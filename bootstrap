@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Install
+ln -vs ~/dotfiles/.??* ~/
+
+# Uninstall
+#find ~/ -maxdepth 2 -type l -exec rm -v "{}" \;
+
+source ~/.bash_profile;
