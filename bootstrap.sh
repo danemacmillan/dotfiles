@@ -6,6 +6,7 @@
 ln -vsf ~/.dotfiles/.bash_profile ~/
 ln -vsf ~/.dotfiles/.bashrc ~/
 ln -vsf ~/.dotfiles/.gitignore ~/
+ln -vsf ~/.dotfiles/.tmux.conf ~/
 ln -vsf ~/.dotfiles/.nix ~/
 ln -vsf ~/.dotfiles/.osx ~/
 ln -vsf ~/.dotfiles/.vimrc ~/
