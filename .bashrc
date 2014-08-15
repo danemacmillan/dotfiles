@@ -20,6 +20,7 @@ source ~/.$OS;
 export PATH="/usr/local/bin:$PATH"
 
 # Aliases
+alias rm='rm -rf'
 alias ll='ls --color -lah --group-directories-first'
 alias llt='ls --color -laht --group-directories-first' # Sort by newest first.
 alias ..='cd ..'
