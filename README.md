@@ -6,7 +6,7 @@ This is the first iteration. It is messy.
 
 ## Installation
 
-`git clone https://github.com/danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source bootstrap.sh`
+`git clone git@github.com:danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source bootstrap.sh`
 
 ### Notes
 
