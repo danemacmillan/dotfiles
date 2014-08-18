@@ -12,6 +12,10 @@ This is the first iteration. It is messy.
 
 The installation will unforgivingly replace all the files in your home directory that match the files in this repo. Back them up if you do not want to lose them.
 
+## Updating
+
+`. ~/dotfiles-refresh`
+
 ## TODO
 
 - Standardize file formatting.
