@@ -22,7 +22,7 @@ Plugin 'delimitMate.vim'
 Plugin 'elzr/vim-json'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlp.vim'
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
 "Plugin 'Lokaltog/powerline'
 
