@@ -18,7 +18,9 @@ Plugin 'Solarized'
 Plugin 'closetag.vim'
 Plugin 'SuperTab'
 Plugin 'Tagbar'
+Plugin 'Command-T'
 Plugin 'delimitMate.vim'
+Plugin 'JSON.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -41,6 +43,15 @@ filetype plugin indent on    " required
 " run, so suppress the message so the plugins install without interruption.
 silent! set background=dark
 silent! colorscheme solarized
+
+" Map command-T
+noremap <leader>o <Esc>:CommandT<CR>
+noremap <leader>O <Esc>:CommandTFlush<CR>
+noremap <leader>m <Esc>:CommandTBuffer<CR>
+
+" Map Tagbar
+let g:tagbar_usearrows = 1
+nnoremap <leader>l :TagbarToggle<CR>
 
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
