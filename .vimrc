@@ -21,6 +21,8 @@ Plugin 'Tagbar'
 Plugin 'delimitMate.vim'
 Plugin 'elzr/vim-json'
 Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlp.vim'
+Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -36,6 +38,12 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" Map Vundle commands
+nnoremap <leader>pl :PluginList<CR>
+nnoremap <leader>pi :PluginInstall!<CR>
+nnoremap <leader>ps :PluginSearch!<Space>
+nnoremap <leader>pc :PluginClean!<CR>
 
 " Use the Solarized Dark theme
 " Installed using Vundler (see above)
@@ -75,8 +83,6 @@ set ttyfast
 set gdefault
 " Use UTF-8 without BOM
 set encoding=utf-8 nobomb
-" Change mapleader
-"let mapleader=","
 " Don’t add empty newlines at the end of files
 set binary
 set noeol
