@@ -52,14 +52,8 @@ nnoremap <leader>pc :PluginClean!<CR>
 " .vimrc typically throws an error about this the first time Vundler is
 " run, so suppress the message so the plugins install without interruption.
 "silent! set background=dark
-
 silent! set background=dark
 silent! colorscheme solarized
-let g:airline_theme='solarized'
-"let g:airline_powerline_fonts=1
-"set linespace=0
-"let g:airline_left_sep=''
-"let g:airline_right_sep=''
 
 " Map command-T
 noremap <leader>o <Esc>:CommandT<CR>
