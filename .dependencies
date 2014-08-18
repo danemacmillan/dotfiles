@@ -1,7 +1,7 @@
 ## .dependencies
 
 # Install Vundler for Vim.
-echo -e "Installing Vim Vundler and plugins."
+echo -e "Installing Vim Vundler and plugins. This may take a few seconds..."
 git clone git@github.com:gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
 # Install Vim plugins defined in .vimrc file.
 # Depending on the location that Vundler installs a plugin, there
