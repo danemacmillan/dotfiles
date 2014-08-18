@@ -9,7 +9,7 @@ ln -vsfn ~/.dotfiles/.gitignore ~/
 ln -vsfn ~/.dotfiles/.tmux.conf ~/
 ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
-ln -vsfn ~/.dotfiles/.vim ~/
+rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
 
 # Install dependencies
