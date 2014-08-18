@@ -3,17 +3,17 @@
 # Install
 #ln -vs ~/dotfiles/.??* ~/
 
-ln -vsf ~/.dotfiles/.bash_profile ~/
-ln -vsf ~/.dotfiles/.bashrc ~/
-ln -vsf ~/.dotfiles/.gitignore ~/
-ln -vsf ~/.dotfiles/.tmux.conf ~/
-ln -vsf ~/.dotfiles/.nix ~/
-ln -vsf ~/.dotfiles/.osx ~/
-ln -vsf ~/.dotfiles/.vim ~/
-ln -vsf ~/.dotfiles/.vimrc ~/
+ln -vsfn ~/.dotfiles/.bash_profile ~/
+ln -vsfn ~/.dotfiles/.bashrc ~/
+ln -vsfn ~/.dotfiles/.gitignore ~/
+ln -vsfn ~/.dotfiles/.tmux.conf ~/
+ln -vsfn ~/.dotfiles/.nix ~/
+ln -vsfn ~/.dotfiles/.osx ~/
+ln -vsfn ~/.dotfiles/.vim ~/
+ln -vsfn ~/.dotfiles/.vimrc ~/
 
 # Install dependencies
-ln -vsf ~/.dotfiles/.dependencies ~/
+ln -vsfn ~/.dotfiles/.dependencies ~/
 source ~/.dependencies
 
 # Uninstall
