@@ -20,6 +20,7 @@ Plugin 'SuperTab'
 Plugin 'Tagbar'
 Plugin 'delimitMate.vim'
 Plugin 'elzr/vim-json'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -50,7 +51,7 @@ noremap <leader>m <Esc>:CommandTBuffer<CR>
 
 " Map Tagbar
 let g:tagbar_usearrows = 1
-nnoremap <leader>l :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
@@ -127,6 +128,13 @@ set showmode
 set title
 " Show the (partial) command as it’s being typed
 set showcmd
+
+" Set and show column at 80 characters
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
 
 " Use relative line numbers
 "if exists("&relativenumber")
