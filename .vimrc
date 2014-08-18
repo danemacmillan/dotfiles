@@ -33,8 +33,10 @@ filetype plugin indent on    " required
 
 " Use the Solarized Dark theme
 " Installed using Vundler (see above)
-set background=dark
-colorscheme solarized
+" .vimrc typically throws an error about this the first time Vundler is
+" run, so suppress the message so the plugins install without interruption.
+silent! set background=dark
+silent! colorscheme solarized
 
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>

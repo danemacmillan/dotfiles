@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Install
-#ln -vs ~/dotfiles/.??* ~/
-
+echo -e "Symlinking dotfiles."
 ln -vsfn ~/.dotfiles/.bash_profile ~/
 ln -vsfn ~/.dotfiles/.bashrc ~/
 ln -vsfn ~/.dotfiles/.gitignore ~/
@@ -13,10 +12,10 @@ rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
 
 # Install dependencies
+echo "Installing dependencies."
 ln -vsfn ~/.dotfiles/.dependencies ~/
 source ~/.dependencies
 
-# Uninstall
-#find ~/ -maxdepth 2 -type l -exec rm -v "{}" \;
-
+# Update terminal
+echo "Updating terminal with new profile."
 source ~/.bash_profile;
