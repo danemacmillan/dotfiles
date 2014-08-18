@@ -8,6 +8,10 @@ This is the first iteration. It is messy.
 
 `git clone https://github.com/danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source bootstrap.sh`
 
+### Notes
+
+The installation will unforgivingly replace all the files in your home directory that match the files in this repo. Back them up if you do not want to lose them.
+
 ## TODO
 
 - Standardize file formatting.
