@@ -23,6 +23,7 @@ Plugin 'elzr/vim-json'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlp.vim'
 Plugin 'bling/vim-airline'
+Plugin 'scrooloose/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -49,8 +50,11 @@ nnoremap <leader>pc :PluginClean!<CR>
 " Installed using Vundler (see above)
 " .vimrc typically throws an error about this the first time Vundler is
 " run, so suppress the message so the plugins install without interruption.
+"silent! set background=dark
+
 silent! set background=dark
 silent! colorscheme solarized
+let g:airline_theme='solarized'
 
 " Map command-T
 noremap <leader>o <Esc>:CommandT<CR>
