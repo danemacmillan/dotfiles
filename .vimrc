@@ -55,7 +55,11 @@ nnoremap <leader>pc :PluginClean!<CR>
 
 silent! set background=dark
 silent! colorscheme solarized
-"let g:airline_theme='solarized'
+let g:airline_theme='solarized'
+"let g:airline_powerline_fonts=1
+"set linespace=0
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
 
 " Map command-T
 noremap <leader>o <Esc>:CommandT<CR>
