@@ -13,12 +13,12 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 
 Plugin 'tpope/vim-fugitive'
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'Command-T'
 Plugin 'Solarized'
 Plugin 'closetag.vim'
 Plugin 'SuperTab'
 Plugin 'Tagbar'
-Plugin 'Command-T'
 Plugin 'delimitMate.vim'
 Plugin 'JSON.vim'
 
