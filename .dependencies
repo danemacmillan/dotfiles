@@ -2,4 +2,4 @@ echo -e "Installing vim vundler and plugins\n"
 # Install vundler for Vim
 git clone git@github.com:gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
 # Install Vim plugins defined in .vimrc file
-vim +PluginInstall +qall &> /dev/null
+vim +PluginInstall +qall
