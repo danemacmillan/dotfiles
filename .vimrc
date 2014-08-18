@@ -53,6 +53,9 @@ noremap <leader>m <Esc>:CommandTBuffer<CR>
 let g:tagbar_usearrows = 1
 nnoremap <F8> :TagbarToggle<CR>
 
+" Map NERDTREE
+nnoremap <leader>n :NERDTreeToggle<CR>
+
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
