@@ -24,6 +24,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
+"Plugin 'Lokaltog/powerline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -54,7 +55,7 @@ nnoremap <leader>pc :PluginClean!<CR>
 
 silent! set background=dark
 silent! colorscheme solarized
-let g:airline_theme='solarized'
+"let g:airline_theme='solarized'
 
 " Map command-T
 noremap <leader>o <Esc>:CommandT<CR>
