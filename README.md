@@ -22,12 +22,6 @@ The installation will unforgivingly replace all the files in your home directory
 
 `source ~/dotfiles.sh`
 
-## TODO
-
-- Standardize file formatting.
-- Include package management.
-- Abstract package management between OSX and Nix.
-
 ## Nods
 
 - https://github.com/mathiasbynens/dotfiles
@@ -37,3 +31,16 @@ The installation will unforgivingly replace all the files in your home directory
 
 [Dane MacMillan](https://danemacmillan.com)
 
+## TODO
+
+- Standardize file formatting.
+- Include package management.
+- Abstract package management between OSX and Nix.
+
+
+### Dependencies to install using `yum` and `brew`
+
+Eventually this subsection will be removed. This is here to remind me of some of the applications that should be automatically installed."
+
+yum ctags-etags
+brew ctags-exuberant 
