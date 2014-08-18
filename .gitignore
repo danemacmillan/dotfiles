@@ -34,3 +34,6 @@ vendor/
 ## Node
 node_modules/
 bower_components/
+
+## Vim
+.netrwhist
