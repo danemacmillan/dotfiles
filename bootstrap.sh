@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Install
-echo -e "Symlinking dotfiles."
+echo -e "\e[34m;1mSymlinking dotfiles."
 ln -vsfn ~/.dotfiles/.bash_profile ~/
 ln -vsfn ~/.dotfiles/.bashrc ~/
 ln -vsfn ~/.dotfiles/.gitignore ~/
@@ -14,10 +14,10 @@ ln -vsfn ~/.dotfiles/dotfiles.sh ~/
 
 
 # Install dependencies
-echo "Installing dependencies."
+echo "\e[34m;1mInstalling dependencies."
 ln -vsfn ~/.dotfiles/.dependencies ~/
 source ~/.dependencies
 
 # Update terminal
-echo "Updating terminal with new profile."
+echo "\e[34m;1mUpdating terminal with new profile."
 source ~/.bash_profile;
