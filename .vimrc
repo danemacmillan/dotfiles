@@ -20,7 +20,7 @@ Plugin 'closetag.vim'
 Plugin 'SuperTab'
 Plugin 'Tagbar'
 Plugin 'delimitMate.vim'
-Plugin 'JSON.vim'
+Plugin 'elzr/vim-json'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
