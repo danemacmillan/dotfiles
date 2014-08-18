@@ -149,11 +149,3 @@ endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
-
-" Automatic commands
-"if has("autocmd")
-	" Enable file type detection
-"	filetype on
-	" Treat .json files as .js
-"	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-"endif
