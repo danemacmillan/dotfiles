@@ -14,10 +14,12 @@ ln -vsfn ~/.dotfiles/dotfiles.sh ~/
 
 
 # Install dependencies
-echo "\x1B[34;1mInstalling dependencies.\x1B[0m"
+echo -e "\x1B[34;1mInstalling dependencies.\x1B[0m"
 ln -vsfn ~/.dotfiles/.dependencies ~/
 source ~/.dependencies
 
 # Update terminal
-echo "\x1B[34;1mUpdating terminal with new profile.\x1B[0m"
+echo -e "\x1B[34;1mUpdating terminal with new profile.\x1B[0m"
 source ~/.bash_profile;
+
+echo -e "\x1B[97;4;1mDone!\x1B[0m"
