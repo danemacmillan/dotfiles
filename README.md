@@ -6,7 +6,13 @@ This is the first iteration. It is messy.
 
 ## Installation
 
+If you have an SSH key installed on the destination:
+
 `git clone git@github.com:danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source bootstrap.sh`
+
+If you do not have an SSH key installed on the destination:
+
+`git clone https://github.com/danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source bootstrap.sh`
 
 ### Notes
 
