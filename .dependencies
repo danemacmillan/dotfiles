@@ -2,9 +2,9 @@ echo -e "Installing vim vundler and plugins..."
 # Install vundler for Vim
 git clone git@github.com:gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
 # Install Vim plugins defined in .vimrc file
-# Redirect stdout and sterror to avoid seeing inevitable .vimrc error
+# Redirect stderr to avoid seeing inevitable .vimrc error
 # about missing the Solarized plugin, as it will only be installed in
-# the next step. This also hides the Vundler installer prompt.
-# Depending on the location that Vundler installs a plugin, there
-# may be an authentication prompt for username and password.
-vim +PluginInstall +qall &> /dev/null
+# the next step. Depending on the location that Vundler installs a
+# plugin, there may be an authentication prompt for username and
+# password.
+vim +PluginInstall +qall 2> /dev/null
