@@ -14,7 +14,7 @@ The installation will unforgivingly replace all the files in your home directory
 
 ## Updating
 
-`. ~/dotfiles-refresh`
+`source ~/dotfiles.sh`
 
 ## TODO
 

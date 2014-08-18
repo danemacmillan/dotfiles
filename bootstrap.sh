@@ -10,7 +10,7 @@ ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
-ln -vsfn ~/.dotfiles/dotfiles-refresh.sh ~/
+ln -vsfn ~/.dotfiles/dotfiles.sh ~/
 
 
 # Install dependencies
