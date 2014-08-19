@@ -72,6 +72,12 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
+" Pasting between different systems when line numbers are visible means that
+" they will be included in the paste. This will strip them. Only strip 
+" whitespace before (from 0 to 2) and after number (0 to 1). Anything more
+" greedy can result in undesired replacements.
+nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//<CR>
+
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 " Enhance command-line completion
