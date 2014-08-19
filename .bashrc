@@ -33,6 +33,8 @@ alias nsp='netstat -tulpn'
 alias ss='lsof -i'
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias vs="vagrant global-status --prune"
+
 
 # Git branch using bash-completion
 export GIT_PS1_SHOWDIRTYSTATE=1
