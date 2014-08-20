@@ -6,6 +6,6 @@ fi;
 
 # If the above does not work, then __git_ps1 will not be available. On CentOS
 # it should also be available through this path.
-if [ ! command -v __git_ps1 >/dev/null 2>&1 ] && [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
-	source /usr/share/git-core/contrib/completion/git-prompt.sh
+if ! command -v __git_ps1 > /dev/null 2>&1 && [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+	source /usr/share/git-core/contrib/completion/git-prompt.sh;
 fi;
