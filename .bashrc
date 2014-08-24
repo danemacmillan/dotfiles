@@ -43,8 +43,10 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM='verbose'
 export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\[\033[1;34m\]\h \[\033[0;36m\]\w\e[0;31m\$(__git_ps1) \[\033[1;36m\]\$\[\033[0m\] "
 
-# Notes
+# Source various helper bash functions
+source ~/.functions;
 
+# Notes
 # SSH keys, a la http://blog.patshead.com/2013/09/generating-new-more-secure-ssh-keys.html
 # ssh-keygen -b 4096 -f ~/.ssh/id_rsa_danemacmillan_4096_2014_08 -C danemacmillan@id_rsa_4096_2014_08
 
