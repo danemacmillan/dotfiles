@@ -1,11 +1,34 @@
 ## .functions
 
-#
-# When in tmux, start irssi and nicklist will appear in side pane.
-# Note: I'm using weechat now, which is much better than irssi. I will keep 
-# this here, as it was a pain to actually figure out with tmux.
-#
 
+## Loop through all subdirectories and run the given command.
+#
+#  Usage: 
+#  loop "git pull"
+#  loop "touch file.txt"
+loop() {
+	if [[ -z $1 ]]; then
+		echo "No command passed. Make sure it is within quotations if there are spaces."
+		return
+	fi
+	
+	# Fancy up the message.
+	SYMBOL="->"
+	if [[ $OS == 'osx' ]]; then
+		SYMBOL="🌀 "
+	fi
+
+	for dir in ./*; do
+		echo -e "$SYMBOL Running \x1B[31;1m$1\x1B[0m in \x1B[36m$dir\x1B[0m."
+		(cd "$dir" && $($1))
+	done
+}
+
+
+## When in tmux, start irssi and nicklist will appear in side pane.
+#
+#  Note: I'm using weechat now, which is much better than irssi. I will keep 
+#  this here, as it was a pain to actually figure out with tmux.
 # Based on http://clusterfuck.logdown.com/posts/52323-when-irssi-meets-tmux
 # create the pane with irssi's nicklist
 function irssi_nickpane() {
