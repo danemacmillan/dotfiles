@@ -22,7 +22,7 @@ loop() {
 	fi
 
 	for subdirectory in ./*; do
-		echo -e "\n$SYMBOL Running commands in \x1B[36m$subdirectory\x1B[0m."
+		echo -e "\n$SYMBOL1 Running commands in \x1B[36m$subdirectory\x1B[0m."
 		for argument in "$@"; do
 			echo -e "   $SYMBOL2 \x1B[31;1m$argument\x1B[0m"
 			(cd "$subdirectory" && $argument|sed 's/^/          /')
