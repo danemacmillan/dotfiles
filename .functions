@@ -17,10 +17,10 @@ loop() {
 		SYMBOL="🌀 "
 	fi
 
-	for argument in "$@"; do
-		for dir in ./*; do
-			echo -e "\n$SYMBOL Running \x1B[31;1m$argument\x1B[0m in \x1B[36m$dir\x1B[0m."
-			(cd "$dir" && $argument)
+	for subdirectory in ./*; do
+		for argument in "$@"; do
+			echo -e "\n$SYMBOL Running \x1B[31;1m$argument\x1B[0m in \x1B[36m$subdirectory\x1B[0m."
+			(cd "$subdirectory" && $argument)
 		done
 	done
 
