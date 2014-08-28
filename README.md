@@ -35,7 +35,7 @@ The installation will unforgivingly replace all the files in your home directory
 
 - Standardize file formatting.
 - Include package management.
-- Abstract package management between OSX and Nix.
+- Abstract package management between OSX and Nix. Use Bash's command substitution $().
 
 
 ### Dependencies to install using `yum` and `brew`
