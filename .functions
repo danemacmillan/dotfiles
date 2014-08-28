@@ -4,7 +4,8 @@
 ## Loop through all subdirectories and run the given command."
 loop() {
 	if [[ -z $1 ]]; then
-		echo -e "Loop through all subdirectories and run the given commands.\n"
+		echo -e "Loop through all subdirectories of the current directory and run"
+		echo -e "the given commands.\n"
 		echo -e "Example usage:\n"
 		echo '  loop "touch notes.txt"'
 		echo '  loop "git pull" "git push"'
