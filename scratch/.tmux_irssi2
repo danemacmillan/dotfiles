@@ -1,0 +1,6 @@
+#!/bin/sh
+tmux new-session -d 'irssi'
+tmux split-window -h -p10 '/bin/cat ~/.irssi/nicklistfifo'
+tmux -2 attach-session -d
+tmux selectw -t 1
+#tmux selectp -t 0
