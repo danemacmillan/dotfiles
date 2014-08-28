@@ -22,6 +22,8 @@ loop() {
 		echo -e "\n$SYMBOL Running \x1B[31;1m$1\x1B[0m in \x1B[36m$dir\x1B[0m."
 		(cd "$dir" && $1)
 	done
+
+	echo -e "\n"
 }
 
 
