@@ -23,7 +23,7 @@ loop() {
 		(cd "$dir" && $1)
 	done
 
-	echo -e "\n"
+	echo -e ""
 }
 
 
