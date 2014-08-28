@@ -1,14 +1,13 @@
 ## .functions
 
 
-## Loop through all subdirectories and run the given command.
-#
-#  Usage: 
-#  loop "git pull"
-#  loop "touch file.txt"
+## Loop through all subdirectories and run the given command."
 loop() {
 	if [[ -z $1 ]]; then
-		echo "No command passed. Make sure it is within quotations if there are spaces."
+		echo -e "Loop through all subdirectories and run the given commands.\n"
+		echo "Usage:"
+		echo '    loop "touch notes.txt"'
+		echo '    loop "git pull" "git push"'
 		return
 	fi
 	
@@ -18,9 +17,11 @@ loop() {
 		SYMBOL="🌀 "
 	fi
 
-	for dir in ./*; do
-		echo -e "\n$SYMBOL Running \x1B[31;1m$1\x1B[0m in \x1B[36m$dir\x1B[0m."
-		(cd "$dir" && $1)
+	for argument in "$@"; do
+		for dir in ./*; do
+			echo -e "\n$SYMBOL Running \x1B[31;1m$argument\x1B[0m in \x1B[36m$dir\x1B[0m."
+			(cd "$dir" && $argument)
+		done
 	done
 
 	echo -e ""
