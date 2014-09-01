@@ -1,0 +1,5 @@
+# Packages to be installed by whatever package manager in use.
+#
+# One package per line.
+
+bash-completion
