@@ -51,6 +51,11 @@ export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\[\033[1;34m\]\h \[\033[0;36m\]\w\e[0
 # Source various helper bash functions
 source ~/.functions;
 
+# Source .extra file if it exists. This file will never get added to repo.
+if [ -f ~/.extra ]; then
+	source ~/.extra
+fi;
+
 # Notes
 # SSH keys, a la http://blog.patshead.com/2013/09/generating-new-more-secure-ssh-keys.html
 # ssh-keygen -b 4096 -f ~/.ssh/id_rsa_danemacmillan_4096_2014_08 -C danemacmillan@id_rsa_4096_2014_08
