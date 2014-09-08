@@ -18,6 +18,11 @@ echo -e "\x1B[34;1mInstalling dependencies.\x1B[0m"
 ln -vsfn ~/.dotfiles/.dependencies ~/
 source ~/.dependencies
 
+# Create optional .extra file to be sourced along repo content.
+if [ ! -f ~/.extra ]; then
+	mkdir ~/.extra
+fi;
+
 # Update terminal
 echo -e "\x1B[34;1mUpdating terminal with new profile.\x1B[0m"
 source ~/.bash_profile;
