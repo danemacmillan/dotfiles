@@ -20,7 +20,8 @@ source ~/.dependencies
 
 # Create optional .extra file to be sourced along repo content.
 if [ ! -f ~/.extra ]; then
-	mkdir ~/.extra
+	echo -e "\x1B[34;1mGenerating .extra file.\x1B[0m"
+	touch ~/.extra
 fi;
 
 # Update terminal
