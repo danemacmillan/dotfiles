@@ -1,7 +1,8 @@
 ## .functions
 
 
-## Loop through all subdirectories and run the given command."
+## 
+# Loop through all subdirectories and run the given command."
 loop() {
 	if [[ -z $1 ]]; then
 		echo -e "Loop through all subdirectories of the current directory and run"
@@ -33,10 +34,40 @@ loop() {
 }
 
 
-## When in tmux, start irssi and nicklist will appear in side pane.
+## 
+# Usage: extract <file>
+# Description: extracts archived files / mounts disk images
+# Note: .dmg/hdiutil is Mac OS X-specific.
+# credit: https://github.com/holman/dotfiles
+extract () {
+	if [ -f $1 ]; then
+		case $1 in
+			*.tar.bz2)  tar -jxvf $1 ;;
+			*.tar.gz)   tar -zxvf $1 ;;
+			*.bz2)      bunzip2 $1 ;;
+			*.dmg)      hdiutil mount $1 ;;
+			*.gz)       gunzip $1 ;;
+			*.tar)      tar -xvf $1 ;;
+			*.tbz2)     tar -jxvf $1 ;;
+			*.tgz)      tar -zxvf $1 ;;
+			*.zip)      unzip $1 ;;
+			*.ZIP)      unzip $1 ;;
+			*.pax)      cat $1 | pax -r ;;
+			*.pax.Z)    uncompress $1 --stdout | pax -r ;;
+			*.Z)        uncompress $1 ;;
+			*)          echo "'$1' cannot be extracted/mounted via extract()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
+
+
+## 
+# When in tmux, start irssi and nicklist will appear in side pane.
 #
-#  Note: I'm using weechat now, which is much better than irssi. I will keep 
-#  this here, as it was a pain to actually figure out with tmux.
+# Note: I'm using weechat now, which is much better than irssi. I will keep 
+# this here, as it was a pain to actually figure out with tmux.
 # Based on http://clusterfuck.logdown.com/posts/52323-when-irssi-meets-tmux
 # create the pane with irssi's nicklist
 function irssi_nickpane() {
@@ -48,7 +79,6 @@ function irssi_nickpane() {
 	tmux selectp -t 1 # select pane 0
 	tmux send-keys -t 1 "/nicklist fifo" C-m
 }
-
 # irssi wrapper
 # Note: only run this within tmux, otherwise nicklist will run silently
 # and invisibly.
@@ -60,7 +90,6 @@ function irssi() {
 	# Otherwise just irssi as usual.
 	$(which irssi)
 }
-
 # repair running irssi's nicklist pane
 function irssi_repair() {
     tmux selectw -t irssi
