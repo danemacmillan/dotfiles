@@ -1,5 +1,14 @@
 ## .functions
 
+# TODO:
+# Create a function to generate archives based on desired output filename.
+# E.g.: archive archivename.tgz dirname/
+# and the function will know to generate a tar gzip file.
+#
+# tar cvzf media.tgz --totals media/
+#
+#
+
 
 ## 
 # Loop through all subdirectories and run the given command."
