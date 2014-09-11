@@ -64,4 +64,7 @@ fi;
 # SSH keys, a la http://blog.patshead.com/2013/09/generating-new-more-secure-ssh-keys.html
 # ssh-keygen -b 4096 -f ~/.ssh/id_rsa_danemacmillan_4096_2014_08 -C danemacmillan@id_rsa_4096_2014_08
 
+# rsync
+#rsync -haz --partial --info=progress2 --bwlimit=5m user@domain.com:~/media ./mediarsync
+
 #alias btop="mytop -u user -p '' -h localhost -d database"
