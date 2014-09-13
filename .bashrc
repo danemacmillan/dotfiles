@@ -46,7 +46,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=0
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM='verbose'
-export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\[\033[1;34m\]\h \[\033[0;36m\]\w\e[0;31m\$(__git_ps1) \[\033[1;36m\]\$\[\033[0m\] "
+export PS1="\\[\033[0;32m\]\u\\[\033[0;36m\]@\\[\033[1;34m\]\h \\[\033[0;36m\]\w\\[\e[0;31m\]\$(__git_ps1) \\[\033[1;36m\]\$\\[\033[0m\] "
 
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
