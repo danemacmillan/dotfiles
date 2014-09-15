@@ -56,7 +56,7 @@ export HISTSIZE=5000
 export HISTFILESIZE=10000
 export HISTCONTROL=ignorespace
 shopt -s histappend
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
