@@ -16,6 +16,9 @@ esac
 # Source OS-specific configs.
 source ~/.$OS;
 
+# Source various helper bash functions
+source ~/.functions;
+
 # Bring in path.
 export PATH="/usr/local/bin:$PATH"
 
@@ -57,9 +60,6 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
 export RSYNC_PARTIAL_DIR="~/.rsync-partial"
-
-# Source various helper bash functions
-source ~/.functions;
 
 # Source .extra file if it exists. This file will never get added to repo.
 if [ -f ~/.extra ]; then
