@@ -52,8 +52,9 @@ export GIT_PS1_SHOWUPSTREAM='verbose'
 export PS1="\\[\033[0;32m\]\u\\[\033[0;36m\]@\\[\033[1;34m\]\h \\[\033[0;36m\]\w\\[\e[0;31m\]\$(__git_ps1) \\[\033[1;36m\]\$\\[\033[0m\] "
 
 # Set bash history configs
-HISTSIZE=5000
-HISTFILESIZE=10000
+export HISTSIZE=5000
+export HISTFILESIZE=10000
+export HISTCONTROL=ignorespace
 shopt -s histappend
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
