@@ -31,6 +31,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias c='clear'
+alias clearhistory='cat /dev/null > ~/.bash_history'
 alias vi='vim'
 alias nsp='netstat -tulpn'
 alias ss='lsof -i'
