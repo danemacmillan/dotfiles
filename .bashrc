@@ -52,15 +52,19 @@ export GIT_PS1_SHOWUPSTREAM='verbose'
 export PS1="\\[\033[0;32m\]\u\\[\033[0;36m\]@\\[\033[1;34m\]\h \\[\033[0;36m\]\w\\[\e[0;31m\]\$(__git_ps1) \\[\033[1;36m\]\$\\[\033[0m\] "
 
 # Set bash history configs
-export HISTSIZE=5000
-export HISTFILESIZE=10000
-export HISTCONTROL=ignorespace
+export HISTSIZE=1000000
+export HISTFILESIZE=1000000
+export HISTCONTROL=ignorespace:ignoredups
+export HISTIGNORE='ls:ll:c'
+export HISTTIMEFORMAT='%F %T '
+shopt -s cmdhist
 shopt -s histappend
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+#export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
-export RSYNC_PARTIAL_DIR="~/.rsync-partial"
+#export RSYNC_PARTIAL_DIR="~/.rsync-partial"
 
 # Source .extra file if it exists. This file will never get added to repo.
 if [ -f ~/.extra ]; then
