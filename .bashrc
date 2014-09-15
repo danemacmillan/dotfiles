@@ -55,7 +55,7 @@ export PS1="\\[\033[0;32m\]\u\\[\033[0;36m\]@\\[\033[1;34m\]\h \\[\033[0;36m\]\w
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
 export HISTCONTROL=ignorespace:ignoredups
-export HISTIGNORE='ls:ll:c'
+export HISTIGNORE='c'
 export HISTTIMEFORMAT='%F %T '
 shopt -s cmdhist
 shopt -s histappend
