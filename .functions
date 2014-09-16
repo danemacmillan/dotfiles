@@ -53,13 +53,13 @@ v() {
 		# Note, at this point nix is technically CentOS. Update .bashrc to
 		# represent more OSes.
 		nix)
-			echo -e "OS:"
+			echo -e "Operating system version:\n"
 			echo -e "    `cat /etc/redhat-release`"
 			;;
 	esac
 
-	echo -e "\nKernel & architecture:"
-	echo -e "    `uname -r -v -p`"
+	echo -e "Kernel & architecture:\n"
+	echo -e "    `uname -r -v -p`\n"
 }
 
 
