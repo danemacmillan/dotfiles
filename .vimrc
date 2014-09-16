@@ -1,4 +1,5 @@
 set nocompatible              " be iMproved, required
+filetype on                   " required for compatibility with Mac OS X, See https://github.com/gmarik/Vundle.vim/issues/167#issuecomment-51679609
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
