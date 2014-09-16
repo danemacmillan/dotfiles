@@ -43,6 +43,23 @@ loop() {
 }
 
 
+##
+# Get current OS version and other information.
+v() {
+	case $OS in
+		osx)
+			system_profiler SPSoftwareDataType 
+			;;
+		# Note, at this point nix is technically CentOS. Update .bashrc to
+		# represent more OSes.
+		nix)
+			echo -e "`cat /etc/redhat-release` (`arch`)"
+			uname -r -v -p
+			;;
+	esac
+}
+
+
 ## 
 # Usage: extract <file>
 # Description: extracts archived files / mounts disk images
