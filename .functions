@@ -48,15 +48,18 @@ loop() {
 v() {
 	case $OS in
 		osx)
-			system_profiler SPSoftwareDataType 
+			system_profiler SPSoftwareDataType
 			;;
 		# Note, at this point nix is technically CentOS. Update .bashrc to
 		# represent more OSes.
 		nix)
-			echo -e "`cat /etc/redhat-release` (`arch`)"
-			uname -r -v -p
+			echo -e "OS:"
+			echo -e "    `cat /etc/redhat-release`"
 			;;
 	esac
+
+	echo -e "\nKernel & architecture:"
+	echo -e "    `uname -r -v -p`"
 }
 
 
