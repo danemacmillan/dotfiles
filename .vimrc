@@ -175,3 +175,7 @@ endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
+
+" Treat extensionless files as bash scripts.
+au BufRead,BufNewFile * setfiletype sh
+
