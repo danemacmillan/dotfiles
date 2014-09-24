@@ -1,5 +1,7 @@
 ## .bashrc
 
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
 # This file contains code that can be run on OSX and NIX machines.
 
 # Detect OS so dotfiles seamlessly work across OSX and Linux.
@@ -18,9 +20,6 @@ source ~/.$OS;
 
 # Source various helper bash functions
 source ~/.functions;
-
-# Bring in path.
-export PATH="/usr/local/bin:$PATH"
 
 # Aliases
 alias rm='rm -rf'
