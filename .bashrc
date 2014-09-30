@@ -40,7 +40,7 @@ alias vs="vagrant global-status --prune"
 alias mkdir="mkdir -pv"
 alias du="du -h --time"
 
-# Mitigate fat-fingering
+# Mitigate fat-fingering and other retardations.
 alias gut="git"
 alias kk="ll"
 
