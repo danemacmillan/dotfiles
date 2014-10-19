@@ -34,3 +34,6 @@ fi;
 
 # perlbrew
 source ~/perl5/perlbrew/etc/bashrc
+
+# OSX settings
+defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
