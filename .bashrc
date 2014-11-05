@@ -40,6 +40,9 @@ alias vs="vagrant global-status --prune"
 alias mkdir="mkdir -pv"
 alias du="du -h --time"
 
+# See http://ipinfo.io/developers for more info.
+alias ipgeo="curl ipinfo.io"
+
 # Mitigate fat-fingering and other retardations.
 alias gut="git"
 alias kk="ll"
