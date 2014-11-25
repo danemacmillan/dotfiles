@@ -127,7 +127,7 @@ function total() {
 	FILES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type f | wc -l`"
 	FILES_LINKS="`expr $FILES_WITH_LINKS - $FILES`"
 
-	echo "Directories: `expr $DIRECTORIES_WITH_LINKS - $DIRECTORY_PADDING` (`expr $DIRECTORIES_LINKS - $DIRECTORY_PADDING`)"
+	echo "Directories: `expr $DIRECTORIES_WITH_LINKS - $DIRECTORY_PADDING` (`expr $DIRECTORIES_LINKS`)"
 	echo "Files: $FILES_WITH_LINKS ($FILES_LINKS)"
 }
 
