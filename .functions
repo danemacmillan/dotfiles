@@ -126,7 +126,6 @@ function total() {
 
 	echo "Directories: $DIRECTORIES_WITH_LINKS ($DIRECTORIES_LINKS)"
 	echo "Files: $FILES_WITH_LINKS ($FILES_LINKS)"
-	echo -e "\nTotal Size: `fs $CHECKDIR`"
 }
 
 
