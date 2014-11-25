@@ -39,6 +39,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias vs="vagrant global-status --prune"
 alias mkdir="mkdir -pv"
 alias du="du -h --time"
+alias tt="total"
 
 # See http://ipinfo.io/developers for more info.
 alias ipgeo="curl ipinfo.io"
