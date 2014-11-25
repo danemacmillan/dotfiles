@@ -120,8 +120,13 @@ function total() {
 	DIRECTORIES="`find $CHECKDIR -maxdepth 1 -type d | wc -l`"
 	DIRECTORIES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type d | wc -l`"
 	DIRECTORIES_LINKS="`expr $DIRECTORIES_WITH_LINKS - $DIRECTORIES`"
-	echo "Directories: $DIRECTORIES ($DIRECTORIES_LINKS)"
-	echo "Files: `find $CHECKDIR -follow -maxdepth 1 -type f | wc -l`"
+	FILES="`find $CHECKDIR -maxdepth 1 -type f | wc -l`"
+	FILES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type f | wc -l`"
+	FILES_LINKS="`expr $FILES_WITH_LINKS - $FILES`"
+
+	echo "Directories: $DIRECTORIES_WITH_LINKS ($DIRECTORIES_LINKS)"
+	echo "Files: $FILES_WITH_LINKS ($FILES_LINKS)"
+	echo -e "\nTotal Size: `fs $CHECKDIR`"
 }
 
 
