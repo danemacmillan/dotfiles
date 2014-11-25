@@ -109,6 +109,15 @@ function fs() {
 	fi;
 }
 
+##
+# Get total directory and file count.
+function total() {
+	if [[ -n "$1" ]]; then
+		echo "Directories: `find $1 -follow -maxdepth 1 -type d | wc -l`"
+		echo "Files: `find $1 -follow -maxdepth 1 -type f | wc -l`"
+	fi;
+}
+
 
 ## 
 # When in tmux, start irssi and nicklist will appear in side pane.
