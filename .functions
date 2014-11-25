@@ -118,7 +118,7 @@ function total() {
 	fi
 	
 	# Directory listings include "." and ".."
-	DIRECTORY_PADDING=2
+	DIRECTORY_PADDING=1
 	
 	DIRECTORIES="`find $CHECKDIR -maxdepth 1 -type d | wc -l`"
 	DIRECTORIES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type d | wc -l`"
