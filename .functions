@@ -121,14 +121,13 @@ function total() {
 	DIRECTORY_PADDING=2
 	
 	DIRECTORIES="`find $CHECKDIR -maxdepth 1 -type d | wc -l`"
-	DIRECTORIES="`expr $DIRECTORIES - $DIRECTORY_PADDING`"
 	DIRECTORIES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type d | wc -l`"
 	DIRECTORIES_LINKS="`expr $DIRECTORIES_WITH_LINKS - $DIRECTORIES`"
 	FILES="`find $CHECKDIR -maxdepth 1 -type f | wc -l`"
 	FILES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type f | wc -l`"
 	FILES_LINKS="`expr $FILES_WITH_LINKS - $FILES`"
 
-	echo "Directories: $DIRECTORIES_WITH_LINKS ($DIRECTORIES_LINKS)"
+	echo "Directories: `expr $DIRECTORIES_WITH_LINKS - $DIRECTORY_PADDING` (`expr $DIRECTORIES_LINKS - $DIRECTORY_PADDING`)"
 	echo "Files: $FILES_WITH_LINKS ($FILES_LINKS)"
 }
 
