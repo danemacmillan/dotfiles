@@ -106,16 +106,22 @@ function fs() {
 		du $arg -- "$@";
 	else
 		du $arg .[^.]* *;
-	fi;
+	fi
 }
 
 ##
 # Get total directory and file count.
 function total() {
+	CHECKDIR=.
 	if [[ -n "$1" ]]; then
-		echo "Directories: `find $1 -follow -maxdepth 1 -type d | wc -l`"
-		echo "Files: `find $1 -follow -maxdepth 1 -type f | wc -l`"
-	fi;
+		CHECKDIR="$1"
+	fi
+	
+	DIRECTORIES="`find $CHECKDIR -maxdepth 1 -type d | wc -l`"
+	DIRECTORIES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type d | wc -l`"
+	DIRECTORIES_LINKS="`expr $DIRECTORIES_WITH_LINKS - $DIRECTORIES`"
+	echo "Directories: $DIRECTORIES ($DIRECTORIES_LINKS)"
+	echo "Files: `find $CHECKDIR -follow -maxdepth 1 -type f | wc -l`"
 }
 
 
