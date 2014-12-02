@@ -38,6 +38,7 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias vs="vagrant global-status --prune"
 alias mkdir="mkdir -pv"
+alias cp="cp -r"
 alias du="du -h --time"
 alias tt="total"
 
