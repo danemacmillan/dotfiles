@@ -7,6 +7,7 @@ ln -vsfn ~/.dotfiles/.bashrc ~/
 ln -vsfn ~/.dotfiles/.functions ~/
 ln -vsfn ~/.dotfiles/.gitignore ~/
 ln -vsfn ~/.dotfiles/.tmux.conf ~/
+ln -vsfn ~/.dotfiles/.npmrc ~/
 ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
