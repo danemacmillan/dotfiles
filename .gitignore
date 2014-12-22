@@ -38,3 +38,10 @@ bower_components/
 ## Vim
 .vim/.netrwhist
 .vim/bundle
+
+## Weechat
+.weechat/irc.conf
+.weechat/logs
+.weechat/*.log
+.weechat/*.upgrade
+.weechat/weechat_fifo*
