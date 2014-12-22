@@ -41,7 +41,6 @@ bower_components/
 
 ## Weechat
 .weechat/irc.conf
-.weechat/logs
 .weechat/*.log
 .weechat/*.upgrade
 .weechat/weechat_fifo*
