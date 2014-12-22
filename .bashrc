@@ -42,6 +42,9 @@ alias cp="cp -r"
 alias du="du -h --time"
 alias tt="total"
 
+# Update dotfiles
+alias dotfiles="~./dotfiles.sh"
+
 # See http://ipinfo.io/developers for more info.
 alias ipgeo="curl ipinfo.io"
 
