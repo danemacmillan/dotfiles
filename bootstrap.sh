@@ -13,6 +13,7 @@ ln -vsfn ~/.dotfiles/.osx ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
 ln -vsfn ~/.dotfiles/dotfiles.sh ~/
+rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
 # Install dependencies
 echo -e "\x1B[34;1mInstalling dependencies.\x1B[0m"
