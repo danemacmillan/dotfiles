@@ -27,6 +27,12 @@ if [ ! -f ~/.extra ]; then
 	touch ~/.extra
 fi;
 
+# Create .gitconfig.local file to hold user credentials for Git.
+if [ ! -f ~/.gitconfig.local ]; then
+	echo -e "\x1B[34;1mGenerating .gitconfig.local file.\x1B[0m"
+	touch ~/.gitconfig.local
+fi;
+
 # Update terminal
 echo -e "\x1B[34;1mUpdating terminal with new profile.\x1B[0m"
 source ~/.bash_profile;
