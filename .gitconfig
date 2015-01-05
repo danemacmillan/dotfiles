@@ -3,7 +3,7 @@
 [alias]
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
-	l = log --oneline -n 100 --graph --decorate --all
+	l = log --oneline -n 500 --graph --decorate --all
 
 	# View the current working tree status using the short format
 	s = status -s
@@ -170,3 +170,6 @@
 	#default = matching
 	default = simple
 
+[user]
+	name = Dane MacMillan
+	email = work@danemacmillan.com
