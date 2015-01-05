@@ -5,6 +5,7 @@ echo -e "\x1B[34;1mSymlinking dotfiles.\x1B[0m"
 ln -vsfn ~/.dotfiles/.bash_profile ~/
 ln -vsfn ~/.dotfiles/.bashrc ~/
 ln -vsfn ~/.dotfiles/.functions ~/
+ln -vsfn ~/.dotfiles/.gitconfig ~/
 ln -vsfn ~/.dotfiles/.gitignore ~/
 ln -vsfn ~/.dotfiles/.tmux.conf ~/
 ln -vsfn ~/.dotfiles/.npmrc ~/
