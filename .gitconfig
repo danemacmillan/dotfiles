@@ -1,9 +1,15 @@
+
+[include]
+
+	# Include user-specific info like git credentials.
+	path = ~/.gitconfig.local
+
 # Based on https://github.com/mathiasbynens/dotfiles/blob/master/.gitconfig
 
 [alias]
-
-	# View abbreviated SHA, description, and history graph of the latest 20 commits
-	l = log --oneline -n 500 --graph --decorate --all
+	
+	# Custom log format
+	l = log -n 500 --graph --all --decorate --pretty=format:'%C(auto)%h  %ad  %Creset%C(magenta dim)%an %Creset<%ae>  %C(auto)%d %C(white bold)%s' --date=iso --abbrev-commit
 
 	# View the current working tree status using the short format
 	s = status -s
@@ -169,7 +175,3 @@
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
 	#default = matching
 	default = simple
-
-[user]
-	name = Dane MacMillan
-	email = work@danemacmillan.com
