@@ -11,6 +11,7 @@ ln -vsfn ~/.dotfiles/.tmux.conf ~/
 ln -vsfn ~/.dotfiles/.npmrc ~/
 ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
+ln -vsfn ~/.dotfiles/.sshmotd ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
 ln -vsfn ~/.dotfiles/dotfiles.sh ~/
