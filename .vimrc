@@ -180,3 +180,10 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 " Treat extensionless files as bash scripts.
 au BufRead,BufNewFile * setfiletype sh
 
+" When invoking dotfiles through vagrant provisioning script, Vundler throws a
+" pair of warnings:
+" Vim: Warning: Output is not to a terminal 
+" Vim: Warning: Input is not from a terminal
+" https://stackoverflow.com/questions/16517568/vim-exec-command-in-command-line-and-vim-warning-input-is-not-from-a-terminal
+au StdinReadPost * set buftype=nofile
+
