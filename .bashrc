@@ -79,6 +79,12 @@ if [ -f ~/.extra ]; then
 	source ~/.extra
 fi;
 
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	SESSION_TYPE=remote/ssh
+	source ~/.sshmotd
+fi
+
+
 # Notes
 # SSH keys, a la http://blog.patshead.com/2013/09/generating-new-more-secure-ssh-keys.html
 # ssh-keygen -b 4096 -f ~/.ssh/id_rsa_danemacmillan_4096_2014_08 -C danemacmillan@id_rsa_4096_2014_08
