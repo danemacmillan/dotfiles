@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo -e "\nRemember to update these dotfiles regularly by running 'dotfiles' from the terminal."
+echo -e "Remember to update your dotfiles regularly by running 'dotfiles' from the terminal."
