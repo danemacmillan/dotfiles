@@ -140,18 +140,27 @@ function total() {
 
 ##
 # Auto-generate new SSH keys with option to provide passphrase
+# Note: if you want characters like "!" in your passphrase, run like this:
+# newsshkey 'Long passphrase!!!! with spaces and niceties!'
+# If you just have regular characters, quoting is unnecessary.
 function newsshkey() {
-	KEY_STRENGTH=4096
-	KEY_NAME="~/.ssh/id_rsa_$KEY_STRENGTH__`date +%Y-%m-%d_%H%M%S`"
+	KEY_STRENGTH="4096"
+	KEY_NAME=~/.ssh/id_rsa_${KEY_STRENGTH}_`date +%Y-%m-%d-%H%M%S`
 	
 	KEY_PASSPHRASE=""
 	if [[ -n "$1" ]]; then
 		KEY_PASSPHRASE="$1"
 	fi
 
-	echo $KEY_NAME
-	echo $KEY_PASSPHRASE
-
-
 	ssh-keygen -b $KEY_STRENGTH -f $KEY_NAME -C $KEY_NAME -N "$KEY_PASSPHRASE"
+	
+	echo -e "\nPassphrase:" \"$KEY_PASSPHRASE\"
+	echo -e "\nProvide this public key to your devop if required:\n"
+	cat $KEY_NAME.pub
+
+	# Remove passphrase from appearing in bash history, if provided.
+	# Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
+	if [[ -n "$1" ]]; then
+		history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))
+	fi
 }
