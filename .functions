@@ -149,5 +149,9 @@ function newsshkey() {
 		KEY_PASSPHRASE="$1"
 	fi
 
+	echo $KEY_NAME
+	echo $KEY_PASSPHRASE
+
+
 	ssh-keygen -b $KEY_STRENGTH -f $KEY_NAME -C $KEY_NAME -N $KEY_PASSPHRASE
 }
