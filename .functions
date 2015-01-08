@@ -137,3 +137,9 @@ function total() {
 	echo "Directories: `expr $DIRECTORIES_WITH_LINKS - $DIRECTORY_PADDING` (`expr $DIRECTORIES_LINKS`)"
 	echo "Files: $FILES_WITH_LINKS ($FILES_LINKS)"
 }
+
+##
+# Auto-generate new SSH keys with option to provide passphrase
+function newkey() {
+	ssh-keygen -b 4096 -f ~/.ssh/id_rsa_4096__`date +%Y_%m_%d_%H%M%S` -C danemacmillan@id_rsa_4096_2014_08
+}
