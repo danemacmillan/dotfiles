@@ -142,7 +142,7 @@ function total() {
 # Auto-generate new SSH keys with option to provide passphrase
 function newsshkey() {
 	KEY_STRENGTH=4096
-	KEY_NAME=~/.ssh/id_rsa_$KEY_STRENGTH__`date +%Y-%m-%d_%H%M%S`
+	KEY_NAME="~/.ssh/id_rsa_$KEY_STRENGTH__`date +%Y-%m-%d_%H%M%S`"
 	
 	KEY_PASSPHRASE=""
 	if [[ -n "$1" ]]; then
@@ -153,5 +153,5 @@ function newsshkey() {
 	echo $KEY_PASSPHRASE
 
 
-	ssh-keygen -b $KEY_STRENGTH -f $KEY_NAME -C $KEY_NAME -N $KEY_PASSPHRASE
+	ssh-keygen -b $KEY_STRENGTH -f $KEY_NAME -C $KEY_NAME -N "$KEY_PASSPHRASE"
 }
