@@ -84,7 +84,7 @@ if [ -f ~/.extra ]; then
 	source ~/.extra
 fi;
 
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+if shopt -q login_shell && [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	SESSION_TYPE=remote/ssh
 	source ~/.sshmotd
 fi
