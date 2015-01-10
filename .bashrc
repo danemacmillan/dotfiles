@@ -7,7 +7,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 # Detect OS so dotfiles seamlessly work across OSX and Linux.
 # I only use OSX and CentOS, so additional cases will need
 # to be defined for another OS.
-OS=$(uname | awk '{print tolower($0)}')
+export OS=$(uname | awk '{print tolower($0)}')
 case $OS in
   darwin*) 
     OS='osx';; 
@@ -16,46 +16,13 @@ case $OS in
 esac
 
 # Source OS-specific configs.
-source ~/.$OS;
+source ~/.$OS
 
 # Source various helper bash functions
-source ~/.functions;
+source ~/.functions
 
-# Aliases
-alias rm='rm -rf'
-alias ll='ls --color -lah --group-directories-first'
-alias llt='ls --color -laht --group-directories-first' # Sort by newest first.
-alias ..='cd ..'
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias c='clear'
-alias vi='vim'
-alias nsp='netstat -tulpn'
-alias ss='lsof -i'
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-alias vs="vagrant global-status --prune"
-alias mkdir="mkdir -pv"
-alias cp="cp -r"
-alias du="du -h --time"
-alias tt="total"
-
-# Update dotfiles
-alias dotfiles="cd ~ && . dotfiles.sh"
-
-# See http://ipinfo.io/developers for more info.
-alias ipgeo="curl ipinfo.io"
-
-# Mitigate fat-fingering and other retardations.
-alias gut="git"
-alias kk="ll"
-
-# Purge all history
-alias historypurgeall='cat /dev/null > ~/.bash_history && history -c && history -w'
-
-# Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
-alias historypurgelast='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
+# Source aliases
+source ~/.aliases
 
 # Git branch using bash-completion
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -84,6 +51,10 @@ if [ -f ~/.extra ]; then
 	source ~/.extra
 fi;
 
+# Source additional script for SSH / interactive sessions.
+# Without login_shell check for interactive shell, software like rsync will
+# connect to a server with these dotfiles, which will output content, and
+# then error out a non-interactive client connection like like rsync.
 if shopt -q login_shell && [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	SESSION_TYPE=remote/ssh
 	source ~/.sshmotd

@@ -1,0 +1,41 @@
+# .aliases
+
+# Update dotfiles
+alias dotfiles="cd ~ && . dotfiles.sh"
+
+# Navigational
+alias ll='ls --color -lah --group-directories-first'
+alias llt='ls --color -laht --group-directories-first' # Sort by newest first.
+alias ..='cd ..'
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# Filesystem
+alias rm='rm -rf'
+alias cp="cp -r"
+alias mkdir="mkdir -pv"
+alias du="du -h --time"
+alias tt="total"
+
+# Misc
+alias c='clear'
+alias vi='vim'
+alias nsp='netstat -tulpn'
+alias ss='lsof -i'
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias vs="vagrant global-status --prune"
+# See http://ipinfo.io/developers for more info.
+alias ipgeo="curl ipinfo.io"
+
+# Mitigate fat-fingering and other retardations.
+alias gut="git"
+alias kk="ll"
+
+# History
+# Purge all history
+alias historypurgeall='cat /dev/null > ~/.bash_history && history -c && history -w'
+# Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
+alias historypurgelast='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
+
