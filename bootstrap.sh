@@ -18,6 +18,12 @@ ln -vsfn ~/.dotfiles/.vimrc ~/
 ln -vsfn ~/.dotfiles/dotfiles.sh ~/
 rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
+# Create user bin if it doesn't exist.
+if [ ! -d "$HOME/bin" ]; then
+	echo "Creating $HOME/bin directory for extra PATH."
+	mkdir $HOME/bin
+fi
+
 # Install dependencies
 echo -e "\x1B[34;1mInstalling dependencies.\x1B[0m"
 ln -vsfn ~/.dotfiles/.dependencies ~/
