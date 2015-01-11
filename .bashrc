@@ -3,6 +3,7 @@
 # Add user bin if it exists.
 if [ -d "$HOME/bin" ]; then
 	export PATH="$HOME/bin:$PATH"
+	chmod -R +x $HOME/bin
 fi
 
 # This file contains code that can be run on OSX and NIX machines.
