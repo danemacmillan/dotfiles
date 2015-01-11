@@ -20,7 +20,7 @@ rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
 # Create user bin if it doesn't exist.
 if [ ! -d "$HOME/bin" ]; then
-	echo "Creating $HOME/bin directory for extra PATH."
+	echo -e "\x1B[34;1mCreating user bin directory for extra PATH.\x1B[0m"
 	mkdir $HOME/bin
 fi
 
