@@ -1,5 +1,9 @@
 ## .bashrc
 
+# Make sure aliases expand in non-interactive mode. For example, when running
+# ssh remote-address "ll"
+shopt -s expand_aliases
+
 # Add user bin if it exists.
 if [ -d "$HOME/bin" ]; then
 	export PATH="$HOME/bin:$PATH"
@@ -60,8 +64,6 @@ fi;
 # connect to a server with these dotfiles, which will output content, and
 # then error out a non-interactive client connection like like rsync.
 if shopt -q login_shell && [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	# Also make sure aliases expand in non-interactive.
-	shopt -s expand_aliases
 	SESSION_TYPE=remote/ssh
 	source ~/.sshmotd
 fi
