@@ -60,6 +60,8 @@ fi;
 # connect to a server with these dotfiles, which will output content, and
 # then error out a non-interactive client connection like like rsync.
 if shopt -q login_shell && [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	# Also make sure aliases expand in non-interactive.
+	shopt -s expand_aliases
 	SESSION_TYPE=remote/ssh
 	source ~/.sshmotd
 fi
