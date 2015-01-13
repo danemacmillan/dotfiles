@@ -63,10 +63,10 @@ fi;
 # Without login_shell check for interactive shell, software like rsync will
 # connect to a server with these dotfiles, which will output content, and
 # then error out a non-interactive client connection like like rsync.
-if shopt -q login_shell && [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	SESSION_TYPE=remote/ssh
-	source ~/.sshmotd
-fi
+#if shopt -q login_shell && [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+#	SESSION_TYPE=remote/ssh
+#	source ~/.sshmotd
+#fi
 
 
 # Notes
