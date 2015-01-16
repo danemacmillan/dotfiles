@@ -149,8 +149,9 @@
 
 [help]
 
-	# Automatically correct and execute mistyped commands
-	autocorrect = 1
+	# Automatically correct and execute mistyped commands. Keep this off unless
+	# you enjoy pain.
+	autocorrect = 0
 
 [merge]
 
