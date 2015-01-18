@@ -1,3 +1,6 @@
 # Case-insensitive tab completion
 # http://unix.stackexchange.com/a/16519
 set completion-ignore-case on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
