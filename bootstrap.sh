@@ -43,7 +43,7 @@ if [ ! -f ~/.gitconfig.local ]; then
 	#touch ~/.gitconfig.local
 	cat >>~/.gitconfig.local <<EOL
 [user]
-	user =
+	name =
 	email =
 EOL
 fi;
