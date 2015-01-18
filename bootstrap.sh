@@ -39,8 +39,13 @@ fi;
 
 # Create .gitconfig.local file to hold user credentials for Git.
 if [ ! -f ~/.gitconfig.local ]; then
-	echo -e "\x1B[34;1mGenerating .gitconfig.local file.\x1B[0m"
-	touch ~/.gitconfig.local
+	echo -e "\x1B[34;1mGenerating .gitconfig.local file for custom changes. Add your Git credentials here.\x1B[0m"
+	#touch ~/.gitconfig.local
+	cat >>/home/$USER_USER/.extra <<EOL
+[user]
+	user =
+	email =
+EOL
 fi;
 
 # Update terminal
