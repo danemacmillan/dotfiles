@@ -4,6 +4,10 @@
 # ssh remote-address "ll"
 shopt -s expand_aliases
 
+# Case-insensitive globbing
+# http://tldp.org/LDP/abs/html/globbingref.html
+shopt -s nocaseglob;
+
 # Add user bin if it exists.
 if [ -d "$HOME/bin" ]; then
 	export PATH="$HOME/bin:$PATH"
