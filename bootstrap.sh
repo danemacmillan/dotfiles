@@ -41,7 +41,7 @@ fi;
 if [ ! -f ~/.gitconfig.local ]; then
 	echo -e "\x1B[34;1mGenerating .gitconfig.local file for custom changes. Add your Git credentials here.\x1B[0m"
 	#touch ~/.gitconfig.local
-	cat >>/home/$USER_USER/.extra <<EOL
+	cat >>~/.gitconfig.local <<EOL
 [user]
 	user =
 	email =
