@@ -117,6 +117,7 @@ function fs() {
 
 ##
 # Get total directory and file count.
+# TODO: integrate filesizes
 function total() {
 	CHECKDIR=.
 	if [[ -n "$1" ]]; then
@@ -162,4 +163,10 @@ function newsshkey() {
 	if [[ -n "$1" ]]; then
 		history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))
 	fi
+}
+
+# From https://twitter.com/climagic/status/370595711483514880
+# Example: git push origin master -f || fliptable
+fliptable() {
+	echo "（╯°□°）╯ ┻━┻";
 }
