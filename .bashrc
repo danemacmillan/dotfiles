@@ -72,11 +72,6 @@ fi;
 #	source ~/.sshmotd
 #fi
 
-
-# Notes
-# SSH keys, a la http://blog.patshead.com/2013/09/generating-new-more-secure-ssh-keys.html
-# ssh-keygen -b 4096 -f ~/.ssh/id_rsa_danemacmillan_4096_2014_08 -C danemacmillan@id_rsa_4096_2014_08
-
 # rsync. --info flag only for 3.1.*
 #rsync -haz --partial --delay-updates --bwlimit=6m --info=progress2 user@domain.com:~/media ./mediarsync
 
