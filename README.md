@@ -20,7 +20,7 @@ The installation will unforgivingly replace all the files in your home directory
 
 ## Updating
 
-Just run the `dotfiles` from anywhere.
+Just run `dotfiles` from anywhere.
 
 ## Nods
 
