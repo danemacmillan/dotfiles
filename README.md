@@ -20,7 +20,7 @@ The installation will unforgivingly replace all the files in your home directory
 
 ## Updating
 
-`source ~/dotfiles.sh`
+Just run the `dotfiles` from anywhere.
 
 ## Nods
 
