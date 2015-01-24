@@ -8,6 +8,8 @@ shopt -s expand_aliases
 # http://tldp.org/LDP/abs/html/globbingref.html
 shopt -s nocaseglob;
 
+export PATH="/usr/local/sbin:$PATH"
+
 # Add user bin if it exists.
 if [ -d "$HOME/bin" ]; then
 	export PATH="$HOME/bin:$PATH"
