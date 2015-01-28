@@ -80,11 +80,14 @@
 [apply]
 
 	# Detect whitespace errors when applying a patch
-	whitespace = fix
+	#whitespace = fix
 
 [core]
-	
-	autocrlf = false
+
+	# http://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/
+	eol = native
+	autocrlf = input
+	safecrlf = true
 
 	# In reference to https://github.com/gmarik/Vundle.vim/issues/167
 	editor = /usr/local/bin/vim
@@ -96,7 +99,7 @@
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error
 	# [default] trailing-space: looks for spaces at the end of a line
 	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
-	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+	#whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
 	# Make `git rebase` safer on OS X
 	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
