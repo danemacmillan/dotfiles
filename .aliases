@@ -19,7 +19,7 @@ alias du="du -h --time"
 alias tt="total"
 
 #Network
-i#alias listen='lsof -i -P | grep LISTEN'
+#alias listen='lsof -i -P | grep LISTEN'
 alias listen='lsof -Pnl +M -i4'
 alias nsp='netstat -tulpn'
 alias ss='lsof -i'
