@@ -25,6 +25,7 @@ alias pumpitup="osascript -e 'set volume 7'"
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+alias flushdns="dscacheutil -flushcache"
 
 # Add tab completion for many Bash commands, including the
 # ability to add extended Git info in PS1.
