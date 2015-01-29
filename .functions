@@ -174,3 +174,17 @@ function newsshkey() {
 fliptable() {
 	echo "（╯°□°）╯ ┻━┻";
 }
+
+# From Kenorb
+
+# Find file
+# Usage: ff (file)
+ff() {
+  find . -name $1
+}
+
+# Allows you to search for any text in any file.
+# Usage: ft "my string" *.php
+ft() {
+  find . -name "$2" -exec grep -il "$1" {} \;
+}
