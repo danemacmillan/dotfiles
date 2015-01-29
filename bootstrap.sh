@@ -35,7 +35,7 @@ source ~/.dependencies
 if [ ! -f ~/.extra ]; then
 	echo -e "\x1B[34;1mGenerating .extra file.\x1B[0m"
 	touch ~/.extra
-fi;
+fi
 
 # Create .gitconfig.local file to hold user credentials for Git.
 if [ ! -f ~/.gitconfig.local ]; then
@@ -46,7 +46,31 @@ if [ ! -f ~/.gitconfig.local ]; then
 	name =
 	email =
 EOL
-fi;
+fi
+
+# Generate .ssh/config file if none.
+if [ ! -f "$HOME/.ssh/config" ]; then
+	# Create directory regardless, just to be sure.
+	mkdir -pv $HOME/.ssh
+	# Default content
+	cat >>$HOME/.ssh/config <<EOL
+# See for reference:
+# https://www.freebsd.org/cgi/man.cgi?query=ssh_config&sektion=5
+# http://www.openssh.com/faq.html#3.14
+
+Host *
+	TCPKeepAlive yes
+	ServerAliveInterval 120
+	PreferredAuthentications publickey
+	Protocol 2
+	Compression yes
+	LogLevel VERBOSE
+	#Hostname
+	#Port
+	#User
+	#IdentityFile
+EOL
+fi
 
 # Update terminal
 echo -e "\x1B[34;1mUpdating terminal with new profile.\x1B[0m"
