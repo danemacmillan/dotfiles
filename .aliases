@@ -19,7 +19,8 @@ alias du="du -h --time"
 alias tt="total"
 
 #Network
-alias listen='lsof -i -P | grep LISTEN'
+i#alias listen='lsof -i -P | grep LISTEN'
+alias listen='lsof -Pnl +M -i4'
 alias nsp='netstat -tulpn'
 alias ss='lsof -i'
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
