@@ -79,6 +79,9 @@ set showmode
 " greedy can result in undesired replacements.
 nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//<CR>
 
+" Toggle line number visibility for copying from other systems with mouse.
+nnoremap <F4> :set invnumber<CR>
+
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 " Enhance command-line completion
