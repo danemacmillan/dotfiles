@@ -38,6 +38,9 @@ source ~/.functions
 # Source aliases
 source ~/.aliases
 
+# Set default editor
+export EDITOR=vim
+
 # Git branch using bash-completion
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=0
