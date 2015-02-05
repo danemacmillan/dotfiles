@@ -80,7 +80,7 @@
 [apply]
 
 	# Detect whitespace errors when applying a patch
-	#whitespace = fix
+	whitespace = fix
 
 [core]
 
