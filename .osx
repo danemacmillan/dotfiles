@@ -1,10 +1,27 @@
 ## .osx
 
+# Get homebrew and some niceties.
+if test ! $(which brew); then
+  echo "Installing homebrew..."
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+	# Install some brew essentials
+	brew update
+	brew install bash bash-completion coreutils findutils
+
+	# Tap some essentials
+	brew tap caskroom/cask
+	brew tap caskroom/versions
+	brew tap homebrew/completions
+	brew tap homebrew/dupes
+	brew tap homebrew/versions
+fi
+
 # Exports
 
 # Assumes that coreutils and other GNU tools have replaced OSX'
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
 export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 
 # Color
@@ -35,7 +52,7 @@ if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
 fi;
 
 # perlbrew
-source ~/perl5/perlbrew/etc/bashrc
+#source ~/perl5/perlbrew/etc/bashrc
 
 # OSX settings
 defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
