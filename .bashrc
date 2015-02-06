@@ -10,6 +10,10 @@ shopt -s nocaseglob;
 
 export PATH="/usr/local/sbin:$PATH"
 
+if [ -d "$HOME/.composer/vendor/bin" ]; then
+	export PATH="$HOME/.composer/vendor/bin:$PATH"
+fi
+
 # Add user bin if it exists.
 if [ -d "$HOME/bin" ]; then
 	export PATH="$HOME/bin:$PATH"
