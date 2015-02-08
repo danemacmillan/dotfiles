@@ -1,5 +1,5 @@
 # Aliases for CentOS
-alias update="yum -y update"
+alias update="dotfiles; yum -y update"
 
 # Add tab completion for many Bash commands, including the
 # ability to add extended Git info in PS1.
