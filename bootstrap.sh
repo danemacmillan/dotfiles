@@ -61,7 +61,7 @@ if [ ! -f "$HOME/.ssh/config" ]; then
 Host *
 	TCPKeepAlive yes
 	ServerAliveInterval 120
-	PreferredAuthentications publickey
+	PreferredAuthentications publickey,password
 	Protocol 2
 	Compression yes
 	LogLevel VERBOSE
