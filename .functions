@@ -75,27 +75,28 @@ v() {
 #
 # For example, type "archive updates.tar.gz updatesdir" and this function will run the
 # necessary commands for generating an archive with .tar.gz compression.
+#
+# Note: bz2 exclusively requires that you just pass bz2 as the desiredfilename
+# because it cannot be output into a single file, but each file will be
+# individually archived with bzip2 compression.
 # 
 archive() {
-
-	echo "$@"	
-	return 1;
-
 	case $1 in
-		*.bz2)      bzip2 "$@" ;;
-		*.tar)      tar -cvf $1 $2;;
-		*.tar.bz2)  tar -jcvf $1 $2 ;;
-		*.tbz2)     tar -jcvf $1 ;;
-		*.tar.gz)   tar -zcvf $1 $2 ;;
-		*.tgz)      tar -zcvf $1 $2 ;;
-		#*.dmg)      hdiutil mount $1 ;;
-		#*.gz)       gzip $1 $2 ;;
-		*.zip)      unzip $1 ;;
-		*.ZIP)      unzip $1 ;;
+		*bz2)       bzip2 "${@:2}" ;;
+		*.gz)       gzip -c "${@:2}" > $1 ;;
+		*.tar)      tar -cvf $1 "${@:2}" ;;
+		*.tbz)      tar -jcvf $1 "${@:2}" ;;
+		*.tbz2)     tar -jcvf $1 "${@:2}" ;;
+		*.tar.bz2)  tar -jcvf $1 "${@:2}" ;;
+		*.tgz)      tar -zcvf $1 "${@:2}" ;;
+		*.tar.gz)   tar -zcvf $1 "${@:2}" ;;
+		*.zip)      zip -r $1 "${@:2}" ;;
+		*.ZIP)      zip -r $1 "${@:2}" ;;
 		#*.pax)      cat $1 | pax -r ;;
 		#*.pax.Z)    uncompress $1 --stdout | pax -r ;;
 		#*.Z)        uncompress $1 ;;
-		*)          echo "'$2' cannot be archived via extract()" ;;
+		#*.dmg)      hdiutil mount $1 ;;
+		*)          echo "'${@:2}' cannot be archived via archive()" ;;
 	esac
 }
 
