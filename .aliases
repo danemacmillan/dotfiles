@@ -26,7 +26,7 @@ alias fgrep='fgrep --color=auto'
 alias listen='lsof -Pnl +M -i4'
 alias nsp='netstat -tulpn'
 alias ss='lsof -i'
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ipp="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias vs="vagrant global-status --prune"
 # See http://ipinfo.io/developers for more info.
@@ -35,6 +35,9 @@ alias ipgeo="curl ipinfo.io"
 # Misc
 alias c='clear'
 alias vi='vim'
+
+# Git--just for reference. Do not rewrite history.
+alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
 
 # Mitigate fat-fingering and other retardations.
 alias gut="git"
