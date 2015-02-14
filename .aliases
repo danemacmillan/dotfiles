@@ -37,7 +37,7 @@ alias c='clear'
 alias vi='vim'
 
 # Git--just for reference. Do not rewrite history.
-alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
+#alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
 
 # Mitigate fat-fingering and other retardations.
 alias gut="git"
