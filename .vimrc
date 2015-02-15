@@ -13,20 +13,21 @@ Plugin 'gmarik/Vundle.vim'
 
 " Keep Plugin commands between vundle#begin/end.
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'Command-T'
 Plugin 'Solarized'
+Plugin 'tpope/vim-fugitive'
+"Plugin 'Command-T'
+Plugin 'kien/ctrlp.vim'
 Plugin 'closetag.vim'
 Plugin 'SuperTab'
 Plugin 'Tagbar'
 Plugin 'delimitMate.vim'
 Plugin 'elzr/vim-json'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
-"Plugin 'Lokaltog/powerline'
-"Plugin 'airblade/vim-gitgutter'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -157,6 +158,8 @@ set showmode
 set title
 " Show the (partial) command as it’s being typed
 set showcmd
+"
+set linespace=0
 
 " Set and show column at 80 characters
 if exists('+colorcolumn')
@@ -175,14 +178,14 @@ endif
 set scrolloff=3
 
 " Strip trailing whitespace (,ss)
-function! StripWhitespace()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
-endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
+"function! StripWhitespace()
+""	let save_cursor = getpos(".")
+""	let old_query = getreg('/')
+""	:%s/\s\+$//e
+""	call setpos('.', save_cursor)
+""	call setreg('/', old_query)
+"endfunction
+"noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
