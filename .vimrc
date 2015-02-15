@@ -1,37 +1,35 @@
+"
+" Begin Vim Vundle configs
+"
+
 set nocompatible              " be iMproved, required
 filetype on                   " required for compatibility with Mac OS X, See https://github.com/gmarik/Vundle.vim/issues/167#issuecomment-51679609
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call vundle#begin('~/.vim/bundle')
+	" Required by Vundle
+	Plugin 'gmarik/Vundle.vim'
+	" My plugins
+	Plugin 'Solarized'
+	Plugin 'tpope/vim-fugitive'
+	"Plugin 'Command-T'
+	Plugin 'kien/ctrlp.vim'
+	Plugin 'closetag.vim'
+	Plugin 'Tagbar'
+	Plugin 'delimitMate.vim'
+	Plugin 'elzr/vim-json'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'bling/vim-airline'
+	Plugin 'scrooloose/syntastic'
+	Plugin 'ntpeters/vim-better-whitespace'
+	Plugin 'airblade/vim-gitgutter'
+	Plugin 'SuperTab'
+	"https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation
+	"Plugin 'Valloric/YouCompleteMe'
+call vundle#end()
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" Keep Plugin commands between vundle#begin/end.
-
-Plugin 'Solarized'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'Command-T'
-Plugin 'kien/ctrlp.vim'
-Plugin 'closetag.vim'
-Plugin 'Tagbar'
-Plugin 'delimitMate.vim'
-Plugin 'elzr/vim-json'
-Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'SuperTab'
-"https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation
-"Plugin 'Valloric/YouCompleteMe'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -50,6 +48,11 @@ nnoremap <leader>pl :PluginList<CR>
 nnoremap <leader>pi :PluginInstall!<CR>
 nnoremap <leader>ps :PluginSearch!<Space>
 nnoremap <leader>pc :PluginClean!<CR>
+
+
+"
+" Begin standard vimrc configs.
+"
 
 " Use the Solarized Dark theme
 " Installed using Vundler (see above)
@@ -78,6 +81,23 @@ let g:airline_theme= 'dark'
 
 " CtrlP
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+"http://blog.patspam.com/2014/super-fast-ctrlp
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+	\ --ignore .git
+	\ --ignore .svn
+	\ --ignore .hg
+	\ --ignore .DS_Store
+	\ --ignore "**/*.pyc"
+	\ -g ""'
+endif
+"https://coderwall.com/p/hk_bwg/how-to-speed-up-ctrlp
+let g:ctrlp_custom_ignore = {
+	\ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
+	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
+	\ }
+
 
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
