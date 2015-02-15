@@ -16,7 +16,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Solarized'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'Command-T'
-"Plugin 'SuperTab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'closetag.vim'
 Plugin 'Tagbar'
@@ -27,8 +26,9 @@ Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'SuperTab'
 "https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
