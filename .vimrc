@@ -112,6 +112,8 @@ let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
 	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
 	\ }
+" Map ctrlp buffer
+nnoremap <F5> :CtrlPBuffer<CR>
 
 " Syntastic
 set statusline+=%#warningmsg#
