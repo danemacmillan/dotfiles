@@ -16,9 +16,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Solarized'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'Command-T'
+"Plugin 'SuperTab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'closetag.vim'
-Plugin 'SuperTab'
 Plugin 'Tagbar'
 Plugin 'delimitMate.vim'
 Plugin 'elzr/vim-json'
@@ -74,6 +74,9 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 "https://github.com/bling/vim-airline/wiki/FAQ
 let g:airline_powerline_fonts = 1
 let g:airline_theme= 'dark'
+
+" CtrlP
+let g:ctrlp_working_path_mode = 'ra'
 
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
