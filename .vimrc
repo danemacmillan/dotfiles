@@ -92,6 +92,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_by_filename = 1
 let g:ctrlp_regexp = 0
 let g:ctrlp_show_hidden = 1
