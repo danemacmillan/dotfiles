@@ -90,22 +90,23 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " CtrlP
 " https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_by_filename = 1
-let g:ctrlp_regexp = 1
+let g:ctrlp_regexp = 0
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_max_files = 0
-let g:ctrlp_working_path_mode = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+
 if executable('ag')
-"http://blog.patspam.com/2014/super-fast-ctrlp
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-	\ --ignore .git
-	\ --ignore .svn
-	\ --ignore .hg
-	\ --ignore .DS_Store
-	\ --ignore "**/*.pyc"
-	\ -g ""'
+	"http://blog.patspam.com/2014/super-fast-ctrlp
+	let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+		\ --ignore .git
+		\ --ignore .svn
+		\ --ignore .hg
+		\ --ignore .DS_Store
+		\ --ignore "**/*.pyc"
+		\ -g ""'
 endif
 "https://coderwall.com/p/hk_bwg/how-to-speed-up-ctrlp
 let g:ctrlp_custom_ignore = {
