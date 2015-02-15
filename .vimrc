@@ -95,6 +95,9 @@ noremap <leader>O <Esc>:CommandTFlush<CR>
 noremap <leader>m <Esc>:CommandTBuffer<CR>
 
 " CtrlP
+" https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
+let g:ctrlp_by_filename = 1
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
