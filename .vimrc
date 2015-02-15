@@ -25,7 +25,6 @@ call vundle#begin('~/.vim/bundle')
 	" My plugins
 	Plugin 'Solarized'
 	Plugin 'tpope/vim-fugitive'
-	"Plugin 'Command-T'
 	Plugin 'kien/ctrlp.vim'
 	Plugin 'closetag.vim'
 	Plugin 'Tagbar'
@@ -89,16 +88,14 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
-" Map command-T
-noremap <leader>o <Esc>:CommandT<CR>
-noremap <leader>O <Esc>:CommandTFlush<CR>
-noremap <leader>m <Esc>:CommandTBuffer<CR>
-
 " CtrlP
 " https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
-let g:ctrlp_by_filename = 1
-let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_by_filename = 1
+let g:ctrlp_regexp = 1
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_max_files = 0
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
 "http://blog.patspam.com/2014/super-fast-ctrlp
@@ -112,7 +109,7 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 endif
 "https://coderwall.com/p/hk_bwg/how-to-speed-up-ctrlp
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
+	\ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public$|log\|tmp$',
 	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
 	\ }
 " Map ctrlp buffer
