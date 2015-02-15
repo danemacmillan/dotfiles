@@ -1,5 +1,16 @@
+" .vimrc file for Dane MacMillan
 "
-" Begin Vim Vundle configs
+" Sections:
+" 1. Vundle installer for plugins.
+" 2. Standard vimrc configurations.
+"
+" Notes:
+" <leader> is equal to \
+"
+
+
+"
+" 1. Begin Vim Vundle configs
 "
 
 set nocompatible              " be iMproved, required
@@ -14,7 +25,7 @@ call vundle#begin('~/.vim/bundle')
 	" My plugins
 	Plugin 'Solarized'
 	Plugin 'tpope/vim-fugitive'
-	"Plugin 'Command-T'
+	Plugin 'Command-T'
 	Plugin 'kien/ctrlp.vim'
 	Plugin 'closetag.vim'
 	Plugin 'Tagbar'
@@ -25,6 +36,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'scrooloose/syntastic'
 	Plugin 'ntpeters/vim-better-whitespace'
 	Plugin 'airblade/vim-gitgutter'
+	Plugin 'bling/vim-bufferline'
 	Plugin 'SuperTab'
 	"https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation
 	"Plugin 'Valloric/YouCompleteMe'
@@ -51,7 +63,7 @@ nnoremap <leader>pc :PluginClean!<CR>
 
 
 "
-" Begin standard vimrc configs.
+" 2. Begin standard vimrc configs.
 "
 
 " Use the Solarized Dark theme
@@ -78,6 +90,10 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 "https://github.com/bling/vim-airline/wiki/FAQ
 let g:airline_powerline_fonts = 1
 let g:airline_theme= 'dark'
+" Displaying nice buffers
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " CtrlP
 let g:ctrlp_working_path_mode = 'ra'
@@ -98,6 +114,15 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
 	\ }
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
