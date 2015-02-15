@@ -98,6 +98,7 @@ let g:ctrlp_by_filename = 0
 let g:ctrlp_regexp = 1
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_max_files = 0
+let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 "https://coderwall.com/p/hk_bwg/how-to-speed-up-ctrlp
 let g:ctrlp_custom_ignore = {
@@ -105,7 +106,9 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
 	\ }
 if executable('ag')
-	"http://blog.patspam.com/2014/super-fast-ctrlp
+	" http://blog.patspam.com/2014/super-fast-ctrlp
+	" https://www.mankier.com/1/ag
+	let g:ctrlp_use_caching = 0
 	let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --follow
 		\ --ignore .git
 		\ --ignore .svn
