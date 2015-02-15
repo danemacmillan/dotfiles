@@ -32,7 +32,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'elzr/vim-json'
 	Plugin 'scrooloose/nerdtree'
 	Plugin 'bling/vim-airline'
-	Plugin 'scrooloose/syntastic'
+	"Plugin 'scrooloose/syntastic'
 	Plugin 'ntpeters/vim-better-whitespace'
 	Plugin 'airblade/vim-gitgutter'
 	Plugin 'bling/vim-bufferline'
@@ -92,9 +92,9 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_by_filename = 1
-let g:ctrlp_regexp = 0
+let g:ctrlp_follow_symlinks = 2
+let g:ctrlp_by_filename = 0
+let g:ctrlp_regexp = 1
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_max_files = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
