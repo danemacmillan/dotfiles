@@ -206,6 +206,8 @@ set ruler
 set shortmess=atI
 " Show the current mode
 set showmode
+" Set title string to just be filename
+set titlestring=%t
 " Show the filename in the window titlebar
 set title
 " Show the (partial) command as it’s being typed
