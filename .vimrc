@@ -23,9 +23,10 @@ Plugin 'delimitMate.vim'
 Plugin 'elzr/vim-json'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlp.vim'
-"Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
 "Plugin 'Lokaltog/powerline'
+"Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -67,6 +68,11 @@ nnoremap <F8> :TagbarToggle<CR>
 
 " Map NERDTREE
 nnoremap <leader>n :NERDTreeToggle<CR>
+
+" Customize Airline
+"https://github.com/bling/vim-airline/wiki/FAQ
+let g:airline_powerline_fonts = 1
+let g:airline_theme= 'dark'
 
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
@@ -188,5 +194,5 @@ au BufRead,BufNewFile * setfiletype sh
 " Vim: Warning: Output is not to a terminal 
 " Vim: Warning: Input is not from a terminal
 " https://stackoverflow.com/questions/16517568/vim-exec-command-in-command-line-and-vim-warning-input-is-not-from-a-terminal
-au StdinReadPost * set buftype=nofile
+"au StdinReadPost * set buftype=nofile
 
