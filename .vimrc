@@ -113,7 +113,7 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
 	\ }
 " Map ctrlp buffer
-nnoremap <F5> :CtrlPBuffer<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 
 " Syntastic
 set statusline+=%#warningmsg#
