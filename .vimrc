@@ -25,7 +25,7 @@ call vundle#begin('~/.vim/bundle')
 	" My plugins
 	Plugin 'Solarized'
 	Plugin 'tpope/vim-fugitive'
-	Plugin 'Command-T'
+	"Plugin 'Command-T'
 	Plugin 'kien/ctrlp.vim'
 	Plugin 'closetag.vim'
 	Plugin 'Tagbar'
@@ -51,9 +51,7 @@ filetype plugin indent on    " required
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
 " see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
 " Map Vundle commands
 nnoremap <leader>pl :PluginList<CR>
@@ -74,11 +72,6 @@ nnoremap <leader>pc :PluginClean!<CR>
 silent! set background=dark
 silent! colorscheme solarized
 
-" Map command-T
-noremap <leader>o <Esc>:CommandT<CR>
-noremap <leader>O <Esc>:CommandTFlush<CR>
-noremap <leader>m <Esc>:CommandTBuffer<CR>
-
 " Map Tagbar
 let g:tagbar_usearrows = 1
 nnoremap <F8> :TagbarToggle<CR>
@@ -94,6 +87,11 @@ let g:airline_theme= 'dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" Map command-T
+noremap <leader>o <Esc>:CommandT<CR>
+noremap <leader>O <Esc>:CommandTFlush<CR>
+noremap <leader>m <Esc>:CommandTBuffer<CR>
 
 " CtrlP
 let g:ctrlp_working_path_mode = 'ra'
