@@ -1,4 +1,4 @@
-" .vimrc file for Dane MacMillan
+" .vimrc at https://github.com/danemacmillan/dotfiles
 "
 " Sections:
 " 1. Vundle installer for plugins.
