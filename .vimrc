@@ -156,6 +156,10 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
+" Map buffer cycling
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+
 " Pasting between different systems when line numbers are visible means that
 " they will be included in the paste. This will strip them. Only strip
 " whitespace before (from 0 to 2) and after number (0 to 1). Anything more
