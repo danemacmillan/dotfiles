@@ -44,6 +44,16 @@ bower_components/
 .vim/.netrwhist
 .vim/bundle
 
+## Binaries
+*.so
+*.dat
+*.jpeg
+*.jpg
+*.png
+*.gif
+*.dmg
+*.iso
+
 ## Weechat
 .weechat/irc.conf
 .weechat/*.log

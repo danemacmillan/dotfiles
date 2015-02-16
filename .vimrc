@@ -92,7 +92,8 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
 nnoremap <leader>b :CtrlPBuffer<CR>
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-let g:ctrlp_working_path_mode = 'ra'
+ " r will use nearest .git, which doesn't play well with symlinks
+let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_follow_symlinks = 2
 let g:ctrlp_by_filename = 0
 let g:ctrlp_regexp = 1
@@ -109,7 +110,7 @@ if executable('ag')
 	" https://www.mankier.com/1/ag
 	let g:ctrlp_user_command = 'ag --ignore-case --nogroup --hidden --follow
 		\ -U -p ~/.agignore
-		\ -l -m 50000
+		\ -l -m 2000
 		\ %s -g ""'
 endif
 
