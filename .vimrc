@@ -108,14 +108,10 @@ let g:ctrlp_custom_ignore = {
 if executable('ag')
 	" http://blog.patspam.com/2014/super-fast-ctrlp
 	" https://www.mankier.com/1/ag
-	let g:ctrlp_use_caching = 0
-	let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --follow
-		\ --ignore .git
-		\ --ignore .svn
-		\ --ignore .hg
-		\ --ignore .DS_Store
-		\ --ignore "**/*.pyc"
-		\ -g ""'
+	let g:ctrlp_user_command = 'ag --ignore-case --nogroup --hidden --follow
+		\ -l -m 50000
+		\ -U -p ~/.agignore
+		\ %s -g ""'
 endif
 
 " Map ctrlp buffer

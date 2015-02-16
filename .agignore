@@ -1,0 +1,46 @@
+## OS
+*~
+*.lock
+*.DS_Store
+*.DS_Store?
+*.localized
+*.swp
+*.out
+Thumbs.db
+composer.phar
+composer
+Desktop.ini
+desktop.ini
+._*
+ehthumbs.db
+.Spotlight-V100
+.Trashes
+
+## For quick testing, create any directory with ~ in front of it,
+## and it will be ignored.
+~*/
+
+## IDEs
+.idea/
+.idea_modules/
+nbproject/
+
+## Vagrant
+.vagrant/
+
+## Composer
+vendor/
+
+## Node
+node_modules/
+bower_components/
+
+## Vim
+.vim/.netrwhist
+.vim/bundle
+
+## Weechat
+.weechat/irc.conf
+.weechat/*.log
+.weechat/*.upgrade
+.weechat/weechat_fifo*

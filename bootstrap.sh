@@ -3,6 +3,7 @@
 # Install
 echo -e "\x1B[34;1mSymlinking dotfiles.\x1B[0m"
 ln -vsfn ~/.dotfiles/.aliases ~/
+ln -vsfn ~/.dotfiles/.agignore ~/
 ln -vsfn ~/.dotfiles/.bash_completion ~/
 ln -vsfn ~/.dotfiles/.bash_profile ~/
 ln -vsfn ~/.dotfiles/.bashrc ~/
