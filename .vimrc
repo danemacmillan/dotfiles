@@ -111,6 +111,11 @@ if executable('ag')
 	let g:ctrlp_user_command = 'ag --ignore-case --nogroup --hidden --follow
 		\ -U -p ~/.agignore
 		\ -l -m 10000
+		\ --ignore .git
+		\ --ignore .svn
+		\ --ignore .hg
+		\ --ignore .DS_Store
+		\ --ignore "**/*.pyc"
 		\ %s -g ""'
 endif
 
