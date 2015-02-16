@@ -19,6 +19,7 @@ desktop.ini
 ehthumbs.db
 .Spotlight-V100
 .Trashes
+.cache/
 
 ## IDEs
 .idea/
@@ -34,9 +35,11 @@ nbproject/
 .vagrant/
 
 ## Composer
+.composer/
 vendor/
 
 ## Node
+.npm/
 node_modules/
 bower_components/
 
