@@ -110,7 +110,7 @@ if executable('ag')
 	" https://www.mankier.com/1/ag
 	let g:ctrlp_user_command = 'ag --ignore-case --nogroup --hidden --follow
 		\ -U -p ~/.agignore
-		\ -l -m 2000
+		\ -l -m 20000
 		\ %s -g ""'
 endif
 
