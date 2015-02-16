@@ -159,6 +159,8 @@ set showmode
 " Map buffer cycling
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
+" Type comma, followed by first characters of buffer filename, enter
+nnoremap , :b<space>
 
 " Pasting between different systems when line numbers are visible means that
 " they will be included in the paste. This will strip them. Only strip
