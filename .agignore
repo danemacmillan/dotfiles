@@ -1,8 +1,10 @@
+## https://www.mankier.com/1/ag
 ## https://github.com/ggreer/the_silver_searcher
 
 ## OS
 *~
 *.lock
+.DS_Store
 *.DS_Store
 *.DS_Store?
 *.localized
@@ -22,6 +24,11 @@ ehthumbs.db
 .idea/
 .idea_modules/
 nbproject/
+
+## VCS ignores
+.git/
+.hg/
+.svn/
 
 ## Vagrant
 .vagrant/
