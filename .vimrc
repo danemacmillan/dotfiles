@@ -109,8 +109,8 @@ if executable('ag')
 	" http://blog.patspam.com/2014/super-fast-ctrlp
 	" https://www.mankier.com/1/ag
 	let g:ctrlp_user_command = 'ag --ignore-case --nogroup --hidden --follow
-		\ -l -m 50000
 		\ -U -p ~/.agignore
+		\ -l -m 50000
 		\ %s -g ""'
 endif
 
