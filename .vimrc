@@ -24,6 +24,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'gmarik/Vundle.vim'
 	" My plugins
 	Plugin 'Solarized'
+	Plugin 'editorconfig/editorconfig-vim'
 	Plugin 'tpope/vim-fugitive'
 	Plugin 'tpope/vim-surround'
 	Plugin 'kien/ctrlp.vim'
@@ -39,6 +40,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'airblade/vim-gitgutter'
 	Plugin 'bling/vim-bufferline'
 	Plugin 'SuperTab'
+	Plugin 'Shougo/neocomplete.vim'
 	"https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation
 	"Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
@@ -121,8 +123,6 @@ if executable('ag')
 		\ %s -g ""'
 endif
 
-" Map ctrlp buffer
-
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -140,13 +140,24 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 
+" Neocomplete
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
 " Pasting between different systems when line numbers are visible means that
-" they will be included in the paste. This will strip them. Only strip 
+" they will be included in the paste. This will strip them. Only strip
 " whitespace before (from 0 to 2) and after number (0 to 1). Anything more
 " greedy can result in undesired replacements.
 nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//<CR>
@@ -261,7 +272,7 @@ au BufRead,BufNewFile * setfiletype sh
 
 " When invoking dotfiles through vagrant provisioning script, Vundler throws a
 " pair of warnings:
-" Vim: Warning: Output is not to a terminal 
+" Vim: Warning: Output is not to a terminal
 " Vim: Warning: Input is not from a terminal
 " https://stackoverflow.com/questions/16517568/vim-exec-command-in-command-line-and-vim-warning-input-is-not-from-a-terminal
 "au StdinReadPost * set buftype=nofile
