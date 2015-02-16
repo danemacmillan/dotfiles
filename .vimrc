@@ -25,6 +25,7 @@ call vundle#begin('~/.vim/bundle')
 	" My plugins
 	Plugin 'Solarized'
 	Plugin 'tpope/vim-fugitive'
+	Plugin 'tpope/vim-surround'
 	Plugin 'kien/ctrlp.vim'
 	Plugin 'closetag.vim'
 	Plugin 'Tagbar'
@@ -34,6 +35,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'bling/vim-airline'
 	"Plugin 'scrooloose/syntastic'
 	Plugin 'ntpeters/vim-better-whitespace'
+	Plugin 'nathanaelkane/vim-indent-guides'
 	Plugin 'airblade/vim-gitgutter'
 	Plugin 'bling/vim-bufferline'
 	Plugin 'SuperTab'
@@ -130,6 +132,13 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+
+" Indent guides
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 0
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 
 " Toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
