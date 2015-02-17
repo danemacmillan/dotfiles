@@ -39,6 +39,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'nathanaelkane/vim-indent-guides'
 	Plugin 'airblade/vim-gitgutter'
 	Plugin 'bling/vim-bufferline'
+	Plugin 'ap/vim-css-color'
 	Plugin 'SuperTab'
 	Plugin 'Shougo/neocomplete.vim'
 	"https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation
