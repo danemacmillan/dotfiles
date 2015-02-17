@@ -73,11 +73,12 @@ nnoremap <leader>pc :PluginClean!<CR>
 silent! set background=dark
 silent! colorscheme solarized
 
-" Map Tagbar
+" Tagbar
 let g:tagbar_usearrows = 1
 nnoremap <F8> :TagbarToggle<CR>
 
-" Map NERDTREE
+" NERDTREE
+let g:NERDTreeShowHidden=1
 nnoremap <leader>n :NERDTreeToggle<CR>
 
 " Customize Airline
