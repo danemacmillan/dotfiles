@@ -20,9 +20,7 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin('~/.vim/bundle')
-	" Required by Vundle
 	Plugin 'gmarik/Vundle.vim'
-	" My plugins
 	Plugin 'Solarized'
 	Plugin 'editorconfig/editorconfig-vim'
 	Plugin 'tpope/vim-fugitive'
@@ -34,18 +32,16 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'elzr/vim-json'
 	Plugin 'scrooloose/nerdtree'
 	Plugin 'bling/vim-airline'
-	"Plugin 'scrooloose/syntastic'
 	Plugin 'ntpeters/vim-better-whitespace'
 	Plugin 'nathanaelkane/vim-indent-guides'
 	Plugin 'airblade/vim-gitgutter'
 	Plugin 'bling/vim-bufferline'
 	Plugin 'ap/vim-css-color'
 	Plugin 'SuperTab'
+	"Plugin 'scrooloose/syntastic'
 	if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
 		Plugin 'Shougo/neocomplete.vim'
 	endif
-	"https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation
-	"Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 
 filetype plugin indent on    " required
@@ -144,17 +140,19 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 
 " Neocomplete
-if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
-	" disable autocomplpop.
-	let g:acp_enableatstartup = 0
-	" use neocomplete.
-	let g:neocomplete#enable_at_startup = 1
-	" use smartcase.
-	let g:neocomplete#enable_smart_case = 1
-	" set minimum syntax keyword length.
-	let g:neocomplete#sources#syntax#min_keyword_length = 2
-	let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-endif
+" disable autocomplpop.
+let g:acp_enableatstartup = 0
+" use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Better whitespace
+let g:strip_whitespace_on_save = 1
+nnoremap <leader>s :StripWhitespace<CR>
 
 " toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
@@ -259,24 +257,9 @@ else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
-" Use relative line numbers
-"if exists("&relativenumber")
-"	set relativenumber
-"	au BufReadPost * set relativenumber
-"endif
-
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
 
-" Strip trailing whitespace (,ss)
-"function! StripWhitespace()
-""	let save_cursor = getpos(".")
-""	let old_query = getreg('/')
-""	:%s/\s\+$//e
-""	call setpos('.', save_cursor)
-""	call setreg('/', old_query)
-"endfunction
-"noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
@@ -289,4 +272,3 @@ au BufRead,BufNewFile * setfiletype sh
 " Vim: Warning: Input is not from a terminal
 " https://stackoverflow.com/questions/16517568/vim-exec-command-in-command-line-and-vim-warning-input-is-not-from-a-terminal
 "au StdinReadPost * set buftype=nofile
-
