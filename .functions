@@ -16,8 +16,8 @@ rr() {
 	if (( $# > 1 )); then
 		local remote_server="$1"
 		local remote_commands="${@:2}"
-		echo -e "\n\x1B[34;1mRunning '\x1B[97;1m$remote_commands\x1B[34;1m' on '$remote_server':\x1B[0m\n"
-		ssh -tt $remote_server "$remote_commands"
+		echo -e "\x1B[34;1mRunning '\x1B[97;1m$remote_commands\x1B[34;1m' on '$remote_server':\x1B[0m"
+		ssh -qtt $remote_server "$remote_commands"
 	fi
 }
 
