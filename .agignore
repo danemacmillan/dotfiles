@@ -56,9 +56,24 @@ bower_components/
 *.gif
 *.dmg
 *.iso
+*.doc
+*.docx
 
 ## Weechat
 .weechat/irc.conf
 .weechat/*.log
 .weechat/*.upgrade
 .weechat/weechat_fifo*
+
+## Misc filesystem
+log
+tmp
+*.sql
+*.gz
+*.zip
+*.tar.gz
+*.tgz
+*.bz2
+*.tar.bz2
+*.tbz
+*.tbz2
