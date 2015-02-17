@@ -33,6 +33,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias vs="vagrant global-status --prune"
 # See http://ipinfo.io/developers for more info.
 alias ipgeo="curl ipinfo.io"
+alias rr='ssh -tt $1 "$2"'
 
 # Misc
 alias c='clear'
