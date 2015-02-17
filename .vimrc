@@ -41,7 +41,9 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'bling/vim-bufferline'
 	Plugin 'ap/vim-css-color'
 	Plugin 'SuperTab'
-	Plugin 'Shougo/neocomplete.vim'
+	if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
+		Plugin 'Shougo/neocomplete.vim'
+	endif
 	"https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation
 	"Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
@@ -62,7 +64,6 @@ nnoremap <leader>pl :PluginList<CR>
 nnoremap <leader>pi :PluginInstall!<CR>
 nnoremap <leader>ps :PluginSearch!<Space>
 nnoremap <leader>pc :PluginClean!<CR>
-
 
 "
 " 2. Begin standard vimrc configs.
@@ -143,19 +144,19 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 
 " Neocomplete
-if has('lua')
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
+	" disable autocomplpop.
+	let g:acp_enableatstartup = 0
+	" use neocomplete.
+	let g:neocomplete#enable_at_startup = 1
+	" use smartcase.
+	let g:neocomplete#enable_smart_case = 1
+	" set minimum syntax keyword length.
+	let g:neocomplete#sources#syntax#min_keyword_length = 2
+	let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 endif
 
-" Toggle annoying paste indenting
+" toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
