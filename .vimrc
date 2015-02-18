@@ -38,6 +38,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'bling/vim-bufferline'
 	Plugin 'ap/vim-css-color'
 	Plugin 'SuperTab'
+	Plugin 'mbbill/undotree'
 	"Plugin 'scrooloose/syntastic'
 	if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
 		Plugin 'Shougo/neocomplete.vim'
@@ -154,6 +155,13 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 " Better whitespace
 let g:strip_whitespace_on_save = 1
 nnoremap <leader>s :StripWhitespace<CR>
+
+" Undo tree
+nnoremap <F5> :UndotreeToggle<CR>
+if has("persistent_undo")
+	set undodir='~/.vim/undo/'
+	set undofile
+endif
 
 " toggle annoying paste indenting
 nnoremap <F2> :set invpaste paste?<CR>
