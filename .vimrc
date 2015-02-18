@@ -180,6 +180,8 @@ nnoremap <F4> :set invnumber<CR>
 " Reload vimrc
 nnoremap <leader>rv :source $MYVIMRC<CR>
 
+" Set default file format
+set ff=unix
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 " Enhance command-line completion
