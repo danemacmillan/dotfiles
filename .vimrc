@@ -95,7 +95,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " CtrlP
 " https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-let g:ctrlp_map = ','
+let g:ctrlp_map = '<space>'
 let g:ctrlp_cmd = 'CtrlP'
  " r will use nearest .git, which doesn't play well with symlinks
 let g:ctrlp_working_path_mode = 'a'
@@ -177,7 +177,9 @@ nnoremap <S-Tab> :bprevious<CR>
 " Hit spacebar, followed by first characters of buffer filename, enter.
 " This is not really necessary, considering CtrlP is mapped to ',' which
 " includes buffers in its searches.
-nnoremap <space> :b<space>
+" Just use CtrlP, which is more elegant and already available.
+"nnoremap <space> :b<space>
+nnoremap , :CtrlPBuffer<CR>
 
 " Pasting between different systems when line numbers are visible means that
 " they will be included in the paste. This will strip them. Only strip
