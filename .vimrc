@@ -157,6 +157,7 @@ let g:strip_whitespace_on_save = 1
 nnoremap <leader>s :StripWhitespace<CR>
 
 " Undo tree
+let g:undotree_WindowLayout = 1
 nnoremap <F5> :UndotreeToggle<CR>
 if has("persistent_undo")
 	set undodir='~/.vim/undo/'
