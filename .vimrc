@@ -125,14 +125,16 @@ if executable('ag')
 endif
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+if exists('g:syntastic_check_on_open')
+	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatuslineFlag()}
+	set statusline+=%*
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 1
+	let g:syntastic_check_on_open = 1
+	let g:syntastic_check_on_wq = 0
+	let g:syntastic_php_checkers = ['phpcs']
+endif
 
 " Indent guides
 let g:indent_guides_start_level = 2
@@ -187,7 +189,7 @@ nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//<CR>
 nnoremap <F4> :set invnumber<CR>
 
 " Reload vimrc
-nnoremap <leader>rv :source $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Set default file format
 set ff=unix
