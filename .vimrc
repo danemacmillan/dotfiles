@@ -30,7 +30,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'Tagbar'
 	Plugin 'delimitMate.vim'
 	Plugin 'elzr/vim-json'
-	Plugin 'scrooloose/nerdtree'
+	"Plugin 'scrooloose/nerdtree'
 	Plugin 'bling/vim-airline'
 	Plugin 'ntpeters/vim-better-whitespace'
 	Plugin 'nathanaelkane/vim-indent-guides'
@@ -79,8 +79,8 @@ let g:tagbar_usearrows = 1
 nnoremap <F8> :TagbarToggle<CR>
 
 " NERDTREE
-let g:NERDTreeShowHidden=1
-nnoremap <leader>n :NERDTreeToggle<CR>
+"let g:NERDTreeShowHidden=1
+"nnoremap <leader>n :NERDTreeToggle<CR>
 
 " Customize Airline
 "https://github.com/bling/vim-airline/wiki/FAQ
