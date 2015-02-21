@@ -44,7 +44,6 @@ call vundle#begin('~/.vim/bundle')
 		Plugin 'Shougo/neocomplete.vim'
 	endif
 call vundle#end()
-
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
