@@ -20,6 +20,8 @@ ehthumbs.db
 .Spotlight-V100
 .Trashes
 .cache/
+log
+tmp
 
 ## IDEs
 .idea/
@@ -66,8 +68,6 @@ bower_components/
 .weechat/weechat_fifo*
 
 ## Misc filesystem
-log
-tmp
 *.sql
 *.gz
 *.zip
