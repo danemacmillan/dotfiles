@@ -39,6 +39,9 @@ bower_components/
 .vim/.netrwhist
 .vim/bundle
 
+## ctags
+tags
+
 ## Weechat
 .weechat/irc.conf
 .weechat/*.log
