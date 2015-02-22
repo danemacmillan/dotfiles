@@ -30,7 +30,6 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'Tagbar'
 	Plugin 'delimitMate.vim'
 	Plugin 'elzr/vim-json'
-	"Plugin 'scrooloose/nerdtree'
 	Plugin 'bling/vim-airline'
 	Plugin 'ntpeters/vim-better-whitespace'
 	Plugin 'nathanaelkane/vim-indent-guides'
@@ -39,10 +38,11 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'ap/vim-css-color'
 	Plugin 'SuperTab'
 	Plugin 'mbbill/undotree'
-	"Plugin 'scrooloose/syntastic'
 	if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
 		Plugin 'Shougo/neocomplete.vim'
 	endif
+	"Plugin 'scrooloose/nerdtree'
+	"Plugin 'scrooloose/syntastic'
 call vundle#end()
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
