@@ -78,6 +78,10 @@ silent! colorscheme solarized
 let g:tagbar_usearrows = 1
 nnoremap <F8> :TagbarToggle<CR>
 
+" Taglist
+let Tlist_Use_Right_Window = 1
+nnoremap <F9> :TlistToggle<CR>
+
 " NERDTREE
 "let g:NERDTreeShowHidden=1
 "nnoremap <leader>n :NERDTreeToggle<CR>
