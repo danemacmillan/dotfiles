@@ -38,6 +38,9 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'ap/vim-css-color'
 	Plugin 'SuperTab'
 	Plugin 'mbbill/undotree'
+	Plugin 'xolox/vim-misc'
+	Plugin 'xolox/vim-easytags'
+	Plugin 'taglist.vim'
 	if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
 		Plugin 'Shougo/neocomplete.vim'
 	endif
