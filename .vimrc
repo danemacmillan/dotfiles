@@ -243,6 +243,7 @@ set tabstop=2
 set shiftwidth=2
 " Show “invisible” characters
 "set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+" triangle-headed rightwards arrow: http://unicode-table.com/en/279D/
 set lcs=tab:➝\ ,trail:·,eol:¬,nbsp:_
 set list
 " Highlight searches
