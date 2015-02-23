@@ -1,4 +1,6 @@
 ## .functions
+#
+# Note: Color and symbol variables depend on .formatting file.
 
 # TODO:
 # Create a function to generate archives based on desired output filename.
