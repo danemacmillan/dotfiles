@@ -292,6 +292,12 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 " Treat extensionless files as bash scripts.
 au BufRead,BufNewFile * setfiletype sh
 
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 " When invoking dotfiles through vagrant provisioning script, Vundler throws a
 " pair of warnings:
 " Vim: Warning: Output is not to a terminal

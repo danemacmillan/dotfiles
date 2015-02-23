@@ -8,6 +8,7 @@ ln -vsfn ~/.dotfiles/.bash_completion ~/
 ln -vsfn ~/.dotfiles/.bash_profile ~/
 ln -vsfn ~/.dotfiles/.bashrc ~/
 ln -vsfn ~/.dotfiles/.ctags ~/
+ln -vsfn ~/.dotfiles/.formatting ~/
 ln -vsfn ~/.dotfiles/.functions ~/
 ln -vsfn ~/.dotfiles/.gitconfig ~/
 ln -vsfn ~/.dotfiles/.gitignore ~/

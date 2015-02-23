@@ -27,14 +27,17 @@ fi
 # to be defined for another OS.
 export OS=$(uname | awk '{print tolower($0)}')
 case $OS in
-  darwin*) 
-    OS='osx';; 
-  linux*)  
+  darwin*)
+    OS='osx';;
+  linux*)
     OS='nix';;
 esac
 
 # Source OS-specific configs.
 source ~/.$OS
+
+# Source formatting / color variables
+source ~/.formatting
 
 # Source various helper bash functions
 source ~/.functions
@@ -50,7 +53,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=0
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM='verbose'
-export PS1="\\[\033[0;32m\]\u\\[\033[0;36m\]@\\[\033[1;34m\]\h \\[\033[0;36m\]\w\\[\e[0;31m\]\$(__git_ps1) \\[\033[1;36m\]\$\\[\033[0m\] "
+export PS1="\\[${GREEN}\]\u\\[$CYAN\]@\\[$BBLUE\]\h \\[$CYAN\]\w\\[$RED\]\$(__git_ps1) \\[$BCYAN\]\$\\[$RESET\] "
 
 # Set bash history configs
 export HISTSIZE=1000000
