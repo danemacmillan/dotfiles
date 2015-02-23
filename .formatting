@@ -72,10 +72,8 @@ fgbg() {
 # echo -e ${PURPLE}${BOLD}${UNDERLINE}Hiiiyooooo
 
 
-# Reset
-RESET="\e[0m"       # Text Reset
-
 # Formatting
+RESET="\e[0m"
 BOLD="\e[1m"
 DIM="\e[2m"
 UNDERLINE="\e[4m"
@@ -102,7 +100,7 @@ BBLACK="\e[1;30m"       # Black
 BRED="\e[1;31m"         # Red
 BGREEN="\e[1;32m"       # Green
 BYELLOW="\e[1;33m"      # Yellow
-BBLUE="\e[1;34m"        # Blue
+BBLUE="\e[1;34m"
 BPURPLE="\e[1;35m"      # Purple
 BCYAN="\e[1;36m"        # Cyan
 BWHITE="\e[1;37m"       # White
