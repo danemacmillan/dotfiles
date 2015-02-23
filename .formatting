@@ -156,3 +156,15 @@ BG_PURPLE="\e[45m"      # Purple
 BG_CYAN="\e[46m"        # Cyan
 BG_WHITE="\e[47m"       # White
 
+
+##
+# Formatting symbols
+
+
+# Fancy up output.
+SWIRL="->"
+BOLT="+"
+if [[ $OS == 'osx' ]]; then
+	SWIRL="🌀 "
+	BOLT="⚡️"
+fi
