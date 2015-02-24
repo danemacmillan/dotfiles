@@ -25,6 +25,7 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'editorconfig/editorconfig-vim'
 	Plugin 'tpope/vim-fugitive'
 	Plugin 'tpope/vim-surround'
+	Plugin 'tpope/vim-commentary'
 	Plugin 'kien/ctrlp.vim'
 	Plugin 'closetag.vim'
 	Plugin 'Tagbar'
@@ -170,13 +171,8 @@ if has("persistent_undo")
 	set undofile
 endif
 
-" toggle annoying paste indenting
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
-
 " Map buffer cycling
-nnoremap <Tab> :bnext<CR>
+set pastetoggle=<F2>
 nnoremap <S-Tab> :bprevious<CR>
 " Hit spacebar, followed by first characters of buffer filename, enter.
 " This is not really necessary, considering CtrlP is mapped to ',' which
