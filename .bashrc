@@ -63,7 +63,7 @@ fi;
 
 # Highlight the hostname when connected via SSH.
 if [[ "${SSH_TTY}" ]]; then
-	HOST_STYLE="${BLUE}${BOLD}${UNDERLINE}\:\/\/";
+	HOST_STYLE="${BLUE}${BOLD}${UNDERLINE}:";
 else
 	HOST_STYLE="${BLUE}${BOLD}";
 fi;
