@@ -16,7 +16,7 @@ rr() {
 	if (( $# > 1 )); then
 		local remote_server="$1"
 		local remote_commands="${@:2}"
-		echo -e "\x1B[34;1mRunning '\x1B[97;1m$remote_commands\x1B[34;1m' on '$remote_server':\x1B[0m"
+		echo -e "${BLUE}${BOLD}Running '\x1B[97;1m$remote_commands${BLUE}' on '$remote_server':${RESET}"
 		ssh -qtt $remote_server "$remote_commands"
 	fi
 }
@@ -34,18 +34,10 @@ loop() {
 		return
 	fi
 
-	# Fancy up the message.
-	SYMBOL1="->"
-	SYMBOL2="+"
-	if [[ $OS == 'osx' ]]; then
-		SYMBOL1="🌀 "
-		SYMBOL2="⚡️"
-	fi
-
 	for subdirectory in ./*; do
-		echo -e "\n\x1B[0m\x1B[48;5;234m$SYMBOL1 \x1B[97;1mRunning commands in \x1B[90m$subdirectory\x1B[0m"
+		echo -e "\n${RESET}\x1B[48;5;234m${TWIRL} \x1B[97;1mRunning commands in \x1B[90m$subdirectory${RESET}"
 		for argument in "$@"; do
-			echo -e "   $SYMBOL2 \x1B[93m$argument\x1B[0m\x1B[38;5;237m"
+			echo -e "   ${BOLT} \x1B[93m$argument${RESET}\x1B[38;5;237m"
 			(cd "$subdirectory" && $argument 2>&1 | sed -e 's/^/        /')
 		done
 	done
@@ -56,7 +48,7 @@ loop() {
 ##
 # Merge all canonical branches from current directory.
 choochoo() {
-	echo -e "Running a train on this repo. Hiyoooo!"
+	echo -e "${BLUE}${BOLD}Running a train on this repo. Hiyoooo!${RESET}"
 	git checkout develop && git pull && git checkout stage && git pull && git merge develop && git push && git checkout master && git pull && git merge stage && git push && git checkout develop && echo -e "All canonical branches merged up to master."
 }
 

@@ -53,7 +53,23 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=0
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM='verbose'
-export PS1="\\[${GREEN}\]\u\\[$CYAN\]@\\[$BBLUE\]\h \\[$CYAN\]\w\\[$RED\]\$(__git_ps1) \\[$BCYAN\]\$\\[$RESET\] "
+
+# Highlight the user name when logged in as root.
+if [[ "${USER}" == "root" ]]; then
+	USER_STYLE="${RED}${BOLD}";
+else
+	USER_STYLE="${GREEN}";
+fi;
+
+# Highlight the hostname when connected via SSH.
+if [[ "${SSH_TTY}" ]]; then
+	HOST_STYLE="${BLUE}${BOLD}${UNDERLINE}";
+else
+	HOST_STYLE="${BLUE}${BOLD}";
+fi;
+
+# Export PS1
+export PS1="\\[${USER_COLOR}\]\u\\[${RESET}${CYAN}\]@\\[${HOST_STYLE}\]\h \\[${RESET}${CYAN}\]\w\\[${RED}\]\$(__git_ps1) \\[${BOLD}${CYAN}\]\$\\[${RESET}\] "
 
 # Set bash history configs
 export HISTSIZE=1000000

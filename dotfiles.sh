@@ -2,6 +2,6 @@
 
 # Refresh dotfiles
 
-echo -e "\x1B[34;1mUpdating dotfiles.\x1B[0m"
+echo -e "${BBLUE}Updating dotfiles.${RESET}"
 cd ~/.dotfiles/ && git pull && cd -
 source ~/.dotfiles/bootstrap.sh

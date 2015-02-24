@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
+# Pull in formatting templates
+if [ -f ~/.dotfiles/.formatting ]; then
+	source ~/.dotfiles/.formatting
+fi
+
 # Install
-echo -e "\x1B[34;1mSymlinking dotfiles.\x1B[0m"
+echo -e "${BLUE}${BOLD}Symlinking dotfiles.${RESET}"
 ln -vsfn ~/.dotfiles/.aliases ~/
 ln -vsfn ~/.dotfiles/.agignore ~/
 ln -vsfn ~/.dotfiles/.bash_completion ~/
@@ -25,24 +30,24 @@ rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
 # Create user bin if it doesn't exist.
 if [ ! -d "$HOME/bin" ]; then
-	echo -e "\x1B[34;1mCreating user bin directory for extra PATH.\x1B[0m"
+	echo -e "${BLUE}${BOLD}Creating user bin directory for extra PATH.${RESET}"
 	mkdir $HOME/bin
 fi
 
 # Install dependencies
-echo -e "\x1B[34;1mInstalling dependencies.\x1B[0m"
+echo -e "${BLUE}${BOLD}Installing dependencies.${RESET}"
 ln -vsfn ~/.dotfiles/.dependencies ~/
 source ~/.dependencies
 
 # Create optional .extra file to be sourced along repo content.
 if [ ! -f ~/.extra ]; then
-	echo -e "\x1B[34;1mGenerating .extra file.\x1B[0m"
+	echo -e "${BLUE}${BOLD}Generating .extra file.${RESET}"
 	touch ~/.extra
 fi
 
 # Create .gitconfig.local file to hold user credentials for Git.
 if [ ! -f ~/.gitconfig.local ]; then
-	echo -e "\x1B[34;1mGenerating .gitconfig.local file for custom changes. Add your Git credentials here.\x1B[0m"
+	echo -e "${BLUE}${BOLD}Generating .gitconfig.local file for custom changes. Add your Git credentials here.${RESET}"
 	#touch ~/.gitconfig.local
 	cat >>~/.gitconfig.local <<EOL
 [user]
@@ -76,7 +81,7 @@ EOL
 fi
 
 # Update terminal
-echo -e "\x1B[34;1mUpdating terminal with new profile.\x1B[0m"
+echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
 source ~/.bash_profile;
 
-echo -e "\x1B[97;4;1mDone!\x1B[0m"
+echo -e "${WHITE}${BOLD}Done!${RESET}"
