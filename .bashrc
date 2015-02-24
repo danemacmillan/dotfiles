@@ -56,14 +56,14 @@ export GIT_PS1_SHOWUPSTREAM='verbose'
 
 # Highlight the user name when logged in as root.
 if [[ "${USER}" == "root" ]]; then
-	USER_STYLE="${RED}${BOLD}";
+	USER_STYLE="${RED}";
 else
 	USER_STYLE="${GREEN}";
 fi;
 
 # Highlight the hostname when connected via SSH.
 if [[ "${SSH_TTY}" ]]; then
-	HOST_STYLE="${BLUE}${BOLD}${UNDERLINE}";
+	HOST_STYLE="${BLUE}${BOLD}${UNDERLINE}\:\/\/";
 else
 	HOST_STYLE="${BLUE}${BOLD}";
 fi;
