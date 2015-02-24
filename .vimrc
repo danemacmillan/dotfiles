@@ -192,7 +192,7 @@ nnoremap , :CtrlPBuffer<CR>
 nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//e <Bar> %s/➝*·*¬*_*»*▸*$//e<CR>
 
 " Toggle line number visibility for copying from other systems with mouse.
-nnoremap <F4> :set invnumber<CR>
+nnoremap <F4> :set invnumber <Bar> :set list!<CR>
 
 " Reload vimrc
 nnoremap <leader>sv :source $MYVIMRC<CR>
