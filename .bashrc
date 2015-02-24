@@ -69,7 +69,7 @@ else
 fi;
 
 # Export PS1
-export PS1="\\[${USER_COLOR}\]\u\\[${RESET}${CYAN}\]@\\[${HOST_STYLE}\]\h \\[${RESET}${CYAN}\]\w\\[${RED}\]\$(__git_ps1) \\[${BOLD}${CYAN}\]\$\\[${RESET}\] "
+export PS1="\\[${USER_STYLE}\]\u\\[${RESET}${CYAN}\]@\\[${HOST_STYLE}\]\h\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) \\[${BOLD}${CYAN}\]\$\\[${RESET}\] "
 
 # Set bash history configs
 export HISTSIZE=1000000
