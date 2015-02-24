@@ -73,6 +73,7 @@ Host *
 	Protocol 2
 	Compression yes
 	LogLevel VERBOSE
+	ForwardX11 yes
 	#Hostname
 	#Port
 	#User
