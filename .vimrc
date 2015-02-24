@@ -185,7 +185,11 @@ nnoremap , :CtrlPBuffer<CR>
 " they will be included in the paste. This will strip them. Only strip
 " whitespace before (from 0 to 2) and after number (0 to 1). Anything more
 " greedy can result in undesired replacements.
-nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//<CR>
+"
+" In addition, copying from other systems may also copy the list characters
+" (lcs) settings defined in vim. For this .vimrc file, those characters match
+" the ones defined later. This mapping will run both search and replaces.
+nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//e <Bar> %s/➝*·*¬*_*$//e<CR>
 
 " Toggle line number visibility for copying from other systems with mouse.
 nnoremap <F4> :set invnumber<CR>
@@ -282,7 +286,7 @@ endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
 
-" Save a file as root (,W)
+" Save a file as root
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
 " Treat extensionless files as bash scripts.
