@@ -189,7 +189,7 @@ nnoremap , :CtrlPBuffer<CR>
 " In addition, copying from other systems may also copy the list characters
 " (lcs) settings defined in vim. For this .vimrc file, those characters match
 " the ones defined later. This mapping will run both search and replaces.
-nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//e <Bar> %s/➝*·*¬*_*$//e<CR>
+nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//e <Bar> %s/➝*·*¬*_*»*▸*$//e<CR>
 
 " Toggle line number visibility for copying from other systems with mouse.
 nnoremap <F4> :set invnumber<CR>
@@ -243,7 +243,6 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 " Show “invisible” characters
-"set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 " triangle-headed rightwards arrow: http://unicode-table.com/en/279D/
 set lcs=tab:➝\ ,trail:·,eol:¬,nbsp:_
 set list
