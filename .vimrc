@@ -40,8 +40,8 @@ call vundle#begin('~/.vim/bundle')
 	Plugin 'SuperTab'
 	Plugin 'mbbill/undotree'
 	Plugin 'xolox/vim-misc'
-	Plugin 'taglist.vim'
 	if (has('ctags'))
+		Plugin 'taglist.vim'
 		Plugin 'xolox/vim-easytags'
 	endif
 	if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
