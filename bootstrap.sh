@@ -19,6 +19,7 @@ ln -vsfn ~/.dotfiles/.functions ~/
 ln -vsfn ~/.dotfiles/.gitconfig ~/
 ln -vsfn ~/.dotfiles/.gitignore ~/
 ln -vsfn ~/.dotfiles/.inputrc ~/
+ln -vsfn ~/.dotfiles/.siegerc ~/
 ln -vsfn ~/.dotfiles/.tmux.conf ~/
 ln -vsfn ~/.dotfiles/.npmrc ~/
 ln -vsfn ~/.dotfiles/.nix ~/
