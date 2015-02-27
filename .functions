@@ -222,3 +222,7 @@ ff() {
 ft() {
   find . -name "$2" -exec grep -il "$1" {} \;
 }
+
+ultraflip() {
+	echo " ┻━┻ ︵╰(°□°)╯︵ ┻━┻";
+}
