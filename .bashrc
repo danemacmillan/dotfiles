@@ -62,8 +62,10 @@ export GIT_PS1_SHOWUPSTREAM='verbose'
 # Highlight the user name when logged in as root.
 if [[ "${USER}" == "root" ]]; then
 	USER_STYLE="${RED}";
+	USER_BANG="\\[${RED}\]${SKULL_CROSSBONES} "
 else
 	USER_STYLE="${GREEN}";
+	USER_BANG="\\[${CYAN}${BOLD}\]\$ "
 fi;
 
 # Highlight the hostname when connected via SSH.
@@ -74,7 +76,7 @@ else
 fi;
 
 # Export PS1
-export PS1="\\[${USER_STYLE}\]\u\\[${RESET}${CYAN}\]@\\[${HOST_STYLE}\]\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) \\[${BOLD}${CYAN}\]\$\\[${RESET}\] "
+export PS1="\\[${USER_STYLE}\]\u\\[${RESET}${CYAN}\]@\\[${HOST_STYLE}\]\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
 
 # Set bash history configs
 export HISTSIZE=1000000

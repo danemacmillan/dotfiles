@@ -120,6 +120,8 @@ BCYAN="${BOLD}${CYAN}"
 # Formatting symbols
 
 # Fancy up output.
+SKULL_CROSSBONES=$'\342\230\240'
+
 SWIRL="->"
 BOLT="+"
 if [[ $OS == 'osx' ]]; then
