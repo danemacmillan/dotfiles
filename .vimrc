@@ -231,8 +231,8 @@ set backupskip=/tmp/*,/private/tmp/*
 " Respect modeline in files
 set modeline
 set modelines=4
-" Enable per-directory .vimrc files and disable unsafe commands in them
-set exrc
+" Disable per-directory .vimrc files and disable unsafe commands in them
+set noexrc
 set secure
 " Enable line numbers
 set number
