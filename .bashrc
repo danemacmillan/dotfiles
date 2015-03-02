@@ -36,6 +36,11 @@ esac
 # Source OS-specific configs.
 source ~/.$OS
 
+# Determine whether in an SSH session, even when su is used.
+if [[ "${SSH_TTY}" ]] || [[ $(who am i) =~ \([-a-zA-Z0-9\.]+\)$ ]]; then
+	export HAS_SSH=1
+fi
+
 # Source formatting / color variables
 source ~/.formatting
 
@@ -62,7 +67,7 @@ else
 fi;
 
 # Highlight the hostname when connected via SSH.
-if [[ "${SSH_TTY}" ]]; then
+if [[ "${HAS_SSH}" ]]; then
 	HOST_STYLE="${BLUE}${BOLD}://";
 else
 	HOST_STYLE="${BLUE}${BOLD}";
