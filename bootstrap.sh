@@ -1,5 +1,32 @@
 #!/usr/bin/env bash
 
+# Install external dependencies
+DF_PKG_MNGR="none"
+echo "Detecting package manager..."
+if hash yum 2>/dev/null; then
+	DF_PKG_MNGR="yum"
+elif hash brew 2>/dev/null; then
+	DF_PKG_MNGR="brew"
+else
+	echo "No compatible package manager detected, skipping externals."
+fi
+
+echo "$DF_PKG_MNGR detected"
+
+if hash ctags 2>/dev/null; then
+	echo "${GREEN}ctags is installed.${RESET}"
+else
+	echo "${RED}Installing ctags${RESET}"
+	case $DF_PKG_MNGR in
+		brew)
+			brew install ctags-exuberant
+			;;
+		yum)
+			yum install ctags-etags
+			;;
+		esac
+fi
+
 # Pull in formatting templates
 if [ -f ~/.dotfiles/.formatting ]; then
 	source ~/.dotfiles/.formatting
