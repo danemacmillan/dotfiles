@@ -8,7 +8,13 @@ shopt -s expand_aliases
 # http://tldp.org/LDP/abs/html/globbingref.html
 shopt -s nocaseglob;
 
-export PATH="/usr/local/sbin:$PATH"
+if [ -d "/usr/local/sbin" ]; then
+	export PATH="/usr/local/sbin:$PATH"
+fi
+
+if [ -d "/usr/local/bin" ]; then
+	export PATH="/usr/local/bin:$PATH"
+fi
 
 if [ -d "$HOME/.composer/vendor/bin" ]; then
 	export PATH="$HOME/.composer/vendor/bin:$PATH"
