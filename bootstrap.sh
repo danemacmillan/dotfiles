@@ -7,6 +7,8 @@ if hash yum 2>/dev/null; then
 	DF_PKG_MNGR="yum"
 elif hash brew 2>/dev/null; then
 	DF_PKG_MNGR="brew"
+elif hash apt-get @>/dev/null; then
+	DF_PKG_MNGR="apt-get"
 else
 	echo "No compatible package manager detected, skipping externals."
 fi
@@ -24,6 +26,8 @@ else
 		yum)
 			yum install ctags-etags
 			;;
+		apt-get)
+			apt-get install exuberant-ctags
 		esac
 fi
 
