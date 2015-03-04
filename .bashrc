@@ -39,6 +39,16 @@ case $OS in
     OS='nix';;
 esac
 
+# Detect package manager.
+export PKGMNGR=""
+if hash yum 2>/dev/null; then
+	export PKG_MNGR="yum"
+elif hash brew 2>/dev/null; then
+	export PKG_MNGR="brew"
+elif hash apt-get 2>/dev/null; then
+	export PKG_MNGR="apt-get"
+fi
+
 # Source OS-specific configs.
 source ~/.$OS
 
