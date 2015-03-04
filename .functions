@@ -226,3 +226,11 @@ ft() {
 ultraflip() {
 	echo " ┻━┻ ︵╰(°□°)╯︵ ┻━┻";
 }
+
+cmdexists() {
+	if hash $1 2>/dev/null; then
+		echo "true"
+	else
+		echo "false"
+	fi
+}
