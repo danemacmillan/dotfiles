@@ -26,7 +26,10 @@ if [ -d "$HOME/bin" ]; then
 	chmod -R +x $HOME/bin
 fi
 
-# This file contains code that can be run on OSX and NIX machines.
+# Determine whether in an SSH session, even when su is used.
+if [[ "${SSH_TTY}" ]] || [[ $(who am i) =~ \([-a-zA-Z0-9\.]+\)$ ]]; then
+	export HAS_SSH=1
+fi
 
 # Detect OS so dotfiles seamlessly work across OSX and Linux.
 # I only use OSX and CentOS, so additional cases will need
@@ -39,14 +42,6 @@ case $OS in
     OS='nix';;
 esac
 
-# Source OS-specific configs.
-source ~/.$OS
-
-# Determine whether in an SSH session, even when su is used.
-if [[ "${SSH_TTY}" ]] || [[ $(who am i) =~ \([-a-zA-Z0-9\.]+\)$ ]]; then
-	export HAS_SSH=1
-fi
-
 # Source formatting / color variables
 source ~/.formatting
 
@@ -55,6 +50,12 @@ source ~/.functions
 
 # Source aliases
 source ~/.aliases
+
+# Source OS-specific configs.
+source ~/.$OS
+
+# Verify and export package manager variables for dotfiles.
+check_package_manager
 
 # Set default editor
 export EDITOR=vim

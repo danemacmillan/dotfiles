@@ -7,7 +7,19 @@
 # the packages directory, dependent on the package management system available.
 echo -e "${BLUE}${BOLD}Installing / updating ${GREEN}${REVERSE} $PKG_MNGR ${RESET}${BLUE}${BOLD} packages, if any.${RESET}"
 
+# Clone git repos before anything else.
 
+case "$DOTFILES_PACKAGE_MANAGER" in
+	brew)
+		;;
+
+	yum)
+		;;
+
+	apt-get)
+		;;
+
+esac
 
 
 
