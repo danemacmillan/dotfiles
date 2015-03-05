@@ -1,13 +1,26 @@
+#!/usr/bin/env bash
+
 ## .functions
 
-# TODO:
-# Create a function to generate archives based on desired output filename.
-# E.g.: archive archivename.tgz dirname/
-# and the function will know to generate a tar gzip file.
+##
+# Helper function for checking package management system for these dotfiles.
 #
-# tar cvzf media.tgz --totals media/
-#
-#
+# This will detect package manager and calculate package hashes per manager.
+check_package_managers() {
+	export DOTFILES_PACKAGE_MANAGER=""
+	if hash brew 2>/dev/null; then
+		export DOTFILES_PACKAGE_MANAGER="brew"
+		export DOTFILES_PACKAGES_MD5_TAP=$(md5 "$HOME/packages/tap" | awk '{ print $4 }')
+		export DOTFILES_PACKAGES_MD5_BREW=$(md5 "$HOME/packages/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $4 }')
+		export DOTFILES_PACKAGES_MD5_CASK=$(md5 "$HOME/packages/cask" | awk '{ print $4 }')
+	elif hash yum 2>/dev/null; then
+		export DOTFILES_PACKAGE_MANAGER="yum"
+		export DOTFILES_PACKAGES_MD5_YUM=$(md5sum "$HOME/packages/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $1 }')
+	elif hash apt-get 2>/dev/null; then
+		export DOTFILES_PACKAGE_MANAGER="apt-get"
+		export DOTFILES_PACKAGES_MD5_APTGET=$(md5sum "$HOME/packages/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $1 }')
+	fi
+}
 
 ##
 # Remotely run commands with color TTY. If passing chained commands (&&),
@@ -70,6 +83,15 @@ v() {
 	echo -e "Kernel & Architecture:\n"
 	echo -e "    `uname -r -v -p`\n"
 }
+
+# TODO:
+# Create a function to generate archives based on desired output filename.
+# E.g.: archive archivename.tgz dirname/
+# and the function will know to generate a tar gzip file.
+#
+# tar cvzf media.tgz --totals media/
+#
+#
 
 ##
 # Pass a filename, with archive extension, and this will figure out the rest.
