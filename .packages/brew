@@ -9,6 +9,7 @@ cask
 casperjs
 cmake
 coreutils
+cowsay
 ctags
 curl
 dos2unix
