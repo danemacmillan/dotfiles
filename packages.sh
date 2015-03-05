@@ -9,8 +9,14 @@ echo -e "${BLUE}${BOLD}Installing / updating ${GREEN}${REVERSE} $PKG_MNGR ${RESE
 
 # Clone git repos before anything else.
 
+DOTFILES_PACKAGES_DIR="$HOME/.packages"
 case "$DOTFILES_PACKAGE_MANAGER" in
 	brew)
+		if [[ "$DOTFILES_PACKAGES_MD5_BREW" != $(calculate_md5_hash "$DOTFILES_PACKAGES_DIR/brew") ]]; then
+			echo 'Update brew packages!'
+		fi
+
+
 		;;
 
 	yum)

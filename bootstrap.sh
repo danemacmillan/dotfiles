@@ -80,11 +80,12 @@ Host *
 EOL
 fi
 
+# Install packages from given package management
+source ~/.functions
+source ~/packages.sh
+
 # Update terminal
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
 source ~/.bash_profile;
-
-# Install packages from given package management
-source ~/packages.sh
 
 echo -e "${WHITE}${BOLD}Done!${RESET}"
