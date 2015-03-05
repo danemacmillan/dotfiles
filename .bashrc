@@ -82,8 +82,13 @@ else
 	HOST_STYLE="${BLUE}${BOLD}";
 fi;
 
-# Export PS1
 export PS1="\\[${USER_STYLE}\]\u\\[${RESET}${CYAN}\]@\\[${HOST_STYLE}\]\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
+
+# Export PS1
+if [[ -n $DOTFILES_CONFIG_TIMESTAMP ]]; then
+	export PS1="$DOTFILES_CONFIG_TIMESTAMP$PS1"
+fi
+
 
 # Set bash history configs
 export HISTSIZE=1000000

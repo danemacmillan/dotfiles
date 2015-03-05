@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# Check if local .config exists. If it doesn't, copy the master .configi
+if [ ! -f ~/.config ]; then
+	cp ~/.dotfiles/.config ~/.config
+fi
+
+source ~/.config
+
 # Pull in formatting templates
 if [ -f ~/.dotfiles/.formatting ]; then
 	source ~/.dotfiles/.formatting
