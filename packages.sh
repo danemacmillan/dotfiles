@@ -55,8 +55,9 @@ case "$DOTFILES_PACKAGE_MANAGER" in
 			if [[ "$DOTFILES_PACKAGES_MD5_OLD" != "$DOTFILES_PACKAGES_MD5_NEW" ]]; then
 				echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $DOTFILES_PACKAGE_MANAGER $package_name ${RESET}${BLUE}${BOLD} packages.${RESET}"
 				while read line; do
+					# Note: using a hash check is insufficient, as not all packages
+					# are installed as an executable CLI tool.
 					if ! $DOTFILES_PACKAGE_MANAGER_COMMAND_LIST | grep -q "^${line}\$"; then
-					#if ! hash "$line" ; then
 						echo $line
 					fi
 				done < $DOTFILES_PACKAGES_DIR/$package_name
@@ -65,10 +66,21 @@ case "$DOTFILES_PACKAGE_MANAGER" in
 		;;
 
 	yum)
+		DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER"
+		DOTFILES_PACKAGES_MD5_NEW=$(calculate_md5_hash "$DOTFILES_PACKAGES_FILE")
+		DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_YUM
+		DOTFILES_PACKAGE_MANAGER_COMMAND="yum"
+		DOTFILES_PACKAGE_MANAGER_COMMAND_LIST="yum list installed"
 
-
-
-
+		if [[ "$DOTFILES_PACKAGES_MD5_OLD" != "$DOTFILES_PACKAGES_MD5_NEW" ]]; then
+			echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $DOTFILES_PACKAGE_MANAGER ${RESET}${BLUE}${BOLD} packages.${RESET}"
+			while read line; do
+				if ! $DOTFILES_PACKAGE_MANAGER_COMMAND_LIST $line | grep -q "^${line}\$"; then
+				#if ! hash "$line" ; then
+					echo $line
+				fi
+			done < $DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER
+		fi
 		;;
 
 	apt-get)
