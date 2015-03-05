@@ -55,7 +55,7 @@ source ~/.aliases
 source ~/.$OS
 
 # Verify and export package manager variables for dotfiles.
-check_package_manager
+check_package_managers
 
 # Set default editor
 export EDITOR=vim
