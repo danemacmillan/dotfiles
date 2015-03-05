@@ -16,7 +16,6 @@ alias rm='rm -rf'
 alias cp="cp -r"
 alias mkdir="mkdir -pv"
 alias du="du -h --time"
-alias tt="total"
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
