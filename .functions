@@ -7,18 +7,19 @@
 #
 # This will detect package manager and calculate package hashes per manager.
 check_package_managers() {
+	local packages_directory="$HOME/.packages"
 	export DOTFILES_PACKAGE_MANAGER=""
 	if hash brew 2>/dev/null; then
 		export DOTFILES_PACKAGE_MANAGER="brew"
-		export DOTFILES_PACKAGES_MD5_TAP=$(md5 "$HOME/packages/tap" | awk '{ print $4 }')
-		export DOTFILES_PACKAGES_MD5_BREW=$(md5 "$HOME/packages/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $4 }')
-		export DOTFILES_PACKAGES_MD5_CASK=$(md5 "$HOME/packages/cask" | awk '{ print $4 }')
+		export DOTFILES_PACKAGES_MD5_TAP=$(md5 "$packages_directory/tap" | awk '{ print $4 }')
+		export DOTFILES_PACKAGES_MD5_BREW=$(md5 "$packages_directory/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $4 }')
+		export DOTFILES_PACKAGES_MD5_CASK=$(md5 "$packages_directory/cask" | awk '{ print $4 }')
 	elif hash yum 2>/dev/null; then
 		export DOTFILES_PACKAGE_MANAGER="yum"
-		export DOTFILES_PACKAGES_MD5_YUM=$(md5sum "$HOME/packages/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $1 }')
+		export DOTFILES_PACKAGES_MD5_YUM=$(md5sum "$packages_directory/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $1 }')
 	elif hash apt-get 2>/dev/null; then
 		export DOTFILES_PACKAGE_MANAGER="apt-get"
-		export DOTFILES_PACKAGES_MD5_APTGET=$(md5sum "$HOME/packages/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $1 }')
+		export DOTFILES_PACKAGES_MD5_APTGET=$(md5sum "$packages_directory/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $1 }')
 	fi
 }
 
