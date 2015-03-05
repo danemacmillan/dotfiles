@@ -1,22 +1,64 @@
 #!/usr/bin/env bash
-
 ##
 # packages.sh
 #
 # This file gets sourced by bootstrap.sh. It installs all packages found in
 # the packages directory, dependent on the package management system available.
-echo -e "${BLUE}${BOLD}Installing / updating ${GREEN}${REVERSE} $PKG_MNGR ${RESET}${BLUE}${BOLD} packages, if any.${RESET}"
+
 
 # Clone git repos before anything else.
 
+
+
+
+# Install packages from OS' package manager.
 DOTFILES_PACKAGES_DIR="$HOME/.packages"
 case "$DOTFILES_PACKAGE_MANAGER" in
 	brew)
-		if [[ "$DOTFILES_PACKAGES_MD5_BREW" != $(calculate_md5_hash "$DOTFILES_PACKAGES_DIR/brew") ]]; then
-			echo 'Update brew packages!'
+		# brew tap
+		DOTFILES_PACKAGES_CURRENT='tap'
+		DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGES_CURRENT"
+		DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_TAP
+		DOTFILES_PACKAGES_MD5_NEW=$(calculate_md5_hash "$DOTFILES_PACKAGES_FILE")
+		if [[ "$DOTFILES_PACKAGES_MD5_OLD" != "$DOTFILES_PACKAGES_MD5_NEW" ]]; then
+
+			echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $DOTFILES_PACKAGE_MANAGER $DOTFILES_PACKAGES_CURRENT ${RESET}${BLUE}${BOLD} packages.${RESET}"
+			while read line; do
+				if ! hash $line ; then
+					echo $line
+				fi
+			done < $DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGES_CURRENT
 		fi
 
+		# brew
+		DOTFILES_PACKAGES_CURRENT=$DOTFILES_PACKAGE_MANAGER
+		DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER"
+		DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_BREW
+		DOTFILES_PACKAGES_MD5_NEW=$(calculate_md5_hash "$DOTFILES_PACKAGES_FILE")
+		if [[ "$DOTFILES_PACKAGES_MD5_OLD" != "$DOTFILES_PACKAGES_MD5_NEW" ]]; then
 
+			echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $DOTFILES_PACKAGE_MANAGER ${RESET}${BLUE}${BOLD} packages.${RESET}"
+			while read line; do
+				if ! hash $line ; then
+					echo $line
+				fi
+			done < "$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER"
+		fi
+
+		# brew cask
+		DOTFILES_PACKAGES_CURRENT='cask'
+		DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGES_CURRENT"
+		DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_CASK
+		DOTFILES_PACKAGES_MD5_NEW=$(calculate_md5_hash "$DOTFILES_PACKAGES_FILE")
+		if [[ "$DOTFILES_PACKAGES_MD5_OLD" != "$DOTFILES_PACKAGES_MD5_NEW" ]]; then
+
+			echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $DOTFILES_PACKAGE_MANAGER $DOTFILES_PACKAGES_CURRENT ${RESET}${BLUE}${BOLD} packages.${RESET}"
+			while read line; do
+				if ! hash $line ; then
+					echo $line
+				fi
+			done < "$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGES_CURRENT"
+		fi
 		;;
 
 	yum)
@@ -24,7 +66,6 @@ case "$DOTFILES_PACKAGE_MANAGER" in
 
 	apt-get)
 		;;
-
 esac
 
 
