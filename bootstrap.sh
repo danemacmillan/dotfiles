@@ -36,10 +36,10 @@ if [ ! -d "$HOME/bin" ]; then
 	mkdir $HOME/bin
 fi
 
-# Install dependencies
-echo -e "${BLUE}${BOLD}Installing dependencies.${RESET}"
-ln -vsfn ~/.dotfiles/.dependencies ~/
-source ~/.dependencies
+# Install packages from given package management
+echo -e "${BLUE}${BOLD}Installing packages.${RESET}"
+ln -vsfn ~/.dotfiles/.packages ~/
+source ~/.packages
 
 # Create optional .extra file to be sourced along repo content.
 if [ ! -f ~/.extra ]; then
