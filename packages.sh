@@ -14,12 +14,12 @@ if ! hash brew; then
 fi
 
 # Vundle
-echo -e "${GREEN}Installing Vim Vundle and plugins. This will take a few seconds.${RESET}"
-#git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
+echo -e "${GREEN}Updating Vim Vundle and plugins. This will take a few seconds.${RESET}"
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
 # Install Vim plugins defined in .vimrc file.
 # Depending on the location that Vundler installs a plugin, there
 # may be an authentication prompt for username and password.
-#vim +PluginInstall +qall 2&> /dev/null
+vim +PluginInstall +qall 2&> /dev/null
 
 
 #
@@ -68,6 +68,7 @@ dotfiles_package_installer()
 							$DOTFILES_PACKAGE_MANAGER_COMMAND $line
 						fi
 					done < $DOTFILES_PACKAGES_DIR/$package_name
+					brew cleanup 2&> /dev/null
 				fi
 			done
 			;;
@@ -86,6 +87,7 @@ dotfiles_package_installer()
 						$DOTFILES_PACKAGE_MANAGER_COMMAND $line
 					fi
 				done < $DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER
+				yum clean all 2&> /dev/null
 			fi
 			;;
 
