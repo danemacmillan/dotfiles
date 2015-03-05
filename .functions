@@ -6,20 +6,37 @@
 # Helper function for checking package management system for these dotfiles.
 #
 # This will detect package manager and calculate package hashes per manager.
+
+calculate_md5_hash() {
+	local md5tool=md5sum
+	local cut_offset=1
+
+	# OSX comes with md5 tool by default, not md5sum.
+	if hash md5 2>/dev/null; then
+		local md5tool=md5
+		local cut_offset=4
+	fi
+
+	local file_path="$1"
+	if [[ -f $file_path ]]; then
+		echo $($md5tool $file_path | cut -d " " -f$cut_offset)
+	fi
+}
+
 check_package_managers() {
 	local packages_directory="$HOME/.packages"
 	export DOTFILES_PACKAGE_MANAGER=""
 	if hash brew 2>/dev/null; then
 		export DOTFILES_PACKAGE_MANAGER="brew"
-		export DOTFILES_PACKAGES_MD5_TAP=$(md5 "$packages_directory/tap" | awk '{ print $4 }')
-		export DOTFILES_PACKAGES_MD5_BREW=$(md5 "$packages_directory/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $4 }')
-		export DOTFILES_PACKAGES_MD5_CASK=$(md5 "$packages_directory/cask" | awk '{ print $4 }')
+		export DOTFILES_PACKAGES_MD5_TAP=$(calculate_md5_hash "$packages_directory/tap")
+		export DOTFILES_PACKAGES_MD5_BREW=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
+		export DOTFILES_PACKAGES_MD5_CASK=$(calculate_md5_hash"$packages_directory/cask")
 	elif hash yum 2>/dev/null; then
 		export DOTFILES_PACKAGE_MANAGER="yum"
-		export DOTFILES_PACKAGES_MD5_YUM=$(md5sum "$packages_directory/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $1 }')
+		export DOTFILES_PACKAGES_MD5_YUM=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
 	elif hash apt-get 2>/dev/null; then
 		export DOTFILES_PACKAGE_MANAGER="apt-get"
-		export DOTFILES_PACKAGES_MD5_APTGET=$(md5sum "$packages_directory/$DOTFILES_PACKAGE_MANAGER" | awk '{ print $1 }')
+		export DOTFILES_PACKAGES_MD5_APTGET=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
 	fi
 }
 
