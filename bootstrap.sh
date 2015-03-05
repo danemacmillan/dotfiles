@@ -24,7 +24,8 @@ ln -vsfn ~/.dotfiles/.tmux.conf ~/
 ln -vsfn ~/.dotfiles/.npmrc ~/
 ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
-ln -vsfn ~/.dotfiles/.packages ~/
+ln -vsfn ~/.dotfiles/packages.sh ~/
+rm -rf ~/.packages && ln -vsfn ~/.dotfiles/.packages ~/
 ln -vsfn ~/.dotfiles/.sshmotd ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
