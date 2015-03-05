@@ -30,7 +30,7 @@ check_package_managers() {
 		export DOTFILES_PACKAGE_MANAGER="brew"
 		export DOTFILES_PACKAGES_MD5_TAP=$(calculate_md5_hash "$packages_directory/tap")
 		export DOTFILES_PACKAGES_MD5_BREW=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
-		export DOTFILES_PACKAGES_MD5_CASK=$(calculate_md5_hash"$packages_directory/cask")
+		export DOTFILES_PACKAGES_MD5_CASK=$(calculate_md5_hash "$packages_directory/cask")
 	elif hash yum 2>/dev/null; then
 		export DOTFILES_PACKAGE_MANAGER="yum"
 		export DOTFILES_PACKAGES_MD5_YUM=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
