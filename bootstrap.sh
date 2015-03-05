@@ -24,6 +24,7 @@ ln -vsfn ~/.dotfiles/.tmux.conf ~/
 ln -vsfn ~/.dotfiles/.npmrc ~/
 ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
+ln -vsfn ~/.dotfiles/.packages ~/
 ln -vsfn ~/.dotfiles/.sshmotd ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
@@ -35,11 +36,6 @@ if [ ! -d "$HOME/bin" ]; then
 	echo -e "${BLUE}${BOLD}Creating user bin directory for extra PATH.${RESET}"
 	mkdir $HOME/bin
 fi
-
-# Install packages from given package management
-echo -e "${BLUE}${BOLD}Installing packages.${RESET}"
-ln -vsfn ~/.dotfiles/.packages ~/
-source ~/.packages
 
 # Create optional .extra file to be sourced along repo content.
 if [ ! -f ~/.extra ]; then
@@ -86,5 +82,8 @@ fi
 # Update terminal
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
 source ~/.bash_profile;
+
+# Install packages from given package management
+source ~/.packages
 
 echo -e "${WHITE}${BOLD}Done!${RESET}"
