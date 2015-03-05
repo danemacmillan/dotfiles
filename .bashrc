@@ -40,7 +40,7 @@ case $OS in
 esac
 
 # Detect package manager.
-export PKGMNGR=""
+export PKG_MNGR=""
 if hash yum 2>/dev/null; then
 	export PKG_MNGR="yum"
 elif hash brew 2>/dev/null; then
