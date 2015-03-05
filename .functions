@@ -3,11 +3,9 @@
 ## .functions
 
 ##
-# Helper function for checking package management system for these dotfiles.
-#
-# This will detect package manager and calculate package hashes per manager.
-
-calculate_md5_hash() {
+# Calculate MD5 hashes regardless of tool, and ensure identical output.
+calculate_md5_hash()
+{
 	local md5tool=md5sum
 	local cut_offset=1
 
@@ -23,7 +21,10 @@ calculate_md5_hash() {
 	fi
 }
 
-check_package_managers() {
+##
+# Helper function for verifying dotfiles' package changes.
+check_package_managers()
+{
 	local packages_directory="$HOME/.packages"
 	export DOTFILES_PACKAGE_MANAGER=""
 	if hash brew 2>/dev/null; then
@@ -40,10 +41,12 @@ check_package_managers() {
 	fi
 }
 
+
 ##
 # Remotely run commands with color TTY. If passing chained commands (&&),
 # remember to put them within quotation marks.
-rr() {
+rr()
+{
 	if (( $# > 1 )); then
 		local remote_server="$1"
 		local remote_commands="${@:2}"
@@ -54,7 +57,8 @@ rr() {
 
 ##
 # Loop through all subdirectories and run the given command."
-loop() {
+loop()
+{
 	if [[ -z $1 ]]; then
 		echo -e "Loop through all subdirectories of the current directory and run"
 		echo -e "the given commands.\n"
@@ -78,14 +82,16 @@ loop() {
 
 ##
 # Merge all canonical branches from current directory.
-choochoo() {
+choochoo()
+{
 	echo -e "${BLUE}${BOLD}Running a train on this repo. Hiyoooo!${RESET}"
 	git checkout develop && git pull && git checkout stage && git pull && git merge develop && git push && git checkout master && git pull && git merge stage && git push && git checkout develop && echo -e "All canonical branches merged up to master."
 }
 
 ##
 # Get current OS version and other information.
-v() {
+v()
+{
 	case $OS in
 		osx)
 			system_profiler SPSoftwareDataType
@@ -123,7 +129,8 @@ v() {
 # because it cannot be output into a single file, but each file will be
 # individually archived with bzip2 compression.
 #
-archive() {
+archive()
+{
 	case $1 in
 		*bz2)       bzip2 "${@:2}" ;;
 		*.gz)       gzip -c "${@:2}" > $1 ;;
@@ -148,7 +155,8 @@ archive() {
 # Description: extracts archived files / mounts disk images
 # Note: .dmg/hdiutil is Mac OS X-specific.
 # Credit: https://github.com/holman/dotfiles
-extract () {
+extract ()
+{
 	if [ -f $1 ]; then
 		case $1 in
 			*.tar.bz2)  tar -jxvf $1 ;;
@@ -175,7 +183,8 @@ extract () {
 ##
 # Determine size of a file or total size of a directory.
 # Credit: https://github.com/mathiasbynens/dotfiles
-fs() {
+fs()
+{
 	if du -b /dev/null > /dev/null 2>&1; then
 		local arg=-sbh;
 	else
@@ -192,7 +201,8 @@ fs() {
 ##
 # Get total directory and file count.
 # TODO: integrate filesizes
-tt() {
+tt()
+{
 	CHECKDIR=.
 	if [[ -n "$1" ]]; then
 		CHECKDIR="$1"
@@ -221,7 +231,8 @@ tt() {
 # Notes
 # SSH keys, a la http://blog.patshead.com/2013/09/generating-new-more-secure-ssh-keys.html
 # ssh-keygen -b 4096 -f ~/.ssh/id_rsa_danemacmillan_4096_2014_08 -C danemacmillan@id_rsa_4096_2014_08
-newsshkey() {
+newsshkey()
+{
 	KEY_STRENGTH="4096"
 	KEY_NAME=~/.ssh/id_rsa_${KEY_STRENGTH}_`date +%Y-%m-%d-%H%M%S`
 
@@ -245,11 +256,13 @@ newsshkey() {
 
 # From https://twitter.com/climagic/status/370595711483514880
 # Example: git push origin master -f || fliptable
-fliptable() {
+fliptable()
+{
 	echo "（╯°□°）╯ ┻━┻";
 }
 
-ultraflip() {
+ultraflip()
+{
 	echo " ┻━┻ ︵╰(°□°)╯︵ ┻━┻";
 }
 
@@ -257,12 +270,14 @@ ultraflip() {
 
 # Find file
 # Usage: ff (file)
-ff() {
+ff()
+{
   find . -name $1
 }
 
 # Allows you to search for any text in any file.
 # Usage: ft "my string" *.php
-ft() {
+ft()
+{
   find . -name "$2" -exec grep -il "$1" {} \;
 }
