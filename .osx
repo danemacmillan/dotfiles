@@ -1,23 +1,5 @@
 ## .osx
 
-# Get homebrew and some niceties.
-if test ! $(which brew); then
-  echo "Installing homebrew..."
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-	# Install some brew essentials
-	brew update
-	brew install bash bash-completion coreutils findutils
-
-	# Tap some essentials
-	brew tap caskroom/cask
-	brew tap caskroom/fonts
-	brew tap caskroom/versions
-	brew tap homebrew/completions
-	brew tap homebrew/dupes
-	brew tap homebrew/versions
-fi
-
 # Exports
 
 # Assumes that coreutils and other GNU tools have replaced OSX'
