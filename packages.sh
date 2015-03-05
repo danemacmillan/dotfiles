@@ -15,11 +15,11 @@ fi
 
 # Vundle
 echo -e "${GREEN}Installing Vim Vundle and plugins. This will take a few seconds.${RESET}"
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
+#git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
 # Install Vim plugins defined in .vimrc file.
 # Depending on the location that Vundler installs a plugin, there
 # may be an authentication prompt for username and password.
-vim +PluginInstall +qall 2&> /dev/null
+#vim +PluginInstall +qall 2&> /dev/null
 
 
 #
@@ -31,15 +31,32 @@ DOTFILES_PACKAGES_DIR="$HOME/.packages"
 case "$DOTFILES_PACKAGE_MANAGER" in
 	brew)
 		# Use three distinct packages for brew.
-		for package_name in "tap brew cask"; do
+		for package_name in "tap" "brew" "cask"; do
 			DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$package_name"
-			DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_TAP
 			DOTFILES_PACKAGES_MD5_NEW=$(calculate_md5_hash "$DOTFILES_PACKAGES_FILE")
+
+			case "$package_name" in
+				tap)
+					DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_TAP
+					DOTFILES_PACKAGE_MANAGER_COMMAND="brew tap"
+					DOTFILES_PACKAGE_MANAGER_COMMAND_LIST="brew tap"
+					;;
+				brew)
+					DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_BREW
+					DOTFILES_PACKAGE_MANAGER_COMMAND="brew"
+					DOTFILES_PACKAGE_MANAGER_COMMAND_LIST="brew list -1"
+					;;
+				cask)
+					DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_CASK
+					DOTFILES_PACKAGE_MANAGER_COMMAND="brew cask"
+					DOTFILES_PACKAGE_MANAGER_COMMAND_LIST="brew cask list -1"
+			esac
 
 			if [[ "$DOTFILES_PACKAGES_MD5_OLD" != "$DOTFILES_PACKAGES_MD5_NEW" ]]; then
 				echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $DOTFILES_PACKAGE_MANAGER $package_name ${RESET}${BLUE}${BOLD} packages.${RESET}"
 				while read line; do
-					if ! hash $line ; then
+					if ! $DOTFILES_PACKAGE_MANAGER_COMMAND_LIST | grep -q "^${line}\$"; then
+					#if ! hash "$line" ; then
 						echo $line
 					fi
 				done < $DOTFILES_PACKAGES_DIR/$package_name
@@ -48,6 +65,10 @@ case "$DOTFILES_PACKAGE_MANAGER" in
 		;;
 
 	yum)
+
+
+
+
 		;;
 
 	apt-get)
