@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-# Check if local .config exists. If it doesn't, copy the master .configi
-if [ ! -f ~/.config ]; then
-	cp ~/.dotfiles/.config ~/.config
+# Check if local .dfconfig exists. If not, copy the master .dfconfig.
+if [ ! -f ~/.dfconfig ]; then
+	cp ~/.dotfiles/.dfconfig ~/
 fi
-
-source ~/.config
+source ~/.dfconfig
 
 # Pull in formatting templates
 if [ -f ~/.dotfiles/.formatting ]; then

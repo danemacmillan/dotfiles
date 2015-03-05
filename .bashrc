@@ -42,6 +42,9 @@ case $OS in
     OS='nix';;
 esac
 
+# Source dotfiles config file.
+source ~/.dfconfig
+
 # Source formatting / color variables
 source ~/.formatting
 
