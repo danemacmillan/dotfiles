@@ -73,6 +73,7 @@ dotfiles_package_installer()
 			done
 			;;
 
+		# TODO: add RPM installs as well.
 		yum)
 			DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER"
 			DOTFILES_PACKAGES_MD5_NEW=$(calculate_md5_hash "$DOTFILES_PACKAGES_FILE")
