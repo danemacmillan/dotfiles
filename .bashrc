@@ -42,11 +42,11 @@ case $OS in
     OS='nix';;
 esac
 
-# Source dotfiles config file.
-source ~/.dfconfig
-
 # Source formatting / color variables
 source ~/.formatting
+
+# Source dotfiles config file.
+source ~/.dfconfig
 
 # Source various helper bash functions
 source ~/.functions
