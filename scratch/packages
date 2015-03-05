@@ -1,0 +1,10 @@
+# Packages to be installed by whatever package manager in use.
+#
+# One package per line.
+
+bash-completion
+
+#ius rsync 3.1.0 for --info flags
+rsync31u
+#brew rsync 3.1.1
+brew install https://raw.github.com/Homebrew/homebrew-dupes/master/rsync.rb
