@@ -6,7 +6,7 @@ if [ -f ~/.dotfiles/.formatting ]; then
 fi
 
 # Install
-echo -e "${BLUE}${BOLD}Symlinking dotfiles.${RESET}"
+echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 ln -vsfn ~/.dotfiles/.aliases ~/
 ln -vsfn ~/.dotfiles/.agignore ~/
 ln -vsfn ~/.dotfiles/.bash_completion ~/
@@ -34,7 +34,7 @@ rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
 # Create user bin if it doesn't exist.
 if [ ! -d "$HOME/bin" ]; then
-	echo -e "${BLUE}${BOLD}Creating user bin directory for extra PATH.${RESET}"
+	echo -e "${RESET}${BLUE}${BOLD}Creating user bin directory for extra PATH.${RESET}"
 	mkdir $HOME/bin
 fi
 

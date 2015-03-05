@@ -2,6 +2,6 @@
 
 # Refresh dotfiles
 
-echo -e "${BBLUE}Updating dotfiles.${RESET}"
+echo -e "${BBLUE}Updating dotfiles.${RESET}${GREEN}"
 cd ~/.dotfiles/ && git pull && cd -
 source ~/.dotfiles/bootstrap.sh
