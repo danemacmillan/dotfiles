@@ -199,6 +199,11 @@ nnoremap <F4> :set invnumber <Bar> :set list!<CR>
 " Reload vimrc
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" Remap D to behave exactly the same, except also move the next line up. This
+" is done by preceding the dd cut mapping with a blackhole register:
+" http://vimhelp.appspot.com/change.txt.html#registers
+nnoremap <S-d> "_dd
+
 " Set default file format
 set ff=unix
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
