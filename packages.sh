@@ -8,7 +8,7 @@
 # Homebrew
 echo -e "${BLUE}${BOLD}Downloading external dependencies, if any.${RESET}"
 # Get homebrew and some niceties.
-if ! hash brew; then
+if ! hash brew 2>/dev/null && [[ $OS == 'osx' ]]; then
 	echo "${GREEN}Installing homebrew.${RESET}"
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
