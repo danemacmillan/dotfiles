@@ -58,7 +58,7 @@ case "$DOTFILES_PACKAGE_MANAGER" in
 					# Note: using a hash check is insufficient, as not all packages
 					# are installed as an executable CLI tool.
 					if ! $DOTFILES_PACKAGE_MANAGER_COMMAND_LIST | grep -q "^${line}\$"; then
-						echo $line
+						$DOTFILES_PACKAGE_MANAGER_COMMAND $line
 					fi
 				done < $DOTFILES_PACKAGES_DIR/$package_name
 			fi
@@ -76,8 +76,7 @@ case "$DOTFILES_PACKAGE_MANAGER" in
 			echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $DOTFILES_PACKAGE_MANAGER ${RESET}${BLUE}${BOLD} packages.${RESET}"
 			while read line; do
 				if ! $DOTFILES_PACKAGE_MANAGER_COMMAND_LIST $line | grep -q "^${line}\$"; then
-				#if ! hash "$line" ; then
-					echo $line
+					$DOTFILES_PACKAGE_MANAGER_COMMAND $line
 				fi
 			done < $DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER
 		fi

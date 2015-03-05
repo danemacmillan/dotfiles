@@ -44,6 +44,7 @@ phantomjs
 pv
 python
 readline
+rlwrap
 rsync
 siege
 the_silver_searcher
