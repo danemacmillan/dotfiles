@@ -43,7 +43,7 @@ dotfiles_managers_get()
 	fi
 
 	if hash apt-get 2>/dev/null; then
-		package_managers+=("apt-get")
+		package_managers+=("aptget")
 	fi
 
 	export DOTFILES_PACKAGE_MANAGERS=${package_managers[@]}
@@ -55,6 +55,14 @@ dotfiles_packages_verify()
 {
 	# Get packaga manager types.
 	dotfiles_managers_get
+
+	# Clear any previously exported hash arrays, so they are not concatenated.
+	export DOTFILES_PACKAGES_MD5_git=
+	export DOTFILES_PACKAGES_MD5_wget=
+	export DOTFILES_PACKAGES_MD5_brew=
+	export DOTFILES_PACKAGES_MD5_rpm=
+	export DOTFILES_PACKAGES_MD5_yum=
+	export DOTFILES_PACKAGES_MD5_aptget=
 
 	# Loop through everything and generate relevant MD5 hashes.
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
@@ -222,7 +230,7 @@ dotfiles_packages_install()
 						dotfiles_packages_install_yum "$packages_dir" $directory_index
 						;;
 
-					apt-get)
+					aptget)
 						;;
 				esac
 			fi
