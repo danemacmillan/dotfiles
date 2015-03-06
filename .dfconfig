@@ -14,3 +14,10 @@ export DOTFILES_CONFIG_TIMESTAMP=""
 export DOTFILES_CONFIG_MODULES=(
 	#"git@github.com:dersam/dotart.git"
 )
+
+# DOTFILES_CONFIG_DEV_MODULES
+# array
+# Contains a listing of modules to load from an absolute path. This allows
+# you to develop modules locally without having to push to a remote to see your
+# changes in action.
+export DOTFILES_CONFIG_DEV_MODULES=()
