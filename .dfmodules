@@ -4,17 +4,29 @@ if [[ -z $DOTFILES_CONFIG_MODULES ]]; then
 	return
 fi
 
+if [ ! -d ~/.dotfiles/.modules ]; then
+	mkdir ~/.dotfiles/.modules
+fi
+
 olddir=`pwd`
+
+echo "${BLUE}${BOLD}Processing modules...${RESET}"
 
 for i in ${DOTFILES_CONFIG_MODULES[@]}; do
 	cd ~/.dotfiles/.modules
 	modname=`echo ${i}|awk -F: '{ print $NF}'|awk -F/ '{ print $NF}'|awk -F. '{ print $1}'`
 	if [ -d $modname ]; then
-		echo "${GREEN}Checking for updates to module $modname...${RESET}"
+		echo "${GREEN}Checking for updates to $modname...${RESET}"
 		cd $modname && git pull
+		cd ..
 	else
-		echo "${GREEN}Installing module $modname...${RESET}"
+		echo "${GREEN}Downloading $modname...${RESET}"
 		git clone ${i}
+	fi
+
+	if [ -f $modname/.dfmodule ]; then
+		echo "${GREEN}Loading $modname...${RESET}"
+		source $modname/.dfmodule
 	fi
 done
 
