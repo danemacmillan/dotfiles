@@ -158,7 +158,6 @@ dotfiles_packages_install()
 
 # Install package depencencies only if install flag passed
 if [[ "$1" == "--install" ]]; then
-	echo -e "--install"
 	dotfiles_packages_install
 fi
 
