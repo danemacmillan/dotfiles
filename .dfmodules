@@ -65,7 +65,7 @@ cd $olddir
 
 # Initalizes an empty module at the specified path
 # Parameters: path,
-makemodule() {
+dfmakemodule() {
 	if [ -z $1 ]; then
 		return
 	fi
@@ -75,5 +75,5 @@ makemodule() {
 	touch .dfmodule
 	touch .dfconfig
 	git add .
-	git commit -m "makemodule initial commit"
+	git commit -m "Inital commit from dfmakemodule."
 }
