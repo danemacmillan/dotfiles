@@ -6,3 +6,9 @@
 # If empty, timestamp will not be displayed.
 # Example: "${YELLOW}[\D{%H:%M}]${RESET} "
 export DOTFILES_CONFIG_TIMESTAMP=""
+
+# DOTFILES_CONFIG_MODULES
+# array
+# Contains the listing of dotfile modules to install
+# A dotfile module listing is a url to a git repository containing a module.
+export DOTFILES_CONFIG_MODULES=()
