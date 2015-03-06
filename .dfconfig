@@ -10,7 +10,7 @@ export DOTFILES_CONFIG_TIMESTAMP=""
 # DOTFILES_CONFIG_MODULES
 # array
 # Contains the listing of dotfile modules to install
-# A dotfile module listing is a url to a git repository containing a module.
+# A dotfile module listing is a url to a git repository containing a .dfmodule.
 export DOTFILES_CONFIG_MODULES=(
 	#"git@github.com:dersam/dotart.git"
 )
