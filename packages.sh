@@ -1,29 +1,10 @@
 #!/usr/bin/env bash
 
-
-#
-# External dependencies
-#
-
-# Homebrew
-echo -e "${BLUE}${BOLD}Downloading external dependencies, if any.${RESET}"
-# Get homebrew and some niceties.
-if ! hash brew 2>/dev/null && [[ $OS == 'osx' ]]; then
-	echo "${GREEN}Installing homebrew.${RESET}"
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-# Vundle
-echo -e "${GREEN}Updating Vim Vundle and plugins. This will take a few seconds.${RESET}"
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
-# Install Vim plugins defined in .vimrc file.
-# Depending on the location that Vundler installs a plugin, there
-# may be an authentication prompt for username and password.
-vim +PluginInstall +qall 2&> /dev/null
-
-
-#
+##
 # Packages
+#
+# dotfiles_package_installer is the main function that executes all the
+# individual pluggable package functions.
 #
 
 ##
@@ -76,6 +57,31 @@ dotfiles_package_installer_brew()
 			fi
 		done
 	fi
+}
+
+##
+# Extras are for packages that are not easily abstracted away due to their
+# need for varying steps. Possibly create an extras file in .dfpackages for
+# blindly running code instead of including it in packages.sh, where there
+# are no hard-coded dependencies--just abstraction to handle package
+# installment through the dotfiles framework.
+dotfiles_package_installer_extras()
+{
+	# Homebrew
+	echo -e "${BLUE}${BOLD}Downloading external dependencies, if any.${RESET}"
+	# Get homebrew and some niceties.
+	if ! hash brew 2>/dev/null && [[ $OS == 'osx' ]]; then
+		echo "${GREEN}Installing homebrew.${RESET}"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
+
+	# Vundle
+	echo -e "${GREEN}Updating Vim Vundle and plugins. This will take a few seconds.${RESET}"
+	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
+	# Install Vim plugins defined in .vimrc file.
+	# Depending on the location that Vundler installs a plugin, there
+	# may be an authentication prompt for username and password.
+	vim +PluginInstall +qall 2&> /dev/null
 }
 
 
