@@ -36,10 +36,10 @@ for i in ${DOTFILES_CONFIG_MODULES[@]}; do
 	if [ -f $modname/.dfmodule ]; then
 		echo "${GREEN}Loading $modname...${RESET}"
 		cd $modname
-		source .dfmodule
 		if [ -f ~/.dotfiles/.modulesconfig/$modname ]; then
 			source ~/.dotfiles/.modulesconfig/$modname
 		fi
+		source .dfmodule
 	fi
 done
 
@@ -48,13 +48,13 @@ for i in ${DOTFILES_CONFIG_DEV_MODULES[@]}; do
 	if [ -d ${i} ]; then
 		cd ${i}
 		echo "${GREEN}DEV MODULE:Attempting to load ${i}...${RESET}"
-		if [ -f ".dfmodule" ];then
-			source ".dfmodule"
-			if [ -f ".dfconfig" ]; then
-				source ".dfconfig"
+		if [ -f ".dfconfig" ];then
+			source ".dfconfig"
+			if [ -f ".dfmodule" ]; then
+				source ".dfmodule"
+			else
+				echo "${RED}Failed to load dev module: ${i}/.dfmodule not found${RESET}"
 			fi
-		else
-			echo "${RED}Failed to load dev module: ${i}/.dfmodule not found${RESET}"
 		fi
 	else
 		echo "${RED}Failed to load dev module: invalid directory ${i}."
