@@ -70,20 +70,18 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM='verbose'
 
 # Highlight the user name when logged in as root.
+USER_STYLE="${GREEN}";
+USER_BANG="\\[${CYAN}${BOLD}\]\$"
 if [[ "${USER}" == "root" ]]; then
 	USER_STYLE="${RED}";
 	USER_BANG="\\[${RED}\]#"
-else
-	USER_STYLE="${GREEN}";
-	USER_BANG="\\[${CYAN}${BOLD}\]\$"
-fi;
+fi
 
 # Highlight the hostname when connected via SSH.
+HOST_STYLE="\\[${BLUE}${BOLD}\]";
 if [[ "${HAS_SSH}" ]]; then
-	HOST_STYLE="${BLUE}${BOLD}://";
-else
-	HOST_STYLE="${BLUE}${BOLD}";
-fi;
+	HOST_STYLE="\\[${BLUE}${BOLD}\]://";
+fi
 
 export PS1="\\[${USER_STYLE}\]\u\\[${RESET}${CYAN}\]@\\[${HOST_STYLE}\]\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
 
