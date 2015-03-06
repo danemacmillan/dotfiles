@@ -62,3 +62,18 @@ for i in ${DOTFILES_CONFIG_DEV_MODULES[@]}; do
 done
 
 cd $olddir
+
+# Initalizes an empty module at the specified path
+# Parameters: path,
+makemodule() {
+	if [ -z $1 ]; then
+		return
+	fi
+	mkdir -p $1
+	cd $1
+	git init
+	touch .dfmodule
+	touch .dfconfig
+	git add .
+	git commit -m "makemodule initial commit"
+}
