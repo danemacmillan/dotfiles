@@ -122,7 +122,7 @@ dotfiles_packages_install()
 	# handle multiple systems.
 	case "$DOTFILES_PACKAGE_MANAGER" in
 		brew)
-			dotfiles_package_installer_brew "$DOTFILES_PACKAGE_MANAGER"
+			dotfiles_packages_install_brew "$DOTFILES_PACKAGE_MANAGER"
 			;;
 
 		# TODO: add RPM installs as well. Ensure these subpackages are available
@@ -153,6 +153,7 @@ dotfiles_packages_install()
 
 # Install package depencencies only if install flag passed
 if [[ "$1" == "--install" ]]; then
+	echo -e "--install"
 	dotfiles_packages_install
 fi
 
