@@ -27,6 +27,59 @@ vim +PluginInstall +qall 2&> /dev/null
 #
 
 ##
+# Pluggable package installer for brew/tap/cask executed by
+# dotfiles_packages_installer.
+# TODO: add check for user's user-defined packages in home directory.
+dotfiles_package_installer_brew()
+{
+	local package="$1"
+	local packages_dir="$HOME/.dotfiles/.dfpackages"
+
+	if [ -d $packages_dir ]; then
+		# Use three distinct packages for brew.
+		for subpackage in "tap" "brew" "cask"; do
+			local packages_file="$packages_dir/$subpackage"
+			local packages_md5_new=$(calculate_md5_hash "$packages_file")
+			local package_name="$package"
+
+			case "$subpackage" in
+				tap|cask)
+					local package_name+=" $subpackage"
+				tap)
+					local packages_md5_old="$DOTFILES_PACKAGES_MD5_TAP"
+					local package_manager_command="brew tap"
+					local package_manager_command_list="brew tap"
+					;;
+				brew)
+					local packages_md5_old="$DOTFILES_PACKAGES_MD5_BREW"
+					local package_manager_command="brew install"
+					local package_manager_command_list="brew list -1"
+					;;
+				cask)
+					local packages_md5_old=$DOTFILES_PACKAGES_MD5_CASK
+					local package_manager_command="brew cask install"
+					local package_manager_command_list="brew cask list -1"
+					;;
+			esac
+
+			if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
+				echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $packagename ${RESET}${BLUE}${BOLD} packages.${RESET}"
+				while read line; do
+					# Ssing a hash check is insufficient, as not all packages are
+					# installed as an executable CLI tool. This is why check is against
+					# list of packages.
+					if ! $package_manager_command_list | grep -q "^${line}\$"; then
+						$package_manager_command $line
+					fi
+				done < $packages_dir/$subpackage
+				brew cleanup 2&> /dev/null
+			fi
+		done
+	fi
+}
+
+
+##
 # Install packages from files, irregardless of OS.
 #
 # This function depends on the existence of package files in the `.packages`
@@ -34,47 +87,17 @@ vim +PluginInstall +qall 2&> /dev/null
 dotfiles_package_installer()
 {
 	# Install packages from OS package manager.
-	DOTFILES_PACKAGES_DIR="$HOME/.packages"
+	# TODO: configure so variable can include git, wget, rpm. This means the
+	# case statement will need to be changed to individual if conditions to
+	# handle multiple systems.
 	case "$DOTFILES_PACKAGE_MANAGER" in
 		brew)
-			# Use three distinct packages for brew.
-			for package_name in "tap" "brew" "cask"; do
-				DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$package_name"
-				DOTFILES_PACKAGES_MD5_NEW=$(calculate_md5_hash "$DOTFILES_PACKAGES_FILE")
-
-				case "$package_name" in
-					tap)
-						DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_TAP
-						DOTFILES_PACKAGE_MANAGER_COMMAND="brew tap"
-						DOTFILES_PACKAGE_MANAGER_COMMAND_LIST="brew tap"
-						;;
-					brew)
-						DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_BREW
-						DOTFILES_PACKAGE_MANAGER_COMMAND="brew install"
-						DOTFILES_PACKAGE_MANAGER_COMMAND_LIST="brew list -1"
-						;;
-					cask)
-						DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_CASK
-						DOTFILES_PACKAGE_MANAGER_COMMAND="brew cask install"
-						DOTFILES_PACKAGE_MANAGER_COMMAND_LIST="brew cask list -1"
-				esac
-
-				if [[ "$DOTFILES_PACKAGES_MD5_OLD" != "$DOTFILES_PACKAGES_MD5_NEW" ]]; then
-					echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $DOTFILES_PACKAGE_MANAGER $package_name ${RESET}${BLUE}${BOLD} packages.${RESET}"
-					while read line; do
-						# Note: using a hash check is insufficient, as not all packages
-						# are installed as an executable CLI tool.
-						if ! $DOTFILES_PACKAGE_MANAGER_COMMAND_LIST | grep -q "^${line}\$"; then
-							$DOTFILES_PACKAGE_MANAGER_COMMAND $line
-						fi
-					done < $DOTFILES_PACKAGES_DIR/$package_name
-					brew cleanup 2&> /dev/null
-				fi
-			done
+			dotfiles_package_installer_brew "$DOTFILES_PACKAGE_MANAGER"
 			;;
 
 		# TODO: add RPM installs as well.
 		yum)
+			DOTFILES_PACKAGES_DIR="$HOME/.dotfiles/.dfpackages"
 			DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER"
 			DOTFILES_PACKAGES_MD5_NEW=$(calculate_md5_hash "$DOTFILES_PACKAGES_FILE")
 			DOTFILES_PACKAGES_MD5_OLD=$DOTFILES_PACKAGES_MD5_YUM
@@ -97,5 +120,5 @@ dotfiles_package_installer()
 	esac
 }
 
-# Execute the function.
+# Install package depencencies.
 dotfiles_package_installer
