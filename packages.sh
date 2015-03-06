@@ -95,7 +95,8 @@ dotfiles_package_installer()
 			dotfiles_package_installer_brew "$DOTFILES_PACKAGE_MANAGER"
 			;;
 
-		# TODO: add RPM installs as well.
+		# TODO: add RPM installs as well. Ensure these subpackages are available
+		# before yum installer is called.
 		yum)
 			DOTFILES_PACKAGES_DIR="$HOME/.dotfiles/.dfpackages"
 			DOTFILES_PACKAGES_FILE="$DOTFILES_PACKAGES_DIR/$DOTFILES_PACKAGE_MANAGER"
