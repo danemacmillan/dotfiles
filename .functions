@@ -22,30 +22,6 @@ calculate_md5_hash()
 }
 
 ##
-# Helper function for verifying dotfiles' package changes.
-# TODO: add check for user-defined dfpackages directory in home directory.
-# TODO: create array of support package types, e.g., brew, git, wget, so that
-# multiple package types can be operated on.
-check_package_managers()
-{
-	local packages_directory="$HOME/.dotfiles/.dfpackages"
-	export DOTFILES_PACKAGE_MANAGER=""
-	if hash brew 2>/dev/null; then
-		export DOTFILES_PACKAGE_MANAGER="brew"
-		export DOTFILES_PACKAGES_MD5_TAP=$(calculate_md5_hash "$packages_directory/tap")
-		export DOTFILES_PACKAGES_MD5_BREW=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
-		export DOTFILES_PACKAGES_MD5_CASK=$(calculate_md5_hash "$packages_directory/cask")
-	elif hash yum 2>/dev/null; then
-		export DOTFILES_PACKAGE_MANAGER="yum"
-		export DOTFILES_PACKAGES_MD5_YUM=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
-	elif hash apt-get 2>/dev/null; then
-		export DOTFILES_PACKAGE_MANAGER="apt-get"
-		export DOTFILES_PACKAGES_MD5_APTGET=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
-	fi
-}
-
-
-##
 # Remotely run commands with color TTY. If passing chained commands (&&),
 # remember to put them within quotation marks.
 rr()

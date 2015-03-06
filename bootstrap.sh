@@ -87,7 +87,7 @@ fi
 
 # Install packages from given package management
 source ~/.functions
-source ~/packages.sh
+source ~/packages.sh --install
 
 # Update terminal
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"

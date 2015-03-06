@@ -3,15 +3,39 @@
 ##
 # Packages
 #
-# dotfiles_package_installer is the main function that executes all the
-# individual pluggable package functions.
+# dotfiles_packageinstall is the main function that executes all the
+# individual pluggable package installers.
 #
+
+##
+# Helper function for verifying dotfiles' package changes and defining
+# the available package types.
+# TODO: add check for user-defined dfpackages directory in home directory.
+# TODO: create array of support package types, e.g., brew, git, wget, so that
+# multiple package types can be operated on.
+dotfiles_packages_verify()
+{
+	local packages_directory="$HOME/.dotfiles/.dfpackages"
+	export DOTFILES_PACKAGE_MANAGER=""
+	if hash brew 2>/dev/null; then
+		export DOTFILES_PACKAGE_MANAGER="brew"
+		export DOTFILES_PACKAGES_MD5_TAP=$(calculate_md5_hash "$packages_directory/tap")
+		export DOTFILES_PACKAGES_MD5_BREW=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
+		export DOTFILES_PACKAGES_MD5_CASK=$(calculate_md5_hash "$packages_directory/cask")
+	elif hash yum 2>/dev/null; then
+		export DOTFILES_PACKAGE_MANAGER="yum"
+		export DOTFILES_PACKAGES_MD5_YUM=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
+	elif hash apt-get 2>/dev/null; then
+		export DOTFILES_PACKAGE_MANAGER="apt-get"
+		export DOTFILES_PACKAGES_MD5_APTGET=$(calculate_md5_hash "$packages_directory/$DOTFILES_PACKAGE_MANAGER")
+	fi
+}
 
 ##
 # Pluggable package installer for brew/tap/cask executed by
 # dotfiles_packages_installer.
 # TODO: add check for user's user-defined packages in home directory.
-dotfiles_package_installer_brew()
+dotfiles_packages_install_brew()
 {
 	local package="$1"
 	local packages_dir="$HOME/.dotfiles/.dfpackages"
@@ -65,7 +89,7 @@ dotfiles_package_installer_brew()
 # blindly running code instead of including it in packages.sh, where there
 # are no hard-coded dependencies--just abstraction to handle package
 # installment through the dotfiles framework.
-dotfiles_package_installer_extras()
+dotfiles_packages_install_extras()
 {
 	# Homebrew
 	echo -e "${BLUE}${BOLD}Downloading external dependencies, if any.${RESET}"
@@ -90,7 +114,7 @@ dotfiles_package_installer_extras()
 #
 # This function depends on the existence of package files in the `.packages`
 # directory. Ensure that the name will correspond with the cases here.
-dotfiles_package_installer()
+dotfiles_packages_install()
 {
 	# Install packages from OS package manager.
 	# TODO: configure so variable can include git, wget, rpm. This means the
@@ -127,5 +151,13 @@ dotfiles_package_installer()
 	esac
 }
 
-# Install package depencencies.
-dotfiles_package_installer
+# Install package depencencies only if install flag passed
+if [[ "$1" == "--install" ]]; then
+	dotfiles_packages_install
+fi
+
+# Run package verification when flag passed. .bashrc does this every time so
+# that md5s of packages can be monitored.
+if [[ "$1" == "--verify" ]]; then
+	dotfiles_packages_verify
+fi

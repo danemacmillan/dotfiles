@@ -57,8 +57,8 @@ source ~/.aliases
 # Source OS-specific configs.
 source ~/.$OS
 
-# Verify and export package manager variables for dotfiles.
-check_package_managers
+# Verify and export package manager variables for dotfiles, and Generate MD5s.
+source ~/packages.sh --verify
 
 # Set default editor
 export EDITOR=vim
