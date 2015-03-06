@@ -4,5 +4,5 @@
 # string
 # Datetime formatting (strftime rules) for the prompt timestamp
 # If empty, timestamp will not be displayed.
-# Example: "${YELLOW}[\D{%H:%M}]${RESET} "
+# Example: "\\[${YELLOW}\][\D{%H:%M}]\\[${RESET}\] "
 export DOTFILES_CONFIG_TIMESTAMP=""
