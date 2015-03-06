@@ -26,11 +26,16 @@ dotfiles_managers_get()
 	fi
 
 	if hash wget 2>/dev/null; then
+		package_managers+=("wget")
+	fi
+
+	# Brew includes taps and casks
+	if hash brew 2>/dev/null; then
 		package_managers+=("brew")
 	fi
 
-	if hash brew 2>/dev/null; then
-		package_managers+=("brew")
+	if hash rpm 2>/dev/null; then
+		package_managers+=("rpm")
 	fi
 
 	if hash yum 2>/dev/null; then
@@ -41,25 +46,30 @@ dotfiles_managers_get()
 		package_managers+=("apt-get")
 	fi
 
-	export DOTFILES_PACKAGER_MANAGERS=$package_managers
+	export DOTFILES_PACKAGE_MANAGERS=${package_managers[@]}
 }
 
 ##
 # Verify and store the MD5 hashes of all packages being used by dotfiles.
 dotfiles_packages_verify()
 {
+	# Get packaga manager types.
+	dotfiles_managers_get
+
+	# Loop through everything and generate relevant MD5 hashes.
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
-		if [ -d $packages_dir ]; then
-			if hash brew 2>/dev/null; then
-				export DOTFILES_PACKAGES_MD5_TAP=$(calculate_md5_hash "$packages_dir/tap")
-				export DOTFILES_PACKAGES_MD5_BREW=$(calculate_md5_hash "$packages_dir/$DOTFILES_PACKAGE_MANAGER")
-				export DOTFILES_PACKAGES_MD5_CASK=$(calculate_md5_hash "$packages_dir/cask")
-			elif hash yum 2>/dev/null; then
-				export DOTFILES_PACKAGES_MD5_YUM=$(calculate_md5_hash "$packages_dir/$DOTFILES_PACKAGE_MANAGER")
-			elif hash apt-get 2>/dev/null; then
-				export DOTFILES_PACKAGES_MD5_APTGET=$(calculate_md5_hash "$packages_dir/$DOTFILES_PACKAGE_MANAGER")
+		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
+			if [ -f "$packages_dir/$package_manager" ]; then
+				# This dynamically generates variable names and assigns MD5s as array.
+				export eval "DOTFILES_PACKAGES_MD5_${package_manager}+=$(calculate_md5_hash "$packages_dir/$package_manager") "
+
+				# Brew handles its subpackages at the same time.
+				if [[ "$package_manager" == "yum" ]]; then
+					export eval "DOTFILES_PACKAGES_MD5_tap+=$(calculate_md5_hash "$packages_dir/tap") "
+					export eval "DOTFILES_PACKAGES_MD5_cask+=$(calculate_md5_hash "$packages_dir/cask") "
+				fi
 			fi
-		fi
+		done
 	done
 }
 
@@ -71,8 +81,9 @@ dotfiles_packages_install_brew()
 {
 	local package="brew"
 	local packages_dir="$1"
+	local directory_index="$2"
 
-	if [ -d $packages_dir ]; then
+	if [ -f $packages_dir/$package ]; then
 		# Use three distinct packages for brew.
 		for subpackage in "tap" "brew" "cask"; do
 			local packages_file="$packages_dir/$subpackage"
@@ -81,18 +92,18 @@ dotfiles_packages_install_brew()
 
 			case "$subpackage" in
 				tap)
-					local packages_md5_old=$DOTFILES_PACKAGES_MD5_TAP
+					local packages_md5_old=${DOTFILES_PACKAGES_MD5_tap[$directory_index]}
 					local package_manager_command="brew tap"
 					local package_manager_command_list="brew tap"
 					local package_name+=" $subpackage"
 					;;
 				brew)
-					local packages_md5_old=$DOTFILES_PACKAGES_MD5_BREW
+					local packages_md5_old=${DOTFILES_PACKAGES_MD5_brew[$directory_index]}
 					local package_manager_command="brew install"
 					local package_manager_command_list="brew list -1"
 					;;
 				cask)
-					local packages_md5_old=$DOTFILES_PACKAGES_MD5_CASK
+					local packages_md5_old=${DOTFILES_PACKAGES_MD5_cask[$directory_index]}
 					local package_manager_command="brew cask install"
 					local package_manager_command_list="brew cask list -1"
 					local package_name+=" $subpackage"
@@ -121,11 +132,12 @@ dotfiles_packages_install_yum()
 {
 	local package="yum"
 	local packages_dir="$1"
+	local directory_index="$2"
 
-	if [ -d $packages_dir ]; then
-		local packages_file="$packages_dir/$subpackage"
+	if [ -f $packages_dir/$package ]; then
+		local packages_file="$packages_dir/$package"
 		local packages_md5_new=$(calculate_md5_hash "$packages_file")
-		local packages_md5_old=$DOTFILES_PACKAGES_MD5_YUM
+		local packages_md5_old=${DOTFILES_PACKAGES_MD5_yum[$directory_index]}
 		local package_manager_command="yum -y install"
 		local package_manager_command_list="yum list installed"
 		local package_name="$package"
@@ -142,6 +154,7 @@ dotfiles_packages_install_yum()
 			done < $packages_dir/$package
 			yum clean all 2&> /dev/null
 		fi
+	fi
 }
 
 ##
@@ -177,14 +190,19 @@ dotfiles_packages_install_extras()
 # directory. Ensure that the name will correspond with the cases here.
 dotfiles_packages_install()
 {
+	# Get list of supported package manager types.
+	dotfiles_managers_get
+
 	# Always install extras first. They will contain stuff like installing
 	# brew, PHP composer, and vim vundle. These are typically essential before
 	# any other packages can be installed.
 	dotfiles_packages_install_extras
 
-	# Install packages from varyious defined package managers.
-	for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
-		for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
+	# Loop through hashes for each directory provided.
+	local directory_index=0
+	# Install packages from various defined package manager types.
+	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
+		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
 			if [ -d $packages_dir ]; then
 				case "$package_manager" in
 					wget)
@@ -194,11 +212,14 @@ dotfiles_packages_install()
 						;;
 
 					brew)
-						dotfiles_packages_install_brew "$packages_dir"
+						dotfiles_packages_install_brew "$packages_dir" $directory_index
+						;;
+
+					rpm)
 						;;
 
 					yum)
-						dotfiles_packages_install_yum "$packages_dir"
+						dotfiles_packages_install_yum "$packages_dir" $directory_index
 						;;
 
 					apt-get)
@@ -206,8 +227,8 @@ dotfiles_packages_install()
 				esac
 			fi
 		done
+		directory_key=$((directory_index+1))
 	done
-
 }
 
 # Install package depencencies only if install flag passed
