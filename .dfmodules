@@ -26,7 +26,8 @@ for i in ${DOTFILES_CONFIG_MODULES[@]}; do
 
 	if [ -f $modname/.dfmodule ]; then
 		echo "${GREEN}Loading $modname...${RESET}"
-		source $modname/.dfmodule
+		cd $modname
+		source .dfmodule
 	fi
 done
 
