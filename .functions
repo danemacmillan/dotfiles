@@ -23,9 +23,12 @@ calculate_md5_hash()
 
 ##
 # Helper function for verifying dotfiles' package changes.
+# TODO: add check for user-defined dfpackages directory in home directory.
+# TODO: create array of support package types, e.g., brew, git, wget, so that
+# multiple package types can be operated on.
 check_package_managers()
 {
-	local packages_directory="$HOME/.packages"
+	local packages_directory="$HOME/.dotfiles/.dfpackages"
 	export DOTFILES_PACKAGE_MANAGER=""
 	if hash brew 2>/dev/null; then
 		export DOTFILES_PACKAGE_MANAGER="brew"

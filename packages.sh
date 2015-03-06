@@ -43,15 +43,14 @@ dotfiles_package_installer_brew()
 			local package_name="$package"
 
 			case "$subpackage" in
-				tap|cask)
-					local package_name+=" $subpackage"
 				tap)
-					local packages_md5_old="$DOTFILES_PACKAGES_MD5_TAP"
+					local packages_md5_old=$DOTFILES_PACKAGES_MD5_TAP
 					local package_manager_command="brew tap"
 					local package_manager_command_list="brew tap"
+					local package_name+=" $subpackage"
 					;;
 				brew)
-					local packages_md5_old="$DOTFILES_PACKAGES_MD5_BREW"
+					local packages_md5_old=$DOTFILES_PACKAGES_MD5_BREW
 					local package_manager_command="brew install"
 					local package_manager_command_list="brew list -1"
 					;;
@@ -59,11 +58,12 @@ dotfiles_package_installer_brew()
 					local packages_md5_old=$DOTFILES_PACKAGES_MD5_CASK
 					local package_manager_command="brew cask install"
 					local package_manager_command_list="brew cask list -1"
+					local package_name+=" $subpackage"
 					;;
 			esac
 
 			if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-				echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $packagename ${RESET}${BLUE}${BOLD} packages.${RESET}"
+				echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages.${RESET}"
 				while read line; do
 					# Ssing a hash check is insufficient, as not all packages are
 					# installed as an executable CLI tool. This is why check is against
