@@ -7,79 +7,6 @@
 # Bash 4.1 supports \e
 #ESC="\e"
 
-# https://wiki.archlinux.org/index.php/Color_Bash_Prompt
-colors() {
-	local fgc bgc vals seq0
-
-	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
-
-	# foreground colors
-	for fgc in {30..37}; do
-		# background colors
-		for bgc in {40..47}; do
-			fgc=${fgc#37} # white
-			bgc=${bgc#40} # black
-
-			vals="${fgc:+$fgc;}${bgc}"
-			vals=${vals%%;}
-
-			seq0="${vals:+\e[${vals}m}"
-			printf "  %-9s" "${seq0:-(default)}"
-			printf " ${seq0}TEXT\e[m"
-			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-		done
-		echo; echo
-	done
-}
-
-# http://misc.flogisoft.com/bash/tip_colors_and_formatting
-clbg() {
-	for clbg in {40..47} {100..107} 49 ; do
-		#Foreground
-		for clfg in {30..37} {90..97} 39 ; do
-			#Formatting
-			for attr in 0 1 2 4 5 7 ; do
-				#Print the result
-				echo -en "\e[${attr};${clbg};${clfg}m ^[${attr};${clbg};${clfg}m \e[0m"
-			done
-			echo #Newline
-		done
-	done
-}
-
-# http://misc.flogisoft.com/bash/tip_colors_and_formatting
-fgbg() {
-	for fgbg in 38 48 ; do #Foreground/Background
-		for color in {0..256} ; do #Colors
-			#Display the color
-			echo -en "\e[${fgbg};5;${color}m ${color}\t\e[0m"
-			#Display 10 colors per lines
-			if [ $((($color + 1) % 10)) == 0 ] ; then
-				echo #New line
-			fi
-		done
-		echo #New line
-	done
-}
-
-# https://linuxtidbits.wordpress.com/2008/08/11/output-color-on-bash-scripts/
-colorstput() {
-	echo
-	echo -e "$(tput bold) reg  bld  und  sta   tput-command-colors$(tput sgr0)"
-
-	for i in $(seq 0 256); do
-		echo " $(tput setaf $i)Text$(tput sgr0) $(tput bold)$(tput setaf $i)Text$(tput sgr0) $(tput sgr 0 1)$(tput setaf $i)Text$(tput sgr0)  $(tput smso)$(tput setaf $i)Text$(tput sgr0)  \$(tput setaf $i)"
-	done
-
-	echo ' Bold            $(tput bold)'
-	echo ' Underline       $(tput sgr 0 1)'
-	echo ' Reset           $(tput sgr0)'
-	echo
-}
-
 ## Color variables
 
 # Formatting
@@ -115,6 +42,22 @@ BG_WHITE=$(tput setab 7)
 # Combinations
 BBLUE="${BOLD}${BLUE}"
 BCYAN="${BOLD}${CYAN}"
+
+# https://linuxtidbits.wordpress.com/2008/08/11/output-color-on-bash-scripts/
+colors()
+{
+	echo
+	echo -e "$(tput bold) reg  bld  und  sta   tput-command-colors$(tput sgr0)"
+
+	for i in $(seq 0 256); do
+		echo " $(tput setaf $i)Text$(tput sgr0) $(tput bold)$(tput setaf $i)Text$(tput sgr0) $(tput sgr 0 1)$(tput setaf $i)Text$(tput sgr0)  $(tput smso)$(tput setaf $i)Text$(tput sgr0)  \$(tput setaf $i)"
+	done
+
+	echo ' Bold            $(tput bold)'
+	echo ' Underline       $(tput sgr 0 1)'
+	echo ' Reset           $(tput sgr0)'
+	echo
+}
 
 ##
 # Formatting symbols

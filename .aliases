@@ -19,8 +19,8 @@ alias du="du -h --time"
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 #alias ag='ag -lfi --hidden --numbers --column --stats'
-
 
 #Network
 #alias listen='lsof -i -P | grep LISTEN'
@@ -37,6 +37,7 @@ alias vmt="/usr/bin/vmware-toolbox-cmd"
 # Misc
 alias c='clear'
 alias vi='vim'
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # Git--just for reference. Do not rewrite history.
 #alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'

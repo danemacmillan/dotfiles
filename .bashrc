@@ -92,6 +92,9 @@ if [[ -n $DOTFILES_CONFIG_TIMESTAMP ]]; then
 	export PS1="$DOTFILES_CONFIG_TIMESTAMP$PS1"
 fi
 
+# Color
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Set bash history configs
 export HISTSIZE=1000000
