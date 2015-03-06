@@ -16,6 +16,9 @@ ehthumbs.db
 .Spotlight-V100
 .Trashes
 
+# Modules directory
+.modules/
+
 ## For quick testing, create any directory with ~ in front of it,
 ## and it will be ignored.
 ~*/
