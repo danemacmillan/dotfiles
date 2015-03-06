@@ -1,0 +1,9 @@
+
+# Stop processing modules if no module config available
+if [[ -z $DOTFILES_CONFIG_MODULES ]]; then
+	return
+fi
+
+for i in ${DOTFILES_CONFIG_MODULES[@]}; do
+	echo ${i}
+done
