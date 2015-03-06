@@ -89,6 +89,7 @@ dotfiles_packages_install_brew()
 # blindly running code instead of including it in packages.sh, where there
 # are no hard-coded dependencies--just abstraction to handle package
 # installment through the dotfiles framework.
+# TODO: Add md5 checks to prevent unnecessary downloads.
 dotfiles_packages_install_extras()
 {
 	# Homebrew
@@ -108,7 +109,6 @@ dotfiles_packages_install_extras()
 	vim +PluginInstall +qall 2&> /dev/null
 }
 
-
 ##
 # Install packages from files, irregardless of OS.
 #
@@ -116,6 +116,11 @@ dotfiles_packages_install_extras()
 # directory. Ensure that the name will correspond with the cases here.
 dotfiles_packages_install()
 {
+	# Always install extras first. They will contain stuff like installing
+	# brew, PHP composer, and vim vundle. These are typically essential before
+	# any other packages can be installed.
+	dotfiles_packages_install_extras
+
 	# Install packages from OS package manager.
 	# TODO: configure so variable can include git, wget, rpm. This means the
 	# case statement will need to be changed to individual if conditions to
