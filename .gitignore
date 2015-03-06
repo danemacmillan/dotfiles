@@ -18,6 +18,7 @@ ehthumbs.db
 
 # Modules directory
 .modules/
+.modulesconfig/
 
 ## For quick testing, create any directory with ~ in front of it,
 ## and it will be ignored.

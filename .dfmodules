@@ -8,6 +8,10 @@ if [ ! -d ~/.dotfiles/.modules ]; then
 	mkdir ~/.dotfiles/.modules
 fi
 
+if [ ! -d ~/.dotfiles/.modulesconfig ]; then
+	mkdir ~/.dotfiles/.modulesconfig
+fi
+
 olddir=`pwd`
 
 echo "${BLUE}${BOLD}Processing modules...${RESET}"
@@ -24,10 +28,18 @@ for i in ${DOTFILES_CONFIG_MODULES[@]}; do
 		git clone ${i}
 	fi
 
+	if [ ! -f ~/.dotfiles/.modulesconfig/$modname ] && [ -f ~/.dotfiles/.modules/$modname/.dfconfig ]; then
+		echo "${GREEN}Publishing $modname config...${RESET}"
+		cp ~/.dotfiles/.modules/$modname/.dfconfig ~/.dotfiles/.modulesconfig/$modname
+	fi
+
 	if [ -f $modname/.dfmodule ]; then
 		echo "${GREEN}Loading $modname...${RESET}"
 		cd $modname
 		source .dfmodule
+		if [ -f ~/.dotfiles/.modulesconfig/$modname ]; then
+			source ~/.dotfiles/.modulesconfig/$modname
+		fi
 	fi
 done
 
