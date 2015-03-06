@@ -74,6 +74,7 @@ dfmakemodule() {
 	git init
 	touch .dfmodule
 	touch .dfconfig
+	touch README.md
 	git add .
 	git commit -m "Inital commit from dfmakemodule."
 }
