@@ -57,27 +57,29 @@ dotfiles_packages_verify()
 	dotfiles_managers_get
 
 	# Clear any previously exported hash arrays, so they are not concatenated.
-	export DOTFILES_PACKAGES_MD5_git=
-	export DOTFILES_PACKAGES_MD5_wget=
-	export DOTFILES_PACKAGES_MD5_brew=
-	export DOTFILES_PACKAGES_MD5_rpm=
-	export DOTFILES_PACKAGES_MD5_yum=
-	export DOTFILES_PACKAGES_MD5_aptget=
+	#export DOTFILES_PACKAGES_MD5_git=
+	#export DOTFILES_PACKAGES_MD5_wget=
+	#export DOTFILES_PACKAGES_MD5_brew=
+	#export DOTFILES_PACKAGES_MD5_rpm=
+	#export DOTFILES_PACKAGES_MD5_yum=
+	#export DOTFILES_PACKAGES_MD5_aptget=
 
+	local directory_index=0
 	# Loop through everything and generate relevant MD5 hashes.
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
 			if [ -f "$packages_dir/$package_manager" ]; then
 				# This dynamically generates variable names and assigns MD5s as array.
-				export eval "DOTFILES_PACKAGES_MD5_${package_manager}+=$(calculate_md5_hash "$packages_dir/$package_manager") "
+				export eval "DOTFILES_PACKAGES_MD5_${package_manager}_${directory_index}=$(calculate_md5_hash "$packages_dir/$package_manager")"
 
 				# Brew handles its subpackages at the same time.
 				if [[ "$package_manager" == "yum" ]]; then
-					export eval "DOTFILES_PACKAGES_MD5_tap+=$(calculate_md5_hash "$packages_dir/tap") "
-					export eval "DOTFILES_PACKAGES_MD5_cask+=$(calculate_md5_hash "$packages_dir/cask") "
+					export eval "DOTFILES_PACKAGES_MD5_tap_${directory_index}=$(calculate_md5_hash "$packages_dir/tap")"
+					export eval "DOTFILES_PACKAGES_MD5_cask_${directory_index}=$(calculate_md5_hash "$packages_dir/cask")"
 				fi
 			fi
 		done
+		directory_key=$((directory_index+1))
 	done
 }
 
@@ -100,18 +102,18 @@ dotfiles_packages_install_brew()
 
 			case "$subpackage" in
 				tap)
-					local packages_md5_old=${DOTFILES_PACKAGES_MD5_tap[$directory_index]}
+					local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_tap_$directory_index)
 					local package_manager_command="brew tap"
 					local package_manager_command_list="brew tap"
 					local package_name+=" $subpackage"
 					;;
 				brew)
-					local packages_md5_old=${DOTFILES_PACKAGES_MD5_brew[$directory_index]}
+					local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_brew_$directory_index)
 					local package_manager_command="brew install"
 					local package_manager_command_list="brew list -1"
 					;;
 				cask)
-					local packages_md5_old=${DOTFILES_PACKAGES_MD5_cask[$directory_index]}
+					local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_cask_$directory_index)
 					local package_manager_command="brew cask install"
 					local package_manager_command_list="brew cask list -1"
 					local package_name+=" $subpackage"
@@ -145,7 +147,7 @@ dotfiles_packages_install_yum()
 	if [ -f $packages_dir/$package ]; then
 		local packages_file="$packages_dir/$package"
 		local packages_md5_new=$(calculate_md5_hash "$packages_file")
-		local packages_md5_old=${DOTFILES_PACKAGES_MD5_yum[$directory_index]}
+		local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_yum_$directory_index)
 		local package_manager_command="yum -y install"
 		local package_manager_command_list="yum list installed"
 		local package_name="$package"
