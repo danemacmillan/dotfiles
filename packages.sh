@@ -53,7 +53,7 @@ dotfiles_managers_get()
 # Verify and store the MD5 hashes of all packages being used by dotfiles.
 dotfiles_packages_verify()
 {
-	# Get packaga manager types.
+	# Get package manager types.
 	dotfiles_managers_get
 
 	local directory_index=0
