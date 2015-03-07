@@ -56,31 +56,26 @@ dotfiles_packages_verify()
 	# Get packaga manager types.
 	dotfiles_managers_get
 
-	# Clear any previously exported hash arrays, so they are not concatenated.
-	#export DOTFILES_PACKAGES_MD5_git=
-	#export DOTFILES_PACKAGES_MD5_wget=
-	#export DOTFILES_PACKAGES_MD5_brew=
-	#export DOTFILES_PACKAGES_MD5_rpm=
-	#export DOTFILES_PACKAGES_MD5_yum=
-	#export DOTFILES_PACKAGES_MD5_aptget=
-
 	local directory_index=0
 	# Loop through everything and generate relevant MD5 hashes.
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
-			if [ -f "$packages_dir/$package_manager" ]; then
+		if [ -f "$packages_dir/$package_manager" ]; then
 				# This dynamically generates variable names and assigns MD5s as array.
 				export eval "DOTFILES_PACKAGES_MD5_${package_manager}_${directory_index}=$(calculate_md5_hash "$packages_dir/$package_manager")"
 
 				# Brew handles its subpackages at the same time.
-				if [[ "$package_manager" == "yum" ]]; then
+				if [[ "$package_manager" == "brew" ]]; then
 					export eval "DOTFILES_PACKAGES_MD5_tap_${directory_index}=$(calculate_md5_hash "$packages_dir/tap")"
 					export eval "DOTFILES_PACKAGES_MD5_cask_${directory_index}=$(calculate_md5_hash "$packages_dir/cask")"
 				fi
 			fi
 		done
-		directory_key=$((directory_index+1))
+		directory_index=$((directory_index+1))
 	done
+
+	# Debug
+	#echo "${!DOTFILES_*}"
 }
 
 ##
@@ -121,7 +116,7 @@ dotfiles_packages_install_brew()
 			esac
 
 			if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-				echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages.${RESET}"
+				echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 				while read line; do
 					# A hash check is insufficient, as not all packages are
 					# installed as an executable CLI tool. This is why check is against
@@ -153,7 +148,7 @@ dotfiles_packages_install_yum()
 		local package_name="$package"
 
 		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-			echo -e "${BLUE}${BOLD}Installing new ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages.${RESET}"
+			echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 			while read line; do
 				# A hash check is insufficient, as not all packages are
 				# installed as an executable CLI tool. This is why check is against
@@ -237,7 +232,7 @@ dotfiles_packages_install()
 				esac
 			fi
 		done
-		directory_key=$((directory_index+1))
+		directory_index=$((directory_index+1))
 	done
 }
 
