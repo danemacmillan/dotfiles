@@ -60,8 +60,8 @@ dotfiles_packages_verify()
 	# Loop through everything and generate relevant MD5 hashes.
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
-		if [ -f "$packages_dir/$package_manager" ]; then
-			# This dynamically generates variable names and assigns MD5s.
+			if [ -f "$packages_dir/$package_manager" ]; then
+				# This dynamically generates variable names and assigns MD5s.
 				export eval "DOTFILES_PACKAGES_MD5_${package_manager}_${directory_index}=$(calculate_md5_hash "$packages_dir/$package_manager")"
 
 				# Brew handles its subpackages at the same time.
@@ -190,6 +190,12 @@ dotfiles_packages_install_extras()
 	# may be an authentication prompt for username and password.
 	vim +PluginInstall +qall 2&> /dev/null
 }
+
+# dotfiles_packages_install can have its pluggable functions overwritten for
+# custom installer behavious.
+if [ -f "$HOME/.packages_install_overwrite"]; then
+	source "$HOME/.packages_install_overwrite";
+fi
 
 ##
 # Install packages from files, irregardless of OS.
