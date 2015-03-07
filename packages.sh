@@ -95,37 +95,40 @@ dotfiles_packages_install_brew()
 			local packages_md5_new=$(calculate_md5_hash "$packages_file")
 			local package_name="$package"
 
-			case "$subpackage" in
-				tap)
-					local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_tap_$directory_index)
-					local package_manager_command="brew tap"
-					local package_manager_command_list="brew tap"
-					local package_name+=" $subpackage"
-					;;
-				brew)
-					local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_brew_$directory_index)
-					local package_manager_command="brew install"
-					local package_manager_command_list="brew list -1"
-					;;
-				cask)
-					local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_cask_$directory_index)
-					local package_manager_command="brew cask install"
-					local package_manager_command_list="brew cask list -1"
-					local package_name+=" $subpackage"
-					;;
-			esac
+			if [ -f $packages_dir/$subpackage ]; then
+				case "$subpackage" in
+					tap)
+						local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_tap_$directory_index)
+						local package_manager_command="brew tap"
+						local package_manager_command_list="brew tap"
+						local package_name+=" $subpackage"
+						;;
+					brew)
+						local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_brew_$directory_index)
+						local package_manager_command="brew install"
+						local package_manager_command_list="brew list -1"
+						;;
+					cask)
+						local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_cask_$directory_index)
+						local package_manager_command="brew cask install"
+						local package_manager_command_list="brew cask list -1"
+						local package_name+=" $subpackage"
+						;;
+				esac
 
-			if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-				echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
-				while read line; do
-					# A hash check is insufficient, as not all packages are
-					# installed as an executable CLI tool. This is why check is against
-					# list of packages.
-					if ! $package_manager_command_list | grep -q "^${line}\$"; then
-						$package_manager_command $line
-					fi
-				done < $packages_dir/$subpackage
-				brew cleanup 2&> /dev/null
+				if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
+					echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+					while read line; do
+						# A hash check is insufficient, as not all packages are
+						# installed as an executable CLI tool. This is why check is against
+						# list of packages.
+						if ! $package_manager_command_list | grep -q "^${line}\$"; then
+							echo -e "${GREEN}$line${RESET}"
+							$package_manager_command $line
+						fi
+					done < $packages_dir/$subpackage
+					brew cleanup 2&> /dev/null
+				fi
 			fi
 		done
 	fi
