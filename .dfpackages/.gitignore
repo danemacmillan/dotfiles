@@ -1,0 +1,11 @@
+# Ignore everything but proper package files.
+*
+!.gitignore
+!aptget
+!brew
+!cask
+!git
+!rpm
+!tap
+!wget
+!yum
