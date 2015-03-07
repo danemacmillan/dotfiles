@@ -1,8 +1,10 @@
+ack
 aspell
 autoconf
 automake
 bash
 bash-completion
+bfg
 bitlbee
 brew-cask
 cask
@@ -37,6 +39,7 @@ mcrypt
 md5sha1sum
 media-info
 mhash
+moreutils
 mytop
 nmap
 node
