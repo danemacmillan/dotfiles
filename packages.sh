@@ -208,7 +208,7 @@ dotfiles_packages_install()
 	# Install packages from various defined package manager types.
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
-			if [ -d $packages_dir ]; then
+			if [ -f $packages_dir/$package_manager ]; then
 				case "$package_manager" in
 					wget)
 						;;
