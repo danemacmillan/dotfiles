@@ -193,8 +193,8 @@ dotfiles_packages_install_extras()
 
 # dotfiles_packages_install can have its pluggable functions overwritten for
 # custom installer behavious.
-if [ -f "$HOME/.packages_install_overwrite"]; then
-	source "$HOME/.packages_install_overwrite";
+if [ -f "$HOME/.packages_install_overwrite" ]; then
+	source "$HOME/.packages_install_overwrite"
 fi
 
 ##
