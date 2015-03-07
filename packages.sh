@@ -3,7 +3,7 @@
 ##
 # Packages
 #
-# dotfiles_packageinstall is the main function that executes all the
+# dotfiles_package_install is the main function that executes all the
 # individual pluggable package installers.
 #
 
@@ -61,7 +61,7 @@ dotfiles_packages_verify()
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
 		if [ -f "$packages_dir/$package_manager" ]; then
-				# This dynamically generates variable names and assigns MD5s as array.
+			# This dynamically generates variable names and assigns MD5s.
 				export eval "DOTFILES_PACKAGES_MD5_${package_manager}_${directory_index}=$(calculate_md5_hash "$packages_dir/$package_manager")"
 
 				# Brew handles its subpackages at the same time.
