@@ -78,10 +78,13 @@ dotfiles_packages_verify()
 	#echo "${!DOTFILES_*}"
 }
 
+# TODO further abstract indivual managers, as they are very similar in
+# functionality. Possibly create a list of verification and install commands
+# that get passed to a single function.
+
 ##
 # Pluggable package installer for brew/tap/cask executed by
 # dotfiles_packages_installer.
-# TODO: add check for user's user-defined packages in home directory.
 dotfiles_packages_install_brew()
 {
 	local package="brew"
@@ -153,9 +156,6 @@ dotfiles_packages_install_yum()
 		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
 			echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 			while read line; do
-				# A hash check is insufficient, as not all packages are
-				# installed as an executable CLI tool. This is why check is against
-				# list of packages.
 				if [ -n "$line" ] && ! $package_manager_command_list "${line}" &> /dev/null ; then
 					echo -e "${GREEN}${line}${RESET}"
 					$package_manager_command $line
@@ -219,6 +219,8 @@ dotfiles_packages_install()
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
 			if [ -f $packages_dir/$package_manager ]; then
+				# TODO possibly use single installer, with modular checkers for each
+				# manager type, so case is no longer needed.
 				case "$package_manager" in
 					wget)
 						;;
