@@ -35,6 +35,7 @@ ln -vsfn ~/.dotfiles/.sshmotd ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
 ln -vsfn ~/.dotfiles/dotfiles.sh ~/
+ln -vsfn ~/.dotfiles/.dfmodules ~/
 rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
 # Create user bin if it doesn't exist.
@@ -88,6 +89,9 @@ fi
 # Install packages from given package management
 source ~/.functions
 source ~/packages.sh --install
+
+# Install dfmodules
+source ~/.dfmodules
 
 # Update terminal
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"

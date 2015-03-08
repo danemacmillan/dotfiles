@@ -1,0 +1,80 @@
+
+# Stop processing modules if no module config available
+if [ -z $DOTFILES_CONFIG_MODULES ] && [ -z $DOTFILES_CONFIG_DEV_MODULES ]; then
+	return
+fi
+
+if [ ! -d ~/.dotfiles/.modules ]; then
+	mkdir ~/.dotfiles/.modules
+fi
+
+if [ ! -d ~/.dotfiles/.modulesconfig ]; then
+	mkdir ~/.dotfiles/.modulesconfig
+fi
+
+olddir=`pwd`
+
+echo "${BLUE}${BOLD}Processing modules...${RESET}"
+
+for i in ${DOTFILES_CONFIG_MODULES[@]}; do
+	cd ~/.dotfiles/.modules
+	modname=`echo ${i}|awk -F: '{ print $NF}'|awk -F/ '{ print $NF}'|awk -F. '{ print $1}'`
+	if [ -d $modname ]; then
+		echo "${GREEN}Checking for updates to $modname...${RESET}"
+		cd $modname && git pull
+		cd ..
+	else
+		echo "${GREEN}Downloading $modname...${RESET}"
+		git clone ${i}
+	fi
+
+	if [ ! -f ~/.dotfiles/.modulesconfig/$modname ] && [ -f ~/.dotfiles/.modules/$modname/.dfconfig ]; then
+		echo "${GREEN}Publishing $modname config...${RESET}"
+		cp ~/.dotfiles/.modules/$modname/.dfconfig ~/.dotfiles/.modulesconfig/$modname
+	fi
+
+	if [ -f $modname/.dfmodule ]; then
+		echo "${GREEN}Loading $modname...${RESET}"
+		cd $modname
+		if [ -f ~/.dotfiles/.modulesconfig/$modname ]; then
+			source ~/.dotfiles/.modulesconfig/$modname
+		fi
+		source .dfmodule
+	fi
+done
+
+for i in ${DOTFILES_CONFIG_DEV_MODULES[@]}; do
+	cd $olddir
+	if [ -d ${i} ]; then
+		cd ${i}
+		echo "${GREEN}DEV MODULE:Attempting to load ${i}...${RESET}"
+		if [ -f ".dfconfig" ];then
+			source ".dfconfig"
+			if [ -f ".dfmodule" ]; then
+				source ".dfmodule"
+			else
+				echo "${RED}Failed to load dev module: ${i}/.dfmodule not found${RESET}"
+			fi
+		fi
+	else
+		echo "${RED}Failed to load dev module: invalid directory ${i}."
+	fi
+done
+
+cd $olddir
+
+# Initalizes an empty module at the specified path
+# Parameters: path,
+dfmakemodule() {
+	if [ -z $1 ]; then
+		return
+	fi
+	mkdir -p $1
+	cd $1
+	git init
+	touch .dfmodule
+	touch .dfconfig
+	touch README.md
+	git add .
+	git commit -m "Inital commit from dfmakemodule."
+}

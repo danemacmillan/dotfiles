@@ -6,3 +6,18 @@
 # If empty, timestamp will not be displayed.
 # Example: "\\[${YELLOW}\][\D{%H:%M}]\\[${RESET}\] "
 export DOTFILES_CONFIG_TIMESTAMP=""
+
+# DOTFILES_CONFIG_MODULES
+# array
+# Contains the listing of dotfile modules to install
+# A dotfile module listing is a url to a git repository containing a .dfmodule.
+export DOTFILES_CONFIG_MODULES=(
+	#"git@github.com:dersam/dotart.git"
+)
+
+# DOTFILES_CONFIG_DEV_MODULES
+# array
+# Contains a listing of modules to load from an absolute path. This allows
+# you to develop modules locally without having to push to a remote to see your
+# changes in action.
+export DOTFILES_CONFIG_DEV_MODULES=()
