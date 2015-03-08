@@ -123,7 +123,7 @@ dotfiles_packages_install_brew()
 						# installed as an executable CLI tool. This is why check is against
 						# list of packages.
 						if ! $package_manager_command_list | grep -q "^${line}\$"; then
-							echo -e "${GREEN}$line${RESET}"
+							echo -e "${GREEN}${line}${RESET}"
 							$package_manager_command $line
 						fi
 					done < $packages_dir/$subpackage
@@ -147,7 +147,7 @@ dotfiles_packages_install_yum()
 		local packages_md5_new=$(calculate_md5_hash "$packages_file")
 		local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_yum_$directory_index)
 		local package_manager_command="yum -y install"
-		local package_manager_command_list="yum list installed"
+		local package_manager_command_list="rpm -q"
 		local package_name="$package"
 
 		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
@@ -156,7 +156,8 @@ dotfiles_packages_install_yum()
 				# A hash check is insufficient, as not all packages are
 				# installed as an executable CLI tool. This is why check is against
 				# list of packages.
-				if ! $package_manager_command_list | grep -q "${line}"; then
+				if ! $package_manager_command_list "${line}" &> /dev/null ; then
+					echo -e "${GREEN}${line}${RESET}"
 					$package_manager_command $line
 				fi
 			done < $packages_dir/$package
