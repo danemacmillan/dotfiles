@@ -19,16 +19,16 @@ fi
 echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
 (cd ~/.dotfiles/ && git pull)
 
-##
-# Install them
-#
-# TODO abstract into function.
-
 # Check if local .dfconfig exists. If not, copy the master .dfconfig.
 if [ ! -f ~/.dfconfig ]; then
 	cp ~/.dotfiles/.dfconfig ~/
 fi
 source ~/.dfconfig
+
+##
+# Install them
+#
+# TODO abstract into function.
 
 # Install
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
@@ -51,15 +51,20 @@ ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
 ln -vsfn ~/.dotfiles/packages.sh ~/
 ln -vsfn ~/.dotfiles/.sshmotd ~/
-rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
-ln -vsfn ~/.dotfiles/dotfiles.sh ~/
+rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
 # Create user bin if it doesn't exist.
 if [ ! -d "$HOME/bin" ]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating user bin directory for extra PATH.${RESET}"
 	mkdir $HOME/bin
+fi
+
+# Make dotfiles script available in user's path.
+if [ -f "$HOME/bin/dotfiles" ]; then
+	ln -vsfn ~/.dotfiles/dotfiles ~/bin
+	chmod u+x ~/bin/dotfiles
 fi
 
 # Create optional .extra file to be sourced along repo content.
