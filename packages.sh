@@ -147,7 +147,7 @@ dotfiles_packages_install_yum()
 		local packages_md5_new=$(calculate_md5_hash "$packages_file")
 		local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_yum_$directory_index)
 		local package_manager_command="yum -y install"
-		local package_manager_command_list="rpm -q"
+		local package_manager_command_list="rpm -q --nodigest --nosignature"
 		local package_name="$package"
 
 		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
