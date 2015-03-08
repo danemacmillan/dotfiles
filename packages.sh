@@ -175,12 +175,19 @@ dotfiles_packages_install_yum()
 # TODO: Add md5 checks to prevent unnecessary downloads.
 dotfiles_packages_install_extras()
 {
-	# Homebrew
 	echo -e "${BLUE}${BOLD}Downloading external dependencies, if any.${RESET}"
+
 	# Get homebrew and some niceties.
 	if ! hash brew 2>/dev/null && [[ $OS == 'osx' ]]; then
-		echo "${GREEN}Installing homebrew.${RESET}"
+		echo "${GREEN}homebrew${RESET}"
 		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
+
+	# Composer
+	if ! hash composer 2>/dev/null && [[ ! -f composer.phar ]]; then
+		echo -e "${GREEN}composer${RESET}"
+		curl -sS https://getcomposer.org/installer | php -- --filename=composer.phar
+		mv composer.phar /usr/local/bin/composer
 	fi
 
 	# Vundle
