@@ -6,7 +6,7 @@
 # This helper script manages these dotfiles.
 
 echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
-cd ~/.dotfiles/ && git pull && cd -
+(cd ~/.dotfiles/ && git pull)
 
 ##
 # Install them
