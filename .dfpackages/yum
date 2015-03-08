@@ -1,4 +1,3 @@
-vim
 vim-common
 vim-enhanced
 vim-minimal
@@ -18,7 +17,6 @@ bash-completion
 cmake
 expect
 lua
-gpg
 rpm-build
 rpm-devel
 autoconf
@@ -36,7 +34,6 @@ setroubleshoot
 atop
 autofs
 bind-utils
-svn
 cpp
 make
 libtool
