@@ -187,7 +187,9 @@ dotfiles_packages_install_extras()
 	if ! hash composer 2>/dev/null && [[ ! -f composer.phar ]]; then
 		echo -e "${GREEN}composer${RESET}"
 		curl -sS https://getcomposer.org/installer | php -- --filename=composer.phar
-		mv composer.phar /usr/local/bin/composer
+		if [ ! -f "$HOME/bin/composer" ]; then
+			mv composer.phar /usr/local/bin/composer
+		fi
 	fi
 
 	# Vundle
