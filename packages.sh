@@ -156,7 +156,7 @@ dotfiles_packages_install_yum()
 				# A hash check is insufficient, as not all packages are
 				# installed as an executable CLI tool. This is why check is against
 				# list of packages.
-				if ! $package_manager_command_list | grep -q "^${line}\$"; then
+				if ! $package_manager_command_list | grep -q "${line}"; then
 					$package_manager_command $line
 				fi
 			done < $packages_dir/$package
