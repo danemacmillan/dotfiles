@@ -1,6 +1,3 @@
-vim-common
-vim-enhanced
-vim-minimal
 htop
 mytop
 nmap
@@ -39,4 +36,7 @@ make
 libtool
 patch
 gcc-c++
+vim-common
+vim-enhanced
+vim-minimal
 wget
