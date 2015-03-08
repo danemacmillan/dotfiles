@@ -1,7 +1,7 @@
 # .aliases
 
 # Make sure no other dotfiles script exists.
-unalias dotfiles
+unalias dotfiles 2&>/dev/null
 
 # Navigational
 alias ll='ls --color -lah --group-directories-first'
