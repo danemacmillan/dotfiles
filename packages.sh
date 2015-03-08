@@ -21,14 +21,6 @@ dotfiles_managers_get()
 {
 	local package_managers=()
 
-	if hash git 2>/dev/null; then
-		package_managers+=("git")
-	fi
-
-	if hash wget 2>/dev/null; then
-		package_managers+=("wget")
-	fi
-
 	# Brew includes taps and casks
 	if hash brew 2>/dev/null; then
 		package_managers+=("brew")
@@ -44,6 +36,14 @@ dotfiles_managers_get()
 
 	if hash apt-get 2>/dev/null; then
 		package_managers+=("aptget")
+	fi
+
+	if hash wget 2>/dev/null; then
+		package_managers+=("wget")
+	fi
+
+	if hash git 2>/dev/null; then
+		package_managers+=("git")
 	fi
 
 	export DOTFILES_PACKAGE_MANAGERS=${package_managers[@]}
@@ -222,12 +222,6 @@ dotfiles_packages_install()
 				# TODO possibly use single installer, with modular checkers for each
 				# manager type, so case is no longer needed.
 				case "$package_manager" in
-					wget)
-						;;
-
-					git)
-						;;
-
 					brew)
 						dotfiles_packages_install_brew "$packages_dir" $directory_index
 						;;
@@ -240,6 +234,12 @@ dotfiles_packages_install()
 						;;
 
 					aptget)
+						;;
+
+					wget)
+						;;
+
+					git)
 						;;
 				esac
 			fi
