@@ -62,7 +62,7 @@ if [ ! -d "$HOME/bin" ]; then
 fi
 
 # Make dotfiles script available in user's path.
-if [ -f "$HOME/bin/dotfiles" ]; then
+if [ ! -f "$HOME/bin/dotfiles" ]; then
 	ln -vsfn ~/.dotfiles/dotfiles ~/bin
 	chmod u+x ~/bin/dotfiles
 fi
