@@ -1,5 +1,8 @@
 # .aliases
 
+# Make sure no other dotfiles script exists.
+unalias dotfiles
+
 # Navigational
 alias ll='ls --color -lah --group-directories-first'
 alias llt='ls --color -laht --group-directories-first' # Sort by newest first.
