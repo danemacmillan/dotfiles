@@ -122,7 +122,7 @@ dotfiles_packages_install_brew()
 						# A hash check is insufficient, as not all packages are
 						# installed as an executable CLI tool. This is why check is against
 						# list of packages.
-						if ! $package_manager_command_list | grep -q "^${line}\$"; then
+						if [ -n "$line" ] && ! $package_manager_command_list | grep -q "^${line}\$"; then
 							echo -e "${GREEN}${line}${RESET}"
 							$package_manager_command $line
 						fi
@@ -156,7 +156,7 @@ dotfiles_packages_install_yum()
 				# A hash check is insufficient, as not all packages are
 				# installed as an executable CLI tool. This is why check is against
 				# list of packages.
-				if ! $package_manager_command_list "${line}" &> /dev/null ; then
+				if [ -n "$line" ] && ! $package_manager_command_list "${line}" &> /dev/null ; then
 					echo -e "${GREEN}${line}${RESET}"
 					$package_manager_command $line
 				fi
