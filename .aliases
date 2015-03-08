@@ -1,7 +1,7 @@
 # .aliases
 
 # Update dotfiles
-alias dotfiles="cd ~ && . dotfiles.sh"
+#alias dotfiles="(cd ~ && . dotfiles.sh)"
 
 # Navigational
 alias ll='ls --color -lah --group-directories-first'

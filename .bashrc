@@ -23,7 +23,7 @@ fi
 # Add user bin if it exists.
 if [ -d "$HOME/bin" ]; then
 	export PATH="$HOME/bin:$PATH"
-	chmod -R +x $HOME/bin
+	#chmod -R +x $HOME/bin
 fi
 
 # Determine whether in an SSH session, even when su is used.

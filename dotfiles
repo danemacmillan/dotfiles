@@ -5,6 +5,17 @@
 #
 # This helper script manages these dotfiles.
 
+# Pull in base formatting templates.
+if [ -f ~/.dotfiles/.formatting ]; then
+	source ~/.dotfiles/.formatting
+fi
+
+# Pull in base functions.
+if [ -f ~/.dotfiles/.functions ]; then
+	source ~/.dotfiles/.functions
+fi
+
+# Update from upstream.
 echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
 (cd ~/.dotfiles/ && git pull)
 
@@ -18,11 +29,6 @@ if [ ! -f ~/.dfconfig ]; then
 	cp ~/.dotfiles/.dfconfig ~/
 fi
 source ~/.dfconfig
-
-# Pull in formatting templates
-if [ -f ~/.dotfiles/.formatting ]; then
-	source ~/.dotfiles/.formatting
-fi
 
 # Install
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
@@ -99,7 +105,6 @@ EOL
 fi
 
 # Install packages from given package management
-source ~/.functions
 source ~/packages.sh --install
 
 # Update terminal
