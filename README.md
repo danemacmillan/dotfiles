@@ -8,11 +8,11 @@ See the `.packages` directory to view what packages are installed.
 
 If you have an SSH key installed on the destination:
 
-`git clone git@github.com:danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source bootstrap.sh`
+`git clone git@github.com:danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source dotfiles.sh`
 
 If you do not have an SSH key installed on the destination:
 
-`git clone https://github.com/danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source bootstrap.sh`
+`git clone https://github.com/danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source dotfiles.sh`
 
 ### Notes
 
