@@ -83,7 +83,7 @@ if [[ "${HAS_SSH}" ]]; then
 	HOST_STYLE="\\[${BLUE}${BOLD}\]://";
 fi
 
-export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@\\[${HOST_STYLE}\]\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
+export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@\\[${RESET}${HOST_STYLE}\]\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
 
 # Export PS1
 if [[ -n $DOTFILES_CONFIG_TIMESTAMP ]]; then
