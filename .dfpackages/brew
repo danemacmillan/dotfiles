@@ -33,6 +33,7 @@ htop-osx
 httperf
 iftop
 ios-webkit-debug-proxy
+jmeter
 jpegoptim
 lua
 lynx
@@ -56,10 +57,11 @@ siege
 the_silver_searcher
 tmux
 tree
+tsung
 unrar
 vagrant-completion
 vim
 weechat
-wget
 weighttp
+wget
 
