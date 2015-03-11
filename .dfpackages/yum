@@ -24,9 +24,9 @@ npm
 pv
 parted
 ca-certificates
-weechat
-bitlbee
-bitlbee-otr
+#weechat
+#bitlbee
+#bitlbee-otr
 setroubleshoot
 atop
 autofs

@@ -125,7 +125,7 @@ dotfiles_packages_install_brew()
 						# A hash check is insufficient, as not all packages are
 						# installed as an executable CLI tool. This is why check is against
 						# list of packages.
-						if [ -n "$line" ] && ! $package_manager_command_list | grep -q "^${line}\$"; then
+						if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list | grep -q "^${line}\$"; then
 							echo -e "${GREEN}${line}${RESET}"
 							$package_manager_command $line
 						fi
@@ -156,7 +156,7 @@ dotfiles_packages_install_yum()
 		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
 			echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 			while read line; do
-				if [ -n "$line" ] && ! $package_manager_command_list "${line}" &> /dev/null ; then
+				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list "${line}" &> /dev/null ; then
 					echo -e "${GREEN}${line}${RESET}"
 					$package_manager_command $line
 				fi
