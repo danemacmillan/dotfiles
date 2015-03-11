@@ -33,6 +33,7 @@ htop-osx
 httperf
 iftop
 ios-webkit-debug-proxy
+iperf3
 jmeter
 jpegoptim
 lua
@@ -43,6 +44,7 @@ media-info
 mhash
 moreutils
 mytop
+netperf
 nmap
 node
 openssl
