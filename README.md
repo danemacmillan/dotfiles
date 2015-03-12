@@ -22,6 +22,12 @@ The installation will unforgivingly replace all the files in your home directory
 
 Just run `dotfiles` from anywhere.
 
+## Packages
+
+These dotfiles include a package management-like script for handling
+dependencies from a wide array of package manager types. This is what enables
+these dotfiles to create environments across a variety of Unix/Linux platforms.
+
 ## Nods
 
 - https://github.com/mathiasbynens/dotfiles
