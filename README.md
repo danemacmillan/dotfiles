@@ -28,6 +28,8 @@ These dotfiles include a package management-like script for handling
 dependencies from a wide array of package manager types. This is what enables
 these dotfiles to create environments across a variety of Unix/Linux platforms.
 
+TODO: explain how these work.
+
 ## Nods
 
 - https://github.com/mathiasbynens/dotfiles
