@@ -30,6 +30,8 @@ source ~/.dfconfig
 #
 # TODO abstract into function.
 
+# TODO do symlinking with cp command so no need to manually track files.
+
 # Install
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 ln -vsfn ~/.dotfiles/.aliases ~/
