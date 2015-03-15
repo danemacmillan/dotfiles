@@ -5,6 +5,8 @@
 #
 # This helper script manages these dotfiles.
 
+# TODO pass flags to distinguish pure dev builds from full setups.
+
 # Pull in base formatting templates.
 if [ -f ~/.dotfiles/.formatting ]; then
 	source ~/.dotfiles/.formatting
