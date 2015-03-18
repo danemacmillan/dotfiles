@@ -1,0 +1,11 @@
+user=root
+pass=
+host=localhost
+db=develop
+delay=1
+port=3306
+socket=
+batchmode=0
+header=1
+color=1
+idle=1
