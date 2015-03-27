@@ -43,7 +43,9 @@ case $OS in
 esac
 
 # Source formatting / color variables
-source ~/.formatting
+if tty -s ; then
+	source ~/.formatting
+fi
 
 # Source dotfiles config file.
 source ~/.dfconfig
