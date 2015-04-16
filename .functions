@@ -66,7 +66,16 @@ tun()
 {
 	local username="$1"
 	local remote_server="$2"
-	ssh -f -T -N -L127:0.0.1:4444:127.0.0.1:3306 $username@$remote_server
+	ssh -f -T -N -L127:0.0.1:4444:127.0.0.1:3306 -pPORT $username@$remote_server
+}
+
+##
+# Remotely execute SQL and save output locally.
+# This is just a stub to remember the command.
+rrmy()
+{
+	ssh -T -pPORT USERNAME@SERVER "mysql -u USERNAME -pPASSWORD -Bs" < "cool.sql" > output.txt
+	# Or if no script to execute, use -Bse.
 }
 
 ##
