@@ -60,6 +60,16 @@ loop()
 }
 
 ##
+# Create a local SSH tunnel to a remote service.
+# This is just a stub to remember the command.
+tun()
+{
+	local username="$1"
+	local remote_server="$2"
+	ssh -f -T -N -L127:0.0.1:4444:127.0.0.1:3306 $username@$remote_server
+}
+
+##
 # Merge all canonical branches from current directory.
 choochoo()
 {
