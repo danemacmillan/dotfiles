@@ -257,12 +257,17 @@ newsshkey()
 # Find all Magento events in current path or path provided.
 magevents()
 {
-	local magento_path="."
-	if [[ -n "$1" ]]; then
-		magento_path="$1"
+	if hash ag 2>/dev/null ; then
+		local magento_path=""
+		if [[ -n "$1" ]]; then
+			magento_path="$1"
+			ag --php -A 3 -C 0 --depth 50 -f -i "Mage::dispatchEvent" "$magento_path"
+		else
+			echo "Provide path to search for Magento events."
+		fi
+	else
+		echo "ag / silver_searcher is required."
 	fi
-
-	ag --php -A 3 -C 0 --depth 50 -f -i "Mage::dispatchEvent" "$magento_path"
 }
 
 # From https://twitter.com/climagic/status/370595711483514880
