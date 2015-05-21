@@ -65,8 +65,9 @@ loop()
 tun()
 {
 	local username="$1"
-	local remote_server="$2"
-	ssh -f -T -N -L127:0.0.1:4444:127.0.0.1:3306 -pPORT $username@$remote_server
+	local service_local="$2"
+	local service_remote="$3"
+	ssh -f -T -N -L $service_local:$service_remote -pPORT $username@$remote_server
 }
 
 ##
@@ -250,6 +251,18 @@ newsshkey()
 	if [[ -n "$1" ]]; then
 		history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))
 	fi
+}
+
+##
+# Find all Magento events in current path or path provided.
+magevents()
+{
+	local magento_path="."
+	if [[ -n "$1" ]]; then
+		magento_path="$1"
+	fi
+
+	ag --php -A 3 -C 0 --depth 50 -f -i "Mage::dispatchEvent" "$magento_path"
 }
 
 # From https://twitter.com/climagic/status/370595711483514880
