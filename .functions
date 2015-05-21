@@ -261,7 +261,7 @@ magevents()
 		local magento_path=""
 		if [[ -n "$1" ]]; then
 			magento_path="$1"
-			ag --php -A 3 -C 0 --depth 50 -f -i "Mage::dispatchEvent" "$magento_path"
+			ag --php -A 5 -C 0 --depth 50 -f -i "Mage::dispatchEvent" "$magento_path"
 		else
 			echo "Provide path to search for Magento events."
 		fi
