@@ -6,7 +6,7 @@
 # Based on https://github.com/mathiasbynens/dotfiles/blob/master/.gitconfig
 
 [alias]
-	
+
 	# Custom log formats
 	ll = log --graph --all --decorate --pretty=format:'%C(auto)%h%d  %ad %C(red bold)(%ar%C(red bold))%Creset  %Creset%C(magenta)%an %Creset<%ae>  %C(white bold)%<(80,trunc)%s' --date=iso
 	l = log -n 40 --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(blue bold)<%an>%Creset'
@@ -91,6 +91,8 @@
 
 	# In reference to https://github.com/gmarik/Vundle.vim/issues/167
 	editor = /usr/local/bin/vim
+
+	ignorecase = false
 
 	# Use custom `.gitignore` and `.gitattributes`
 	#excludesfile = ~/.gitignore
