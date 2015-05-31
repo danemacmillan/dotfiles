@@ -1,3 +1,20 @@
+[defaults]
+qnew = -Ue
+
 [extensions]
 progress =
 share =
+mq =
+hgext.extdiff =
+
+[extdiff]
+cmd.diffw = diff
+opts.diffw = -w -r -N -p -U 8
+
+[diff]
+git = 1
+showfunc = 1
+unified = 8
+
+# Pull in local configs, such as username and email.
+%include ~/.hgrc.local

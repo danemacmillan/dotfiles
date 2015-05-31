@@ -82,11 +82,19 @@ fi
 # Create .gitconfig.local file to hold user credentials for Git.
 if [ ! -f ~/.gitconfig.local ]; then
 	echo -e "${BLUE}${BOLD}Generating .gitconfig.local file for custom changes. Add your Git credentials here.${RESET}"
-	#touch ~/.gitconfig.local
 	cat >>~/.gitconfig.local <<EOL
 [user]
 	name =
 	email =
+EOL
+fi
+
+# Create .hgrc.local file to hold user credentials for Mercurial.
+if [ ! -f ~/.hgrc.local ]; then
+	echo -e "${BLUE}${BOLD}Generating .hgrc.local file for custom changes. Add your Mercurial credentials here.${RESET}"
+	cat >>~/.hgrc.local <<EOL
+[ui]
+username = First Last <you@domain.tld>
 EOL
 fi
 
