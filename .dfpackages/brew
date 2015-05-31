@@ -56,6 +56,7 @@ readline
 rlwrap
 rsync
 siege
+terminal-notifier
 the_silver_searcher
 tmux
 tree
