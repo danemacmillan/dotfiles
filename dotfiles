@@ -67,6 +67,9 @@ if [ ! -d "$HOME/bin" ]; then
 	mkdir $HOME/bin
 fi
 
+# Symlink local bin files.
+ln -vsfn ~/.dotfiles/bin/* ~/bin/
+
 # Make dotfiles script available in user's path.
 if [ ! -f "$HOME/bin/dotfiles" ]; then
 	ln -vsfn ~/.dotfiles/dotfiles ~/bin
