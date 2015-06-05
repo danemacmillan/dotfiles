@@ -44,8 +44,13 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 #alias fpmstat='ps aux | grep php-fpm | wc -l ; ps --no-headers -o "rss,cmd" -C php-fpm | awk '{ sum+=$1 } END { printf ("%d%s\n", sum/NR/1024,"M") }'
 alias fpmstat="ps aux | grep php-fpm | wc -l ; ps --no-headers -o \"rss,cmd\" -C php-fpm | awk '{ sum+=\$1 } END { printf (\"%d%s\n\", sum/NR/1024,\"M\") }'"
 
-# Git--just for reference. Do not rewrite history.
+# Git
+# just for reference. Do not rewrite history.
 #alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
+alias gco="git checkout"
+alias gp="git pull"
+alias gpp="git push"
+alias gc="git commit"
 
 # Mitigate fat-fingering and other retardations.
 alias gut="git"
