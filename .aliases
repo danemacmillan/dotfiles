@@ -21,6 +21,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 #alias ag='ag -lfi --hidden --numbers --column --stats'
+alias belinux="find . -type f -exec dos2unix {} \;"
 
 #Network
 #alias listen='lsof -i -P | grep LISTEN'
