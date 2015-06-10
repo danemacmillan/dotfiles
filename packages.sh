@@ -137,6 +137,32 @@ dotfiles_packages_install_brew()
 	fi
 }
 
+dotfiles_packages_install_aptget()
+{
+	local package="aptget"
+	local packages_dir="$1"
+	local directory_index="$2"
+
+	if [ -f $packages_dir/$package ]; then
+		local packages_file="$packages_dir/$package"
+		local packages_md5_new=$(calculate_md5_hash "$packages_file")
+		local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_aptget_$directory_index)
+		local package_manager_command="sudo apt-get install"
+		local package_manager_command_list="dpkg --get-selections | grep "
+		local package_name="$package"
+
+		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
+			echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+			while read line; do
+				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list '^${line}\W' &> /dev/null ; then
+					echo -e "${GREEN}${line}${RESET}"
+					$package_manager_command $line
+				fi
+			done < $packages_dir/$package
+		fi
+	fi
+}
+
 ##
 # Pluggable package installer for yum executed by dotfiles_packages_installer.
 dotfiles_packages_install_yum()
@@ -242,6 +268,7 @@ dotfiles_packages_install()
 						;;
 
 					aptget)
+						dotfiles_packages_install_aptget "$packages_dir" $directory_index
 						;;
 
 					wget)
