@@ -270,6 +270,10 @@ magevents()
 	fi
 }
 
+## TODO function for finding files then passing command
+##find ./ -type f -size 0 -exec cp {} ~/linusmedia0 \; -exec echo {} >> ~/linusmedia0/0size.txt \;
+
+
 # From https://twitter.com/climagic/status/370595711483514880
 # Example: git push origin master -f || fliptable
 fliptable()
