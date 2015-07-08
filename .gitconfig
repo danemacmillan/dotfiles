@@ -14,6 +14,9 @@
 	# View the current working tree status using the short format
 	s = status -s
 
+	# View status of working tree but suppress listing untracked files
+	ss = status -uno
+
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
