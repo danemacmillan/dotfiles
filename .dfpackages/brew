@@ -44,6 +44,7 @@ media-info
 mhash
 moreutils
 mytop
+ncdu
 netperf
 nmap
 node
