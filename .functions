@@ -272,18 +272,18 @@ magevents()
 
 ## TODO function for finding files then passing command
 ##find ./ -type f -size 0 -exec cp {} ~/linusmedia0 \; -exec echo {} >> ~/linusmedia0/0size.txt \;
-fff()
-{
-	local file_path="$1"
-	local exec_argument="$2"
-
-
-	if [[ -n "$file_path" && -n "$exec_argument" && -f "$file_path"]]; then
-		find . -name $1 -exec $exec_argument
-	fi
-
-
-}
+#fff()
+#{
+#	local file_path="$1"
+#	local exec_argument="$2"
+#
+#
+#	if [[ -n "$file_path" && -n "$exec_argument" && -f "$file_path"]]; then
+#		find . -name $1 -exec $exec_argument
+#	fi
+#
+#
+#}
 
 # From https://twitter.com/climagic/status/370595711483514880
 # Example: git push origin master -f || fliptable
