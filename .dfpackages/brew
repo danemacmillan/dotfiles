@@ -21,6 +21,7 @@ fontconfig
 freetype
 gawk
 git
+git-extras
 glib
 gnu-getopt
 gnu-indent

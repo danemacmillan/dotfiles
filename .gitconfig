@@ -184,3 +184,7 @@
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
 	#default = matching
 	default = current
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
