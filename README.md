@@ -32,7 +32,7 @@ TODO: explain how these work.
 
 ## Nods
 
-- https://github.com/mathiasbynens/dotfiles
+- https://github.com/mathiasbynens/dotfiles (for many of his excellent OSX configs)
 - https://github.com/kenorb/dotfiles
 
 ## Author
