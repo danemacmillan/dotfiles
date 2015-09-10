@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
 ##
-# Packages
+# Packages - packages.sh
+#
+# The purpose of this script is to scan the flat text files located in the
+# .dfpackages directory and auto-install the utilities listed.
 #
 # dotfiles_package_install is the main function that executes all the
 # individual pluggable package installers.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
 #
 
 # Determine paths for installing packages.

@@ -4,6 +4,11 @@
 
 ##
 # Calculate MD5 hashes regardless of tool, and ensure identical output.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 calculate_md5_hash()
 {
 	local md5tool=md5sum
@@ -24,6 +29,11 @@ calculate_md5_hash()
 ##
 # Remotely run commands with color TTY. If passing chained commands (&&),
 # remember to put them within quotation marks.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 rr()
 {
 	if (( $# > 1 )); then
@@ -36,6 +46,11 @@ rr()
 
 ##
 # Loop through all subdirectories and run the given command."
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 loop()
 {
 	if [[ -z $1 ]]; then
@@ -62,6 +77,11 @@ loop()
 ##
 # Create a local SSH tunnel to a remote service.
 # This is just a stub to remember the command.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 tun()
 {
 	local username="$1"
@@ -73,6 +93,11 @@ tun()
 ##
 # Remotely execute SQL and save output locally.
 # This is just a stub to remember the command.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 rrmy()
 {
 	ssh -T -pPORT USERNAME@SERVER "mysql -u USERNAME -pPASSWORD -Bs" < "cool.sql" > output.txt
@@ -81,6 +106,11 @@ rrmy()
 
 ##
 # Merge all canonical branches from current directory.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 choochoo()
 {
 	echo -e "${BLUE}${BOLD}Running a train on this repo. Hiyoooo!${RESET}"
@@ -89,6 +119,11 @@ choochoo()
 
 ##
 # Get current OS version and other information.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 v()
 {
 	case $OS in
@@ -106,6 +141,116 @@ v()
 	echo -e "Kernel & Architecture:\n"
 	echo -e "    `uname -r -v -p`\n"
 }
+
+##
+# Get total directory and file count.
+# TODO: integrate filesizes
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+tt()
+{
+	CHECKDIR=.
+	if [[ -n "$1" ]]; then
+		CHECKDIR="$1"
+	fi
+
+	# Directory listings include "." and ".."
+	DIRECTORY_PADDING=1
+
+	DIRECTORIES="`find $CHECKDIR -maxdepth 1 -type d | wc -l`"
+	DIRECTORIES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type d | wc -l`"
+	DIRECTORIES_LINKS="`expr $DIRECTORIES_WITH_LINKS - $DIRECTORIES`"
+	FILES="`find $CHECKDIR -maxdepth 1 -type f | wc -l`"
+	FILES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type f | wc -l`"
+	FILES_LINKS="`expr $FILES_WITH_LINKS - $FILES`"
+
+	echo "Directories: `expr $DIRECTORIES_WITH_LINKS - $DIRECTORY_PADDING` (`expr $DIRECTORIES_LINKS`)"
+	echo "Files: $FILES_WITH_LINKS ($FILES_LINKS)"
+}
+
+##
+# Auto-generate new SSH keys with option to provide passphrase
+# Note: if you want characters like "!" in your passphrase, run like this:
+# newsshkey 'Long passphrase!!!! with spaces and niceties!'
+# If you just have regular characters, quoting is unnecessary.
+#
+# Notes
+# SSH keys, a la http://blog.patshead.com/2013/09/generating-new-more-secure-ssh-keys.html
+# ssh-keygen -b 4096 -f ~/.ssh/id_rsa_danemacmillan_4096_2014_08 -C danemacmillan@id_rsa_4096_2014_08
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+newsshkey()
+{
+	KEY_STRENGTH="4096"
+	KEY_NAME=~/.ssh/id_rsa_${KEY_STRENGTH}_`date +%Y-%m-%d-%H%M%S`
+
+	KEY_PASSPHRASE=""
+	if [[ -n "$1" ]]; then
+		KEY_PASSPHRASE="$1"
+	fi
+
+	ssh-keygen -b $KEY_STRENGTH -f $KEY_NAME -C $KEY_NAME -N "$KEY_PASSPHRASE"
+
+	echo -e "\nPassphrase:" \"$KEY_PASSPHRASE\"
+	echo -e "\nProvide this public key to your devop if required:\n"
+	cat $KEY_NAME.pub
+
+	# Remove passphrase from appearing in bash history, if provided.
+	# Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
+	if [[ -n "$1" ]]; then
+		history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))
+	fi
+}
+
+##
+# Find all Magento events in current path or path provided.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+magevents()
+{
+	if hash ag 2>/dev/null ; then
+		local magento_path=""
+		if [[ -n "$1" ]]; then
+			magento_path="$1"
+			ag --php -A 5 -C 0 --depth 50 -f -i "Mage::dispatchEvent" "$magento_path"
+		else
+			echo "Provide path to search for Magento events."
+		fi
+	else
+		echo "ag / silver_searcher is required."
+	fi
+}
+
+##
+# TODO function for finding files then passing command
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+##find ./ -type f -size 0 -exec cp {} ~/linusmedia0 \; -exec echo {} >> ~/linusmedia0/0size.txt \;
+#fff()
+#{
+#	local file_path="$1"
+#	local exec_argument="$2"
+#
+#
+#	if [[ -n "$file_path" && -n "$exec_argument" && -f "$file_path"]]; then
+#		find . -name $1 -exec $exec_argument
+#	fi
+#
+#
+#}
+
 
 # TODO:
 # Create a function to generate archives based on desired output filename.
@@ -128,6 +273,10 @@ v()
 # because it cannot be output into a single file, but each file will be
 # individually archived with bzip2 compression.
 #
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 archive()
 {
 	case $1 in
@@ -148,6 +297,18 @@ archive()
 		*)          echo "'${@:2}' cannot be archived via archive()" ;;
 	esac
 }
+
+
+
+
+
+###############################################################################
+# From other authors
+###############################################################################
+
+
+
+
 
 ##
 # Usage: extract <file>
@@ -196,94 +357,6 @@ fs()
 		du $arg .[^.]* *;
 	fi
 }
-
-##
-# Get total directory and file count.
-# TODO: integrate filesizes
-tt()
-{
-	CHECKDIR=.
-	if [[ -n "$1" ]]; then
-		CHECKDIR="$1"
-	fi
-
-	# Directory listings include "." and ".."
-	DIRECTORY_PADDING=1
-
-	DIRECTORIES="`find $CHECKDIR -maxdepth 1 -type d | wc -l`"
-	DIRECTORIES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type d | wc -l`"
-	DIRECTORIES_LINKS="`expr $DIRECTORIES_WITH_LINKS - $DIRECTORIES`"
-	FILES="`find $CHECKDIR -maxdepth 1 -type f | wc -l`"
-	FILES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type f | wc -l`"
-	FILES_LINKS="`expr $FILES_WITH_LINKS - $FILES`"
-
-	echo "Directories: `expr $DIRECTORIES_WITH_LINKS - $DIRECTORY_PADDING` (`expr $DIRECTORIES_LINKS`)"
-	echo "Files: $FILES_WITH_LINKS ($FILES_LINKS)"
-}
-
-##
-# Auto-generate new SSH keys with option to provide passphrase
-# Note: if you want characters like "!" in your passphrase, run like this:
-# newsshkey 'Long passphrase!!!! with spaces and niceties!'
-# If you just have regular characters, quoting is unnecessary.
-#
-# Notes
-# SSH keys, a la http://blog.patshead.com/2013/09/generating-new-more-secure-ssh-keys.html
-# ssh-keygen -b 4096 -f ~/.ssh/id_rsa_danemacmillan_4096_2014_08 -C danemacmillan@id_rsa_4096_2014_08
-newsshkey()
-{
-	KEY_STRENGTH="4096"
-	KEY_NAME=~/.ssh/id_rsa_${KEY_STRENGTH}_`date +%Y-%m-%d-%H%M%S`
-
-	KEY_PASSPHRASE=""
-	if [[ -n "$1" ]]; then
-		KEY_PASSPHRASE="$1"
-	fi
-
-	ssh-keygen -b $KEY_STRENGTH -f $KEY_NAME -C $KEY_NAME -N "$KEY_PASSPHRASE"
-
-	echo -e "\nPassphrase:" \"$KEY_PASSPHRASE\"
-	echo -e "\nProvide this public key to your devop if required:\n"
-	cat $KEY_NAME.pub
-
-	# Remove passphrase from appearing in bash history, if provided.
-	# Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
-	if [[ -n "$1" ]]; then
-		history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))
-	fi
-}
-
-##
-# Find all Magento events in current path or path provided.
-magevents()
-{
-	if hash ag 2>/dev/null ; then
-		local magento_path=""
-		if [[ -n "$1" ]]; then
-			magento_path="$1"
-			ag --php -A 5 -C 0 --depth 50 -f -i "Mage::dispatchEvent" "$magento_path"
-		else
-			echo "Provide path to search for Magento events."
-		fi
-	else
-		echo "ag / silver_searcher is required."
-	fi
-}
-
-## TODO function for finding files then passing command
-##find ./ -type f -size 0 -exec cp {} ~/linusmedia0 \; -exec echo {} >> ~/linusmedia0/0size.txt \;
-#fff()
-#{
-#	local file_path="$1"
-#	local exec_argument="$2"
-#
-#
-#	if [[ -n "$file_path" && -n "$exec_argument" && -f "$file_path"]]; then
-#		find . -name $1 -exec $exec_argument
-#	fi
-#
-#
-#}
 
 # From https://twitter.com/climagic/status/370595711483514880
 # Example: git push origin master -f || fliptable

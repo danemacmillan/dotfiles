@@ -1,4 +1,10 @@
-## .bashrc
+##
+# .bashrc
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 
 # Make sure aliases expand in non-interactive mode. For example, when running
 # ssh remote-address "ll"
