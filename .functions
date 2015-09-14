@@ -298,8 +298,39 @@ archive()
 	esac
 }
 
+##
+# Get IP count of standard Web server logs (Nginx/Apache)
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+function log_ips()
+{
+	if [[ -n $1 ]]; then
+		cat $1 | awk '{print $1}' | sort -n | uniq -c | sort -nr | head -30
+	fi
+}
+
+##
+# Get user agent count of standard Web server logs (Nginx/Apache)
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+#function log_uas()
+#{
+#
+#}
 
 
+
+#curl -I -H 'User-agent: Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0' https://www.canadasmotorcycle.ca
+function hasaccess()
+{
+	curl -I -H 'User-agent: "$1"' "$2"
+}
 
 
 ###############################################################################
