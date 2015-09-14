@@ -39,6 +39,7 @@ alias vmt="/usr/bin/vmware-toolbox-cmd"
 alias c='clear'
 alias vi='vim'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+alias mysql='mycli'
 
 # Server
 # Get the number of php-fpm processes, and their average size in MB.
