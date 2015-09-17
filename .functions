@@ -332,6 +332,35 @@ function hasaccess()
 	curl -I -H 'User-agent: "$1"' "$2"
 }
 
+##
+# Find Firefox install on OSX, so commands can be passed to it.
+#
+# TODO: Perform search on different platforms. Check for existence before.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+firefox()
+{
+	# OSX only
+	$(mdfind -onlyin /Applications/ -name firefox)/Contents/MacOS/firefox "$@"
+}
+
+##
+# Load specified Firefox profile.
+#
+# Pass a specific profile name and it will load, whether an instance of Firefox
+# is already open or not.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+firefox_profile()
+{
+	firefox --no-remote -P "$@"
+}
 
 ###############################################################################
 # From other authors
