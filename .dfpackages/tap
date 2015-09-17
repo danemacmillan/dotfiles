@@ -5,3 +5,5 @@ homebrew/completions
 homebrew/dupes
 homebrew/php
 homebrew/versions
+hhvm/hhvm
+
