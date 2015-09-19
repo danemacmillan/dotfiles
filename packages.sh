@@ -21,6 +21,11 @@ if [ -d "$HOME/.dfpackages" ]; then
 fi
 export DOTFILES_PACKAGES_DIR
 
+# Create .dotfiles-packages directory to store various downloaded packages.
+if [[ ! -d "$HOME/.dotfiles-packages" ]]; then
+	mkdir "$HOME/.dotfiles-packages"
+fi
+
 ##
 # Get list of available package manager types, which the installer will
 # operate against.
@@ -206,6 +211,7 @@ dotfiles_packages_install_yum()
 # are no hard-coded dependencies--just abstraction to handle package
 # installment through the dotfiles framework.
 # TODO: Add md5 checks to prevent unnecessary downloads.
+# TODO: Move this into external process. Run Git updates also.
 dotfiles_packages_install_extras()
 {
 	echo -e "${BLUE}${BOLD}Downloading external dependencies, if any.${RESET}"
@@ -231,6 +237,19 @@ dotfiles_packages_install_extras()
 	# Depending on the location that Vundler installs a plugin, there
 	# may be an authentication prompt for username and password.
 	vim +PluginInstall +qall 2&> /dev/null
+
+	# Vimperator color scheme on Git: fxdevtools-dark
+	# TODO turn path into variable.
+	echo -e "${GREEN}Updating Vimperator theme: fxdevtools-dark.${RESET}"
+	if [[ ! -d "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark" ]]; then
+		git clone https://github.com/danemacmillan/vimperator-theme-fxdevtools-dark.git "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark"
+	else
+		(cd "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark" && git pull)
+	fi
+
+	if [[ -d "$HOME/.vimperator/colors" ]]; then
+		ln -nsfv "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark/colors/fxdevtools-dark.vimp" "$HOME/.vimperator/colors/fxdevtools-dark.vimp"
+	fi
 }
 
 # dotfiles_packages_install can have its pluggable functions overwritten for
