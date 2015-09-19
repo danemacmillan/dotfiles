@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
 ##
-# dotfiles helper
+# Dotfiles - dotfiles
 #
-# This helper script manages these dotfiles.
+# The purpose of this script is to bootstrap the dotfiles dependencies and
+# provide a quick utility for updating them.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
 
 # TODO pass flags to distinguish pure dev builds from full setups.
 
