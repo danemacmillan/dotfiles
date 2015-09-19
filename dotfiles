@@ -40,6 +40,8 @@ source ~/.dfconfig
 
 # TODO do symlinking with cp command so no need to manually track files.
 
+# TODO verify vimperator config directory.
+
 # Install
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 ln -vsfn ~/.dotfiles/.aliases ~/
@@ -66,6 +68,7 @@ ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
 ln -vsfn ~/.dotfiles/packages.sh ~/
 ln -vsfn ~/.dotfiles/.sshmotd ~/
+ln -vsfn ~/.dotfiles/.vimperatorrc ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/

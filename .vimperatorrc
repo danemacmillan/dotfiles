@@ -1,0 +1,49 @@
+" =============================================================================
+" .vimperatorrc
+"
+" @author Dane MacMillan
+" @link https://danemacmillan.com
+" @license MIT
+" =============================================================================
+
+" Basic configuration
+set complete=stl
+set gui=none,tabs
+
+
+" iTerm-like mapping for moving tabs.
+nnoremap <S-M-Left> :tabm -1<CR>
+nnoremap <S-M-Right> :tabm +1<CR>
+
+" Map regular Firefox search to Vim search, so I stop using Firefox.
+nnoremap <M-f> /
+
+" In addition, this will automatically search for any selected text on page.
+" This has a shortcoming. Work on it later.
+" nnoremap <M-f> <M-c>/<M-v><CR>
+" nnoremap / <M-c>/<M-v><CR>
+
+" Map vimperator 'd' key for closing tabs to standard C+w to maintain tab
+" jumping memory. See: http://superuser.com/q/734074
+nnoremap d <M-w>
+
+
+" Load the fxdevtools-dark theme.
+" https://github.com/danemacmillan/vimperator-theme-fxdevtools-dark
+colorscheme! fxdevtools-dark
+
+
+" Insert CSS directly
+style! -name=tab chrome://* <<EOF
+.tabbrowser-strip {
+}
+EOF
+
+" Insert JS directly"
+javascript <<EOF
+EOF
+
+" Source local vimperatorrc file.
+source! ~/.vimperatorrc.local
+
+"vim: set ft=vimperator:
