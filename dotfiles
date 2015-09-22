@@ -66,6 +66,7 @@ ln -vsfn ~/.dotfiles/.myclirc ~/
 ln -vsfn ~/.dotfiles/.npmrc ~/
 ln -vsfn ~/.dotfiles/.nix ~/
 ln -vsfn ~/.dotfiles/.osx ~/
+ln -vsfn ~/.dotfiles/.paths ~/
 ln -vsfn ~/.dotfiles/packages.sh ~/
 ln -vsfn ~/.dotfiles/.sshmotd ~/
 ln -vsfn ~/.dotfiles/.vimperatorrc ~/
