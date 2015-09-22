@@ -14,23 +14,7 @@ shopt -s expand_aliases
 # http://tldp.org/LDP/abs/html/globbingref.html
 shopt -s nocaseglob;
 
-if [ -d "/usr/local/sbin" ]; then
-	export PATH="/usr/local/sbin:$PATH"
-fi
-
-if [ -d "/usr/local/bin" ]; then
-	export PATH="/usr/local/bin:$PATH"
-fi
-
-if [ -d "$HOME/.composer/vendor/bin" ]; then
-	export PATH="$HOME/.composer/vendor/bin:$PATH"
-fi
-
-# Add user bin if it exists.
-if [ -d "$HOME/bin" ]; then
-	export PATH="$HOME/bin:$PATH"
-	#chmod -R +x $HOME/bin
-fi
+source $HOME/.paths
 
 # Determine whether in an SSH session, even when su is used.
 if [[ "${SSH_TTY}" ]] || [[ $(who am i) =~ \([-a-zA-Z0-9\.]+\)$ ]]; then
