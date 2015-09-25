@@ -9,6 +9,7 @@
 " Basic configuration
 set complete=stl
 set gui=none,tabs
+set status=input,location,bookmark,history,tabcount,position,ssl
 
 
 " iTerm-like mapping for moving tabs.
