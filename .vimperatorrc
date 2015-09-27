@@ -10,7 +10,7 @@
 set complete=stl
 set gui=none,tabs
 set status=input,location,bookmark,history,tabcount,position,ssl
-set ssli=2
+set ssli=1
 
 " iTerm-like mapping for moving tabs.
 nnoremap <S-M-Left> :tabm -1<CR>
