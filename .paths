@@ -29,3 +29,8 @@ if [ -d "$HOME/.composer/vendor/bin" ]; then
 	export PATH="$HOME/.composer/vendor/bin:$PATH"
 fi
 
+# If vagrantshell is installed (https://github.com/danemacmillan/vagrantshell)
+if [[ -d "/vagrant/bin" ]]; then
+	export PATH="/vagrant/bin:$PATH"
+fi
+
