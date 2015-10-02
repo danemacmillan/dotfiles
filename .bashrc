@@ -60,6 +60,11 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=0
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM='verbose'
+# In a VM, these can really slow the prompt down:
+if [[ -d "/vagrant" ]]; then
+	export GIT_PS1_SHOWDIRTYSTATE=
+	export GIT_PS1_SHOWUNTRACKEDFILES=
+fi
 
 # Highlight the user name when logged in as root.
 USER_STYLE='\[${GREEN}\]';
