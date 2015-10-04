@@ -8,9 +8,12 @@
 
 " Basic configuration
 set complete=stl
+" Use S in complete to use engines
+" set suggestengines=google
 set gui=none,tabs
 set status=input,location,bookmark,history,tabcount,position,ssl
 set ssli=1
+set smartcase=true
 
 " iTerm-like mapping for moving tabs.
 nnoremap <S-M-Left> :tabm -1<CR>
