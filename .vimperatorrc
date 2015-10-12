@@ -7,9 +7,9 @@
 " =============================================================================
 
 " Basic configuration
-set complete=stl
+set complete=stlS
 " Use S in complete to use engines
-" set suggestengines=google
+set suggestengines=ddg
 set gui=none,tabs
 set status=input,location,bookmark,history,tabcount,position,ssl
 set ssli=1
