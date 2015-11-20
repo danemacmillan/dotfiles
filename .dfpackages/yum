@@ -40,3 +40,4 @@ vim-common
 vim-enhanced
 vim-minimal
 wget
+ncdu
