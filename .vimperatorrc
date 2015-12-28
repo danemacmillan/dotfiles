@@ -7,7 +7,8 @@
 " =============================================================================
 
 " Basic configuration
-set complete=stlS
+" set complete=stlS
+set complete=slS
 " Use S in complete to use engines
 set suggestengines=ddg
 set gui=none,tabs
