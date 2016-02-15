@@ -34,6 +34,7 @@ alias vs="vagrant global-status --prune"
 # See http://ipinfo.io/developers for more info.
 alias ipgeo="curl ipinfo.io"
 alias vmt="/usr/bin/vmware-toolbox-cmd"
+alias flushdns='sudo killall -HUP mDNSResponder'
 
 # Misc
 alias c='clear'
