@@ -362,6 +362,22 @@ firefox_profile()
 	firefox --no-remote -P "$@"
 }
 
+##
+# Use imgcat script to retrieve images from the Web as well.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+imget()
+{
+	if [[ ! -d "$HOME/tmp" ]]; then
+		mkdir $HOME/tmp
+	fi
+
+	imgcat $(wget $1 -q -O $HOME/tmp/imgcat.tmp; echo $HOME/tmp/imgcat.tmp)
+}
+
+
 ###############################################################################
 # From other authors
 ###############################################################################
@@ -418,17 +434,6 @@ fs()
 	fi
 }
 
-##
-# Use imgcat script to retrieve images from the Web as well.
-imget()
-{
-	if [[ ! -d "$HOME/tmp" ]]; then
-		mkdir $HOME/tmp
-	fi
-
-	imgcat $(wget $1 -q -O $HOME/tmp/imgcat.tmp; echo $HOME/tmp/imgcat.tmp)
-}
-
 # From https://twitter.com/climagic/status/370595711483514880
 # Example: git push origin master -f || fliptable
 fliptable()
@@ -436,6 +441,7 @@ fliptable()
 	echo "（╯°□°）╯ ┻━┻";
 }
 
+# From @dersamne
 ultraflip()
 {
 	echo " ┻━┻ ︵╰(°□°)╯︵ ┻━┻";
