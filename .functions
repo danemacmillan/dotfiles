@@ -418,6 +418,14 @@ fs()
 	fi
 }
 
+##
+# Use imgcat script to retrieve images from the Web as well.
+# TODO: check for tmp directory.
+imget()
+{
+	imgcat $(wget $1 -q -O $HOME/tmp/imgcat; echo $HOME/tmp/imgcat)
+}
+
 # From https://twitter.com/climagic/status/370595711483514880
 # Example: git push origin master -f || fliptable
 fliptable()
