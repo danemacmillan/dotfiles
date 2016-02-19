@@ -420,10 +420,13 @@ fs()
 
 ##
 # Use imgcat script to retrieve images from the Web as well.
-# TODO: check for tmp directory.
 imget()
 {
-	imgcat $(wget $1 -q -O $HOME/tmp/imgcat; echo $HOME/tmp/imgcat)
+	if [[ ! -d "$HOME/tmp" ]]; then
+		mkdir $HOME/tmp
+	fi
+
+	imgcat $(wget $1 -q -O $HOME/tmp/imgcat.tmp; echo $HOME/tmp/imgcat.tmp)
 }
 
 # From https://twitter.com/climagic/status/370595711483514880
