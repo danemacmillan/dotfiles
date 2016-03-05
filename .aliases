@@ -23,6 +23,7 @@ alias fgrep='fgrep --color=auto'
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 #alias ag='ag -lfi --hidden --numbers --column --stats'
 alias belinux="find . -type f -exec dos2unix {} \;"
+alias elcapinstallercreate="sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/ElCapInstaller --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction"
 
 #Network
 #alias listen='lsof -i -P | grep LISTEN'
