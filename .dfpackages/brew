@@ -58,6 +58,7 @@ python
 readline
 rlwrap
 rsync
+rtorrent
 siege
 terminal-notifier
 the_silver_searcher
