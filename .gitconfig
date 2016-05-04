@@ -80,6 +80,9 @@
 		fi \
 	}; f"
 
+	# Prune deleted remote branches and delete local merged branches
+	purge = !"git fetch --all -p && git branch --merged | grep -v develop | grep -v stage | grep -v master | xargs -n 1 git branch -d"
+
 [apply]
 
 	# Detect whitespace errors when applying a patch
