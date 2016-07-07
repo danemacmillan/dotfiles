@@ -59,6 +59,7 @@ readline
 rlwrap
 rsync
 rtorrent
+ssh-copy-id
 siege
 terminal-notifier
 the_silver_searcher
