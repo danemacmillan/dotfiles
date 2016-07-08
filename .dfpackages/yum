@@ -1,8 +1,10 @@
+epel-release
 htop
 mytop
 nmap
 at
 yum-utils
+yum-plugin-replace
 openssl
 openssl-devel
 curl
@@ -36,6 +38,7 @@ make
 libtool
 patch
 gcc-c++
+vim
 vim-common
 vim-enhanced
 vim-minimal
