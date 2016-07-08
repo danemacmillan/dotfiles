@@ -1,4 +1,5 @@
 epel-release
+https://centos6.iuscommunity.org/ius-release.rpm
 htop
 mytop
 nmap
@@ -44,3 +45,5 @@ vim-enhanced
 vim-minimal
 wget
 ncdu
+symlinks
+
