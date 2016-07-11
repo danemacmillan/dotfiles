@@ -42,7 +42,7 @@ alias flushdns='sudo killall -HUP mDNSResponder'
 alias c='clear'
 alias vi='vim'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
-alias mysql='mycli'
+#alias mysql='mycli'
 
 # Complete nonsense
 alias fuuu='imgcat $HOME/.dotfiles/img/hacking.gif'

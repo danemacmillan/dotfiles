@@ -61,7 +61,7 @@ ln -vsfn ~/.dotfiles/.hgrc ~/
 ln -vsfn ~/.dotfiles/.siegerc ~/
 ln -vsfn ~/.dotfiles/.tmux.conf ~/
 ln -vsfn ~/.dotfiles/.mozconfig ~/
-ln -vsfn ~/.dotfiles/.my.cnf ~/
+ln -vsfn ~/.dotfiles/.my.cnf ~/.my.cnf.sample
 ln -vsfn ~/.dotfiles/.myclirc ~/
 ln -vsfn ~/.dotfiles/.npmrc ~/
 ln -vsfn ~/.dotfiles/.nix ~/
