@@ -49,4 +49,5 @@ vim-minimal
 wget
 ncdu
 symlinks
+strace
 
