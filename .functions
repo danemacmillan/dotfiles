@@ -187,19 +187,27 @@ tt()
 #
 newsshkey()
 {
-	KEY_STRENGTH="4096"
-	KEY_NAME=~/.ssh/id_rsa_${KEY_STRENGTH}_`date +%Y-%m-%d-%H%M%S`
-
-	KEY_PASSPHRASE=""
-	if [[ -n "$1" ]]; then
-		KEY_PASSPHRASE="$1"
+	KEY_USER=${USER}
+	if [[ -n $1 ]]; then
+		KEY_USER="$1"
 	fi
 
-	ssh-keygen -b $KEY_STRENGTH -f $KEY_NAME -C $KEY_NAME -N "$KEY_PASSPHRASE"
+	KEY_STRENGTH="4096"
+	KEY_NAME_BASE=${KEY_STRENGTH}_$(date +%Y_%m_%d_%H%M%S)
+	KEY_PATH=${HOME}/.ssh/${KEY_USER}_${KEY_NAME_BASE}.id_rsa
+	KEY_COMMENT="${KEY_USER}@${KEY_NAME_BASE}"
 
-	echo -e "\nPassphrase:" \"$KEY_PASSPHRASE\"
+	KEY_PASSPHRASE=""
+	if [[ -n "$2" ]]; then
+		KEY_PASSPHRASE="$2"
+	fi
+
+	ssh-keygen -b ${KEY_STRENGTH} -f ${KEY_PATH} -C ${KEY_COMMENT} -N "${KEY_PASSPHRASE}"
+
+	echo -e "\nUsername:" \"${KEY_USER}\"
+	echo -e "\nPassphrase:" \"${KEY_PASSPHRASE}\"
 	echo -e "\nProvide this public key to your devop if required:\n"
-	cat $KEY_NAME.pub
+	cat ${KEY_PATH}.pub
 
 	# Remove passphrase from appearing in bash history, if provided.
 	# Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
