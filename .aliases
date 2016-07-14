@@ -43,6 +43,7 @@ alias c='clear'
 alias vi='vim'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 #alias mysql='mycli'
+alias how='vi ${HOME}/.dotfiles/HOWDOI.md'
 
 # Complete nonsense
 alias fuuu='imgcat $HOME/.dotfiles/img/hacking.gif'
