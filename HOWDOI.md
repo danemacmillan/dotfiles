@@ -53,3 +53,7 @@ it was generated. Do not use old keys.
 The `yum-plugin-replace` package is installed with these dotfiles.
 
 - `yum -y replace git --replace-with git2u`
+
+# Index relevant Magento indexes with N98
+
+- `date && ./n98-magerun.phar -vvv index:reindex catalog_product_attribute,catalog_product_price,catalog_url,catalog_category_flat,catalog_category_product,cataloginventory_stock,catalog_product_flat && date`
