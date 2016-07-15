@@ -8,6 +8,10 @@ opening it in a text editor. Note that unless specified, these are steps for
 `CentOS`, or other things I personally use, regardless of OS. Ensure the
 title for each heading reads like, "How do I... Do this thing."
 
+# Turn off line numbers and invisibles in Vim
+
+- These dotfiles provide an `<F4>` key shortcut to toggle them.
+
 # Find, format, mount, and auto-mount an attached disk
 
 - `ll /dev/disk/by-id`
@@ -57,3 +61,24 @@ The `yum-plugin-replace` package is installed with these dotfiles.
 # Index relevant Magento indexes with N98
 
 - `date && ./n98-magerun.phar -vvv index:reindex catalog_product_attribute,catalog_product_price,catalog_url,catalog_category_flat,catalog_category_product,cataloginventory_stock,catalog_product_flat && date`
+
+# Format a crontab
+
+```
+SHELL=/bin/bash
+PATH=$HOME:$HOME/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+MAILTO="[EMAIL]"
+MAILFROM="[EMAIL]"
+
+LWEBROOT="/[PATH]"
+
+# Minute  Hour    DayMnth  Month        DayWeek      Command                   #
+# (0-59)  (0-23)  (1-31)   ([jan]1-12)  ([sun]0-6)                             #
+#-------  ------  -------  -----------  -----------  --------------------------#
+08        20      *        *            *            date && cd $LWEBROOT && ./n98-magerun -vvv index:reindex cataloginventory_stock,catalog_product_attribute,catalog_product_price && date
+08        20      *        *            *            date && cd $LWEBROOT && ./n98-magerun -vvv index:reindex catalog_category_flat && date
+08        20      *        *            *            date && cd $LWEBROOT && ./n98-magerun -vvv index:reindex catalog_category_product && date
+08        20      *        *            *            date && cd $LWEBROOT && ./n98-magerun -vvv index:reindex catalog_url && date
+08        20      *        *            *            date && cd $LWEBROOT && ./n98-magerun -vvv index:reindex catalog_product_flat && date
+```
+
