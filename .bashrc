@@ -106,6 +106,9 @@ shopt -s histappend
 export MYSQL_HISTFILE=/dev/null
 export MYCLI_HISTFILE=/dev/null
 
+# Stop less from making history file
+export LESSHISTFILE=/dev/null
+
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
 #export RSYNC_PARTIAL_DIR="~/.rsync-partial"
