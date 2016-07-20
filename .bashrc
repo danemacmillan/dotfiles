@@ -102,8 +102,9 @@ shopt -s histappend
 #export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-# Disable MySQL hsitory logging
+# Disable MySQL history logging
 export MYSQL_HISTFILE=/dev/null
+export MYCLI_HISTFILE=/dev/null
 
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
