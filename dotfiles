@@ -48,6 +48,7 @@ ln -vsfn ~/.dotfiles/.aliases ~/
 ln -vsfn ~/.dotfiles/.agignore ~/
 ln -vsfn ~/.dotfiles/.bash_completion ~/
 ln -vsfn ~/.dotfiles/.bash_profile ~/
+ln -vsfn ~/.dotfiles/.bash_sessions_disable ~/
 ln -vsfn ~/.dotfiles/.bashrc ~/
 ln -vsfn ~/.dotfiles/.ctags ~/
 ln -vsfn ~/.dotfiles/.digrc ~/
