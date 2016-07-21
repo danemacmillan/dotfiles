@@ -82,3 +82,12 @@ LWEBROOT="/[PATH]"
 08        20      *        *            *            date && cd $LWEBROOT && ./n98-magerun -vvv index:reindex catalog_product_flat && date
 ```
 
+# Mount a remote filesystem with SSHFS on OSX
+
+Note that if an `.ssh/config` file with a `home` rule, as in the example, does
+not exist, the regular syntax will need to be used. Use `-p###` for port.
+
+- `mkdir -p /Volumes/[MOUNT_NAME]`
+- `sshfs home:/home/danemacmillan/ /Volumes/home -o auto_cache,reconnect,defer_permissions,noappledouble,negative_vncache,volname=UbuntuHome`
+
+
