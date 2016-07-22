@@ -4,5 +4,6 @@ caskroom/fonts
 caskroom/versions
 homebrew/completions
 homebrew/dupes
+homebrew/fuse
 homebrew/php
 homebrew/versions
