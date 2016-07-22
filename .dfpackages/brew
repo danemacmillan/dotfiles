@@ -4,6 +4,7 @@ autoconf
 automake
 bash
 bash-completion
+beeftornado/rmtree/brew-rmtree
 bfg
 bitlbee
 brew-cask
