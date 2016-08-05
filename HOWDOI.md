@@ -90,4 +90,10 @@ not exist, the regular syntax will need to be used. Use `-p###` for port.
 - `mkdir -p /Volumes/[MOUNT_NAME]`
 - `sshfs home:/home/danemacmillan/ /Volumes/home -o auto_cache,reconnect,defer_permissions,noappledouble,negative_vncache,volname=UbuntuHome`
 
+# Create a new group and add a new user to it
+
+- `groupadd linus`
+- `useradd -G wheel,linus -c "Dane MacMillan" danemacmillan`
+- `passwd danemacmillan`
+- Add group after: `usermod -a -G linus danemacmillan`
 
