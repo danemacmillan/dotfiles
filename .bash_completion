@@ -20,10 +20,34 @@ _n98-magerun()
 
     COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
 
-    # removes colon containing prefix from COMPREPLY items 
+    # removes colon containing prefix from COMPREPLY items
     __ltrim_colon_completions "$cur"
     return 0
 }
 complete -F _n98-magerun n98-magerun.phar
 complete -F _n98-magerun n98-magerun
 complete -F _n98-magerun magerun
+
+
+##
+# Custom completion for vshell command.
+#
+# The vshell command is part of the VagrantShell repo located at
+# https://github.com/danemacmillan/vagrantshell
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+#
+_vshell()
+{
+	local cur prev opts
+	COMPREPLY=()
+	cur="${COMP_WORDS[COMP_CWORD]}"
+	prev="${COMP_WORDS[COMP_CWORD-1]}"
+	opts="help map restart update xdebug xhprof"
+
+	if [[ ${cur} == -* ]] ; then
+		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+		return 0
+	fi
+}
+complete -F _vshell vshell
