@@ -96,4 +96,4 @@ not exist, the regular syntax will need to be used. Use `-p###` for port.
 - `useradd -G wheel,linus -c "Dane MacMillan" danemacmillan`
 - `passwd danemacmillan`
 - Add group after: `usermod -a -G linus danemacmillan`
-
+- Disable logins: `usermod -s /sbin/nologin danemacmillan`
