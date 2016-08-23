@@ -133,10 +133,10 @@ Host *
 	Compression yes
 	LogLevel VERBOSE
 	ForwardX11 yes
+	IdentityFile $HOME/.ssh/id_rsa
 	#Hostname
 	#Port
 	#User
-	#IdentityFile
 EOL
 fi
 
