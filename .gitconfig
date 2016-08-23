@@ -100,6 +100,9 @@
 
 	ignorecase = false
 
+	# Disable filemode: http://stackoverflow.com/questions/2517339/how-to-recover-the-file-permissions-to-what-git-thinks-the-file-should-be
+	filemode = false
+
 	# Use custom `.gitignore` and `.gitattributes`
 	#excludesfile = ~/.gitignore
 	#attributesfile = ~/.gitattributes
