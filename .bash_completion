@@ -45,7 +45,7 @@ _vshell()
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
 	opts="help map restart update xdebug xhprof"
 
-	if [[ ${cur} == -* ]] ; then
+	if [[ ${cur} == * ]] ; then
 		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 		return 0
 	fi
