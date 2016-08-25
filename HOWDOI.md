@@ -102,4 +102,8 @@ not exist, the regular syntax will need to be used. Use `-p###` for port.
 
 - `git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git`
 
+# Create an email SPF record
+
+- Example: `IN TXT "v=spf1 mx a ptr a:email.kayako.com include:_spf.google.com include:servers.mcsv.net include:spf.mandrillapp.com ~all"`
+- Really good generator: [http://www.spfwizard.net/](http://www.spfwizard.net/)
 
