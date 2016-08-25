@@ -38,7 +38,9 @@ atop
 autofs
 bind-utils
 cpp
+kernel-devel
 make
+ncurses-devel
 libtool
 patch
 gcc-c++
