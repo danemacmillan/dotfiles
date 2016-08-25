@@ -97,3 +97,9 @@ not exist, the regular syntax will need to be used. Use `-p###` for port.
 - `passwd danemacmillan`
 - Add group after: `usermod -a -G linus danemacmillan`
 - Disable logins: `usermod -s /sbin/nologin danemacmillan`
+
+# Change a git repository's remote URL
+
+- `git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git`
+
+
