@@ -20,6 +20,12 @@ title for each heading reads like, "How do I... Do this thing."
 - `mount -o discard,defaults /dev/disk/by-id/[DISK_NAME] /[MNT_DIR]`
 - `vi /etc/fstab`, then paste, `/dev/disk/by-id/[DISK_NAME] /[MNT_DIR] ext4 discard,defaults 1 1`
 
+# Remount a current mount without downtime
+
+This example remounts whatever is mounted to the root.
+
+- `mount -o remount /`
+
 # Resize a disk that has changed in size
 
 - Ensure the disk is mounted and note its size: `df -h`
