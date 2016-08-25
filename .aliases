@@ -16,6 +16,7 @@ alias .....="cd ../../../.."
 alias rm='rm -rf'
 # Note that -a is recursive, and, more importantly, preserves all ACLs, should
 # any be set on the directory being copied.
+# http://unix.stackexchange.com/a/43608
 alias cp="cp -a"
 # DO NOT EVER ALIAS mkdir with -p parents option. IT WILL BREAK INHERITED ACL
 # PERMISSIONS.
