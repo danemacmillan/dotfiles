@@ -14,7 +14,9 @@ alias .....="cd ../../../.."
 
 # Filesystem
 alias rm='rm -rf'
-alias cp="cp -r"
+# Note that -a is recursive, and, more importantly, preserves all ACLs, should
+# any be set on the directory being copied.
+alias cp="cp -a"
 # DO NOT EVER ALIAS mkdir with -p parents option. IT WILL BREAK INHERITED ACL
 # PERMISSIONS.
 # http://serverfault.com/questions/197263/conflicts-between-acls-and-umask
