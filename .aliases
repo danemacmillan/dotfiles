@@ -52,6 +52,8 @@ alias vi='vim'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 #alias mysql='mycli'
 alias how='vi ${HOME}/.dotfiles/HOWDOI.md'
+# https://twitter.com/liamosaur/status/506975850596536320?lang=en
+alias fu='sudo $(history -p \!\!)'
 
 # Complete nonsense
 alias fuuu='imgcat $HOME/.dotfiles/img/hacking.gif'
