@@ -75,6 +75,10 @@ ln -vsfn ~/.dotfiles/.vimrc ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
+if [ -d "$HOME/.ssh" ]; then
+	ln -vsfn ~/.dotfiles/.ssh/rc ~/.ssh/rc
+fi
+
 # Create user bin if it doesn't exist.
 if [ ! -d "$HOME/bin" ]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating user bin directory for extra PATH.${RESET}"
