@@ -52,4 +52,5 @@ wget
 ncdu
 symlinks
 strace
+the_silver_searcher
 
