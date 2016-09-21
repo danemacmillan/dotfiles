@@ -34,3 +34,7 @@ fi;
 defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
 # Faster keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
+# Disable character suggestions for accents, etc
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# Speed up Mission Control animation. Note that MacOS Sierra seems to ignore this.
+defaults write com.apple.dock expose-animation-duration -float 0 && killall Dock
