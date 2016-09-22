@@ -7,6 +7,9 @@ export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
 export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 
+# Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
+export EVENT_NOKQUEUE=1
+
 # Aliases
 
 # Depends on Firefox Tools Adapter: https://developer.mozilla.org/en-US/docs/Tools/Firefox_Tools_Adapter
