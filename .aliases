@@ -71,6 +71,9 @@ alias gp="git pull"
 alias gpp="git push"
 alias gc="git commit"
 
+# Similar to GitX
+alias kraken="$(mdfind -onlyin /Applications/ -name GitKraken)/Contents/MacOS/GitKraken -p $(pwd)"
+
 # Mitigate fat-fingering and other retardations.
 alias gut="git"
 alias kk="ll"
