@@ -25,7 +25,7 @@ fi
 
 # Update from upstream.
 echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
-(cd ~/.dotfiles/ && git pull)
+(cd ~/.dotfiles/ && git stash && git pull && git stash pop)
 
 # Check if local .dfconfig exists. If not, copy the master .dfconfig.
 if [ ! -f ~/.dfconfig ]; then
