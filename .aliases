@@ -70,6 +70,7 @@ alias gco="git checkout"
 alias gp="git pull"
 alias gpp="git push"
 alias gc="git commit"
+alias git="hub"
 
 # Mitigate fat-fingering and other retardations.
 alias gut="git"
