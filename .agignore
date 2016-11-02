@@ -1,5 +1,8 @@
 ## https://www.mankier.com/1/ag
 ## https://github.com/ggreer/the_silver_searcher
+# Note that ag is aliased to "ag --hidden" which will search for hidden files
+# by default. That is not the same as ignoring these files, as ag by
+# default does not search any hidden files.
 
 ## OS
 *~

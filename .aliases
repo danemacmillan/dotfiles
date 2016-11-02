@@ -32,6 +32,10 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 #alias ag='ag -lfi --hidden --numbers --column --stats'
 alias belinux="find . -type f -exec dos2unix {} \;"
 alias elcapinstallercreate="sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/ElCapInstaller --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction"
+# By default ag/silver_searcher should search hidden files. Note that this is
+# not the same as the ignores in `.agignore`.
+alias ag="ag --hidden"
+
 
 #Network
 #alias listen='lsof -i -P | grep LISTEN'
