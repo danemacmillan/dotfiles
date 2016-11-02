@@ -5,7 +5,7 @@
 # default does not search any hidden files.
 
 ## OS
-*~
+#*~
 *.lock
 .DS_Store
 *.DS_Store
@@ -65,10 +65,7 @@ bower_components/
 *.docx
 
 ## Weechat
-.weechat/irc.conf
-.weechat/*.log
-.weechat/*.upgrade
-.weechat/weechat_fifo*
+.weechat
 
 ## Misc filesystem
 *.sql
