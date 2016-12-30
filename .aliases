@@ -74,7 +74,10 @@ alias gco="git checkout"
 alias gp="git pull"
 alias gpp="git push"
 alias gc="git commit"
-alias git="hub"
+
+if hash hub 2>/dev/null; then
+	alias git="hub"
+fi
 
 # Mitigate fat-fingering and other retardations.
 alias gut="git"
