@@ -32,6 +32,12 @@ This example remounts whatever is mounted to the root.
 - `resize2fs /dev/disk/by-id/[DISK_NAME]`
 - Note the new size of the mounted disk
 
+# Update, query, and delete kernels on CentOS
+
+- `yum update kernel`
+- `rpm -q kernel`
+- Delete kernels that are not the current or latest: `yum erase kernel-2.6.32-642.3.1.el6.x86_64`
+
 # Rsync stuff
 
 - `rsync -hrltD --info=progress2 --exclude=catalog/product/cache --exclude=css --exclude=css_secure --exclude=js -e ssh [REMOTE_ADDR]:/media /web/sites/`
