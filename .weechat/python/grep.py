@@ -66,6 +66,12 @@
 #
 #   History:
 #
+#   2016-06-23, mickael9
+#   version 0.7.7: fix get_home function
+#
+#   2015-11-26
+#   version 0.7.6: fix a typo
+#
 #   2015-01-31, Nicd-
 #   version 0.7.5:
 #   '~' is now expaned to the home directory in the log file path so
@@ -200,7 +206,7 @@ except ImportError:
 
 SCRIPT_NAME    = "grep"
 SCRIPT_AUTHOR  = "Elián Hanisch <lambdae2@gmail.com>"
-SCRIPT_VERSION = "0.7.5"
+SCRIPT_VERSION = "0.7.7"
 SCRIPT_LICENSE = "GPL3"
 SCRIPT_DESC    = "Search in buffers and logs"
 SCRIPT_COMMAND = "grep"
@@ -414,8 +420,9 @@ def get_config_log_filter():
 
 def get_home():
     home = weechat.config_string(weechat.config_get('logger.file.path'))
+    home = home.replace('%h', weechat.info_get('weechat_dir', ''))
     home = path.abspath(path.expanduser(home))
-    return home.replace('%h', weechat.info_get('weechat_dir', ''))
+    return home
 
 def strip_home(s, dir=''):
     """Strips home dir from the begging of the log path, this makes them sorter."""
@@ -1639,7 +1646,7 @@ if __name__ == '__main__' and import_ok and \
                  If used with 'log <file>' search in all logs that matches <file>.
     -b --buffer: Search only in buffers, not in file logs.
      -c --count: Just count the number of matched lines instead of showing them.
- -m --matchcase: Don't do case insensible search.
+ -m --matchcase: Don't do case insensitive search.
    -H --hilight: Colour exact matches in output buffer.
 -o --only-match: Print only the matching part of the line (unique matches).
  -v -i --invert: Print lines that don't match the regular expression.
