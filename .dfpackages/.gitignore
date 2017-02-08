@@ -4,8 +4,5 @@
 !aptget
 !brew
 !cask
-!git
-!rpm
 !tap
-!wget
 !yum

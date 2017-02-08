@@ -38,24 +38,12 @@ dotfiles_managers_get()
 		package_managers+=("brew")
 	fi
 
-	if hash rpm 2>/dev/null; then
-		package_managers+=("rpm")
-	fi
-
 	if hash yum 2>/dev/null; then
 		package_managers+=("yum")
 	fi
 
 	if hash apt-get 2>/dev/null; then
 		package_managers+=("aptget")
-	fi
-
-	if hash wget 2>/dev/null; then
-		package_managers+=("wget")
-	fi
-
-	if hash git 2>/dev/null; then
-		package_managers+=("git")
 	fi
 
 	export DOTFILES_PACKAGE_MANAGERS=${package_managers[@]}
@@ -286,21 +274,12 @@ dotfiles_packages_install()
 						dotfiles_packages_install_brew "$packages_dir" $directory_index
 						;;
 
-					rpm)
-						;;
-
 					yum)
 						dotfiles_packages_install_yum "$packages_dir" $directory_index
 						;;
 
 					aptget)
 						dotfiles_packages_install_aptget "$packages_dir" $directory_index
-						;;
-
-					wget)
-						;;
-
-					git)
 						;;
 				esac
 			fi
