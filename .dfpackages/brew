@@ -15,6 +15,7 @@ coreutils
 cowsay
 ctags
 curl
+diff-so-fancy
 dos2unix
 findutils
 fontconfig
