@@ -425,7 +425,7 @@ pimport()
 	local now=$(date +'%Y%m%d%H%M%S-%b-%d-%a-%H%M')
 	echo -e "${BBLUE}Import start: ${RESET}${WHITE}$now${RESET}"
 
-	if [[ ${filepath} == "*.gz" ]]; then
+	if [[ ${filepath} == *.gz ]]; then
 		pv ${filepath} | gunzip | mysql -u${username} -p -D ${database_name} --force
 	else
 		pv ${filepath} | mysql -u${username} -p -D ${database_name} --force
