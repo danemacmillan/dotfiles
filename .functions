@@ -385,6 +385,57 @@ imget()
 	imgcat $(wget $1 -q -O $HOME/tmp/imgcat.tmp; echo $HOME/tmp/imgcat.tmp)
 }
 
+##
+# Import a MySQL dump piped through pv to get progress. Pimped.
+#
+# This will also gunzip a *.gz dumped file, if present. Errors will be ignored
+# and printed to the terminal, so import can continue (--force).
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+pimport()
+{
+	local filepath=""
+	if [[ -n "$1" ]]; then
+		local filepath="$1"
+	fi
+
+	local database_name=""
+	if [[ -n "$2" ]]; then
+		local database_name="$2"
+	fi
+
+	local username=${USER}
+	if [[ -n "$3" ]]; then
+		local username="$3"
+	fi
+
+	if [[ -z ${filepath} || -z ${database_name} ]]; then
+		echo -e "Import a MySQL dump (*.sql|*.sql.gz) with progress."
+		echo -e "Usage:\n  ${BCYAN}pimport${RESET} ${GREEN}FILEPATH DATABASE ${YELLOW}[USERNAME]${RESET}"
+		return 1
+	fi
+
+	if [[ ! -f ${filepath} ]]; then
+		echo -e "$filepath does not exist."
+		return 1
+	fi
+
+	local now=$(date +'%Y%m%d%H%M%S-%b-%d-%a-%H%M')
+	echo -e "${BBLUE}Import start: ${RESET}${WHITE}$now${RESET}"
+
+	if [[ ${filepath} == "*.gz" ]]; then
+		pv ${filepath} | gunzip | mysql -u${username} -p -D ${database_name} --force
+	else
+		pv ${filepath} | mysql -u${username} -p -D ${database_name} --force
+	fi
+
+	local now=$(date +'%Y%m%d%H%M%S-%b-%d-%a-%H%M')
+	echo -e "${BBLUE}Import finish: ${RESET}${WHITE}$now${RESET}"
+}
+
+
 
 ###############################################################################
 # From other authors
@@ -422,7 +473,6 @@ extract ()
 		echo "'$1' is not a valid file"
 	fi
 }
-
 
 ##
 # Determine size of a file or total size of a directory.
