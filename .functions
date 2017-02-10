@@ -435,6 +435,52 @@ pimport()
 	echo -e "${BBLUE}Import finish: ${RESET}${WHITE}$now${RESET}"
 }
 
+##
+# Rsync copy
+#
+# This exists so that instead of using `scp` to copy files, you can just
+# invoke `rcp` with predefined arguments that are good for transfers,
+# including automatic resumption of partial uploads.
+#
+# Note that by default the progress of the entirety of the transfer is shown
+# on one line using --info=progress2. Should you want to see the transfer
+# progress of each file individually, simply make the command more verbose by
+# passing the option `-v` or `-vv`, which overrides the consolidated progress.
+# These options are simply passed directly to `rsync`. Read the `rsync`
+# documentation to learn about available options.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @license MIT
+rcp()
+{
+	local source=''
+	if [[ -n "$1" ]]; then
+		local source="$1"
+	fi
+
+	local destination=''
+	if [[ -n "$2" ]]; then
+		local destination="$2"
+	fi
+
+	local options=''
+	if [[ -n "$3" ]]; then
+		local options="$3"
+	fi
+
+	if [[ -n ${source} && -n ${destination} ]]; then
+		rsync -hrltD --info=progress2 --partial --partial-dir '$HOME/tmp/rsync-partials/' --exclude-from=$HOME/.rsync-excludes ${options} -e ssh ${source} ${destination}
+	else
+		echo -e "Rsync over SSH with useful defaults selected: partial file resumption, full progress."
+		echo -e "Usage:\n  ${BCYAN}rcp${RESET} ${GREEN}[[USER@]HOST:]SOURCE [[USER@]HOST:]DESTINATION ${YELLOW}[-RSYNC_OPTIONS]${RESET}"
+		echo -e "\nExamples:\n\n Rsync all contents of current directory to remote (defined in ~/.ssh/config as stage) directory foo in remote home directory:\n  rcp . stage:foo/ "
+		echo -e "\n Same as above, but display verbose, per-file progress of transfer:\n  rcp . stage:foo/ -vv"
+		echo -e "\n Rsync all contents of foo to remote bar directory, but display verbose, per-file progress of transfer:\n  rcp foo/ stage:bar -vv"
+		return 1
+	fi
+}
+
+
 
 
 ###############################################################################

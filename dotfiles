@@ -70,6 +70,7 @@ ln -vsfn ~/.dotfiles/.osx ~/
 ln -vsfn ~/.dotfiles/.paths ~/
 ln -vsfn ~/.dotfiles/packages.sh ~/
 ln -vsfn ~/.dotfiles/.sshmotd ~/
+ln -vsfn ~/.dotfiles/.rsync-excludes ~/
 ln -vsfn ~/.dotfiles/.vimperatorrc ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/

@@ -1,0 +1,10 @@
+.DS_Store
+*.DS_Store
+*.DS_Store?
+Thumbs.db
+Desktop.ini
+desktop.ini
+ehthumbs.db
+.Spotlight-V100
+.Trashes
+.cache/
