@@ -42,6 +42,12 @@ source ~/.dfconfig
 
 # TODO verify vimperator config directory.
 
+
+# Create directory where htoprc file will be located.
+if [[ ! -d "$HOME/.config/htop" ]]; then
+	mkdir -pv "$HOME/.config/htop"
+fi
+
 # Install
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 ln -vsfn ~/.dotfiles/.aliases ~/
@@ -73,8 +79,10 @@ ln -vsfn ~/.dotfiles/.sshmotd ~/
 ln -vsfn ~/.dotfiles/.rsync-excludes ~/
 ln -vsfn ~/.dotfiles/.vimperatorrc ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
+ln -vsfn ~/.dotfiles/.config/htop/htoprc ~/
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
+
 
 if [ -d "$HOME/.ssh" ]; then
 	ln -vsfn ~/.dotfiles/.ssh/rc ~/.ssh/rc
