@@ -88,10 +88,16 @@ if [ -d "$HOME/.ssh" ]; then
 	ln -vsfn ~/.dotfiles/.ssh/rc ~/.ssh/rc
 fi
 
-# Create user bin if it doesn't exist.
+# Create user bin directory if it doesn't exist.
 if [ ! -d "$HOME/bin" ]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating user bin directory for extra PATH.${RESET}"
 	mkdir $HOME/bin
+fi
+
+# Create user tmp directory if it doesn't exist.
+if [ ! -d "$HOME/tmp" ]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating user tmp directory.${RESET}"
+	mkdir $HOME/tmp
 fi
 
 # Symlink local bin files.
