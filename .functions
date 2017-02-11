@@ -3,6 +3,21 @@
 ## .functions
 
 ##
+# Check if command line utility exists.
+#
+# This is based on discussion at:
+# http://stackoverflow.com/q/592620
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+command_exists()
+{
+	command -v "$1" >/dev/null 2>&1
+}
+
+##
 # Calculate MD5 hashes regardless of tool, and ensure identical output.
 #
 # @author Dane MacMillan <work@danemacmillan.com>
