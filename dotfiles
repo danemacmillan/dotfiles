@@ -79,7 +79,7 @@ ln -vsfn ~/.dotfiles/.sshmotd ~/
 ln -vsfn ~/.dotfiles/.rsync-excludes ~/
 ln -vsfn ~/.dotfiles/.vimperatorrc ~/
 ln -vsfn ~/.dotfiles/.vimrc ~/
-ln -vsfn ~/.dotfiles/.config/htop/htoprc ~/
+ln -vsfn ~/.dotfiles/.config/htop/htoprc ~/.config/htop/htoprc
 rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
 rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
 
