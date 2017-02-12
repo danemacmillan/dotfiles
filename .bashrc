@@ -37,9 +37,6 @@ if tty -s ; then
 	source ~/.formatting
 fi
 
-# Source dotfiles config file.
-source ~/.dfconfig
-
 # Source various helper bash functions
 source ~/.functions
 
