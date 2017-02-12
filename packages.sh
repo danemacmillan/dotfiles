@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 ##
-# Packages - packages.sh
+# Dotfiles package manager (DPM) - dotfiles_packages
 #
 # The purpose of this script is to scan the flat text files located in the
-# .dfpackages directory and auto-install the utilities listed.
+# `dotfiles_packages.d` directory and auto-install the packages listed.
 #
 # dotfiles_package_install is the main function that executes all the
 # individual pluggable package installers.
@@ -12,6 +12,10 @@
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
+#
+# @TODO further abstract indivual managers, as they are very similar in
+# functionality. Possibly create a list of verification and install commands
+# that get passed to a single function.
 #
 
 # Determine paths for installing packages.
@@ -27,8 +31,9 @@ if [[ ! -d "$HOME/.dotfiles-packages" ]]; then
 fi
 
 ##
-# Get list of available package manager types, which the installer will
-# operate against.
+# Get list of available package manager types.
+#
+# The installers will operate against this.
 dotfiles_managers_get()
 {
 	local package_managers=()
@@ -78,9 +83,77 @@ dotfiles_packages_verify()
 	#echo "${!DOTFILES_*}"
 }
 
-# TODO further abstract indivual managers, as they are very similar in
-# functionality. Possibly create a list of verification and install commands
-# that get passed to a single function.
+##
+# Delegate the install command for each dotfiles_packages_install_* function.
+#
+# This abstraction provides the ability to create an override for each package
+# name listed in the standard one-item-per-line package files directly under
+# the `packages.d` directory. If a matching script for the package manager
+# package is discovered, that script will override the default install behaviour
+# of the native package manager. For example, on CentOS, the `weechat` yum
+# package exists, but it is very outdated. This function will search for the
+# name of the package it is about to install with the `yum` command inside of an
+# optional `yum.d` directory for a script called `weechat_install`, and if
+# found, will run the script instead of simply passing the `weechat` string to
+# `yum -y install`. This allows for very powerful customizations, while still
+# maintaining the simplicity of a basic newline-separated text file listing
+# of desired packages.
+#
+# Note that the package name itself does not even need to exist in the native
+# package manager's DB/RPM, so if some random package name like `foobarbaz` is
+# passed to the simple text file list, it will check to see if a
+# `foobarbaz_install` script exists for the given package manager.
+dotfiles_packages_delegate_install_command()
+{
+	local install_string_suffix="_install"
+
+	local package_manager="$1"
+	local package_manager_command="$2"
+	local package_manager_package="$3"
+	local package_manager_override_directory="${HOME}/.dotfiles/.dfpackages/${package_manager}.d"
+	local package_manager_package_override="${package_manager_override_directory}/${package_manager_package}${install_string_suffix}"
+
+	if [[ -f "${package_manager_package_override}" ]]; then
+		echo -e "  --> Executing install override for ${GREEN}${package_manager_package}${RESET} from '${package_manager_package_override}'"
+		# Note that the script MUST be executable in order for this to work. There
+		# is no point in sourcing a script and keeping it in memory when it will
+		# be run infrequently. There is no desire for the script to affect the
+		# running context. Executing it ensures a new process is used, and it also
+		# also ensures intent.
+		${package_manager_package_override}
+	else
+		# Install the package using standard package manager utility.
+		${package_manager_command} ${package_manager_package}
+	fi
+}
+
+##
+# Pluggable package installer for yum executed by dotfiles_packages_installer.
+dotfiles_packages_install_aptget()
+{
+	local package="aptget"
+	local packages_dir="$1"
+	local directory_index="$2"
+
+	if [ -f $packages_dir/$package ]; then
+		local packages_file="$packages_dir/$package"
+		local packages_md5_new=$(calculate_md5_hash "$packages_file")
+		local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_aptget_$directory_index)
+		local package_manager_command="sudo apt-get install"
+		local package_manager_command_list="dpkg --get-selections | grep "
+		local package_name="$package"
+
+		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
+			echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+			while read line; do
+				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list '^${line}\W' &> /dev/null ; then
+					echo -e "${GREEN}${line}${RESET}"
+					dotfiles_packages_delegate_install_command "$package" "$package_manager_command" "$line"
+				fi
+			done < $packages_dir/$package
+		fi
+	fi
+}
 
 ##
 # Pluggable package installer for brew/tap/cask executed by
@@ -119,7 +192,7 @@ dotfiles_packages_install_brew()
 						;;
 				esac
 
-				if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
+				#if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
 					echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 					while read line; do
 						# A hash check is insufficient, as not all packages are
@@ -127,39 +200,13 @@ dotfiles_packages_install_brew()
 						# list of packages.
 						if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list | grep -q "^${line}\$"; then
 							echo -e "${GREEN}${line}${RESET}"
-							$package_manager_command $line
+							dotfiles_packages_delegate_install_command "$subpackage" "$package_manager_command" "$line"
 						fi
 					done < $packages_dir/$subpackage
 					brew cleanup 2&> /dev/null
-				fi
+				#fi
 			fi
 		done
-	fi
-}
-
-dotfiles_packages_install_aptget()
-{
-	local package="aptget"
-	local packages_dir="$1"
-	local directory_index="$2"
-
-	if [ -f $packages_dir/$package ]; then
-		local packages_file="$packages_dir/$package"
-		local packages_md5_new=$(calculate_md5_hash "$packages_file")
-		local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_aptget_$directory_index)
-		local package_manager_command="sudo apt-get install"
-		local package_manager_command_list="dpkg --get-selections | grep "
-		local package_name="$package"
-
-		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-			echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
-			while read line; do
-				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list '^${line}\W' &> /dev/null ; then
-					echo -e "${GREEN}${line}${RESET}"
-					$package_manager_command $line
-				fi
-			done < $packages_dir/$package
-		fi
 	fi
 }
 
@@ -184,7 +231,7 @@ dotfiles_packages_install_yum()
 			while read line; do
 				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list "${line}" &> /dev/null ; then
 					echo -e "${GREEN}${line}${RESET}"
-					$package_manager_command $line
+					dotfiles_packages_delegate_install_command "$package" "$package_manager_command" "$line"
 				fi
 			done < $packages_dir/$package
 			yum clean all 2&> /dev/null
@@ -239,12 +286,6 @@ dotfiles_packages_install_extras()
 		ln -nsfv "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark/colors/fxdevtools-dark.vimp" "$HOME/.vimperator/colors/fxdevtools-dark.vimp"
 	fi
 }
-
-# dotfiles_packages_install can have its pluggable functions overwritten for
-# custom installer behavious.
-if [ -f "$HOME/.packages_install_overwrite" ]; then
-	source "$HOME/.packages_install_overwrite"
-fi
 
 ##
 # Install packages from files, irregardless of OS.

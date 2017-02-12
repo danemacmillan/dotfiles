@@ -64,11 +64,14 @@ ruby-devel
 strace
 symlinks
 the_silver_searcher
-#tmux Note that this must be built
 v8-devel
 vim
 vim-common
 vim-enhanced
 vim-minimal
-#weechat Note that this should be built instead. All of its dependencies are available here.
 wget
+
+# These packages should only be installed after the general ones.
+git
+tmux
+weechat
