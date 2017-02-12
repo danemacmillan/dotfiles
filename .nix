@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 # Aliases for CentOS
 alias update="dotfiles; composer selfupdate; yum -y update"
 

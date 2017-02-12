@@ -1,6 +1,13 @@
-#!/usr/bin/env bash
+# vim: ft=sh
 
-## .functions
+##
+# .functions
+#
+# Library of functions that are used throughout dotfiles.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
 
 ##
 # Check if command line utility exists.
@@ -254,37 +261,6 @@ magevents()
 }
 
 ##
-# TODO function for finding files then passing command
-#
-# @author Dane MacMillan <work@danemacmillan.com>
-# @link https://github.com/danemacmillan/dotfiles
-# @license MIT
-#
-##find ./ -type f -size 0 -exec cp {} ~/linusmedia0 \; -exec echo {} >> ~/linusmedia0/0size.txt \;
-#fff()
-#{
-#	local file_path="$1"
-#	local exec_argument="$2"
-#
-#
-#	if [[ -n "$file_path" && -n "$exec_argument" && -f "$file_path"]]; then
-#		find . -name $1 -exec $exec_argument
-#	fi
-#
-#
-#}
-
-
-# TODO:
-# Create a function to generate archives based on desired output filename.
-# E.g.: archive archivename.tgz dirname/
-# and the function will know to generate a tar gzip file.
-#
-# tar cvzf media.tgz --totals media/
-#
-#
-
-##
 # Pass a filename, with archive extension, and this will figure out the rest.
 #
 # Usage: archive <desiredfilename>.<extension> [ directory | filename ]
@@ -299,6 +275,8 @@ magevents()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
+#
+# @TODO This is incomplete and requires more testing.
 #
 archive()
 {
@@ -336,20 +314,14 @@ log_ips()
 }
 
 ##
-# Get user agent count of standard Web server logs (Nginx/Apache)
+# Check if given user agent has access to the given URL.
+#
+# Example usage:
+#  curl -I -H 'User-agent: Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0' https://www.canadasmotorcycle.ca
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
-#log_uas()
-#{
-#
-#}
-
-
-
-#curl -I -H 'User-agent: Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0' https://www.canadasmotorcycle.ca
 hasaccess()
 {
 	curl -I -H 'User-agent: "$1"' "$2"
@@ -495,16 +467,9 @@ rcp()
 	fi
 }
 
-
-
-
 ###############################################################################
 # From other authors
 ###############################################################################
-
-
-
-
 
 ##
 # Usage: extract <file>
@@ -551,33 +516,4 @@ fs()
 	else
 		du $arg .[^.]* *;
 	fi
-}
-
-# From https://twitter.com/climagic/status/370595711483514880
-# Example: git push origin master -f || fliptable
-fliptable()
-{
-	echo "（╯°□°）╯ ┻━┻";
-}
-
-# From @dersamne
-ultraflip()
-{
-	echo " ┻━┻ ︵╰(°□°)╯︵ ┻━┻";
-}
-
-# From Kenorb
-
-# Find file
-# Usage: ff (file)
-ff()
-{
-  find . -name $1
-}
-
-# Allows you to search for any text in any file.
-# Usage: ft "my string" *.php
-ft()
-{
-  find . -name "$2" -exec grep -il "$1" {} \;
 }

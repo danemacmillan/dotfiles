@@ -192,7 +192,7 @@ dotfiles_packages_install_brew()
 						;;
 				esac
 
-				#if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
+				if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
 					echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 					while read line; do
 						# A hash check is insufficient, as not all packages are
@@ -204,7 +204,7 @@ dotfiles_packages_install_brew()
 						fi
 					done < $packages_dir/$subpackage
 					brew cleanup 2&> /dev/null
-				#fi
+				fi
 			fi
 		done
 	fi

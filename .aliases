@@ -1,4 +1,11 @@
+# vim: ft=sh
+
+##
 # .aliases
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
 
 # Make sure no other dotfiles script exists.
 unalias dotfiles 2&>/dev/null

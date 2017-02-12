@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+# vim: ft=sh
+
 # Include custom bash_completion content here.
 
 # Autocompletion for https://github.com/netz98/n98-magerun
