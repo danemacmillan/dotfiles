@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ##
-# Dotfiles package manager (DPM) - dotfiles_packages
+# dpm - Dotfiles package manager.
 #
 # The purpose of this script is to scan the flat text files located in the
 # `dotfiles_packages.d` directory and auto-install the packages listed.
@@ -17,11 +17,13 @@
 # functionality. Possibly create a list of verification and install commands
 # that get passed to a single function.
 #
+export DOTFILES_PACKAGE_MANAGER_DIRECTORY="${HOME}/.dotfiles/dpm.d"
 
 # Determine paths for installing packages.
-DOTFILES_PACKAGES_DIR=("$HOME/.dotfiles/.dfpackages")
-if [ -d "$HOME/.dfpackages" ]; then
-	DOTFILES_PACKAGES_DIR+=("$HOME/.dfpackages")
+# Note that creating one in the user home directory means it, too, will be used.
+DOTFILES_PACKAGES_DIR=("${DOTFILES_PACKAGE_MANAGER_DIRECTORY}")
+if [ -d "$HOME/dpm.d" ]; then
+	DOTFILES_PACKAGES_DIR+=("$HOME/dpm.d")
 fi
 export DOTFILES_PACKAGES_DIR
 
@@ -34,7 +36,7 @@ fi
 # Get list of available package manager types.
 #
 # The installers will operate against this.
-dotfiles_managers_get()
+__dpm_managers_get()
 {
 	local package_managers=()
 
@@ -56,10 +58,10 @@ dotfiles_managers_get()
 
 ##
 # Verify and store the MD5 hashes of all packages being used by dotfiles.
-dotfiles_packages_verify()
+__dpm_verify()
 {
 	# Get package manager types.
-	dotfiles_managers_get
+	__dpm_managers_get
 
 	local directory_index=0
 	# Loop through everything and generate relevant MD5 hashes.
@@ -84,7 +86,7 @@ dotfiles_packages_verify()
 }
 
 ##
-# Delegate the install command for each dotfiles_packages_install_* function.
+# Delegate the install command for each dpm_install_* function.
 #
 # This abstraction provides the ability to create an override for each package
 # name listed in the standard one-item-per-line package files directly under
@@ -103,14 +105,14 @@ dotfiles_packages_verify()
 # package manager's DB/RPM, so if some random package name like `foobarbaz` is
 # passed to the simple text file list, it will check to see if a
 # `foobarbaz_install` script exists for the given package manager.
-dotfiles_packages_delegate_install_command()
+__dpm_delegate_install_command()
 {
 	local install_string_suffix="_install"
 
 	local package_manager="$1"
 	local package_manager_command="$2"
 	local package_manager_package="$3"
-	local package_manager_override_directory="${HOME}/.dotfiles/.dfpackages/${package_manager}.d"
+	local package_manager_override_directory="${HOME}/.dotfiles/dpm.d/${package_manager}.d"
 	local package_manager_package_override="${package_manager_override_directory}/${package_manager_package}${install_string_suffix}"
 
 	if [[ -f "${package_manager_package_override}" ]]; then
@@ -128,8 +130,8 @@ dotfiles_packages_delegate_install_command()
 }
 
 ##
-# Pluggable package installer for yum executed by dotfiles_packages_installer.
-dotfiles_packages_install_aptget()
+# Pluggable package installer for `apt-get` executed by `dpm_install`.
+__dpm_install_aptget()
 {
 	local package="aptget"
 	local packages_dir="$1"
@@ -148,7 +150,7 @@ dotfiles_packages_install_aptget()
 			while read line; do
 				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list '^${line}\W' &> /dev/null ; then
 					echo -e "${GREEN}${line}${RESET}"
-					dotfiles_packages_delegate_install_command "$package" "$package_manager_command" "$line"
+					__dpm_delegate_install_command "$package" "$package_manager_command" "$line"
 				fi
 			done < $packages_dir/$package
 		fi
@@ -156,9 +158,8 @@ dotfiles_packages_install_aptget()
 }
 
 ##
-# Pluggable package installer for brew/tap/cask executed by
-# dotfiles_packages_installer.
-dotfiles_packages_install_brew()
+# Pluggable package installer for `brew/tap/cask` executed by `dpm_install`.
+__dpm_install_brew()
 {
 	local package="brew"
 	local packages_dir="$1"
@@ -200,7 +201,7 @@ dotfiles_packages_install_brew()
 						# list of packages.
 						if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list | grep -q "^${line}\$"; then
 							echo -e "${GREEN}${line}${RESET}"
-							dotfiles_packages_delegate_install_command "$subpackage" "$package_manager_command" "$line"
+							__dpm_delegate_install_command "$subpackage" "$package_manager_command" "$line"
 						fi
 					done < $packages_dir/$subpackage
 					brew cleanup 2&> /dev/null
@@ -211,8 +212,8 @@ dotfiles_packages_install_brew()
 }
 
 ##
-# Pluggable package installer for yum executed by dotfiles_packages_installer.
-dotfiles_packages_install_yum()
+# Pluggable package installer for `yum` executed by `dpm_install`.
+__dpm_install_yum()
 {
 	local package="yum"
 	local packages_dir="$1"
@@ -231,7 +232,7 @@ dotfiles_packages_install_yum()
 			while read line; do
 				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list "${line}" &> /dev/null ; then
 					echo -e "${GREEN}${line}${RESET}"
-					dotfiles_packages_delegate_install_command "$package" "$package_manager_command" "$line"
+					__dpm_delegate_install_command "$package" "$package_manager_command" "$line"
 				fi
 			done < $packages_dir/$package
 			yum clean all 2&> /dev/null
@@ -241,13 +242,13 @@ dotfiles_packages_install_yum()
 
 ##
 # Extras are for packages that are not easily abstracted away due to their
-# need for varying steps. Possibly create an extras file in .dfpackages for
+# need for varying steps. Possibly create an extras file in dpm.d for
 # blindly running code instead of including it in packages.sh, where there
 # are no hard-coded dependencies--just abstraction to handle package
 # installment through the dotfiles framework.
 # TODO: Add md5 checks to prevent unnecessary downloads.
 # TODO: Move this into external process. Run Git updates also.
-dotfiles_packages_install_extras()
+__dpm_install_extras()
 {
 	echo -e "${BLUE}${BOLD}Downloading external dependencies, if any.${RESET}"
 
@@ -290,17 +291,17 @@ dotfiles_packages_install_extras()
 ##
 # Install packages from files, irregardless of OS.
 #
-# This function depends on the existence of package files in the `.packages`
+# This function depends on the existence of package files in the `dpm.d`
 # directory. Ensure that the name will correspond with the cases here.
-dotfiles_packages_install()
+__dpm_install()
 {
 	# Get list of supported package manager types.
-	dotfiles_managers_get
+	__dpm_managers_get
 
 	# Always install extras first. They will contain stuff like installing
 	# brew, PHP composer, and vim vundle. These are typically essential before
 	# any other packages can be installed.
-	dotfiles_packages_install_extras
+	__dpm_install_extras
 
 	# Loop through hashes for each directory provided.
 	local directory_index=0
@@ -312,15 +313,15 @@ dotfiles_packages_install()
 				# manager type, so case is no longer needed.
 				case "$package_manager" in
 					brew)
-						dotfiles_packages_install_brew "$packages_dir" $directory_index
+						__dpm_install_brew "$packages_dir" $directory_index
 						;;
 
 					yum)
-						dotfiles_packages_install_yum "$packages_dir" $directory_index
+						__dpm_install_yum "$packages_dir" $directory_index
 						;;
 
 					aptget)
-						dotfiles_packages_install_aptget "$packages_dir" $directory_index
+						__dpm_install_aptget "$packages_dir" $directory_index
 						;;
 				esac
 			fi
@@ -331,11 +332,11 @@ dotfiles_packages_install()
 
 # Install package depencencies only if install flag passed
 if [[ "$1" == "--install" ]]; then
-	dotfiles_packages_install
+	__dpm_install
 fi
 
 # Run package verification when flag passed. .bashrc does this every time so
 # that md5s of packages can be monitored.
 if [[ "$1" == "--verify" ]]; then
-	dotfiles_packages_verify
+	__dpm_verify
 fi
