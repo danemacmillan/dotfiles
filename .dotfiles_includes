@@ -14,6 +14,17 @@
 export DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 export DOTFILES_INCLUDES="${DOTFILES_DIRECTORY}/.dotfiles_includes"
 
+# Detect OS so dotfiles seamlessly work across OSX and Linux.
+# I only use OSX and CentOS, so additional cases will need
+# to be defined for another OS.
+export OS=$(uname | awk '{print tolower($0)}')
+case $OS in
+  darwin*)
+    OS='osx';;
+  linux*)
+    OS='nix';;
+esac
+
 # Pull in base formatting templates.
 if [[ -f "${DOTFILES_DIRECTORY}/.formatting" ]]; then
 	if tty -s ; then

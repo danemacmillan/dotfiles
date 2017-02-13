@@ -7,9 +7,6 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 
-# Make sure no other dotfiles script exists.
-unalias dotfiles 2&>/dev/null
-
 # Navigational
 alias ll='ls --color -lah --group-directories-first'
 alias llt='ls --color -laht --group-directories-first' # Sort by newest first.
@@ -43,7 +40,6 @@ alias elcapinstallercreate="sudo /Applications/Install\ OS\ X\ El\ Capitan.app/C
 # not the same as the ignores in `.agignore`.
 alias ag="ag --hidden --column -B0 -A0 --color-path='30;43' --color-line-number='30;1' --color-match='1;32'"
 
-
 #Network
 #alias listen='lsof -i -P | grep LISTEN'
 alias listen='lsof -Pnl +M -i4'
@@ -62,6 +58,7 @@ alias c='clear'
 alias vi='vim'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 #alias mysql='mycli'
+#alias btop="mytop -u user -p '' -h localhost -d database"
 alias how='vi ${HOME}/.dotfiles/HOWDOI.md'
 # https://twitter.com/liamosaur/status/506975850596536320?lang=en
 alias fu='sudo $(history -p \!\!)'
@@ -77,18 +74,10 @@ alias fpmstat="ps aux | grep php-fpm | wc -l ; ps --no-headers -o \"rss,cmd\" -C
 # Git
 # just for reference. Do not rewrite history.
 #alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
-alias gco="git checkout"
-alias gp="git pull"
-alias gpp="git push"
-alias gc="git commit"
 
-if hash hub 2>/dev/null; then
+if command_exists hub; then
 	alias git="hub"
 fi
-
-# Mitigate fat-fingering and other retardations.
-alias gut="git"
-alias kk="ll"
 
 # History
 # Purge all history

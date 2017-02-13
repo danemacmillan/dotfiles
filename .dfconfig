@@ -1,8 +1,0 @@
-# Export global config variables for dotfiles
-
-# DOTFILES_CONFIG_DISPLAY_TIMESTAMP
-# string
-# Datetime formatting (strftime rules) for the prompt timestamp
-# If empty, timestamp will not be displayed.
-# Example: "\\[${YELLOW}\][\D{%H:%M}]\\[${RESET}\] "
-export DOTFILES_CONFIG_TIMESTAMP=""

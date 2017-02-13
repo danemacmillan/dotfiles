@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-echo -e "Remember to update your dotfiles regularly by running 'dotfiles' from the terminal."

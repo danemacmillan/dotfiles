@@ -1,0 +1,31 @@
+# vim: ft=sh
+
+##
+# .path
+#
+# Central location for defining additional paths.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+# Standard
+if [[ -d "/usr/local/sbin" ]]; then
+	export PATH="/usr/local/sbin:${PATH}"
+fi
+
+# Standard
+if [[ -d "/usr/local/bin" ]]; then
+	export PATH="/usr/local/bin:${PATH}"
+fi
+
+# Composer global installs
+if [[ -d "${HOME}/.composer/vendor/bin" ]]; then
+	export PATH="${HOME}/.composer/vendor/bin:${PATH}"
+fi
+
+# Add user bin if it exists.
+if [[ -d "${HOME}/bin" ]]; then
+	export PATH="${HOME}/bin:${PATH}"
+fi

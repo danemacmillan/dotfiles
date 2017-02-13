@@ -1,4 +1,5 @@
 # vim: ft=sh
+source "${HOME}/.dotfiles/.dotfiles_includes"
 
 ##
 # .bashrc
@@ -16,75 +17,22 @@ shopt -s expand_aliases
 # http://tldp.org/LDP/abs/html/globbingref.html
 shopt -s nocaseglob;
 
-source $HOME/.paths
+# Source general configs.
+source "${HOME}/.paths"
+source "${HOME}/.aliases"
+# Source OS-specific configs.
+source ~/.$OS
 
 # Determine whether in an SSH session, even when su is used.
 if [[ "${SSH_TTY}" ]] || [[ $(who am i) =~ \([-a-zA-Z0-9\.]+\)$ ]]; then
 	export HAS_SSH=1
 fi
 
-# Detect OS so dotfiles seamlessly work across OSX and Linux.
-# I only use OSX and CentOS, so additional cases will need
-# to be defined for another OS.
-export OS=$(uname | awk '{print tolower($0)}')
-case $OS in
-  darwin*)
-    OS='osx';;
-  linux*)
-    OS='nix';;
-esac
-
-# Source formatting / color variables
-if tty -s ; then
-	source ~/.formatting
-fi
-
-# Source various helper bash functions
-source ~/.functions
-
-# Source aliases
-source ~/.aliases
-
-# Source OS-specific configs.
-source ~/.$OS
-
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
 dpm --verify
 
 # Set default editor
 export EDITOR=vim
-
-# Git branch using bash-completion
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=0
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWUPSTREAM='verbose'
-# In a VM, these can really slow the prompt down:
-if [[ -d "/vagrant" ]]; then
-	export GIT_PS1_SHOWDIRTYSTATE=
-	export GIT_PS1_SHOWUNTRACKEDFILES=
-fi
-
-# Highlight the user name when logged in as root.
-USER_STYLE='\[${GREEN}\]';
-USER_BANG='\[${CYAN}${BOLD}\]\$'
-if [[ "${USER}" == "root" ]]; then
-	USER_STYLE='\[${RED}\]';
-	USER_BANG='\[${RED}\]#'
-fi
-
-# Highlight the hostname when connected via SSH.
-HOST_STYLE='\[${BLUE}${BOLD}\]';
-if [[ "${HAS_SSH}" ]]; then
-	HOST_STYLE='\[${BLUE}${BOLD}\]://';
-fi
-
-export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
-
-# Export PS1
-if [[ -n $DOTFILES_CONFIG_TIMESTAMP ]]; then
-	export PS1="$DOTFILES_CONFIG_TIMESTAMP$PS1"
-fi
 
 # Color
 export CLICOLOR=1
@@ -110,23 +58,41 @@ export LESSHISTFILE=/dev/null
 
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
-#export RSYNC_PARTIAL_DIR="~/.rsync-partial"
+export RSYNC_PARTIAL_DIR="{HOME}/tmp/rsync-partials"
 
+##
+# PS1
+
+# Git branch using bash-completion
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=0
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWUPSTREAM='verbose'
+
+# In a VM, these can really slow the prompt down:
+if [[ -d "/vagrant" ]]; then
+	export GIT_PS1_SHOWDIRTYSTATE=
+	export GIT_PS1_SHOWUNTRACKEDFILES=
+fi
+
+# Highlight the user name when logged in as root.
+USER_STYLE='\[${GREEN}\]';
+USER_BANG='\[${CYAN}${BOLD}\]\$'
+if [[ "${USER}" == "root" ]]; then
+	USER_STYLE='\[${RED}\]';
+	USER_BANG='\[${RED}\]#'
+fi
+
+# Highlight the hostname when connected via SSH.
+HOST_STYLE='\[${BLUE}${BOLD}\]';
+if [[ "${HAS_SSH}" ]]; then
+	HOST_STYLE='\[${BLUE}${BOLD}\]://';
+fi
+
+export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
+
+##
 # Source .extra file if it exists. This file will never get added to repo.
-if [ -f ~/.extra ]; then
-	source ~/.extra
+if [[ -f "${HOME}/.extra" ]]; then
+	source "${HOME}/.extra"
 fi;
-
-# Source additional script for SSH / interactive sessions.
-# Without login_shell check for interactive shell, software like rsync will
-# connect to a server with these dotfiles, which will output content, and
-# then error out a non-interactive client connection like like rsync.
-#if shopt -q login_shell && [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-#	SESSION_TYPE=remote/ssh
-#	source ~/.sshmotd
-#fi
-
-# rsync. --info flag only for 3.1.*
-#rsync -haz --partial --delay-updates --bwlimit=6m --info=progress2 user@domain.com:~/media ./mediarsync
-
-#alias btop="mytop -u user -p '' -h localhost -d database"
