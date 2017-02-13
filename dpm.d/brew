@@ -20,6 +20,7 @@ findutils
 fontconfig
 freetype
 gawk
+gcc
 git
 git-extras
 glib
@@ -60,7 +61,6 @@ rclone
 readline
 rlwrap
 rsync
-rtorrent
 ssh-copy-id
 siege
 terminal-notifier

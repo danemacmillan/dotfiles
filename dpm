@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
 
 ##
 # dpm - Dotfiles package manager.
@@ -16,7 +17,7 @@
 # @TODO further abstract indivual managers, as they are very similar in
 # functionality. Possibly create a list of verification and install commands
 # that get passed to a single function.
-#
+
 export DOTFILES_PACKAGE_MANAGER_DIRECTORY="${HOME}/.dotfiles/dpm.d"
 
 # Determine paths for installing packages.

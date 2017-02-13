@@ -1,0 +1,4 @@
+# vim: ft=sh
+
+# Use this file to add extra functionality to the dotfiles without having it
+# tracked in the working tree.

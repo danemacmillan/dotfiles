@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
 
 ##
 # Download, compile, and install latest version of tmux.
@@ -17,16 +18,6 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 #
-
-# Pull in base formatting templates.
-if [[ -f "${HOME}/.dotfiles/.formatting" ]]; then
-	source "${HOME}/.dotfiles/.formatting"
-fi
-
-# Pull in base functions.
-if [[ -f "${HOME}/.dotfiles/.functions" ]]; then
-	source "${HOME}/.dotfiles/.functions"
-fi
 
 directory_dotfiles_packages="${HOME}/.dotfiles-packages"
 if [[ ! -d "${directory_dotfiles_packages}" ]]; then

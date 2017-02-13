@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
 
 ##
 # Clone, compile, and install WeeChat.
@@ -16,16 +17,6 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 #
-
-# Pull in base formatting templates.
-if [[ -f "${HOME}/.dotfiles/.formatting" ]]; then
-	source "${HOME}/.dotfiles/.formatting"
-fi
-
-# Pull in base functions.
-if [[ -f "${HOME}/.dotfiles/.functions" ]]; then
-	source "${HOME}/.dotfiles/.functions"
-fi
 
 directory_dotfiles_packages="${HOME}/.dotfiles-packages"
 weechat_directory="${directory_dotfiles_packages}/weechat"

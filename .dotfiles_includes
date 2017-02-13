@@ -1,0 +1,25 @@
+# vim: ft=sh
+
+##
+# .dotfiles_includes
+#
+# The purpose of this script is to provide dependencies used throughout these
+# dotfiles for building scripts. This makes it easier to develop new scripts, as
+# there is only one file that needs to be sourced to gain a tonne of
+# functionality.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+export DOTFILES_DIRECTORY="${HOME}/.dotfiles"
+export DOTFILES_INCLUDES="${DOTFILES_DIRECTORY}/.dotfiles_includes"
+
+# Pull in base formatting templates.
+if [[ -f "${DOTFILES_DIRECTORY}/.formatting" ]]; then
+	source "${DOTFILES_DIRECTORY}/.formatting"
+fi
+
+# Pull in base functions.
+if [[ -f "${DOTFILES_DIRECTORY}/.functions" ]]; then
+	source "${DOTFILES_DIRECTORY}/.functions"
+fi

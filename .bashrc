@@ -49,7 +49,7 @@ source ~/.aliases
 source ~/.$OS
 
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
-source ~/packages.sh --verify
+dpm --verify
 
 # Set default editor
 export EDITOR=vim

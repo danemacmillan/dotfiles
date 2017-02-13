@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
 
 ##
 # Dotfiles - dotfiles
@@ -10,159 +11,125 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 #
-# @TODO pass flags to distinguish pure dev builds from full setups.
-
-# Pull in base formatting templates.
-if [ -f ~/.dotfiles/.formatting ]; then
-	source ~/.dotfiles/.formatting
-fi
-
-# Pull in base functions.
-if [ -f ~/.dotfiles/.functions ]; then
-	source ~/.dotfiles/.functions
-fi
-
-# Update from upstream.
-echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
-(cd ~/.dotfiles/ && git stash && git pull && git stash pop)
-
+# @TODO
+#  - abstract into function.
+#  - do symlinking with cp command so no need to manually track files.
+#  - verify vimperator config directory.
 
 ##
-# Install them
+# Update repo from upstream.
+echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
+(cd "${DOTFILES_DIRECTORY}" && git stash && git pull && git stash pop)
+
+##
+# Create directories that will not be tracked by the repo.
 #
-# TODO abstract into function.
-
-# TODO do symlinking with cp command so no need to manually track files.
-
-# TODO verify vimperator config directory.
-
-
-# Create directory where htoprc file will be located.
-if [[ ! -d "$HOME/.config/htop" ]]; then
-	mkdir -pv "$HOME/.config/htop"
+# Their contents could be via symlinks from `.dotfiles/*`, though.
+if [[ ! -d "${HOME}/.config/htop" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.config/htop' directory.${RESET}"
+	mkdir -p "${HOME}/.config/htop"
 fi
 
-# Install
+if [[ ! -d "${HOME}/.ssh" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.ssh' directory.${RESET}"
+	mkdir -p "${HOME}/.ssh"
+fi
+
+if [ ! -d "${HOME}/bin" ]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/bin' directory.${RESET}"
+	mkdir -p "${HOME}/bin"
+fi
+
+if [ ! -d "${HOME}/tmp" ]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/tmp' directory.${RESET}"
+	mkdir -p "${HOME}/tmp"
+fi
+
+##
+# Copy file templates that will not be tracked by the repo.
+if [[ ! -f "${HOME}/.extra" ]]; then
+	echo -e "${BLUE}${BOLD}Copying '.extra' template file for custom dotfiles edits that will not be tracked.${RESET}"
+	cp -v "${DOTFILES_DIRECTORY}/.extra" "${HOME}/.extra"
+fi
+
+if [[ ! -f "${HOME}/.gitconfig.local" ]]; then
+	echo -e "${BLUE}${BOLD}Copying '.gitconfig.local' template file for custom changes. Add your Git credentials here.${RESET}"
+	cp -v "${DOTFILES_DIRECTORY}/.gitconfig.local" "${HOME}/.gitconfig.local"
+fi
+
+if [[ ! -f "${HOME}/.hgrc.local" ]]; then
+	echo -e "${BLUE}${BOLD}Copying '.hgrc.local' template file for custom changes. Add your Mercurial credentials here.${RESET}"
+	cp -v "${DOTFILES_DIRECTORY}/.hgrc.local" "${HOME}/.hgrc.local"
+fi
+
+if [[ ! -f "${HOME}/.ssh/config" ]]; then
+	echo -e "${BLUE}${BOLD}Copying '.ssh/config' template file for custom SSH credentials.${RESET}"
+	cp -v "${DOTFILES_DIRECTORY}/.ssh/config" "${HOME}/.ssh/config"
+fi
+
+##
+# Symlink all trackable files.
+#
+# Note that not all files within the `.dotfiles` directory are symlinked into
+# the user home directory, as they are only used internally by these dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
-ln -vsfn ~/.dotfiles/.aliases ~/
-ln -vsfn ~/.dotfiles/.agignore ~/
-ln -vsfn ~/.dotfiles/.bash_completion ~/
-ln -vsfn ~/.dotfiles/.bash_profile ~/
-ln -vsfn ~/.dotfiles/.bash_sessions_disable ~/
-ln -vsfn ~/.dotfiles/.bashrc ~/
-ln -vsfn ~/.dotfiles/.ctags ~/
-ln -vsfn ~/.dotfiles/.digrc ~/
-ln -vsfn ~/.dotfiles/.formatting ~/
-ln -vsfn ~/.dotfiles/.functions ~/
-ln -vsfn ~/.dotfiles/.gitconfig ~/
-ln -vsfn ~/.dotfiles/.gitignore ~/
-ln -vsfn ~/.dotfiles/.grcat ~/
-ln -vsfn ~/.dotfiles/.hushlogin ~/
-ln -vsfn ~/.dotfiles/.inputrc ~/
-ln -vsfn ~/.dotfiles/.hgrc ~/
-ln -vsfn ~/.dotfiles/.siegerc ~/
-ln -vsfn ~/.dotfiles/.tmux.conf ~/
-ln -vsfn ~/.dotfiles/.mozconfig ~/
-ln -vsfn ~/.dotfiles/.my.cnf ~/.my.cnf.sample
-ln -vsfn ~/.dotfiles/.myclirc ~/
-ln -vsfn ~/.dotfiles/.npmrc ~/
-ln -vsfn ~/.dotfiles/.nix ~/
-ln -vsfn ~/.dotfiles/.osx ~/
-ln -vsfn ~/.dotfiles/.paths ~/
-ln -vsfn ~/.dotfiles/.sshmotd ~/
-ln -vsfn ~/.dotfiles/.rsync-excludes ~/
-ln -vsfn ~/.dotfiles/.vimperatorrc ~/
-ln -vsfn ~/.dotfiles/.vimrc ~/
-ln -vsfn ~/.dotfiles/.config/htop/htoprc ~/.config/htop/htoprc
-rm -rf ~/.vim && ln -vsfn ~/.dotfiles/.vim ~/
-rm -rf ~/.weechat && ln -vsfn ~/.dotfiles/.weechat ~/
+ln -vsfn "${DOTFILES_DIRECTORY}/bin/*" "${HOME}/bin/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.config/htop/htoprc" "${HOME}/.config/htop/htoprc"
+ln -vsfn "${DOTFILES_DIRECTORY}/.ssh/rc" "${HOME}/.ssh/rc"
+ln -vsfn "${DOTFILES_DIRECTORY}/.agignore" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.aliases" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.bash_completion" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.bash_profile" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.bash_sessions_disable" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.bashrc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.ctags" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.digrc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.editorconfig" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.gitconfig" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.gitignore" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.grcat" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.hgrc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.hushlogin" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.inputrc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.mozconfig" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.my.cnf" "${HOME}/".my.cnf.sample
+ln -vsfn "${DOTFILES_DIRECTORY}/.myclirc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.mytop" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.nix" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.npmrc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.osx" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.paths" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.rsync_excludes" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.siegerc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.sshmotd" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.tmux.conf" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.vimperatorrc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
 
-if [ -d "$HOME/.ssh" ]; then
-	ln -vsfn ~/.dotfiles/.ssh/rc ~/.ssh/rc
+##
+# Symlink trackable directories that could exist, and back up to `tmp`.
+mv -f "${HOME}/.vim" "${HOME}/tmp/.vim-$(now)" \
+&& ln -vsfn "${DOTFILES_DIRECTORY}/.vim" "${HOME}/"
+
+mv -f "${HOME}/.weechat" "${HOME}/tmp/.weechat-$(now)" \
+&& ln -vsfn "${DOTFILES_DIRECTORY}/.weechat" "${HOME}/"
+
+##
+# Add `dotfiles` and `dpm` executable scripts into `~/bin`.
+if [[ ! -f "$HOME/bin/dotfiles" ]]; then
+	ln -vsfn "${DOTFILES_DIRECTORY}/dotfiles" "${HOME}/bin/"
 fi
 
-# Create user bin directory if it doesn't exist.
-if [ ! -d "$HOME/bin" ]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating user bin directory for extra PATH.${RESET}"
-	mkdir $HOME/bin
-fi
-
-# Create user tmp directory if it doesn't exist.
-if [ ! -d "$HOME/tmp" ]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating user tmp directory.${RESET}"
-	mkdir $HOME/tmp
-fi
-
-# Symlink local bin files.
-ln -vsfn ~/.dotfiles/bin/* ~/bin/
-
-# Make dotfiles script available in user's path.
-if [ ! -f "$HOME/bin/dotfiles" ]; then
-	ln -vsfn ~/.dotfiles/dotfiles ~/bin
-	chmod u+x ~/bin/dotfiles
-fi
-
-# Make dpm script available in user's path.
 if [[ ! -f "$HOME/bin/dpm" ]]; then
-	ln -vsfn ~/.dotfiles/dpm ~/bin
-	chmod u+x ~/bin/dpm
+	ln -vsfn "${DOTFILES_DIRECTORY}/dpm" "${HOME}/bin/"
 fi
 
-# Create optional .extra file to be sourced along repo content.
-if [ ! -f ~/.extra ]; then
-	echo -e "${BLUE}${BOLD}Generating .extra file.${RESET}"
-	touch ~/.extra
-fi
-
-# Create .gitconfig.local file to hold user credentials for Git.
-if [ ! -f ~/.gitconfig.local ]; then
-	echo -e "${BLUE}${BOLD}Generating .gitconfig.local file for custom changes. Add your Git credentials here.${RESET}"
-	cat >>~/.gitconfig.local <<EOL
-[user]
-	name =
-	email =
-EOL
-fi
-
-# Create .hgrc.local file to hold user credentials for Mercurial.
-if [ ! -f ~/.hgrc.local ]; then
-	echo -e "${BLUE}${BOLD}Generating .hgrc.local file for custom changes. Add your Mercurial credentials here.${RESET}"
-	cat >>~/.hgrc.local <<EOL
-[ui]
-username = First Last <you@domain.tld>
-EOL
-fi
-
-# Generate .ssh/config file if none.
-if [ ! -f "$HOME/.ssh/config" ]; then
-	# Create directory regardless, just to be sure.
-	mkdir -pv $HOME/.ssh
-	# Default content
-	cat >>$HOME/.ssh/config <<EOL
-# See for reference:
-# https://www.freebsd.org/cgi/man.cgi?query=ssh_config&sektion=5
-# http://www.openssh.com/faq.html#3.14
-
-Host *
-	TCPKeepAlive yes
-	ServerAliveInterval 120
-	PreferredAuthentications publickey,password
-	Protocol 2
-	Compression yes
-	LogLevel VERBOSE
-	ForwardX11 yes
-	IdentityFile $HOME/.ssh/id_rsa
-	#Hostname
-	#Port
-	#User
-EOL
-fi
-
+##
 # Install dotfiles package manager packages.
 dpm --install
 
+##
 # Update terminal
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
-source ~/.bash_profile;
-
+source "${HOME}/.bash_profile"
 echo -e "${WHITE}${BOLD}Done!${RESET}"
