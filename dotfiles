@@ -94,7 +94,7 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.hgrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.hushlogin" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.inputrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.mozconfig" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.my.cnf" "${HOME}/".my.cnf.sample
+ln -vsfn "${DOTFILES_DIRECTORY}/.my.cnf" "${HOME}/.my.cnf.sample"
 ln -vsfn "${DOTFILES_DIRECTORY}/.myclirc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.mytop" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.nix" "${HOME}/"
