@@ -20,7 +20,6 @@ findutils
 fontconfig
 freetype
 gawk
-gcc
 git
 git-extras
 glib
