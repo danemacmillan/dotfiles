@@ -72,5 +72,6 @@ wget
 
 # These packages should only be installed after the general ones.
 git
+rsync
 tmux
 weechat

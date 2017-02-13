@@ -346,10 +346,14 @@ __dpm_install()
 	# Install packages from various defined package manager types.
 	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
-			if [ -f $packages_dir/$package_manager ]; then
+			if [[ -f $packages_dir/$package_manager ]]; then
 				# TODO possibly use single installer, with modular checkers for each
 				# manager type, so case is no longer needed.
 				case "$package_manager" in
+					aptget)
+						__dpm_install_aptget "$packages_dir" $directory_index
+						;;
+
 					brew)
 						__dpm_install_brew "$packages_dir" $directory_index
 						;;
@@ -357,11 +361,9 @@ __dpm_install()
 					yum)
 						__dpm_install_yum "$packages_dir" $directory_index
 						;;
-
-					aptget)
-						__dpm_install_aptget "$packages_dir" $directory_index
-						;;
 				esac
+				# Update terminal session hashes.
+				source dpm --verify
 			fi
 		done
 		directory_index=$((directory_index+1))
