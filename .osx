@@ -2,6 +2,10 @@
 
 ## .osx
 
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
 # Exports
 
 # Assumes that coreutils and other GNU tools have replaced OSX'
@@ -38,9 +42,12 @@ if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
 fi;
 
 # OSX settings
+
 defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
 # Faster keyboard repeat rate.
 defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
 # Ensure character suggestions for accents are enabled.
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
 # Speed up Mission Control animation. Note that MacOS Sierra seems to ignore this.
