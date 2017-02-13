@@ -20,11 +20,7 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # Cleanup any legacy associations from older versions of this dotfiles repo.
 unalias dotfiles 2&>/dev/null
 rm "${HOME}/.dfconfig" 2&>/dev/null
-unlink "${HOME}/.my.cnf" 2&>/dev/null
-unlink "${HOME}/.paths" 2&>/dev/null
-unlink "${HOME}/.rsync-excludes" 2&>/dev/null
-unlink "${HOME}/.sshmotd" 2&>/dev/null
-unlink "${HOME}/packages.sh" 2&>/dev/null
+symlinks -d "${HOME}" 2&>/dev/null
 
 ##
 # Update repo from upstream.
