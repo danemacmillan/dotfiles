@@ -31,6 +31,6 @@ cd "${directory_dotfiles_packages}" \
 cd "${source_directory}" \
 && git checkout "${version}" \
 && make \
-&& cp -f symlinks /usr/local/bin \
+&& cp -f symlinks "${HOME}/bin" \
 && make clean \
 && echo -e "${GREEN}${name} installed.${RESET}"
