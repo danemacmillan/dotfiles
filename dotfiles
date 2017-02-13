@@ -141,5 +141,6 @@ unalias dotfiles 2&>/dev/null
 rm "${HOME}/.dfconfig"
 unlink "${HOME}/.formatting"
 unlink "${HOME}/.my.cnf"
+unlink "${HOME}/.paths"
 unlink "${HOME}/.rsync-excludes"
 unlink "${HOME}/.sshmotd"
