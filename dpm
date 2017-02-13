@@ -87,6 +87,23 @@ __dpm_verify()
 }
 
 ##
+# Clear all the DOTFILES_PACKAGES_MD5* hashes from current terminal memory.
+#
+# This is useful to run before an --install when you want to be absolutely sure
+# the install should run through all installable packages and ensure they are
+# not yet installed. `dpm` generates hashes of all installed packages from its
+# `dpm.d` directory, and passes it into the current shell's memory. This speeds
+# up the shell as it does not need to run through and verify each package
+# individually. Nevertheless, if an error happened, the new hash will be
+# generated as though it were installed. This clears all the hashes in memory,
+# so the install functions can fail the hash check and instead manually check
+# for the existence of each package individually, which is slower.
+__dpm_hashes_clear()
+{
+	unset $(echo "${!DOTFILES_PACKAGES_MD5*}")
+}
+
+##
 # Delegate the install command for each dpm_install_* function.
 #
 # This abstraction provides the ability to create an override for each package
@@ -147,9 +164,13 @@ __dpm_install_aptget()
 		local package_name="$package"
 
 		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-			echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+			echo -e "${BLUE}${BOLD}Individually checking/installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 			while read line; do
-				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list '^${line}\W' &> /dev/null ; then
+				if [[ -n "$line" ]] \
+					&& [[ ${line:0:1} != '#' ]] \
+					&& (! $package_manager_command_list '^${line}\W' &> /dev/null \
+						&& ! command_exists "${line}") \
+				; then
 					echo -e "${GREEN}${line}${RESET}"
 					__dpm_delegate_install_command "$package" "$package_manager_command" "$line"
 				fi
@@ -195,12 +216,16 @@ __dpm_install_brew()
 				esac
 
 				if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-					echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+					echo -e "${BLUE}${BOLD}Individually checking/installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 					while read line; do
 						# A hash check is insufficient, as not all packages are
 						# installed as an executable CLI tool. This is why check is against
 						# list of packages.
-						if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list | grep -q "^${line}\$"; then
+						if [[ -n "$line" ]] \
+							&& [[ ${line:0:1} != '#' ]] \
+							&& (! $package_manager_command_list | grep -q "^${line}\$" \
+								&& ! command_exists "${line}") \
+						; then
 							echo -e "${GREEN}${line}${RESET}"
 							__dpm_delegate_install_command "$subpackage" "$package_manager_command" "$line"
 						fi
@@ -229,9 +254,13 @@ __dpm_install_yum()
 		local package_name="$package"
 
 		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-			echo -e "${BLUE}${BOLD}Installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+			echo -e "${BLUE}${BOLD}Individually checking/installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
 			while read line; do
-				if [ -n "$line" ] && [[ ${line:0:1} != '#' ]] && ! $package_manager_command_list "${line}" &> /dev/null ; then
+				if [[ -n "$line" ]] \
+					&& [[ ${line:0:1} != '#' ]] \
+					&& (! $package_manager_command_list "${line}" &> /dev/null \
+						&& ! command_exists "${line}") \
+				; then
 					echo -e "${GREEN}${line}${RESET}"
 					__dpm_delegate_install_command "$package" "$package_manager_command" "$line"
 				fi
@@ -331,13 +360,19 @@ __dpm_install()
 	done
 }
 
+# Run package verification when flag passed. .bashrc does this every time so
+# that md5s of packages can be monitored.
+if [[ "$1" == "--verify" ]]; then
+	__dpm_verify
+fi
+
 # Install package depencencies only if install flag passed
 if [[ "$1" == "--install" ]]; then
 	__dpm_install
 fi
 
-# Run package verification when flag passed. .bashrc does this every time so
-# that md5s of packages can be monitored.
-if [[ "$1" == "--verify" ]]; then
-	__dpm_verify
+# Clear DOTFILES_PACKAGES_MD5* hashes from current session to force a
+# re-evaluation of all installed packages.
+if [[ "$1" == "--clear-hashes" ]]; then
+	__dpm_hashes_clear
 fi
