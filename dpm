@@ -309,7 +309,8 @@ __dpm_install_extras()
 	# Install Vim plugins defined in .vimrc file.
 	# Depending on the location that Vundler installs a plugin, there
 	# may be an authentication prompt for username and password.
-	vim +PluginInstall +qall 2&> /dev/null
+#	vim +PluginInstall +qall 2&> /dev/null
+	vim +PluginInstall +qall
 
 	# Vimperator color scheme on Git: fxdevtools-dark
 	# TODO turn path into variable.
