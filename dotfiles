@@ -73,7 +73,7 @@ fi
 # Note that not all files within the `.dotfiles` directory are symlinked into
 # the user home directory, as they are only used internally by these dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
-ln -vsfn "${DOTFILES_DIRECTORY}/bin/*" "${HOME}/bin/"
+ln -vsfn ${DOTFILES_DIRECTORY}/bin/* "${HOME}/bin/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.config/htop/htoprc" "${HOME}/.config/htop/htoprc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.ssh/rc" "${HOME}/.ssh/rc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.agignore" "${HOME}/"
@@ -138,9 +138,9 @@ echo -e "${WHITE}${BOLD}Done!${RESET}"
 ##
 # Cleanup any legacy associations from older versions of this dotfiles repo.
 unalias dotfiles 2&>/dev/null
-rm "${HOME}/.dfconfig"
-unlink "${HOME}/.formatting"
-unlink "${HOME}/.my.cnf"
-unlink "${HOME}/.paths"
-unlink "${HOME}/.rsync-excludes"
-unlink "${HOME}/.sshmotd"
+rm "${HOME}/.dfconfig" 2&>/dev/null
+unlink "${HOME}/.my.cnf" 2&>/dev/null
+unlink "${HOME}/.paths" 2&>/dev/null
+unlink "${HOME}/.rsync-excludes" 2&>/dev/null
+unlink "${HOME}/.sshmotd" 2&>/dev/null
+unlink "${HOME}/packages.sh" 2&>/dev/null

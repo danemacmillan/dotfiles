@@ -18,10 +18,10 @@ shopt -s expand_aliases
 shopt -s nocaseglob;
 
 # Source general configs.
-source "${HOME}/.paths"
+source "${HOME}/.path"
 source "${HOME}/.aliases"
 # Source OS-specific configs.
-source ~/.$OS
+source "${HOME}/.${OS}"
 
 # Determine whether in an SSH session, even when su is used.
 if [[ "${SSH_TTY}" ]] || [[ $(who am i) =~ \([-a-zA-Z0-9\.]+\)$ ]]; then
