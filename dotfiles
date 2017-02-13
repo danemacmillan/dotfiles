@@ -127,7 +127,8 @@ fi
 
 ##
 # Install dotfiles package manager packages.
-dpm --install
+#dpm --install
+source "${DOTFILES_DIRECTORY}/dpm" --install
 
 ##
 # Update terminal

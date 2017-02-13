@@ -29,7 +29,8 @@ if [[ "${SSH_TTY}" ]] || [[ $(who am i) =~ \([-a-zA-Z0-9\.]+\)$ ]]; then
 fi
 
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
-dpm --verify
+#dpm --verify
+source "${DOTFILES_DIRECTORY}/dpm" --verify
 
 # Set default editor
 export EDITOR=vim
