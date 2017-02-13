@@ -16,7 +16,9 @@ export DOTFILES_INCLUDES="${DOTFILES_DIRECTORY}/.dotfiles_includes"
 
 # Pull in base formatting templates.
 if [[ -f "${DOTFILES_DIRECTORY}/.formatting" ]]; then
-	source "${DOTFILES_DIRECTORY}/.formatting"
+	if tty -s ; then
+		source "${DOTFILES_DIRECTORY}/.formatting"
+	fi
 fi
 
 # Pull in base functions.
