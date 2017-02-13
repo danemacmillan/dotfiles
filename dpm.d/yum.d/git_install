@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Ensure correct, non-yum version of git is installed.
+#
+# CentOS carries a very old version, so replace it with the one defined in the
+# ius repo.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="git"
+version="git2u"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url=""
+source_directory=""
+
+echo -e "${RESET}${BBLUE}Removing any existing version of ${name}${RESET}"
+yum -y remove "${name}"
+
+echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+yum -y install "${version}"
+echo -e "${GREEN}${name} installed.${RESET}"

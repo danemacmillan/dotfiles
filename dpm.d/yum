@@ -1,6 +1,6 @@
 # Base
 epel-release
-groupinstall "Development Tools"
+#groupinstall "Development Tools"
 yum-plugin-replace
 yum-utils
 https://centos6.iuscommunity.org/ius-release.rpm
