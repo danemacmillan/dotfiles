@@ -1,5 +1,4 @@
 # Base
-update
 epel-release
 groupinstall "Development Tools"
 yum-plugin-replace
