@@ -217,6 +217,8 @@ __dpm_install_brew()
 
 				if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
 					echo -e "${BLUE}${BOLD}Individually checking/installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+					echo -e "${GREEN}Updating homebrew. Twice.${RESET}"
+					brew update && brew update
 					while read line; do
 						# A hash check is insufficient, as not all packages are
 						# installed as an executable CLI tool. This is why check is against
@@ -230,7 +232,10 @@ __dpm_install_brew()
 							__dpm_delegate_install_command "$subpackage" "$package_manager_command" "$line"
 						fi
 					done < $packages_dir/$subpackage
-					brew cleanup 2&> /dev/null
+					echo -e "${GREEN}Running cleanup, prune, and doctor on homebrew.${RESET}"
+					brew cleanup
+					brew prune
+					brew doctor
 				fi
 			fi
 		done
@@ -255,6 +260,8 @@ __dpm_install_yum()
 
 		if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
 			echo -e "${BLUE}${BOLD}Individually checking/installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+			#echo -e "${GREEN}Updating yum packages.${RESET}"
+			#yum -y update
 			while read line; do
 				if [[ -n "$line" ]] \
 					&& [[ ${line:0:1} != '#' ]] \
