@@ -74,3 +74,5 @@ weechat
 weighttp
 wget
 
+# Build these myself via dpm.d/
+symlinks
