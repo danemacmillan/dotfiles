@@ -17,6 +17,16 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 #  - verify vimperator config directory.
 
 ##
+# Cleanup any legacy associations from older versions of this dotfiles repo.
+unalias dotfiles 2&>/dev/null
+rm "${HOME}/.dfconfig" 2&>/dev/null
+unlink "${HOME}/.my.cnf" 2&>/dev/null
+unlink "${HOME}/.paths" 2&>/dev/null
+unlink "${HOME}/.rsync-excludes" 2&>/dev/null
+unlink "${HOME}/.sshmotd" 2&>/dev/null
+unlink "${HOME}/packages.sh" 2&>/dev/null
+
+##
 # Update repo from upstream.
 echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
 (cd "${DOTFILES_DIRECTORY}" && git stash && git pull && git stash pop)
@@ -135,13 +145,3 @@ source "${DOTFILES_DIRECTORY}/dpm" --install
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
 source "${HOME}/.bash_profile"
 echo -e "${WHITE}${BOLD}Done!${RESET}"
-
-##
-# Cleanup any legacy associations from older versions of this dotfiles repo.
-unalias dotfiles 2&>/dev/null
-rm "${HOME}/.dfconfig" 2&>/dev/null
-unlink "${HOME}/.my.cnf" 2&>/dev/null
-unlink "${HOME}/.paths" 2&>/dev/null
-unlink "${HOME}/.rsync-excludes" 2&>/dev/null
-unlink "${HOME}/.sshmotd" 2&>/dev/null
-unlink "${HOME}/packages.sh" 2&>/dev/null

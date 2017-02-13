@@ -96,4 +96,4 @@ export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\H\\[${RESET}${CYAN
 # Source .extra file if it exists. This file will never get added to repo.
 if [[ -f "${HOME}/.extra" ]]; then
 	source "${HOME}/.extra"
-fi;
+fi
