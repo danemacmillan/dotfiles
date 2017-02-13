@@ -25,10 +25,10 @@ fi
 source_url="git@github.com:weechat/weechat.git"
 source_directory="${DPM_INSTALL_DIRECTORY}/${name}"
 
-echo -e "${BBLUE}Removing any existing version of ${name}${RESET}"
+echo -e "${RESET}${BBLUE}Removing any existing version of ${name}${RESET}"
 yum -y remove weechat
 
-echo -e "${BBLUE}Cloning, compiling, and installing ${name} ${GREEN}${version}${RESET}"
+echo -e "${RESET}${BBLUE}Cloning, compiling, and installing ${name} ${GREEN}${version}${RESET}"
 rm -rf "${source_directory}" \
 && git clone "${source_url}" "${source_directory}"
 cd "${source_directory}" \

@@ -19,7 +19,7 @@ fi
 source_url="git@github.com:brandt/symlinks.git"
 source_directory="${DPM_INSTALL_DIRECTORY}/${name}"
 
-echo -e "${BBLUE}Downloading, compiling, and installing ${name} ${GREEN}${version}${RESET}"
+echo -e "${RESET}${BBLUE}Downloading, compiling, and installing ${name} ${GREEN}${version}${RESET}"
 cd "${DPM_INSTALL_DIRECTORY}" \
 && rm -rf "${source_directory}" \
 && git clone "${source_url}" "${source_directory}"
