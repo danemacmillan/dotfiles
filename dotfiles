@@ -41,14 +41,19 @@ if [[ ! -d "${HOME}/.ssh" ]]; then
 	mkdir -p "${HOME}/.ssh"
 fi
 
-if [ ! -d "${HOME}/bin" ]; then
+if [[ ! -d "${HOME}/bin" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/bin' directory.${RESET}"
 	mkdir -p "${HOME}/bin"
 fi
 
-if [ ! -d "${HOME}/tmp" ]; then
+if [[ ! -d "${HOME}/tmp" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/tmp' directory.${RESET}"
 	mkdir -p "${HOME}/tmp"
+fi
+
+if [[ ! -d "${DPM_INSTALL_DIRECTORY}" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${DPM_INSTALL_DIRECTORY}' directory.${RESET}"
+	mkdir -p "${DPM_INSTALL_DIRECTORY}"
 fi
 
 ##

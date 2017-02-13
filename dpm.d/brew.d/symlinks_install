@@ -12,20 +12,15 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # @license MIT
 #
 name="symlinks"
-source_url="git@github.com:brandt/symlinks.git"
 version="v1.4.3"
 if [[ -n "$1" ]]; then
 	version="$1"
 fi
-
-directory_dotfiles_packages="${HOME}/.dotfiles-packages"
-source_directory="${directory_dotfiles_packages}/${name}"
-if [[ ! -d "${directory_dotfiles_packages}" ]]; then
-	mkdir -pv "${directory_dotfiles_packages}"
-fi
+source_url="git@github.com:brandt/symlinks.git"
+source_directory="${DPM_INSTALL_DIRECTORY}/${name}"
 
 echo -e "${BBLUE}Downloading, compiling, and installing ${name} ${GREEN}${version}${RESET}"
-cd "${directory_dotfiles_packages}" \
+cd "${DPM_INSTALL_DIRECTORY}" \
 && rm -rf "${source_directory}" \
 && git clone "${source_url}" "${source_directory}"
 cd "${source_directory}" \
