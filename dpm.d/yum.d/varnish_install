@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install varnish 3.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="varnish"
+version="varnish"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url=""
+source_directory=""
+
+if ! command_exists ${name}; then
+	echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+
+	yum -y install \
+	https://repo.varnish-cache.org/redhat/varnish-3.0.el6.rpm \
+	${version}
+
+	echo -e "${GREEN}${name} installed.${RESET}"
+fi

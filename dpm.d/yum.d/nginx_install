@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install nginx version from ius.
+#
+# CentOS carries a very old version, so replace it with the one defined in the
+# ius repo.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="nginx"
+version="nginx"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url=""
+source_directory=""
+
+if ! command_exists ${name}; then
+	echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+
+	yum -y install \
+	http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm \
+	${version}
+
+	echo -e "${GREEN}${name} installed.${RESET}"
+fi

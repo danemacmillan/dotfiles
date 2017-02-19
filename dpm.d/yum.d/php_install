@@ -19,10 +19,11 @@ fi
 source_url=""
 source_directory=""
 
-if ! command_exists php; then
+if ! command_exists ${name}; then
 	echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
 
 	yum -y install \
+	https://centos6.iuscommunity.org/ius-release.rpm \
 	${version} \
 	${version}-cli \
 	${version}-common \

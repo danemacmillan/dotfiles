@@ -73,8 +73,14 @@ vim-minimal
 wget
 zlib-devel
 
-# These packages should only be installed after the general ones.
+# These packages should only be installed after the general ones, as they
+# either compile, or perform extra dependency and version checks.
 git
+mysql
+nginx
+php
 rsync
 tmux
+varnish
 weechat
+
