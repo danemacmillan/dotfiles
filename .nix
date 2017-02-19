@@ -1,7 +1,8 @@
 # vim: ft=sh
 
 # Aliases for CentOS
-alias update="dotfiles; composer selfupdate; yum -y update"
+alias update="dotfiles; composer selfupdate; npm install npm@latest -g; yum -y update"
+
 
 # Add tab completion for many Bash commands, including the
 # ability to add extended Git info in PS1.
