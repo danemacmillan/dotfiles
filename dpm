@@ -14,9 +14,12 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 #
-# @TODO further abstract indivual managers, as they are very similar in
+# @TODO
+# - Further abstract indivual managers, as they are very similar in
 # functionality. Possibly create a list of verification and install commands
 # that get passed to a single function.
+# - Move package install hash tracking from in-memory Bash variable, to
+# file-based, so that after an install, the hashes update in the current shell.
 
 export DOTFILES_PACKAGE_MANAGER_DIRECTORY="${HOME}/.dotfiles/dpm.d"
 
@@ -59,6 +62,9 @@ __dpm_managers_get()
 
 ##
 # Verify and store the MD5 hashes of all packages being used by dotfiles.
+#
+# @todo Move this into file-based vs memory-based variable, as existing shell
+# update session will not reflect new hashes.
 __dpm_verify()
 {
 	# Get package manager types.
@@ -272,7 +278,7 @@ __dpm_install_yum()
 					__dpm_delegate_install_command "$package" "$package_manager_command" "$line"
 				fi
 			done < $packages_dir/$package
-			yum clean all 2&> /dev/null
+			yum clean all
 		fi
 	fi
 }
