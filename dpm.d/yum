@@ -29,13 +29,14 @@ gcc
 gcc-c++
 gettext
 gnutls-devel
+gpg
 htop
 kernel-devel
 libcurl
 libcurl-devel
-libcurl-devel
+libdwarf-devel
 libgcrypt-devel
-libgcrypt-devel
+libmcrypt-devel
 libtool
 lsof
 lua
@@ -62,6 +63,7 @@ ruby-devel
 #setroubleshoot
 strace
 symlinks
+tbb-devel
 the_silver_searcher
 v8-devel
 vim
@@ -69,6 +71,7 @@ vim-common
 vim-enhanced
 vim-minimal
 wget
+zlib-devel
 
 # These packages should only be installed after the general ones.
 git

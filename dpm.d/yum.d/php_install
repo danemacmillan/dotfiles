@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install specific PHP version and extensions.
+#
+# CentOS carries a very old version, so replace it with the one defined in the
+# ius repo.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="php"
+version="php56u"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url=""
+source_directory=""
+
+if ! command_exists php; then
+	echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+
+	yum -y install \
+	${version} \
+	${version}-cli \
+	${version}-common \
+	${version}-devel \
+	${version}-fpm \
+	${version}-gd \
+	${version}-imap \
+	${version}-ioncube-loader \
+	${version}-mbstring \
+	${version}-mcrypt \
+	${version}-mhash \
+	${version}-mysqlnd \
+	${version}-opcache \
+	${version}-pecl-geoip \
+	${version}-pecl-jsonc \
+	${version}-pecl-memcached \
+	${version}-pecl-redis \
+	${version}-pecl-xdebug \
+	${version}-pdo \
+	${version}-process \
+	${version}-soap \
+	${version}-xml
+
+	echo -e "${GREEN}${name} installed.${RESET}"
+fi
