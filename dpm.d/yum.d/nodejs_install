@@ -21,11 +21,11 @@ source_url=""
 source_directory=""
 
 echo -e "${RESET}${BBLUE}Removing any existing version of ${name}${RESET}"
-yum -y remove "${version}" npm
+yum remove -y "${version}" npm
 
 echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
 curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -
-yum -y install ${version} \
-&& npm install npm@latest -g
+yum -y install ${version}
+npm install npm@latest -g
 
 echo -e "${GREEN}${name} installed.${RESET}"
