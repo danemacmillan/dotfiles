@@ -193,6 +193,12 @@ __dpm_install_brew()
 	local packages_dir="$1"
 	local directory_index="$2"
 
+		# Get homebrew and some niceties.
+	if ! command_exists brew; then
+		echo "${BLUE}${BOLD}Installing homebrew${RESET}"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
+
 	if [ -f $packages_dir/$package ]; then
 		# Use three distinct packages for brew.
 		for subpackage in "tap" "brew" "cask"; do
@@ -286,49 +292,32 @@ __dpm_install_yum()
 ##
 # Extras are for packages that are not easily abstracted away due to their
 # need for varying steps. Possibly create an extras file in dpm.d for
-# blindly running code instead of including it in packages.sh, where there
+# blindly running code instead of including it here, where there
 # are no hard-coded dependencies--just abstraction to handle package
 # installment through the dotfiles framework.
 # TODO: Add md5 checks to prevent unnecessary downloads.
 # TODO: Move this into external process. Run Git updates also.
 __dpm_install_extras()
 {
-	echo -e "${BLUE}${BOLD}Downloading external dependencies, if any.${RESET}"
+	# Vim Vundle
+	if command_exists vim; then
+		echo -e "${BLUE}${BOLD}Updating Vim Vundle and its plugins.${RESET}"
+		local vim_vundle_directory=${HOME}/.vim/bundle/Vundle.vim
+		local vim_vundle_repo=https://github.com/VundleVim/Vundle.vim.git
 
-	# Get homebrew and some niceties.
-	if ! hash brew 2>/dev/null && [[ $OS == 'osx' ]]; then
-		echo "${GREEN}homebrew${RESET}"
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	fi
-
-	# Composer
-	if ! hash composer 2>/dev/null && [[ ! -f composer.phar ]]; then
-		echo -e "${GREEN}composer${RESET}"
-		if [ ! -f "$HOME/bin/composer" ]; then
-			(cd "$HOME/bin" && curl -sS https://getcomposer.org/installer | php -- --filename=composer)
+		if [[ ! -d ${vim_vundle_directory} ]]; then
+			git clone ${vim_vundle_repo} ${vim_vundle_directory}
+		else
+			cd ${vim_vundle_directory} \
+			&& git remote set-url ${vim_vundle_repo} \
+			&& git pull
 		fi
-	fi
 
-	# Vundle
-	echo -e "${GREEN}Updating Vim Vundle and plugins. This will take a few seconds.${RESET}"
-	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
-	# Install Vim plugins defined in .vimrc file.
-	# Depending on the location that Vundler installs a plugin, there
-	# may be an authentication prompt for username and password.
-#	vim +PluginInstall +qall 2&> /dev/null
-	vim +PluginInstall +qall
-
-	# Vimperator color scheme on Git: fxdevtools-dark
-	# TODO turn path into variable.
-	echo -e "${GREEN}Updating Vimperator theme: fxdevtools-dark.${RESET}"
-	if [[ ! -d "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark" ]]; then
-		git clone https://github.com/danemacmillan/vimperator-theme-fxdevtools-dark.git "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark"
-	else
-		(cd "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark" && git pull)
-	fi
-
-	if [[ -d "$HOME/.vimperator/colors" ]]; then
-		ln -nsfv "$HOME/.dotfiles-packages/vimperator-theme-fxdevtools-dark/colors/fxdevtools-dark.vimp" "$HOME/.vimperator/colors/fxdevtools-dark.vimp"
+		# Install Vim plugins defined in .vimrc file.
+		# Depending on the location that Vundler installs a plugin, there
+		# may be an authentication prompt for username and password.
+		#vim +PluginInstall +qall 2&> /dev/null
+		vim +PluginInstall +qall
 	fi
 }
 
@@ -341,11 +330,6 @@ __dpm_install()
 {
 	# Get list of supported package manager types.
 	__dpm_managers_get
-
-	# Always install extras first. They will contain stuff like installing
-	# brew, PHP composer, and vim vundle. These are typically essential before
-	# any other packages can be installed.
-	__dpm_install_extras
 
 	# Loop through hashes for each directory provided.
 	local directory_index=0
@@ -368,12 +352,15 @@ __dpm_install()
 						__dpm_install_yum "$packages_dir" $directory_index
 						;;
 				esac
-				# Update terminal session hashes.
-				source dpm --verify
 			fi
 		done
 		directory_index=$((directory_index+1))
 	done
+
+	__dpm_install_extras
+
+	# Update terminal session hashes.
+	source dpm --verify
 }
 
 # Run package verification when flag passed. .bashrc does this every time so

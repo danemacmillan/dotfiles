@@ -47,5 +47,11 @@ if ! command_exists ${name}; then
 	${version}-soap \
 	${version}-xml
 
+	# Composer
+	if ! command_exists composer; then
+		echo -e "${GREEN}Installing composer${RESET}"
+		curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
+	fi
+
 	echo -e "${GREEN}${name} installed.${RESET}"
 fi
