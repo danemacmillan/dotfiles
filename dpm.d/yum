@@ -48,7 +48,6 @@ mytop
 ncdu
 ncurses-devel
 nmap
-npm
 openssl
 openssl-devel
 parted
@@ -78,6 +77,7 @@ zlib-devel
 git
 mysql
 nginx
+nodejs
 php
 rsync
 tmux

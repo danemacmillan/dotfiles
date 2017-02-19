@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install latest version of nodejs and npm.
+#
+# Installation instructions:
+# - https://nodejs.org/en/download/package-manager/#enterprise-linux-and-fedora
+# - https://docs.npmjs.com/getting-started/installing-node
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="nodejs"
+version="nodejs"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url=""
+source_directory=""
+
+echo -e "${RESET}${BBLUE}Removing any existing version of ${name}${RESET}"
+yum -y remove "${name}" npm
+
+echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+curl --silent --location https://rpm.nodesource.com/setup_7.x | bash - \
+&& npm install npm@latest -g
+
+echo -e "${GREEN}${name} installed.${RESET}"
