@@ -308,11 +308,12 @@ __dpm_install_extras()
 		local vim_vundle_repo="https://github.com/VundleVim/Vundle.vim.git"
 
 		if [[ ! -d ${vim_vundle_directory} ]]; then
-			git clone ${vim_vundle_repo} ${vim_vundle_directory}
+			(cd ${vim_vundle_directory} \
+			&& git clone ${vim_vundle_repo} ${vim_vundle_directory})
 		else
-			cd ${vim_vundle_directory} \
+			(cd ${vim_vundle_directory} \
 			&& git remote set-url origin ${vim_vundle_repo} \
-			&& git pull
+			&& git pull)
 		fi
 
 		# Install Vim plugins defined in .vimrc file.
