@@ -300,16 +300,18 @@ __dpm_install_yum()
 __dpm_install_extras()
 {
 	# Vim Vundle
-	if command_exists vim; then
+	if command_exists vim \
+		&& command_exists git \
+	; then
 		echo -e "${BLUE}${BOLD}Updating Vim Vundle and its plugins.${RESET}"
-		local vim_vundle_directory=${HOME}/.vim/bundle/Vundle.vim
-		local vim_vundle_repo=https://github.com/VundleVim/Vundle.vim.git
+		local vim_vundle_directory="${HOME}/.vim/bundle/Vundle.vim"
+		local vim_vundle_repo="https://github.com/VundleVim/Vundle.vim.git"
 
 		if [[ ! -d ${vim_vundle_directory} ]]; then
 			git clone ${vim_vundle_repo} ${vim_vundle_directory}
 		else
 			cd ${vim_vundle_directory} \
-			&& git remote set-url ${vim_vundle_repo} \
+			&& git remote set-url origin ${vim_vundle_repo} \
 			&& git pull
 		fi
 
