@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+##
+# First install of dotfiles.
+#
+# This is a script to install Dane MacMillan's dotfiles repo on a brand new
+# machine with nothing available.
+#
+# Note that you MUST have already set up your SSH keys on the machine and added
+# them to your GitHub account.
+#
+# Install:
+#   curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+# @TODO Make OS detection more thorough. At the moment, "nix" essentially
+# means "not MacOS and definitely CentOS." Obviously there is more to "nix."
+
+# Determine OS to determine the package manager used to install packages.
+export OS=$(uname | awk '{print tolower($0)}')
+case "${OS}" in
+  darwin*)
+    OS="osx";;
+  linux*)
+    OS="nix";;
+esac
+
+echo -e "Preparing dotfiles install for ${OS} OS.\n"
+
+if [[ "${OS}" == "osx" ]]; then
+		echo "Installing homebrew"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		brew install git
+fi
+
+if command -v yum >/dev/null 2>&1 \
+	&& [[ "${OS}" == "nix" ]] \
+; then
+	yum -y install git
+fi
+
+cd "${HOME}" && git clone git@github.com:danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source dotfiles
