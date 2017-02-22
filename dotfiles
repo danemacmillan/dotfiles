@@ -118,13 +118,17 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.tmux.conf" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.vimperatorrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
 
+## TODO FIX vim and weechat mv error. Handle vundle missing bundle directory.
+## Update install script and readme.
+## http://stackoverflow.com/questions/4642915/passing-parameters-to-bash-when-executing-a-script-fetched-by-curl
+
 ##
 # Symlink trackable directories that could exist, and back up to `tmp`.
-mv -f "${HOME}/.vim" "${HOME}/tmp/.vim-$(now)" \
-&& ln -vsfn "${DOTFILES_DIRECTORY}/.vim" "${HOME}/"
+#mv -f "${HOME}/.vim" "${HOME}/tmp/.vim-$(now)" \
+ln -vsfn "${DOTFILES_DIRECTORY}/.vim" "${HOME}/"
 
-mv -f "${HOME}/.weechat" "${HOME}/tmp/.weechat-$(now)" \
-&& ln -vsfn "${DOTFILES_DIRECTORY}/.weechat" "${HOME}/"
+#mv -f "${HOME}/.weechat" "${HOME}/tmp/.weechat-$(now)" \
+ln -vsfn "${DOTFILES_DIRECTORY}/.weechat" "${HOME}/"
 
 ##
 # Add `dotfiles` and `dpm` executable scripts into `~/bin`.
