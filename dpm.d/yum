@@ -44,6 +44,7 @@ lua-devel
 lynx
 make
 make
+memcached
 mytop
 ncdu
 ncurses-devel
