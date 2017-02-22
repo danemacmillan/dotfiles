@@ -55,6 +55,7 @@ patch
 perl-ExtUtils-Embed
 pv
 python-devel
+redis
 rpm-build
 rpm-devel
 ruby
