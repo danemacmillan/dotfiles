@@ -37,7 +37,6 @@ bower_components/
 
 ## Vim
 .vim/.netrwhist
-.vim/bundle
 
 ## ctags
 tags
