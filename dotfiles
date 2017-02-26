@@ -154,4 +154,4 @@ source "${DOTFILES_DIRECTORY}/dpm" --install
 # Update terminal
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
 source "${HOME}/.bash_profile"
-echo -e "${WHITE}${BOLD}Done!${RESET}"
+echo -e "${WHITE}${BOLD}Done!${RESET}\n\n"

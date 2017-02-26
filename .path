@@ -25,6 +25,11 @@ if [[ -d "${HOME}/.composer/vendor/bin" ]]; then
 	export PATH="${HOME}/.composer/vendor/bin:${PATH}"
 fi
 
+# Go lang binaries
+if [[ -d "${HOME}/go" ]]; then
+	export PATH="${HOME}/go/bin:${PATH}"
+fi
+
 # Add user bin if it exists.
 if [[ -d "${HOME}/bin" ]]; then
 	export PATH="${HOME}/bin:${PATH}"
