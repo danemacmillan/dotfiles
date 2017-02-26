@@ -233,6 +233,9 @@ endif
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
 
+" Set .viminfo location
+set viminfo+=n~/.vim/.viminfo
+
 " Respect modeline in files
 set modeline
 set modelines=4
