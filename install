@@ -18,6 +18,7 @@
 #
 # @TODO Make OS detection more thorough. At the moment, "nix" essentially
 # means "not MacOS and definitely CentOS." Obviously there is more to "nix."
+# @TODO Make this more robust.
 
 # Determine OS to determine the package manager used to install packages.
 export OS=$(uname | awk '{print tolower($0)}')
