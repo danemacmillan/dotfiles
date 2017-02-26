@@ -62,6 +62,10 @@ export LESSHISTFILE=/dev/null
 export RSYNC_PARTIAL_DIR="{HOME}/tmp/rsync-partials"
 
 ##
+# Go lang
+export GOPATH="${HOME}/go"
+
+##
 # PS1
 
 # Git branch using bash-completion

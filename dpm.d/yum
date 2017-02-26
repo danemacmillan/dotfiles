@@ -29,6 +29,7 @@ gcc
 gcc-c++
 gettext
 gnutls-devel
+golang
 gpg
 htop
 kernel-devel
@@ -81,6 +82,7 @@ mysql
 nginx
 nodejs
 php
+rclone
 rsync
 tmux
 varnish

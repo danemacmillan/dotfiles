@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install latest version of rclone from source.
+#
+# Installation instructions:
+# - http://rclone.org/install/
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="rclone"
+version="rclone"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url="github.com/ncw/rclone"
+source_directory=""
+
+if ! command_exists go; then
+	echo -e "${RESET}${BBLUE}Installing golang${RESET}"
+	yum -y install golang
+fi
+
+if [[ ! -d "${HOME}/go" ]]; then
+	mkdir -p "${HOME}/go"
+fi
+
+export GOPATH="${HOME}/go"
+
+echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+go get -u -v "${source_url}"
+
+echo -e "${GREEN}${name} installed.${RESET}"
