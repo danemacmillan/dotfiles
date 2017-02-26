@@ -39,6 +39,8 @@ fi
 if [[ ! -d "${HOME}/.ssh" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.ssh' directory.${RESET}"
 	mkdir -p "${HOME}/.ssh"
+	chown -R $USER:$USER "${HOME}/.ssh"
+	chmod 700 "${HOME}/.ssh"
 fi
 
 if [[ ! -d "${HOME}/bin" ]]; then
@@ -76,6 +78,7 @@ fi
 if [[ ! -f "${HOME}/.ssh/config" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.ssh/config' template file for custom SSH credentials.${RESET}"
 	cp -v "${DOTFILES_DIRECTORY}/.ssh/config" "${HOME}/.ssh/config"
+	chmod 600 "${HOME}"/.ssh/*
 fi
 
 ##
@@ -84,7 +87,7 @@ fi
 # Note that not all files within the `.dotfiles` directory are symlinked into
 # the user home directory, as they are only used internally by these dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
-ln -vsfn ${DOTFILES_DIRECTORY}/bin/* "${HOME}/bin/"
+ln -vsfn "${DOTFILES_DIRECTORY}"/bin/* "${HOME}/bin/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.config/htop/htoprc" "${HOME}/.config/htop/htoprc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.ssh/rc" "${HOME}/.ssh/rc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.agignore" "${HOME}/"
@@ -121,6 +124,8 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
 ## TODO FIX vim and weechat mv error. Handle vundle missing bundle directory.
 ## Update install script and readme.
 ## http://stackoverflow.com/questions/4642915/passing-parameters-to-bash-when-executing-a-script-fetched-by-curl
+#
+# ALSO ADD NPM build: npm install -g diff-so-fancy
 
 ##
 # Symlink trackable directories that could exist, and back up to `tmp`.
