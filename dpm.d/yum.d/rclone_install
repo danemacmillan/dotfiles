@@ -30,7 +30,9 @@ fi
 
 export GOPATH="${HOME}/go"
 
-if ! command_exists rclone; then
+if command_exists go \
+	&& ! command_exists rclone \
+; then
 	echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
 	go get -u -v "${source_url}"
 	mv "${GOPATH}/bin/rclone" /usr/local/bin/
