@@ -15,7 +15,7 @@ If you have an SSH key installed on the destination:
 
 If you do not have an SSH key installed on the destination:
 
-`cd ~ && git clone https://github.com/danemacmillan/dotfiles.git .dotfiles && cd .dotfiles && source dotfiles`
+`curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -s -- nossh`
 
 ### Notes
 

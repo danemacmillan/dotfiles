@@ -122,9 +122,6 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.vimperatorrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
 
 ## TODO FIX vim and weechat mv error. Handle vundle missing bundle directory.
-## Update install script and readme.
-## http://stackoverflow.com/questions/4642915/passing-parameters-to-bash-when-executing-a-script-fetched-by-curl
-#
 # ALSO ADD NPM build: npm install -g diff-so-fancy
 
 ##
