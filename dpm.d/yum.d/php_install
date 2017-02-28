@@ -12,10 +12,17 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # @license MIT
 #
 name="php"
-version="php56u"
+version="php55u"
+yum_enablerepo=""
+
 if [[ -n "$1" ]]; then
 	version="$1"
 fi
+
+if [[ "${version}" == "php55u" ]]; then
+	yum_enablerepo="--enablerepo=ius-archive"
+fi
+
 source_url=""
 source_directory=""
 
@@ -24,6 +31,7 @@ if ! command_exists ${name}; then
 
 	yum -y install \
 	https://centos6.iuscommunity.org/ius-release.rpm \
+	${yum_enablerepo} \
 	${version} \
 	${version}-cli \
 	${version}-common \
