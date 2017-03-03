@@ -471,6 +471,8 @@ rcp()
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 # @license MIT
+#
+# @TODO Make it accept extra rsync and ssh parameters.
 migrate_privates()
 {
 	local command_name="migrate_privates"
@@ -541,7 +543,7 @@ migrate_privates()
 				echo -e "  - ${YELLOW}${HOME}/${filepath}${RESET}"
 			fi
 		done
-		echo -e "\nUsage:\n  ${BCYAN}migrate_privates${RESET} ${GREEN}USER@HOST[:PATH]${RESET}"
+		echo -e "\nUsage:\n  ${BCYAN}${command_name}${RESET} ${GREEN}USER@HOST[:PATH]${RESET}"
 		echo -e "\nExamples:"
 		echo -e "\n Migrate private files to a new remote host:\n  ${command_name} user@host"
 		echo -e "\n Migrate private files to remote host (defined in ~/.ssh/config as stage):\n  ${command_name} stage"
@@ -550,6 +552,39 @@ migrate_privates()
 	fi
 }
 
+##
+# Deploy Dane MacMillan's dotfiles to a remote server.
+#
+# Note that this does not accept extra rsync or SSH parameters. Add a remote
+# host to a `.ssh/config` file and reference the name, or ensure that the
+# remote host is on the implied port of 22.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @license MIT
+function dotfiles_deploy_remote()
+{
+	local command_name="dotfiles_deploy_remote"
+
+	local destination=""
+	if [[ -n "$1" ]]; then
+		local destination="$1"
+	fi
+
+	if [[ -n "${destination}" ]]; then
+		local dotfiles_install_string="curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -"
+		migrate_privates "${destination}"
+		ssh "${destination}" "${dotfiles_install_string}"
+		migrate_privates "${destination}"
+	else
+		echo -e "Deploy Dane MacMillan's dotfiles to a remote server."
+		echo -e "\nUsage:\n  ${BCYAN}${command_name}${RESET} ${GREEN}USER@HOST${RESET}"
+		echo -e "\nExamples:"
+		echo -e "\n Deploy dotfiles to remote server:\n  ${command_name} user@host"
+		echo -e "\n Deploy dotfiles to remote server (defined in ~/.ssh/config as stage):\n  ${command_name} stage"
+		return 1
+	fi
+
+}
 ###############################################################################
 # From other authors
 ###############################################################################
