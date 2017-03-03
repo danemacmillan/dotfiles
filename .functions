@@ -1,15 +1,6 @@
 # vim: ft=sh
 
 ##
-# .functions
-#
-# Library of functions that are used throughout dotfiles.
-#
-# @author Dane MacMillan <work@danemacmillan.com>
-# @link https://github.com/danemacmillan/dotfiles
-# @license MIT
-
-##
 # Check if command line utility exists.
 #
 # This is based on discussion at:
@@ -44,7 +35,6 @@ now()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 calculate_md5_hash()
 {
 	local md5tool=md5sum
@@ -69,7 +59,6 @@ calculate_md5_hash()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 rr()
 {
 	if (( $# > 1 )); then
@@ -86,7 +75,6 @@ rr()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 loop()
 {
 	if [[ -z $1 ]]; then
@@ -117,7 +105,6 @@ loop()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 tun()
 {
 	local username="$1"
@@ -133,7 +120,6 @@ tun()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 rrmy()
 {
 	ssh -T -pPORT USERNAME@SERVER "mysql -u USERNAME -pPASSWORD -Bs" < "cool.sql" > output.txt
@@ -146,7 +132,6 @@ rrmy()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 choochoo()
 {
 	echo -e "${BLUE}${BOLD}Running a train on this repo. Hiyoooo!${RESET}"
@@ -159,7 +144,6 @@ choochoo()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 v()
 {
 	case $OS in
@@ -185,7 +169,6 @@ v()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 tt()
 {
 	CHECKDIR=.
@@ -220,7 +203,6 @@ tt()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 newsshkey()
 {
 	KEY_USER=${USER}
@@ -258,7 +240,6 @@ newsshkey()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 magevents()
 {
 	if hash ag 2>/dev/null ; then
@@ -291,7 +272,6 @@ magevents()
 # @license MIT
 #
 # @TODO This is incomplete and requires more testing.
-#
 archive()
 {
 	case $1 in
@@ -319,7 +299,6 @@ archive()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 log_ips()
 {
 	if [[ -n $1 ]]; then
@@ -349,7 +328,6 @@ hasaccess()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 firefox()
 {
 	# OSX only
@@ -365,7 +343,6 @@ firefox()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 firefox_profile()
 {
 	firefox --no-remote -P "$@"
@@ -572,7 +549,6 @@ migrate_privates()
 		return 1
 	fi
 }
-
 
 ###############################################################################
 # From other authors
