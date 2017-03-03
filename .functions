@@ -559,6 +559,8 @@ migrate_privates()
 # host to a `.ssh/config` file and reference the name, or ensure that the
 # remote host is on the implied port of 22.
 #
+# THIS IS NOT WORKING. IT IS A WORK IN PROGRESS.
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @license MIT
 function dotfiles_deploy_remote()
@@ -573,10 +575,10 @@ function dotfiles_deploy_remote()
 	if [[ -n "${destination}" ]]; then
 		local dotfiles_install_string="curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -"
 		migrate_privates "${destination}"
-		ssh "${destination}" "${dotfiles_install_string}"
+#		ssh -t "${destination}" su ${USER} -c "${dotfiles_install_string}"
 		migrate_privates "${destination}"
 	else
-		echo -e "Deploy Dane MacMillan's dotfiles to a remote server."
+		echo -e "Deploy Dane MacMillan's dotfiles to a remote server. This will ask for sudo password."
 		echo -e "\nUsage:\n  ${BCYAN}${command_name}${RESET} ${GREEN}USER@HOST${RESET}"
 		echo -e "\nExamples:"
 		echo -e "\n Deploy dotfiles to remote server:\n  ${command_name} user@host"
