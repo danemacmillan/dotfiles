@@ -121,15 +121,22 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.tmux.conf" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.vimperatorrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
 
-## TODO FIX vim and weechat mv error. Handle vundle missing bundle directory.
-# ALSO ADD NPM build: npm install -g diff-so-fancy
+# TODO ALSO ADD NPM build: npm install -g diff-so-fancy
 
 ##
 # Symlink trackable directories that could exist, and back up to `tmp`.
-#mv -f "${HOME}/.vim" "${HOME}/tmp/.vim-$(now)" \
+if [[ -e "${HOME}/.vim" ]] \
+	&& [[ ! -e "${HOME}/tmp/.vim" ]] \
+; then
+	mv "${HOME}/.vim" "${HOME}/tmp/.vim"
+fi
 ln -vsfn "${DOTFILES_DIRECTORY}/.vim" "${HOME}/"
 
-#mv -f "${HOME}/.weechat" "${HOME}/tmp/.weechat-$(now)" \
+if [[ -e "${HOME}/.weechat" ]] \
+	&& [[ ! -e "${HOME}/tmp/.weechat" ]] \
+; then
+	mv "${HOME}/.weechat" "${HOME}/tmp/.weechat"
+fi
 ln -vsfn "${DOTFILES_DIRECTORY}/.weechat" "${HOME}/"
 
 ##
