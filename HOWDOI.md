@@ -119,3 +119,13 @@ not exist, the regular syntax will need to be used. Use `-p###` for port.
 - Example: `IN TXT "v=spf1 mx a ptr a:email.kayako.com include:_spf.google.com include:servers.mcsv.net include:spf.mandrillapp.com ~all"`
 - Really good generator: [http://www.spfwizard.net/](http://www.spfwizard.net/)
 
+# Make a directory shared among multiple users with `setgid` bit and `acl`s
+
+- Ensure the parent directory has the desired owners and permissions.
+- Read current ACLs with `getfacl parentdir`
+- Run `chmod g+s parentdir` to set `setgid` bit. This ensures all files and
+directories are created with the same group owner as the parent.
+- Run `setfacl -m d:u::rwX,d:g::rwX,d:o::---,u::rwX,g::rwX,o::--- parentdir` to
+ensure that permissions are defined for all new files and directories based on
+this ACL rule.
+- Recursively remove all ACLs: `setfacl -R -b parentdir` 

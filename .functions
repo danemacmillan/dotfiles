@@ -585,8 +585,8 @@ function dotfiles_deploy_remote()
 		echo -e "\n Deploy dotfiles to remote server (defined in ~/.ssh/config as stage):\n  ${command_name} stage"
 		return 1
 	fi
-
 }
+
 ###############################################################################
 # From other authors
 ###############################################################################
