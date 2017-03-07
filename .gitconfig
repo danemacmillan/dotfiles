@@ -126,7 +126,7 @@
 
 	# https://github.com/so-fancy/diff-so-fancy
 	#pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified):'
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	#pager = diff-so-fancy | less --tabs=4 -RFX
 
 # Colors http://nathanhoad.net/how-to-colours-in-git
 
