@@ -32,6 +32,21 @@ This example remounts whatever is mounted to the root.
 - `resize2fs /dev/disk/by-id/[DISK_NAME]`
 - Note the new size of the mounted disk
 
+# Mount a Google Cloud Storage bucket as disk on filesystem
+
+Be sure to read:
+
+- https://github.com/GoogleCloudPlatform/gcsfuse
+- http://serverfault.com/a/750719
+
+Instructions:
+
+- `yum install fuse`
+- Grab latest rpm from https://github.com/GoogleCloudPlatform/gcsfuse/releases
+- `yum install https://github.com/GoogleCloudPlatform/gcsfuse/releases/download/v0.20.1/gcsfuse-0.20.1-1.x86_64.rpm`
+- Regular mount: `gcsfuse -o allow_other -file-mode=777 -dir-mode=777 bucket-name /mnt/bucket-name`
+- Persist mount in `/etc/fstab`: `bucket-name /mnt/bucket-name gcsfuse rw,allow_other,file_mode=777,dir_mode=777`
+
 # Update, query, and delete kernels on CentOS
 
 - `yum update kernel`

@@ -25,6 +25,8 @@ cppunit
 curl
 epel-release
 expect
+fuse
+https://github.com/GoogleCloudPlatform/gcsfuse/releases/download/v0.20.1/gcsfuse-0.20.1-1.x86_64.rpm
 gcc
 gcc-c++
 gettext
