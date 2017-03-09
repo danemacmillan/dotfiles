@@ -587,6 +587,19 @@ function dotfiles_deploy_remote()
 	fi
 }
 
+##
+# Set the rclone configuration password for current session.
+#
+# Documentation: http://rclone.org/docs/#configuration-encryption
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @license MIT
+function set_rclone_password()
+{
+	read -s RCLONE_CONFIG_PASS
+	export RCLONE_CONFIG_PASS
+}
+
 ###############################################################################
 # From other authors
 ###############################################################################
