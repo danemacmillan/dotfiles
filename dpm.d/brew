@@ -19,6 +19,7 @@ dos2unix
 findutils
 fontconfig
 freetype
+fswatch
 gawk
 git
 git-extras
