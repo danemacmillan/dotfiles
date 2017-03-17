@@ -8,41 +8,58 @@
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 
+##
 # Standard
 if [[ -d "/usr/local/sbin" ]]; then
 	export PATH="/usr/local/sbin:${PATH}"
 fi
 
+##
 # Standard
 if [[ -d "/usr/local/bin" ]]; then
 	export PATH="/usr/local/bin:${PATH}"
 fi
 
+##
 # Composer global installs
 if [[ -d "${HOME}/.composer/vendor/bin" ]]; then
 	export PATH="${HOME}/.composer/vendor/bin:${PATH}"
 fi
 
+##
 # Go lang binaries
 if [[ -d "${HOME}/go" ]]; then
 	export PATH="${HOME}/go/bin:${PATH}"
 fi
 
+##
 # Add user bin if it exists.
 if [[ -d "${HOME}/bin" ]]; then
 	export PATH="${HOME}/bin:${PATH}"
 fi
 
+##
+# Go lang
+export GOPATH="${HOME}/go"
+
+##
 # MacOS
 if command_exists brew ; then
+	# These are really slow, so just use hardcoded path.
+	#HOMEBREW_INSTALL_PATH="$(brew --prefix)"
+	#HOMEBREW_INSTALL_PATH_COREUTILS="$(brew --prefix coreutils)"
+	HOMEBREW_INSTALL_PATH="/usr/local"
+	HOMEBREW_INSTALL_PATH_COREUTILS="${HOMEBREW_INSTALL_PATH}/opt/coreutils"
 	# Assumes that coreutils and other GNU tools have replaced OSX'
-	[[ -f "$(brew --prefix coreutils)/libexec/gnubin" ]] && export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-	[[ -f "/usr/local/opt/gnu-tar/libexec/gnubin" ]] && export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-	[[ -f "/usr/local/opt/curl/bin" ]] && export PATH="/usr/local/opt/curl/bin:$PATH"
-	[[ -f "$(brew --prefix coreutils)/libexec/gnuman" ]] && export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
+	export PATH="${HOMEBREW_INSTALL_PATH_COREUTILS}/libexec/gnubin:$PATH"
+	export PATH="${HOMEBREW_INSTALL_PATH}/opt/gnu-tar/libexec/gnubin:$PATH"
+	export PATH="${HOMEBREW_INSTALL_PATH}/opt/curl/bin:$PATH"
+	export MANPATH="${HOMEBREW_INSTALL_PATH_COREUTILS}/libexec/gnuman:$MANPATH"
 
-	# Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
-	export EVENT_NOKQUEUE=1
+	# Source google-cloud-sdk gcloud utilities
+	# https://cloud.google.com/sdk/docs/quickstarts
+	if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]]; then
+		source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+	fi
 fi

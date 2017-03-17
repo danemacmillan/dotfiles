@@ -43,7 +43,7 @@ alias belinux="find . -type f -exec dos2unix {} \;"
 # not the same as the ignores in `.agignore`.
 alias ag="ag --hidden --column -B0 -A0 --color-path='30;43' --color-line-number='30;1' --color-match='1;32'"
 # Print each PATH entry on a separate line
-alias path="echo -e ${PATH//:/\\n}"
+alias path='echo -e ${PATH//:/\\n}'
 
 ##
 # Network

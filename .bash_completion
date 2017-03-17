@@ -1,7 +1,28 @@
 # vim: ft=sh
 
+##
+# .bash_completion
+#
+# This includes third-party bash completion scripts, and custom ones.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+
+##
+# Third party bash completion.
+
+# Source google-cloud-sdk gcloud utilities
+# https://cloud.google.com/sdk/docs/quickstarts
+if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ]]; then
+	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+fi
+
+
+##
 # Include custom bash_completion content here.
 
+##
 # Autocompletion for https://github.com/netz98/n98-magerun
 _n98-magerun()
 {
@@ -28,7 +49,6 @@ _n98-magerun()
 complete -F _n98-magerun n98-magerun.phar
 complete -F _n98-magerun n98-magerun
 complete -F _n98-magerun magerun
-
 
 ##
 # Custom completion for vshell command.

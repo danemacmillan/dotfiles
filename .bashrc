@@ -9,6 +9,10 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # @license MIT
 
 ##
+# Update PATH
+source "${HOME}/.path"
+
+##
 # Make sure aliases expand in non-interactive mode. For example, when running
 # ssh remote-address "ll"
 shopt -s expand_aliases
@@ -17,11 +21,6 @@ shopt -s expand_aliases
 # Case-insensitive globbing
 # http://tldp.org/LDP/abs/html/globbingref.html
 shopt -s nocaseglob;
-
-##
-# Source general configs.
-source "${HOME}/.path"
-source "${HOME}/.aliases"
 
 ##
 # Add tab completion for many Bash commands, including the
@@ -35,21 +34,11 @@ fi
 ##
 # If the above does not work on CentOS, then __git_ps1 will not be available.
 # On CentOS it should also be available through this path.
-if ! command_exists __git_ps1 \
-	&& [[ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]] \
-; then
-	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
-fi
-
-##
-# Source google-cloud-sdk gcloud utilities
-# https://cloud.google.com/sdk/docs/quickstarts
-if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]]; then
-	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-fi
-if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ]]; then
-	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-fi
+#if ! command_exists __git_ps1 \
+#	&& [[ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]] \
+#; then
+#	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
+#fi
 
 ##
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
@@ -91,9 +80,14 @@ export LESSHISTFILE=/dev/null
 # flag when running rsync.
 export RSYNC_PARTIAL_DIR="{HOME}/tmp/rsync-partials"
 
+# Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
+export EVENT_NOKQUEUE=1
+
 ##
-# Go lang
-export GOPATH="${HOME}/go"
+# Aliases
+if [[ -f "${HOME}/.aliases" ]]; then
+	source "${HOME}/.aliases"
+fi
 
 ##
 # Bash prompt, like PS1
