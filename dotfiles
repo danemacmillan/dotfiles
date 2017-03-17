@@ -157,6 +157,7 @@ source "${DOTFILES_DIRECTORY}/dpm" --install
 ##
 # Source any MacOS-specific defaults
 if command_exists defaults ; then
+	echo -e "${BLUE}${BOLD}Setting MacOS defaults.${RESET}"
 	source "${HOME}/.macos_defaults"
 fi
 
