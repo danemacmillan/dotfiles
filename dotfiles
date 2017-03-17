@@ -94,6 +94,7 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.agignore" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.aliases" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.bash_completion" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.bash_profile" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.bash_prompt" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.bash_sessions_disable" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.bashrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.ctags" "${HOME}/"
@@ -107,13 +108,12 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.grcat" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.hgrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.hushlogin" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.inputrc" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.macos_defaults" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.mozconfig" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.my.cnf" "${HOME}/.my.cnf.sample"
 ln -vsfn "${DOTFILES_DIRECTORY}/.myclirc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.mytop" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.nix" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.npmrc" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.osx" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.path" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.rsync_excludes" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.siegerc" "${HOME}/"
@@ -153,6 +153,12 @@ fi
 # Install dotfiles package manager packages.
 #dpm --install
 source "${DOTFILES_DIRECTORY}/dpm" --install
+
+##
+# Source any MacOS-specific defaults
+if command_exists defaults ; then
+	source "${HOME}/.macos_defaults"
+fi
 
 ##
 # Update terminal

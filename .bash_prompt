@@ -1,0 +1,48 @@
+# vim: ft=sh
+
+##
+# .bash_prompt
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+##
+# PS1
+
+##
+# Determine whether in an SSH session, even when su is used.
+if [[ "${SSH_TTY}" ]] \
+	|| [[ $(who am i) =~ \([-a-zA-Z0-9\.]+\)$ ]] \
+; then
+	export HAS_SSH=1
+fi
+
+# Git branch using bash-completion
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=0
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWUPSTREAM='verbose'
+
+# In a VM, these can really slow the prompt down:
+if [[ -d "/vagrant" ]]; then
+	export GIT_PS1_SHOWDIRTYSTATE=
+	export GIT_PS1_SHOWUNTRACKEDFILES=
+fi
+
+# Highlight the user name when logged in as root.
+USER_STYLE='\[${GREEN}\]';
+USER_BANG='\[${CYAN}${BOLD}\]\$'
+if [[ "${USER}" == "root" ]]; then
+	USER_STYLE='\[${RED}\]';
+	USER_BANG='\[${RED}\]#'
+fi
+
+# Highlight the hostname when connected via SSH.
+HOST_STYLE='\[${BLUE}${BOLD}\]';
+if [[ "${HAS_SSH}" ]]; then
+	HOST_STYLE='\[${BLUE}${BOLD}\]://';
+fi
+
+export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "

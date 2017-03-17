@@ -3,11 +3,17 @@
 ##
 # .aliases
 #
+# Some of these aliases from https://github.com/mathiasbynens/dotfiles/blob/master/.aliases
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 
-# Navigational
+# View and edit danemacmillan's HOWDOI.md file.
+alias how="vi ${HOME}/.dotfiles/HOWDOI.md"
+
+##
+# Filesystem
 alias ll='ls --color -lah --group-directories-first'
 alias llt='ls --color -laht --group-directories-first' # Sort by newest first.
 alias ..='cd ..'
@@ -15,8 +21,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 #alias imgls="imgls *.jpg *.jpeg *.gif *.png"
-
-# Filesystem
 alias rm='rm -rf'
 # Note that -a is recursive, and, more importantly, preserves all ACLs, should
 # any be set on the directory being copied.
@@ -35,12 +39,14 @@ alias fgrep='fgrep --color=auto'
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 #alias ag='ag -lfi --hidden --numbers --column --stats'
 alias belinux="find . -type f -exec dos2unix {} \;"
-alias elcapinstallercreate="sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/ElCapInstaller --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction"
 # By default ag/silver_searcher should search hidden files. Note that this is
 # not the same as the ignores in `.agignore`.
 alias ag="ag --hidden --column -B0 -A0 --color-path='30;43' --color-line-number='30;1' --color-match='1;32'"
+# Print each PATH entry on a separate line
+alias path="echo -e ${PATH//:/\\n}"
 
-#Network
+##
+# Network
 #alias listen='lsof -i -P | grep LISTEN'
 alias listen='lsof -Pnl +M -i4'
 alias nsp='netstat -tulpn'
@@ -53,41 +59,79 @@ alias ipgeo="curl ipinfo.io"
 alias vmt="/usr/bin/vmware-toolbox-cmd"
 alias flushdns='sudo killall -HUP mDNSResponder'
 
-# Misc
-alias c='clear'
-alias vi='vim'
-alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
-#alias mysql='mycli'
-#alias btop="mytop -u user -p '' -h localhost -d database"
-alias how='vi ${HOME}/.dotfiles/HOWDOI.md'
-# https://twitter.com/liamosaur/status/506975850596536320?lang=en
-alias fu='sudo $(history -p \!\!)'
-
-# Complete nonsense
-alias fuuu='imgcat $HOME/.dotfiles/img/hacking.gif'
-
+##
 # Server
 # Get the number of php-fpm processes, and their average size in MB.
 #alias fpmstat='ps aux | grep php-fpm | wc -l ; ps --no-headers -o "rss,cmd" -C php-fpm | awk '{ sum+=$1 } END { printf ("%d%s\n", sum/NR/1024,"M") }'
 alias fpmstat="ps aux | grep php-fpm | wc -l ; ps --no-headers -o \"rss,cmd\" -C php-fpm | awk '{ sum+=\$1 } END { printf (\"%d%s\n\", sum/NR/1024,\"M\") }'"
 
+##
 # Git
-# just for reference. Do not rewrite history.
+# Just for reference. Do not rewrite history.
 #alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
+command_exists hub && alias git="hub"
 
-if command_exists hub; then
-	alias git="hub"
-fi
-
+##
 # History
 # Purge all history
 alias historypurgeall='cat /dev/null > ~/.bash_history && history -c && history -w'
 # Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
 alias historypurgelast='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
 
+##
 # PHP
 # Note: this is very specific to my standard virtual machine. Change domain.
 alias phpdebug='PHP_CLI_DEBUG="true" PHP_IDE_CONFIG="serverName=develop.vagrant.dev" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=10.0.2.2" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp"'
 #alias phpdebug='PHP_IDE_CONFIG="serverName=develop.vagrant.dev" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=192.168.80.1" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp"'
 
+##
+# Misc
+alias c='clear'
+alias vi='vim'
+#alias mysql='mycli'
+#alias btop="mytop -u user -p '' -h localhost -d database"
+# https://twitter.com/liamosaur/status/506975850596536320?lang=en
+alias fu='sudo $(history -p \!\!)'
 
+##
+# Complete nonsense
+alias fuuu='imgcat $HOME/.dotfiles/img/hacking.gif'
+
+##
+# CentOS-specific Aliases
+if command_exists yum ; then
+	alias update="\
+		dotfiles; \
+		composer selfupdate; \
+		npm install npm@latest -g; \
+		yum -y update; \
+		yum clean all \
+	"
+fi
+
+##
+# MacOS-specific Aliases
+if command_exists brew ; then
+	# Depends on Firefox Tools Adapter: https://developer.mozilla.org/en-US/docs/Tools/Firefox_Tools_Adapter
+	# TODO: Add checking.
+	alias debugios='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app; sleep 2s; ios_webkit_debug_proxy'
+
+	alias elcapinstallercreate="sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/ElCapInstaller --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction"
+	alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+	alias flushdns="dscacheutil -flushcache"
+
+	alias update="\
+		softwareupdate -i -a --verbose; \
+		dotfiles; \
+		composer selfupdate; \
+		npm install npm@latest -g; \
+		brew update; \
+		brew upgrade; \
+		brew cleanup; \
+		brew cask cleanup; \
+		brew doctor; \
+		brew cask doctor; \
+		brew prune; \
+		command_exists gcloud && gcloud components update \
+	"
+fi
