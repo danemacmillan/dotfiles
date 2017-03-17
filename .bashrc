@@ -34,11 +34,11 @@ fi
 ##
 # If the above does not work on CentOS, then __git_ps1 will not be available.
 # On CentOS it should also be available through this path.
-#if ! command_exists __git_ps1 \
-#	&& [[ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]] \
-#; then
-#	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
-#fi
+if ! command_exists __git_ps1 \
+	&& [[ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]] \
+; then
+	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
+fi
 
 ##
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
