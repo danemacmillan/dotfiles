@@ -117,7 +117,7 @@ TERM xterm-termite
 
 # Standard. This will color everything, including permissions and ownership.
 #NORMAL 00
-NORMAL 00;38;5;244
+NORMAL 00;38;5;246
 
 # All files default.
 #FILE 00
@@ -167,13 +167,13 @@ CAPABILITY 30;41
 STICKY_OTHER_WRITABLE 48;5;64;38;5;230
 
 # Directory that is other-writable (o+w) and not sticky.
-OTHER_WRITABLE 48;5;34;38;5;4
+OTHER_WRITABLE 48;5;02;38;5;04
 
 # Directory with the sticky bit set (+t) and not other-writable.
 STICKY 48;5;33;38;5;230
 
 # Files with execute permission.
-EXEC 00;38;5;64
+EXEC 00;38;5;203;01
 
 ## All other files, targeted by their extension.
 
@@ -192,7 +192,7 @@ EXEC 00;38;5;64
 .z      00;38;5;61;01
 .Z      00;38;5;61;01
 .dz     00;38;5;61;01
-.gz     00;38;5;61;01
+.gz     00;38;5;75;01
 .lz     00;38;5;61;01
 .xz     00;38;5;61;01
 .bz2    00;38;5;61;01
@@ -246,8 +246,16 @@ EXEC 00;38;5;64
 .objc            00;38;5;245
 .sqlite          00;38;5;245
 .go              00;38;5;245
-.sql             00;38;5;46
-.csv             00;38;5;245
+
+# Files with potentially sensitive data
+.bash_history 00;38;5;46
+.csv 00;38;5;46
+*irc.conf 00;38;5;46 # weechat
+#*local.xml.* 00;38;5;46 # magento
+.mysql_history 00;38;5;46
+.sql 00;38;5;46
+.sql.gz 00;38;5;46;01
+.yaml 00;38;5;46
 
 # "unimportant" files as logs and backups
 .log        00;38;5;240
