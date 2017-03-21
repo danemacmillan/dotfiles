@@ -11,9 +11,6 @@
 #
 #  eval $(dircolors -b "${HOME}/.dir_colors")
 #
-# Some "special files" coloring based on
-# https://github.com/seebi/dircolors-solarized, but largely diverged.
-#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @license MIT
 
@@ -113,7 +110,15 @@ TERM xterm-termite
 # 48;5;COLOR_NUMBER
 # COLOR_NUMBER is from 0 to 255.
 
-## Special files
+##
+# Special files
+#
+# Note that special file coloring trumps extension coloring. There is
+# reference to this issue on the GNU bug tracker at:
+# https://lists.gnu.org/archive/html/bug-fileutils/2001-07/msg00017.html
+#
+# Some "special files" coloring based on
+# https://github.com/seebi/dircolors-solarized, but largely diverged.
 
 # Standard. This will color everything, including permissions and ownership.
 #NORMAL 00
@@ -127,7 +132,7 @@ FILE 00;38;5;252
 RESET 0
 
 # Directories
-DIR 00;38;5;33;01
+DIR 01;38;5;33
 
 # Symbolic link. (If you set this to 'target' instead of a numerical value, the color is as for the file pointed to.)
 #LINK target
@@ -152,7 +157,7 @@ BLK 48;5;230;38;5;244;01
 CHR 48;5;230;38;5;244;01
 
 # Symlink to nonexistent file, or non-stat'able file.
-ORPHAN 48;5;235;38;5;160;01;05
+ORPHAN 01;05;48;5;235;38;5;160
 
 # File that is setuid (u+s)
 SETUID 48;5;160;38;5;230
@@ -173,44 +178,44 @@ OTHER_WRITABLE 48;5;02;38;5;04
 STICKY 48;5;33;38;5;230
 
 # Files with execute permission.
-EXEC 00;38;5;203;01
+EXEC 01;38;5;203
 
 ## All other files, targeted by their extension.
 
 ## TODO: Expand on files relevant to my workflow.
 
 # Archives or compressed
-.tar    00;38;5;61;01
-.tgz    00;38;5;61;01
-.arj    00;38;5;61;01
-.taz    00;38;5;61;01
-.lzh    00;38;5;61;01
-.lzma   00;38;5;61;01
-.tlz    00;38;5;61;01
-.txz    00;38;5;61;01
-.zip    00;38;5;61;01
-.z      00;38;5;61;01
-.Z      00;38;5;61;01
-.dz     00;38;5;61;01
-.gz     00;38;5;75;01
-.lz     00;38;5;61;01
-.xz     00;38;5;61;01
-.bz2    00;38;5;61;01
-.bz     00;38;5;61;01
-.tbz    00;38;5;61;01
-.tbz2   00;38;5;61;01
-.tz     00;38;5;61;01
-.deb    00;38;5;61;01
-.rpm    00;38;5;61;01
-.jar    00;38;5;61;01
-.rar    00;38;5;61;01
-.ace    00;38;5;61;01
-.zoo    00;38;5;61;01
-.cpio   00;38;5;61;01
-.7z     00;38;5;61;01
-.rz     00;38;5;61;01
-.apk    00;38;5;61;01
-.gem    00;38;5;61;01
+.tar    01;48;5;236;38;5;45
+.tgz    01;48;5;236;38;5;45
+.arj    01;48;5;236;38;5;45
+.taz    01;48;5;236;38;5;45
+.lzh    01;48;5;236;38;5;45
+.lzma   01;48;5;236;38;5;45
+.tlz    01;48;5;236;38;5;45
+.txz    01;48;5;236;38;5;45
+.zip    01;48;5;236;38;5;45
+.z      01;48;5;236;38;5;45
+.Z      01;48;5;236;38;5;45
+.dz     01;48;5;236;38;5;45
+.gz     01;48;5;236;38;5;45
+.lz     01;48;5;236;38;5;45
+.xz     01;48;5;236;38;5;45
+.bz2    01;48;5;236;38;5;45
+.bz     01;48;5;236;38;5;45
+.tbz    01;48;5;236;38;5;45
+.tbz2   01;48;5;236;38;5;45
+.tz     01;48;5;236;38;5;45
+.deb    01;48;5;236;38;5;45
+.rpm    01;48;5;236;38;5;45
+.jar    01;48;5;236;38;5;45
+.rar    01;48;5;236;38;5;45
+.ace    01;48;5;236;38;5;45
+.zoo    01;48;5;236;38;5;45
+.cpio   01;48;5;236;38;5;45
+.7z     01;48;5;236;38;5;45
+.rz     01;48;5;236;38;5;45
+.apk    01;48;5;236;38;5;45
+.gem    01;48;5;236;38;5;45
 
 # Files of special interest
 .tex             00;38;5;245
@@ -219,7 +224,6 @@ EXEC 00;38;5;203;01
 .n3              00;38;5;245
 .ttl             00;38;5;245
 .nt              00;38;5;245
-.torrent         00;38;5;245
 .xml             00;38;5;245
 *Makefile        00;38;5;245
 *Rakefile        00;38;5;245
@@ -234,7 +238,6 @@ EXEC 00;38;5;203;01
 .md              00;38;5;245
 *README.markdown 00;38;5;245
 .ini             00;38;5;245
-.yml             00;38;5;245
 .cfg             00;38;5;245
 .conf            00;38;5;245
 .h               00;38;5;245
@@ -246,16 +249,22 @@ EXEC 00;38;5;203;01
 .objc            00;38;5;245
 .sqlite          00;38;5;245
 .go              00;38;5;245
+.php 00;38;5;183
 
 # Files with potentially sensitive data
 .bash_history 00;38;5;46
 .csv 00;38;5;46
 *irc.conf 00;38;5;46 # weechat
+.json 00;38;5;46
 #*local.xml.* 00;38;5;46 # magento
 .mysql_history 00;38;5;46
-.sql 00;38;5;46
-.sql.gz 00;38;5;46;01
+.sql 01;38;5;46
+.sql.gz 01;48;5;236;38;5;46
 .yaml 00;38;5;46
+.yml 00;38;5;46
+
+# Files to clean regularly
+.torrent 00;38;5;9
 
 # "unimportant" files as logs and backups
 .log        00;38;5;240
@@ -279,6 +288,8 @@ EXEC 00;38;5;203;01
 .pyc        00;38;5;240
 .class      00;38;5;240
 .cache      00;38;5;240
+.sample      00;38;5;240
+.example      00;38;5;240
 
 # NOTE: I don't care about these.
 
