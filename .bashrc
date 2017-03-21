@@ -27,7 +27,7 @@ shopt -s nocaseglob;
 # ability to add extended Git info in PS1.
 # Note that this will work on both MacOS and CentOS. On the latter, the path
 # will simply be "/etc/bash_completion" as brew will return nothing.
-if [[ -f "$(command_exists brew && brew --prefix)/etc/bash_completion" ]]; then
+if [[ -e "$(command_exists brew && brew --prefix)/etc/bash_completion" ]]; then
 	source "$(command_exists brew && brew --prefix)/etc/bash_completion"
 fi
 
@@ -35,7 +35,7 @@ fi
 # If the above does not work on CentOS, then __git_ps1 will not be available.
 # On CentOS it should also be available through this path.
 if ! command_exists __git_ps1 \
-	&& [[ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]] \
+	&& [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]] \
 ; then
 	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
 fi
@@ -92,14 +92,20 @@ export EVENT_NOKQUEUE=1
 
 ##
 # Aliases
-if [[ -f "${HOME}/.aliases" ]]; then
+if [[ -e "${HOME}/.aliases" ]]; then
 	source "${HOME}/.aliases"
 fi
 
 ##
 # Bash prompt, like PS1
-if [[ -f "${HOME}/.bash_prompt" ]]; then
+if [[ -e "${HOME}/.bash_prompt" ]]; then
 	source "${HOME}/.bash_prompt"
+fi
+
+if command_exists gcloud \
+	&& [[ -e "${HOME}/.gcp" ]] \
+; then
+	source "${HOME}/.gcp"
 fi
 
 ##
