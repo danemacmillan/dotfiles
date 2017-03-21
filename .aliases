@@ -91,8 +91,12 @@ alias c='clear'
 alias vi='vim'
 #alias mysql='mycli'
 #alias btop="mytop -u user -p '' -h localhost -d database"
-# https://twitter.com/liamosaur/status/506975850596536320?lang=en
-alias fu='sudo $(history -p \!\!)'
+
+##
+# My E-key is a somewhat busted.
+alias xit="exit"
+alias eexit="exit"
+alias eeexit="exit"
 
 ##
 # Complete nonsense
