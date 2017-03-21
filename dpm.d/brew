@@ -76,4 +76,5 @@ weighttp
 wget
 
 # Build these myself via dpm.d/
+cloud_sql_proxy
 symlinks

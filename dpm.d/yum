@@ -79,6 +79,7 @@ zlib-devel
 
 # These packages should only be installed after the general ones, as they
 # either compile, or perform extra dependency and version checks.
+cloud_sql_proxy
 git
 mysql
 nginx

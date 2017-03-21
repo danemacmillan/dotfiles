@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install Google Cloud Platform's cloud_sql_proxy.
+#
+# Cloud SQL Proxy:
+# - https://cloud.google.com/sql/docs/mysql/connect-admin-proxy#install
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="cloud_sql_proxy"
+version=""
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url="https://dl.google.com/cloudsql/cloud_sql_proxy.darwin.amd64"
+source_directory="${DPM_INSTALL_DIRECTORY}/${name}"
+
+echo -e "${RESET}${BBLUE}Downloading, compiling, and installing ${name} ${GREEN}${version}${RESET}"
+
+cd "${DPM_INSTALL_DIRECTORY}" \
+&& curl -o ${name} ${source_url} \
+&& chmod +x ${name} \
+&& mv ${name} /usr/local/bin \
+&& echo -e "${GREEN}${name} installed.${RESET}"
+
+
