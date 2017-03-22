@@ -51,6 +51,8 @@ memcached
 mytop
 ncdu
 ncurses-devel
+nfs-utils
+nfs-utils-lib
 nmap
 openssl
 openssl-devel
