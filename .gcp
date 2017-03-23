@@ -4,7 +4,7 @@
 # .gcp
 #
 # These are all Google CLoud Platform settings and functions I typically
-# use on my machines.
+# use on my machines. Also look in `.extra` for more sensitive commands.
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
@@ -15,3 +15,10 @@
 # CentOS' yum utility, which depends on 2.6.x.
 # https://cloud.google.com/sdk/docs/release-notes#13200_2016-10-26
 export CLOUDSDK_PYTHON=""
+
+# Allow specifying the auth credentials file. Having this set will override
+# any account set with gcloud. Note that this is commonly used for Service
+# Accounts within the iam+ section, which can also be passed to most utilities
+# with a `-credential_file=` flag.
+# https://developers.google.com/identity/protocols/application-default-credentials
+export GOOGLE_APPLICATION_CREDENTIALS=""
