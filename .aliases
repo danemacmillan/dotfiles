@@ -110,7 +110,8 @@ if command_exists yum ; then
 		composer selfupdate; \
 		npm install npm@latest -g; \
 		yum -y update; \
-		yum clean all \
+		yum clean all; \
+		command_exists gcloud && gcloud components update \
 	"
 fi
 

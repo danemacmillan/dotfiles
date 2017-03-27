@@ -158,4 +158,4 @@ be copied into its config file in order for it to persist after restart.
 - Set configuration maxmemory to 18GB: `set config maxmemory 18000000000`
 - Set instance as slave of master: `SLAVEOF host port`
 - Set instance as master again: `SLAVEOF NO ONE`
-
+- Flush DB 0 from host: `redis-cli -h instance-name-or-ip -n 0 flushdb`
