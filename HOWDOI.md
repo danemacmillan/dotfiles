@@ -144,3 +144,18 @@ directories are created with the same group owner as the parent.
 ensure that permissions are defined for all new files and directories based on
 this ACL rule.
 - Recursively remove all ACLs: `setfacl -R -b parentdir`
+
+# Interact with Redis
+
+Note that any changes made to a live Redis instance's config will also need to
+be copied into its config file in order for it to persist after restart.
+
+- Access to Redis CLI: `redis-cli`
+- List general info once in CLI mode: `info`
+- Select a DB: `select 0`
+- List all keys in a DB: `keys *`
+- Get configuration: `get config maxmemory`
+- Set configuration maxmemory to 18GB: `set config maxmemory 18000000000`
+- Set instance as slave of master: `SLAVEOF host port`
+- Set instance as master again: `SLAVEOF NO ONE`
+
