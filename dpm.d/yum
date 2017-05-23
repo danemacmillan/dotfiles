@@ -3,8 +3,6 @@ epel-release
 #groupinstall "Development Tools"
 https://centos6.iuscommunity.org/ius-release.rpm
 http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
-https://repo.varnish-cache.org/redhat/varnish-3.0.el6.rpm
-#https://repo.varnish-cache.org/redhat/varnish-4.0.el6.rpm
 http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 yum-plugin-replace
 yum-utils
@@ -98,6 +96,5 @@ rclone
 rsync
 tmux
 varnish
-varnish-libs
 weechat
 

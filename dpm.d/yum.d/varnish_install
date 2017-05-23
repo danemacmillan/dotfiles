@@ -2,14 +2,17 @@
 source "${HOME}/.dotfiles/.dotfiles_includes"
 
 ##
-# Install varnish 3.
+# Install varnish.
+#
+# https://repo.varnish-cache.org/redhat/varnish-3.0.el6.rpm
+# https://repo.varnish-cache.org/redhat/varnish-4.0.el6.rpm
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 #
 name="varnish"
-version="varnish"
+version="3.0"
 if [[ -n "$1" ]]; then
 	version="$1"
 fi
@@ -20,8 +23,9 @@ if ! command_exists ${name}; then
 	echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
 
 	yum -y install \
-	https://repo.varnish-cache.org/redhat/varnish-3.0.el6.rpm \
-	${version}
+	https://repo.varnish-cache.org/redhat/varnish-${version}.el6.rpm \
+	${name} \
+	${name}-libs
 
 	echo -e "${GREEN}${name} installed.${RESET}"
 fi
