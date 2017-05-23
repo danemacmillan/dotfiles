@@ -27,7 +27,6 @@ if ! command_exists ${name}; then
 	https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/${version}/elasticsearch-${version}.rpm \
 	https://download.elastic.co/kibana/kibana/kibana-4.6.4-x86_64.rpm
 
-	# Create snapshot directory.
 	mkdir -pv /home/elasticsearch/snapshots
 	chown -R elasticsearch:elasticsearch /home/elasticsearch
 	chmod -R 770 /home/elasticsearch
@@ -36,7 +35,7 @@ if ! command_exists ${name}; then
 	echo "script.inline: on" >> /etc/elasticsearch/elasticsearch.yml
 	echo "script.indexed: on" >> /etc/elasticsearch/elasticsearch.yml
 	echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
-	echo "path.repo: /vagrant/snapshots" >> /etc/elasticsearch/elasticsearch.yml
+	echo "path.repo: /home/elasticsearch/snapshots" >> /etc/elasticsearch/elasticsearch.yml
 
 	/usr/share/elasticsearch/bin/plugin install analysis-phonetic
 	/usr/share/elasticsearch/bin/plugin install analysis-icu
@@ -46,7 +45,7 @@ if ! command_exists ${name}; then
 	#chkconfig elasticsearch on
 	#/etc/init.d/elasticsearch restart
 	#chkconfig kibana on
-	#service kibana start
+	#/etc/init.d/kibana start
 
 	echo -e "${GREEN}${name} installed.${RESET}"
 fi
