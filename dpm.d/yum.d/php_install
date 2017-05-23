@@ -39,7 +39,9 @@ if ! command_exists ${name}; then
 	${version}-fpm \
 	${version}-gd \
 	${version}-imap \
+	${version}-intl \
 	${version}-ioncube-loader \
+	${version}-json \
 	${version}-mbstring \
 	${version}-mcrypt \
 	${version}-mhash \
@@ -51,6 +53,7 @@ if ! command_exists ${name}; then
 	${version}-pecl-redis \
 	${version}-pecl-xdebug \
 	${version}-pdo \
+	${version}-pdo_mysql \
 	${version}-process \
 	${version}-soap \
 	${version}-xml
