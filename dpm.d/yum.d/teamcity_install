@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install teamcity and some plugins.
+#
+# Documentation:
+# - https://confluence.jetbrains.com/display/TCD10/Installation
+# - https://confluence.jetbrains.com/display/TCD10/Installing+and+Configuring+the+TeamCity+Server#InstallingandConfiguringtheTeamCityServer-installingWithTomcat
+# - https://confluence.jetbrains.com/display/TCD10/Setting+up+an+External+Database#SettingupanExternalDatabase-MySQL
+#
+# Note that a DB also needs to be created. This will be prompt for the moment
+# the frontend is accessed, where the installation steps continue.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="teamcity"
+version="2017.1.1"
+yum_enablerepo=""
+
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+
+source_url="https://download.jetbrains.com/teamcity/TeamCity-${version}.tar.gz"
+source_directory="/home/teamcity"
+
+if ! command_exists ${name}; then
+	echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+
+	useradd teamcity
+	usermod -s /sbin/nologin teamcity
+
+	mkdir -pv ${source_directory}/{snapshots,.BuildServer}
+	mkdir -pv ${source_directory}/.BuildServer/lib/jdbc
+
+	cd ${source_directory} \
+		&& wget "${source_url}" \
+		&& extract "TeamCity-${version}.tar.gz"
+
+	cd ${source_directory}/.BuildServer/lib/jdbc \
+		&& wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.42.tar.gz \
+		&& extract mysql-connector-java-5.1.42.tar.gz \
+		&& cp mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar .
+
+	cd ${source_directory}/.BuildServer/plugins \
+		&& wget https://github.com/parautenbach/TeamCity-HipChat-Notifier/archive/0.9.2.tar.gz \
+		&& extract 0.9.2.tar.gz
+
+	chown -R teamcity:teamcity ${source_directory}
+	chmod -R 770 ${source_directory}
+	chmod -R +X ${source_directory}
+
+	echo -e "${GREEN}${name} ${version} installed.${RESET}"
+	echo -e "To run: bin/runAll.sh start"
+fi

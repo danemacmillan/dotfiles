@@ -94,6 +94,7 @@ nodejs
 php
 rclone
 rsync
+#teamcity
 tmux
 varnish
 weechat
