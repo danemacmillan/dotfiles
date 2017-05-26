@@ -33,8 +33,9 @@ if ! command_exists ${name}; then
 	useradd teamcity
 	usermod -s /sbin/nologin teamcity
 
-	mkdir -pv ${source_directory}/{snapshots,.BuildServer}
+	mkdir -pv ${source_directory}/snapshots
 	mkdir -pv ${source_directory}/.BuildServer/lib/jdbc
+	mkdir -pv ${source_directory}/.BuildServer/plugins
 
 	cd ${source_directory} \
 		&& wget "${source_url}" \
