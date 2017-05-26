@@ -37,6 +37,7 @@ if ! command_exists ${name}; then
 	${version}-common \
 	${version}-devel \
 	${version}-fpm \
+	${version}-fpm-nginx \
 	${version}-gd \
 	${version}-imap \
 	${version}-intl \
