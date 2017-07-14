@@ -32,6 +32,7 @@ gettext
 gnutls-devel
 golang
 gpg
+hdparm
 htop
 ioping
 kernel-devel
@@ -67,6 +68,7 @@ rpm-devel
 ruby
 ruby-devel
 #setroubleshoot
+smartmontools
 strace
 symlinks
 tbb-devel
@@ -85,6 +87,7 @@ http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
 
 # These packages should only be installed after the general ones, as they
 # either compile, or perform extra dependency and version checks.
+#chromedriver
 cloud_sql_proxy
 #elasticsearch
 git

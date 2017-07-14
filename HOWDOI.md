@@ -154,8 +154,8 @@ be copied into its config file in order for it to persist after restart.
 - List general info once in CLI mode: `info`
 - Select a DB: `select 0`
 - List all keys in a DB: `keys *`
-- Get configuration: `get config maxmemory`
-- Set configuration maxmemory to 18GB: `set config maxmemory 18000000000`
+- Get configuration: `config get maxmemory`
+- Set configuration maxmemory to 18GB: `config set maxmemory 18000000000`
 - Set instance as slave of master: `SLAVEOF host port`
 - Set instance as master again: `SLAVEOF NO ONE`
 - Flush DB 0 from host: `redis-cli -h instance-name-or-ip -n 0 flushdb`
