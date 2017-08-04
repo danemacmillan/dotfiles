@@ -85,6 +85,15 @@ The `yum-plugin-replace` package is installed with these dotfiles.
 
 - `yum -y replace git --replace-with git2u`
 
+# List all versions of a yum repo from a specific repository
+
+- `yum --enablerepo ius-archive list --showduplicates php70u-pecl-redis`
+
+# Show yum history and get more info about an entry
+
+- `yum history`
+- `yum history info {id}`
+
 # Index relevant Magento indexes with N98
 
 - `date && ./n98-magerun.phar -vvv index:reindex catalog_product_attribute,catalog_product_price,catalog_url,catalog_category_flat,catalog_category_product,cataloginventory_stock,catalog_product_flat && date`
