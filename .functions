@@ -88,9 +88,9 @@ loop()
 	fi
 
 	for subdirectory in ./*; do
-		echo -e "\n${RESET}\x1B[48;5;234m${TWIRL} \x1B[97;1mRunning commands in \x1B[90m$subdirectory${RESET}"
+		echo -e "\n${RESET}\x1B[48;5;235m${TWIRL} \x1B[97;1mRunning commands in ${BBLUE}$subdirectory${RESET}"
 		for argument in "$@"; do
-			echo -e "   ${BOLT} \x1B[93m$argument${RESET}\x1B[38;5;237m"
+			echo -e "   ${BOLT} \x1B[93m$argument${RESET}\x1B[38;5;245m"
 			(cd "$subdirectory" && $argument 2>&1 | sed -e 's/^/        /')
 		done
 	done
