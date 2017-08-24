@@ -90,6 +90,19 @@ export RSYNC_PARTIAL_DIR="{HOME}/tmp/rsync-partials"
 # Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
 export EVENT_NOKQUEUE=1
 
+# Since gcloud 132.0.0, Python 2.6 is deprecated. On CentOS this is a problem.
+# This variable points the gcloud tool to a supported version without breaking
+# CentOS' yum utility, which depends on 2.6.x.
+# https://cloud.google.com/sdk/docs/release-notes#13200_2016-10-26
+export CLOUDSDK_PYTHON=""
+
+# Allow specifying the auth credentials file. Having this set will override
+# any account set with gcloud. Note that this is commonly used for Service
+# Accounts within the iam+ section, which can also be passed to most utilities
+# with a `-credential_file=` flag.
+# https://developers.google.com/identity/protocols/application-default-credentials
+export GOOGLE_APPLICATION_CREDENTIALS=""
+
 ##
 # Aliases
 if [[ -e "${HOME}/.aliases" ]]; then
