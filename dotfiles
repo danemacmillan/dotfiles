@@ -126,15 +126,19 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
 ##
 # Symlink trackable directories that could exist, and back up to `tmp`.
 if [[ -e "${HOME}/.vim" ]] \
+	&& [[ ! -L "${HOME}/.vim" ]] \
 	&& [[ ! -e "${HOME}/tmp/.vim" ]] \
 ; then
+	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.vim directory to ~/tmp.${RESET}"
 	mv "${HOME}/.vim" "${HOME}/tmp/.vim"
 fi
 ln -vsfn "${DOTFILES_DIRECTORY}/.vim" "${HOME}/"
 
 if [[ -e "${HOME}/.weechat" ]] \
+	&& [[ ! -L "${HOME}/.weechat" ]] \
 	&& [[ ! -e "${HOME}/tmp/.weechat" ]] \
 ; then
+	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.weechat directory to ~/.weechat.${RESET}"
 	mv "${HOME}/.weechat" "${HOME}/tmp/.weechat"
 fi
 ln -vsfn "${DOTFILES_DIRECTORY}/.weechat" "${HOME}/"
