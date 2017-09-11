@@ -61,6 +61,8 @@ alias vs="vagrant global-status --prune"
 alias ipgeo="curl ipinfo.io"
 alias vmt="/usr/bin/vmware-toolbox-cmd"
 alias flushdns='sudo killall -HUP mDNSResponder'
+# Full port scan, service version, and OS scan (sudo required).
+alias portscan="sudo nmap -vv -Pn -p1-65535 -sV -O --reason"
 
 ##
 # Server
