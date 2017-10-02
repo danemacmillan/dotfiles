@@ -23,17 +23,24 @@ shopt -s expand_aliases
 shopt -s nocaseglob;
 
 ##
-# Add tab completion for many Bash commands, including the
-# ability to add extended Git info in PS1.
+# Add tab completion for many Bash commands.
+#
 # Note that this will work on both MacOS and CentOS. On the latter, the path
 # will simply be "/etc/bash_completion" as brew will return nothing.
-if [[ -e "$(command_exists brew && brew --prefix)/etc/bash_completion" ]]; then
-	source "$(command_exists brew && brew --prefix)/etc/bash_completion"
+export DOTFILES_BASHCOMPLETION="$(command_exists brew && brew --prefix)"
+if [[ -e "${DOTFILES_BASHCOMPLETION}/etc/bash_completion" ]]; then
+	source "${DOTFILES_BASHCOMPLETION}/etc/bash_completion"
 fi
 
 ##
-# If the above does not work on CentOS, then __git_ps1 will not be available.
-# On CentOS it should also be available through this path.
+# __git_ps1 for MacOS
+export DOTFILES_GITPS1="$(command_exists brew && brew --prefix git)"
+if [[ -e "${DOTFILES_GITPS1}/etc/bash_completion.d/git-prompt.sh" ]]; then
+	source "${DOTFILES_GITPS1}/etc/bash_completion.d/git-prompt.sh"
+fi
+
+##
+# __git_ps1 for CentOS
 if ! command_exists __git_ps1 \
 	&& [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]] \
 ; then
