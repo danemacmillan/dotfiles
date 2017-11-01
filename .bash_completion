@@ -25,6 +25,7 @@ fi
 #
 if [[ -f "/usr/local/bin/linus" ]]; then
 	eval $(linus _completion -g -p linus)
+	eval $(linus _completion -g -p linusdebug)
 fi
 
 
