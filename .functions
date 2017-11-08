@@ -32,13 +32,26 @@ now()
 ##
 # Calculate MD5 hashes regardless of tool, and ensure identical output.
 #
+# The file contents themselves are hashed when a valid file path is provided,
+# but when it is determined that the path provided is not a valid file path,
+# it will be treated as a string and that string is hashed. The latter operation
+# is done by piping to STDIN via the "<<<" operator.
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 calculate_md5_hash()
 {
+	local command_name="calculate_md5_hash"
 	local md5tool=md5sum
 	local cut_offset=1
+	local file_path="${1}"
+
+	if [[ -z "${file_path}" ]]; then
+		echo -e "Calculate the MD5 hash of a file (or string if path not found)"
+		echo -e "Usage:\n  ${BCYAN}${command_name}${RESET} ${GREEN}FILEPATH|STRING"
+		return 1
+	fi
 
 	# OSX comes with md5 tool by default, not md5sum.
 	if hash md5 2>/dev/null; then
@@ -46,9 +59,10 @@ calculate_md5_hash()
 		local cut_offset=4
 	fi
 
-	local file_path="$1"
-	if [[ -f $file_path ]]; then
-		echo $($md5tool $file_path | cut -d " " -f$cut_offset)
+	if [[ -f "${file_path}" ]]; then
+		echo $($md5tool "${file_path}" | cut -d " " -f$cut_offset)
+	else
+		echo $($md5tool <<< "${file_path}" | cut -d " " -f$cut_offset)
 	fi
 }
 
