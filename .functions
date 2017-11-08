@@ -378,6 +378,52 @@ imget()
 }
 
 ##
+# A better cat utility.
+#
+# This is for lazy people who just want to cat out documents to their terminal.
+# These documents can be any kind of text document, as usual, but also any
+# kind of image, assuming the `imgcat` script is available, as well as iterm2.
+# Additionally, this will handle remote files over HTTP and HTTPS.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+cat()
+{
+	local filepath="${1}"
+
+	case "${filepath}" in
+		http:*|https:*)
+			local md5hashpathstring=$(calculate_md5_hash "${filepath}")
+			filepath=$(wget "${filepath}" -q -O "${HOME}/tmp/${md5hashpathstring}.tmp" && echo "${HOME}/tmp/${md5hashpathstring}.tmp")
+			echo -e "Remote file temporarily stored at: ${filepath}"
+		;;
+	esac
+
+	if command_exists file \
+		&& command_exists imgcat \
+	; then
+		local filetype=$(file -b "${filepath}")
+
+		case "${filetype}" in
+			*JPEG*|*PNG*|*GIF*)
+				imgcat "${filepath}"
+				return 0
+			;;
+		esac
+	fi
+
+	if [[ -n "${filepath}" ]]; then
+		$(which cat) "${filepath}"
+		return 0
+	else
+		$(which cat) --help
+	fi
+
+	return 1
+}
+
+##
 # Import a MySQL dump piped through pv to get progress. Pimped.
 #
 # This will also gunzip a *.gz dumped file, if present. Errors will be ignored
