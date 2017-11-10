@@ -424,6 +424,33 @@ cat()
 }
 
 ##
+# Basic function to back up Plex Media Server data.
+#
+# This excludes the Cache directory, as recommended in:
+# https://support.plex.tv/hc/en-us/articles/201539237-Backing-Up-Plex-Media-Server-Data
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+plex_backup_metadata()
+{
+	local command_name="${FUNCNAME[0]}"
+
+	local backup_rootpath="${HOME}"
+	local backup_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
+	local backup_path="${backup_rootpath}/${backup_filename}"
+	local plex_metadata_rootpath="/var/lib/plexmediaserver"
+
+	echo -e "${command_name} start: $(date)"
+
+	date > "/var/log/${command_name}.log" \
+		&& zip -db -vr "${HOME}/${backup_filename}" "${plex_metadata_rootpath}" -x ${plex_metadata_rootpath}/Library/Application\ Support/Plex\ Media\ Server/Cache/\* >> "/var/log/${command_name}.log" \
+		&& date >> "/var/log/${command_name}.log"
+
+	echo -e "${command_name} end: $(date)"
+}
+
+##
 # Import a MySQL dump piped through pv to get progress. Pimped.
 #
 # This will also gunzip a *.gz dumped file, if present. Errors will be ignored
