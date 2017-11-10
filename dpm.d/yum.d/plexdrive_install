@@ -25,4 +25,14 @@ cd /usr/local/bin/ \
 	&& mv plexdrive-linux-amd64 plexdrive \
 	&& chmod +x plexdrive \
 
+mkdir -p /mnt/plexdrive
+
+echo 'SHELL=/bin/bash
+PATH=$HOME:$HOME/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+MAILTO="root"
+#*/1 * * * * root  pgrep plexdrive > /dev/null || plexdrive mount --cache-file=/root/.plexdrive/cache.bolt --fuse-options=allow_other --verbosity=3 /mnt/plexdrive > /var/log/plexdrive.log
+' > /etc/cron.d/plexdrive
+
+/etc/init.d/crond restart
+
 echo -e "${GREEN}${name} installed.${RESET}"
