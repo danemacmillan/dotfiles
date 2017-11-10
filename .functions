@@ -524,6 +524,14 @@ backup_deluge()
 	fi
 }
 
+timezone_set_est5edt()
+{
+	if [[ -e /usr/share/zoneinfo/EST5EDT ]]; then
+		mv /etc/localtime /etc/localtime.bak \
+			&& ln -nsfv /usr/share/zoneinfo/EST5EDT /etc/localtime
+	fi
+}
+
 ##
 # Import a MySQL dump piped through pv to get progress. Pimped.
 #
