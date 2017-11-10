@@ -32,7 +32,7 @@ mkdir /torrents/media
 mkdir /torrents/tmp
 
 ./plexdrive_install
-mkdir -p mnt/plexdrive
+mkdir -p /mnt/plexdrive
 
 ./plexmediaserver_install
 
