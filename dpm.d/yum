@@ -90,13 +90,13 @@ http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
 #chromedriver
 cloud_sql_proxy
 #elasticsearch
-git
+git2u
 mysql
 nginx
 nodejs
 php
 rclone
-rsync
+rsync31u
 #teamcity
 tmux
 varnish
