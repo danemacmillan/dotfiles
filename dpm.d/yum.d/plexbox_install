@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# plexbox
+#
+# This is just the name I give to my local plexbox instance. This script
+# consolidates the work of various scripts, each responsible for a service
+# on the plexbox instance. It also provides the basic filesystem structure
+# that most of these services use.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="plexbox"
+version="plexbox"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url=""
+source_directory=""
+
+echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+
+./deluge_install
+mkdir /torrents
+chmod g+s /torrents
+setfacl -m d:u::rwX,d:g::rwX,d:o::rwX,u::rwX,g::rwX,o::rwX /torrents
+mkdir /torrents/media
+mkdir /torrents/tmp
+
+./plexdrive_install
+mkdir -p mnt/plexdrive
+
+./plexmediaserver_install
+
+echo -e "${GREEN}${name} installed.${RESET}"
+
+echo -e "Remember to copy deluge, rclone, plexdrive, and plex metadata configs."
