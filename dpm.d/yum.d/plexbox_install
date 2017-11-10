@@ -24,16 +24,7 @@ source_directory=""
 echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
 
 ./deluge_install
-mkdir /torrents
-chown -R deluge:deluge /torrents
-chmod g+s /torrents
-setfacl -m d:u::rwX,d:g::rwX,d:o::rwX,u::rwX,g::rwX,o::rwX /torrents
-mkdir /torrents/media
-mkdir /torrents/tmp
-
 ./plexdrive_install
-mkdir -p /mnt/plexdrive
-
 ./plexmediaserver_install
 
 echo -e "${GREEN}${name} installed.${RESET}"
