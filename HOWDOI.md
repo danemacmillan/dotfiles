@@ -168,3 +168,11 @@ be copied into its config file in order for it to persist after restart.
 - Set instance as slave of master: `SLAVEOF host port`
 - Set instance as master again: `SLAVEOF NO ONE`
 - Flush DB 0 from host: `redis-cli -h instance-name-or-ip -n 0 flushdb`
+
+# Remotely access a fresh PMS install
+
+https://support.plex.tv/hc/en-us/articles/200288586-Installation
+
+- `ssh ip.address.of.server -L 8888:localhost:32400`
+- `http://localhost:8888/web`
+
