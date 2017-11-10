@@ -15,7 +15,7 @@ autofs
 automake
 bash-completion
 bind-utils
-bitlbee
+#bitlbee
 ca-certificates
 cmake
 cpp
@@ -48,7 +48,7 @@ lua-devel
 lynx
 make
 make
-memcached
+#memcached
 mytop
 ncdu
 ncurses-devel
@@ -91,14 +91,14 @@ http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
 cloud_sql_proxy
 #elasticsearch
 git2u
-mysql
-nginx
+#mysql
+#nginx
 nodejs
-php
+#php
 rclone
 rsync31u
 #teamcity
 tmux
 #varnish
-weechat
+#weechat
 
