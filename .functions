@@ -446,7 +446,7 @@ backup_plexmetadata()
 	echo -e "${command_name} start: $(date)"
 
 	date > "/var/log/${command_name}.log" \
-		&& zip -db -vr "${destination_path}" "${source_path}" -x ${source_path}/Library/Application\ Support/Plex\ Media\ Server/Cache/\* >> "/var/log/${command_name}.log" \
+		&& zip -db -vr "${destination_path}" "${source_path}" -x ${source_path}/Library/Application\ Support/Plex\ Media\ Server/Cache/\* \
 		&& date >> "/var/log/${command_name}.log"
 
 	echo -e "${command_name} end zip: $(date)"
