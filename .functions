@@ -440,7 +440,7 @@ backup_plexmetadata()
 
 	local destination_rootpath="${HOME}"
 	local destination_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
-	local destination_path="${backup_rootpath}/${backup_filename}"
+	local destination_path="${destination_rootpath}/${destination_filename}"
 	local source_path="/var/lib/plexmediaserver"
 
 	echo -e "${command_name} start: $(date)"
