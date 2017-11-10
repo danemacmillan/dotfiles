@@ -554,6 +554,7 @@ plexbox_install()
 		echo -e "Wait for it to install."
 		echo -e "Run on your local machine: ssh $(ipp) -L 8888:localhost:32400"
 		echo -e "Browse to: http://localhost:8888/web"
+		echo -e "Add Dynamic DNS cron update for server to update domain with ephemereal IP."
 	fi
 }
 
