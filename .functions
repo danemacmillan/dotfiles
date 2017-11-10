@@ -429,25 +429,97 @@ cat()
 # This excludes the Cache directory, as recommended in:
 # https://support.plex.tv/hc/en-us/articles/201539237-Backing-Up-Plex-Media-Server-Data
 #
+# TODO combine with other quick backup scripts and abstract.
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-plex_backup_metadata()
+backup_plexmetadata()
 {
 	local command_name="${FUNCNAME[0]}"
 
-	local backup_rootpath="${HOME}"
-	local backup_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
-	local backup_path="${backup_rootpath}/${backup_filename}"
-	local plex_metadata_rootpath="/var/lib/plexmediaserver"
+	local destination_rootpath="${HOME}"
+	local destination_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
+	local destination_path="${backup_rootpath}/${backup_filename}"
+	local source_path="/var/lib/plexmediaserver"
 
 	echo -e "${command_name} start: $(date)"
 
 	date > "/var/log/${command_name}.log" \
-		&& zip -db -vr "${HOME}/${backup_filename}" "${plex_metadata_rootpath}" -x ${plex_metadata_rootpath}/Library/Application\ Support/Plex\ Media\ Server/Cache/\* >> "/var/log/${command_name}.log" \
+		&& zip -db -vr "${destination_path}" "${source_path}" -x ${source_path}/Library/Application\ Support/Plex\ Media\ Server/Cache/\* >> "/var/log/${command_name}.log" \
 		&& date >> "/var/log/${command_name}.log"
 
-	echo -e "${command_name} end: $(date)"
+	echo -e "${command_name} end zip: $(date)"
+
+		# Very specific to me. Temporary.
+	if command_exists rclone; then
+		rclone -v moveto ${destination_path} gd:servers/plexbox/${destination_filename} --stats 1s \
+			&& echo -e "${command_name} end transfer: $(date)"
+	fi
+}
+
+##
+# Back up plexdrive files and databases.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+backup_plexdrive()
+{
+	local command_name="${FUNCNAME[0]}"
+
+	local destination_rootpath="${HOME}"
+	local destination_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
+	local destination_path="${destination_rootpath}/${destination_filename}"
+	local source_path="${HOME}/.plexdrive"
+
+	if [[ -e "${source_path}" ]]; then
+		echo -e "${command_name} start: $(date)"
+
+		date > "/var/log/${command_name}.log" \
+			&& zip -db -vr "${destination_path}" "${source_path}" >> "/var/log/${command_name}.log" \
+			&& date >> "/var/log/${command_name}.log"
+
+		echo -e "${command_name} end zip: $(date)"
+
+		# Very specific to me. Temporary.
+		if command_exists rclone; then
+			rclone -v moveto ${destination_path} gd:servers/plexbox/${destination_filename} --stats 1s \
+				&& echo -e "${command_name} end transfer: $(date)"
+		fi
+	fi
+}
+
+##
+# Back up deluge files and state.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+backup_deluge()
+{
+	local command_name="${FUNCNAME[0]}"
+
+	local destination_rootpath="${HOME}"
+	local destination_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
+	local destination_path="${destination_rootpath}/${destination_filename}"
+	local source_path="/var/lib/deluge"
+
+	if [[ -e "${source_path}" ]]; then
+		echo -e "${command_name} start: $(date)"
+
+		date > "/var/log/${command_name}.log" \
+			&& zip -db -vr "${destination_path}" "${source_path}" >> "/var/log/${command_name}.log" \
+			&& date >> "/var/log/${command_name}.log"
+
+		echo -e "${command_name} end zip: $(date)"
+
+		# Very specific to me. Temporary.
+		if command_exists rclone; then
+			rclone -v moveto ${destination_path} gd:servers/plexbox/${destination_filename} --stats 1s \
+				&& echo -e "${command_name} end transfer: $(date)"
+		fi
+	fi
 }
 
 ##
