@@ -531,8 +531,8 @@ plexbox_import_run()
 		rclone -v copy gd:servers/plexbox ~/plexbox --stats 1s
 		cd ~/plexbox && unzip "*.zip"
 
-		if [[ ! -e ~/.plexdrive ]]; then
-			mv ~/plexbox/.plexdrive ~
+		if [[ ! -d ~/.plexdrive ]]; then
+			mv ~/plexbox/root/.plexdrive ~
 			if ! command_exists plexdrive; then
 				~/.dotfiles/dpm.d/yum.d/plexdrive_install
 			fi
