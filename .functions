@@ -533,6 +533,9 @@ plexbox_install()
 
 		if [[ ! -e ~/.plexdrive ]]; then
 			mv ~/plexbox/.plexdrive ~
+			if ! command_exists plexdrive; then
+				~/.dotfiles/dpm.d/yum.d/plexdrive_install
+			fi
 		fi
 
 		if [[ ! -d /var/lib/plexmediaserver ]]; then
@@ -543,7 +546,7 @@ plexbox_install()
 
 		groupadd plex \
 			; groupadd video \
-			; adduser plex -g plex -G video -d /var/lib/heyooo -s /sbin/nologin
+			; adduser plex -g plex -G video -d /var/lib/plexmediaserver -s /sbin/nologin
 
 		chown -R plex:plex /var/lib/plexmediaserver
 
