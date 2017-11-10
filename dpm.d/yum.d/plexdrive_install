@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install plexdrive.
+#
+# https://github.com/dweidenfeld/plexdrive
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="plexdrive"
+version="5.0.0"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url="https://github.com/dweidenfeld/plexdrive/releases/download/${version}/plexdrive-linux-amd64"
+source_directory=""
+
+echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+
+cd /usr/local/bin/ \
+	&& wget ${source_url} \
+	&& mv plexdrive-linux-amd64 plexdrive \
+	&& chmod +x plexdrive \
+
+echo -e "${GREEN}${name} installed.${RESET}"
