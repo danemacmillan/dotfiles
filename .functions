@@ -524,6 +524,36 @@ backup_deluge()
 	fi
 }
 
+# Temporary and specific.
+plexbox_install()
+{
+	if command_exists rclone; then
+		rclone -v copy gd:servers/plexbox ~/plexbox --stats 1s
+		cd ~/plexbox && unzip "*.zip"
+
+		if [[ ! -e ~/.plexdrive ]]; then
+			mv ~/plexbox/.plexdrive ~
+		fi
+
+		if [[ ! -d /var/lib/plexmediaserver ]]; then
+			mv -f ~/plexbox/var/lib/plexmediaserver /var/lib
+			rm -rf /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/Preferences.xml
+			rm -rf /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/plexmediaserver.pid
+		fi
+
+		groupadd plex \
+			; groupadd video \
+			; adduser plex -g plex -G video -d /var/lib/heyooo -s /sbin/nologin
+
+		chown -R plex:plex /var/lib/plexmediaserver
+
+		echo -e 'Run as non-root: bash -c "$(wget -qO - https://raw.githubusercontent.com/mrworf/plexupdate/master/extras/installer.sh)"'
+		echo -e "Wait for it to install."
+		echo -e "Run on your local machine: ssh $(ipp) -L 8888:localhost:32400"
+		echo -e "Browse to: http://localhost:8888/web"
+	fi
+}
+
 timezone_set_est5edt()
 {
 	if [[ -e /usr/share/zoneinfo/EST5EDT ]]; then
