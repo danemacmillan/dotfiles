@@ -34,6 +34,13 @@ yum -y install deluge-common deluge-web deluge-images deluge-daemon
 service deluge-daemon restart
 chkconfig deluge-daemon on
 
+mkdir /torrents
+chown -R deluge:deluge /torrents
+chmod g+s /torrents
+setfacl -m d:u::rwX,d:g::rwX,d:o::rwX,u::rwX,g::rwX,o::rwX /torrents
+mkdir /torrents/media
+mkdir /torrents/tmp
+
 echo -e "${GREEN}${name} installed.${RESET}"
 
 
