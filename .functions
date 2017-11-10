@@ -525,7 +525,7 @@ backup_deluge()
 }
 
 # Temporary and specific.
-plexbox_install()
+plexbox_import_run()
 {
 	if command_exists rclone; then
 		rclone -v copy gd:servers/plexbox ~/plexbox --stats 1s
