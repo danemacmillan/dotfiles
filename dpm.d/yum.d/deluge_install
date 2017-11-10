@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install deluge using linuxtech rpm.
+#
+# http://idroot.net/tutorials/how-to-install-deluge-on-centos-6/
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+name="deluge"
+version="deluge"
+if [[ -n "$1" ]]; then
+	version="$1"
+fi
+source_url=""
+source_directory=""
+
+echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
+
+# Create new yum repo for linuxtech.
+cat <<EOT > /etc/yum.repos.d/linuxtech.repo
+[linuxtech]
+name=LinuxTECH
+baseurl=http://pkgrepo.linuxtech.net/el6/release/
+enabled=1
+gpgcheck=1
+gpgkey=http://pkgrepo.linuxtech.net/el6/release/RPM-GPG-KEY-LinuxTECH.NET
+EOT
+
+yum -y update
+yum -y install deluge-common deluge-web deluge-images deluge-daemon
+service deluge-daemon restart
+chkconfig deluge-daemon on
+
+echo -e "${GREEN}${name} installed.${RESET}"
+
+
+
+# Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+#*filter
+#:INPUT ACCEPT [0:0]
+#:FORWARD ACCEPT [0:0]
+#:OUTPUT ACCEPT [0:0]
+#-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+#-A INPUT -p icmp -j ACCEPT
+#-A INPUT -i lo -j ACCEPT
+#-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+#-A INPUT -m state --state NEW -m tcp -p tcp --dport 32400 -j ACCEPT
+#-A INPUT -m state --state NEW -m tcp -p tcp --dport 55555 -j ACCEPT
+#-A INPUT -m state --state NEW -m tcp -p tcp --dport 58846 -j ACCEPT
+#-A INPUT -m state --state NEW -m tcp -p tcp --dport 63333 -j ACCEPT
+#-A INPUT -m state --state NEW -m udp -p udp --dport 63333 -j ACCEPT
+#-A INPUT -j REJECT --reject-with icmp-host-prohibited
+#-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+#COMMIT
