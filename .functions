@@ -542,13 +542,13 @@ plexbox_import_run()
 			mv -f ~/plexbox/var/lib/plexmediaserver /var/lib
 			rm -rf /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/Preferences.xml
 			rm -rf /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/plexmediaserver.pid
+
+			groupadd plex \
+				; groupadd video \
+				; adduser plex -g plex -G video -d /var/lib/plexmediaserver -s /sbin/nologin
+
+			chown -R plex:plex /var/lib/plexmediaserver
 		fi
-
-		groupadd plex \
-			; groupadd video \
-			; adduser plex -g plex -G video -d /var/lib/plexmediaserver -s /sbin/nologin
-
-		chown -R plex:plex /var/lib/plexmediaserver
 
 		echo -e 'Run as non-root: bash -c "$(wget -qO - https://raw.githubusercontent.com/mrworf/plexupdate/master/extras/installer.sh)"'
 		echo -e "Wait for it to install."
