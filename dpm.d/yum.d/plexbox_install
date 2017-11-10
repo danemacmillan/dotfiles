@@ -25,6 +25,7 @@ echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
 
 ./deluge_install
 mkdir /torrents
+chown -R deluge:deluge /torrents
 chmod g+s /torrents
 setfacl -m d:u::rwX,d:g::rwX,d:o::rwX,u::rwX,g::rwX,o::rwX /torrents
 mkdir /torrents/media

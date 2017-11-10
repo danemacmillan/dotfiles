@@ -21,14 +21,13 @@ source_directory=""
 echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
 
 # Create new yum repo for linuxtech.
-cat <<EOT > /etc/yum.repos.d/linuxtech.repo
-[linuxtech]
+echo "[linuxtech]
 name=LinuxTECH
 baseurl=http://pkgrepo.linuxtech.net/el6/release/
 enabled=1
 gpgcheck=1
 gpgkey=http://pkgrepo.linuxtech.net/el6/release/RPM-GPG-KEY-LinuxTECH.NET
-EOT
+" > /etc/yum.repos.d/linuxtech.repo
 
 yum -y update
 yum -y install deluge-common deluge-web deluge-images deluge-daemon
