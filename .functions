@@ -484,7 +484,7 @@ backup_plexdrive()
 
 		# Very specific to me. Temporary.
 		if command_exists rclone; then
-			rclone -v moveto ${destination_path} gd:servers/plexbox/${destination_filename} --stats 1s \
+			rclone -v moveto ${destination_path} gd:servers/plex/${destination_filename} --stats 1s \
 				&& echo -e "${command_name} end transfer: $(date)" \
 				&& date >> "/var/log/${command_name}.log"
 		fi
@@ -517,7 +517,7 @@ backup_deluge()
 
 		# Very specific to me. Temporary.
 		if command_exists rclone; then
-			rclone -v moveto ${destination_path} gd:servers/plexbox/${destination_filename} --stats 1s \
+			rclone -v moveto ${destination_path} gd:servers/transfers/${destination_filename} --stats 1s \
 				&& echo -e "${command_name} end transfer: $(date)" \
 				&& date >> "/var/log/${command_name}.log"
 		fi
