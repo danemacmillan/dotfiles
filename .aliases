@@ -101,10 +101,11 @@ alias vi='vim'
 #alias btop="mytop -u user -p '' -h localhost -d database"
 
 ##
-# My E-key is a somewhat busted.
+# My E-key is somewhat busted. Also, general typos I always make.
 alias xit="exit"
 alias eexit="exit"
 alias eeexit="exit"
+alias gut="git"
 
 ##
 # Complete nonsense
