@@ -102,9 +102,12 @@ alias vi='vim'
 
 ##
 # My E-key is somewhat busted. Also, general typos I always make.
+# I don't know how to ever eit.
 alias xit="exit"
 alias eexit="exit"
 alias eeexit="exit"
+alias eit="exit"
+alias exot="exit"
 alias gut="git"
 
 ##
