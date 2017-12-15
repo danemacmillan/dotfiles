@@ -23,7 +23,7 @@ fi
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 #
-if [[ -f "/usr/local/bin/linus" ]]; then
+if command_exists linus; then
 	eval $(linus _completion -g -p linus)
 	eval $(linus _completion -g -p linusdebug)
 fi
