@@ -25,9 +25,11 @@ fi
 #
 if command_exists linus; then
 	eval $(linus _completion -g -p linus)
-	eval $(linus _completion -g -p linusdebug)
-fi
 
+	if php -m |grep -q xdebug; then
+		eval $(linus _completion -g -p linusdebug)
+	fi
+fi
 
 ##
 # Include custom bash_completion content here.
