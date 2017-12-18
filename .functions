@@ -558,6 +558,160 @@ plexbox_import_run()
 	fi
 }
 
+##
+# Get the inode number of a file.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+get_inode_number()
+{
+	if [[ -n $1 ]]; then
+		local path="${1}"
+
+		if [[ -e "${path}" ]]; then
+			stat -c '%i' "${path}"
+		fi
+	fi
+}
+
+##
+# Get the number of hardlinks that point to path.
+#
+# This is based on how many hardlinks share the same inode.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+get_hardlink_count()
+{
+	if [[ -n $1 ]]; then
+		local path="${1}"
+
+		if [[ -e "${path}" ]]; then
+				stat -c '%h' "${path}"
+		fi
+	fi
+}
+
+##
+# Get the path to a file based on the inode provided.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+get_paths_from_inode_number()
+{
+	if [[ -n $1 ]]; then
+		local inode_number="${1}"
+		#readlink -f $(find . -xdev -inum "${inode_number}")
+		find . -xdev -inum "${inode_number}"
+	fi
+}
+
+##
+# Find all hardlinks and replace them with symlinks to plexdrive mount.
+#
+# Steps:
+#
+# - deluge downloads to /content/local/tmp # and SEEDS
+# - sonarr hardlinks to /content/unionfs/media/tv/[show] # /content/local/media/tv/[show]
+# - [There is now 1 inode and 2 links to it]
+# - rclone moves to gd:media/tv/[show] # /content/plexdrive/media/tv/[show]
+# - ensure uploads are complete
+# - script recursively loops through seed directory /content/local/tmp and gets inode of each file
+# - find every file path that matches inode numbers in /content/
+# - find equivalent path in /content/plexdrive/media
+# - force replace all hardlinks with symlinks to /content/plexdrive/media/tv/[show]
+#
+#
+# File structure for this to work:
+#
+# /content
+#   - /local (RW) [tmp items move here on complete]
+#     - /media
+#       - /movies
+#       - /tv
+#     - /tmp
+#
+#   - /plexdrive (RO)
+#     - /media
+#       - /movies
+#       - /tv
+#
+#   - /unionfs (fuse mount) [local + plexdrive]
+#     - /media
+#       - /movies
+#       - /tv
+#
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+seed_hardlink_with_plexdrive_symlink()
+{
+	#local basepath="${HOME}/content"
+	local basepath="."
+
+	if [[ -d "${basepath}" ]]; then
+
+		# Find all tmp files.
+		local tmpfiles=$(find "${basepath}/local/tmp" -type f -maxdepth 3)
+		local inode_numbers=()
+		local file_inode_number=""
+		for tmpfile in ${tmpfiles}; do
+			file_inode_number="$(get_inode_number ${tmpfile})"
+			#echo ${file_inode_number}
+
+			if [[ -n "${file_inode_number}" ]]; then
+				inode_numbers+=("${file_inode_number}")
+			fi
+		done
+
+		# Get paths and filenames from tmp.
+		# TODO get inode count before using. These are not necessarily in tmp.
+		local tmp_filepath=""
+		local tmp_filepaths=()
+		local tmp_filenames=()
+		for inode_number in "${inode_numbers[@]}"; do
+			tmp_filepath="$(get_paths_from_inode_number ${inode_number})"
+			tmp_filepaths+=("${tmp_filepath}")
+			tmp_filenames+=("$(basename ${tmp_filepath})")
+			#echo -e "${inode_number}"
+			#echo -e "${tmp_filepath}"
+			#echo $(basename "${tmp_filepath}")
+		done
+
+		#echo "${tmp_filepaths[@]}"
+
+		# Find the filenames extracted from tmp in plexdrive. They should have
+		# been uploaded by now. These are the paths that will be force symlinked
+		# over the same paths in tmp.
+		local plexdrive_filepaths=()
+		for tmp_filename in "${tmp_filenames[@]}"; do
+			#echo -e "${tmp_filename}"
+			plexdrive_filepaths+=($(find ${basepath}/plexdrive/media -type f -name "${tmp_filename}" -maxdepth 5))
+		done
+
+		for plexdrive_filepath in "${plexdrive_filepaths[@]}"; do
+			for tmpp_filepath in "${tmp_filepaths[@]}"; do
+				if [[ $(basename "${plexdrive_filepath}") == $(basename "${tmpp_filepath}") ]]; then
+					echo ""
+					#echo -e "Symlinking ${plexdrive_filepath} -> ${tmpp_filepath}"
+				fi
+			done
+		done
+
+
+
+		echo "${tmp_filepaths[@]}"
+
+		#echo "${tmp_filepaths[@]}"
+		#echo "${plexdrive_filepaths[@]}"
+
+	fi
+}
+
 timezone_set_est5edt()
 {
 	if [[ -e /usr/share/zoneinfo/EST5EDT ]]; then
