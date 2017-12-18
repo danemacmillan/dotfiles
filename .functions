@@ -653,6 +653,7 @@ seed_hardlink_with_plexdrive_symlink()
 {
 	local basepath="/content"
 	if [[ -d "${basepath}" ]]; then
+		echo -e "Searching for files from ${basepath}/tmp in ${basepath}/plexdrive"
 
 		local tmpfiles=$(find "${basepath}/local/tmp" -type f -maxdepth 5)
 		for tmpfile in ${tmpfiles}; do
