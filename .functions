@@ -643,6 +643,7 @@ get_paths_from_inode_number()
 #     - /media
 #       - /movies
 #       - /tv
+#     - /tmp
 #
 #
 # @author Dane MacMillan <work@danemacmillan.com>
@@ -650,65 +651,30 @@ get_paths_from_inode_number()
 # @license MIT
 seed_hardlink_with_plexdrive_symlink()
 {
-	#local basepath="${HOME}/content"
-	local basepath="."
-
+	local basepath="/content"
 	if [[ -d "${basepath}" ]]; then
 
-		# Find all tmp files.
-		local tmpfiles=$(find "${basepath}/local/tmp" -type f -maxdepth 3)
-		local inode_numbers=()
-		local file_inode_number=""
+		local tmpfiles=$(find "${basepath}/local/tmp" -type f -maxdepth 5)
 		for tmpfile in ${tmpfiles}; do
-			file_inode_number="$(get_inode_number ${tmpfile})"
-			#echo ${file_inode_number}
 
-			if [[ -n "${file_inode_number}" ]]; then
-				inode_numbers+=("${file_inode_number}")
+			local tmp_filename=$(basename "${tmpfile}")
+			local tmp_filepath=$(readlink -s -q -f "${tmpfile}")
+			if [[ -f "${tmp_filepath}" ]] \
+				&& [[ ! -L "${tmp_filepath}" ]] \
+			; then
+
+				local plexdrive_filepath=$(readlink -s -q -f "$(find ${basepath}/plexdrive/media -type f -name "${tmp_filename}" -maxdepth 5)")
+				if [[ -f "${plexdrive_filepath}" ]]; then
+					#echo "${tmp_filepath}"
+					#echo "${plexdrive_filepath}"
+
+					echo -e "${tmp_filepath} will symlink to: ${plexdrive_filepath}"
+					if [[ -n "${1}" ]]; then
+						ln -nsfv "${plexdrive_filepath}" "${tmp_filepath}"
+					fi
+				fi
 			fi
 		done
-
-		# Get paths and filenames from tmp.
-		# TODO get inode count before using. These are not necessarily in tmp.
-		local tmp_filepath=""
-		local tmp_filepaths=()
-		local tmp_filenames=()
-		for inode_number in "${inode_numbers[@]}"; do
-			tmp_filepath="$(get_paths_from_inode_number ${inode_number})"
-			tmp_filepaths+=("${tmp_filepath}")
-			tmp_filenames+=("$(basename ${tmp_filepath})")
-			#echo -e "${inode_number}"
-			#echo -e "${tmp_filepath}"
-			#echo $(basename "${tmp_filepath}")
-		done
-
-		#echo "${tmp_filepaths[@]}"
-
-		# Find the filenames extracted from tmp in plexdrive. They should have
-		# been uploaded by now. These are the paths that will be force symlinked
-		# over the same paths in tmp.
-		local plexdrive_filepaths=()
-		for tmp_filename in "${tmp_filenames[@]}"; do
-			#echo -e "${tmp_filename}"
-			plexdrive_filepaths+=($(find ${basepath}/plexdrive/media -type f -name "${tmp_filename}" -maxdepth 5))
-		done
-
-		for plexdrive_filepath in "${plexdrive_filepaths[@]}"; do
-			for tmpp_filepath in "${tmp_filepaths[@]}"; do
-				if [[ $(basename "${plexdrive_filepath}") == $(basename "${tmpp_filepath}") ]]; then
-					echo ""
-					#echo -e "Symlinking ${plexdrive_filepath} -> ${tmpp_filepath}"
-				fi
-			done
-		done
-
-
-
-		echo "${tmp_filepaths[@]}"
-
-		#echo "${tmp_filepaths[@]}"
-		#echo "${plexdrive_filepaths[@]}"
-
 	fi
 }
 
