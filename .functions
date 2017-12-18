@@ -655,7 +655,7 @@ seed_hardlink_with_plexdrive_symlink()
 	if [[ -d "${basepath}" ]]; then
 		echo -e "Searching for files from ${basepath}/tmp in ${basepath}/plexdrive"
 
-		local tmpfiles=$(find "${basepath}/local/tmp" -type f -maxdepth 5)
+		local tmpfiles=$(find "${basepath}/local/tmp" -maxdepth 5 -type f)
 		for tmpfile in ${tmpfiles}; do
 
 			local tmp_filename=$(basename "${tmpfile}")
@@ -664,7 +664,7 @@ seed_hardlink_with_plexdrive_symlink()
 				&& [[ ! -L "${tmp_filepath}" ]] \
 			; then
 
-				local plexdrive_filepath=$(readlink -s -q -f "$(find ${basepath}/plexdrive/media -type f -name "${tmp_filename}" -maxdepth 5)")
+				local plexdrive_filepath=$(readlink -s -q -f "$(find ${basepath}/plexdrive/media -maxdepth 5 -type f -name "${tmp_filename}")")
 				if [[ -f "${plexdrive_filepath}" ]]; then
 					#echo "${tmp_filepath}"
 					#echo "${plexdrive_filepath}"
