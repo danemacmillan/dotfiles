@@ -11,39 +11,41 @@
 
 ## Color variables
 
-# Formatting
-RESET=$(tput sgr0)
-BOLD=$(tput bold)
-DIM=$(tput dim)
-STANDOUT=$(tput smso)
-UNDERLINE=$(tput smul)
-BLINK=$(tput blink)
-REVERSE=$(tput rev)
-HIDDEN="\e[8m"
+if [[ $- == *i* ]]; then
+	# Formatting
+	RESET=$(tput sgr0)
+	BOLD=$(tput bold)
+	DIM=$(tput dim)
+	STANDOUT=$(tput smso)
+	UNDERLINE=$(tput smul)
+	BLINK=$(tput blink)
+	REVERSE=$(tput rev)
+	HIDDEN="\e[8m"
 
-# Foreground
-BLACK=$(tput setaf 0)
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-YELLOW=$(tput setaf 3)
-BLUE=$(tput setaf 4)
-PURPLE=$(tput setaf 5)
-CYAN=$(tput setaf 6)
-WHITE=$(tput setaf 7)
+	# Foreground
+	BLACK=$(tput setaf 0)
+	RED=$(tput setaf 1)
+	GREEN=$(tput setaf 2)
+	YELLOW=$(tput setaf 3)
+	BLUE=$(tput setaf 4)
+	PURPLE=$(tput setaf 5)
+	CYAN=$(tput setaf 6)
+	WHITE=$(tput setaf 7)
 
-# Background
-BG_BLACK=$(tput setab 0)
-BG_RED=$(tput setab 1)
-BG_GREEN=$(tput setab 2)
-BG_YELLOW=$(tput setab 3)
-BG_BLUE=$(tput setab 4)
-BG_PURPLE=$(tput setab 5)
-BG_CYAN=$(tput setab 6)
-BG_WHITE=$(tput setab 7)
+	# Background
+	BG_BLACK=$(tput setab 0)
+	BG_RED=$(tput setab 1)
+	BG_GREEN=$(tput setab 2)
+	BG_YELLOW=$(tput setab 3)
+	BG_BLUE=$(tput setab 4)
+	BG_PURPLE=$(tput setab 5)
+	BG_CYAN=$(tput setab 6)
+	BG_WHITE=$(tput setab 7)
 
-# Combinations
-BBLUE="${BOLD}${BLUE}"
-BCYAN="${BOLD}${CYAN}"
+	# Combinations
+	BBLUE="${BOLD}${BLUE}"
+	BCYAN="${BOLD}${CYAN}"
+fi
 
 # https://linuxtidbits.wordpress.com/2008/08/11/output-color-on-bash-scripts/
 colors()

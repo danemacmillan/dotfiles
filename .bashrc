@@ -64,7 +64,8 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # GNU LS_COLORS for other flavours, like CentOS.
 # Note that these dotfiles install GNU's `ls`, so the below will work on MacOS,
 # and ignore the CLICOLOR and LSCOLORS variables above.
-if command_exists tput \
+if [[ $- == *i* ]] \
+	&& command_exists tput \
 	&& [[ $(tput colors) -ge 256 ]] \
 	&& [[ -e ~/.dir_colors ]] \
 ; then
