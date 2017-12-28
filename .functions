@@ -651,9 +651,9 @@ get_paths_from_inode_number()
 # @license MIT
 seed_hardlink_with_plexdrive_symlink()
 {
-	local basepath="/content"
+	local basepath="~/content"
 	if [[ -d "${basepath}" ]]; then
-		echo -e "Searching for files from ${basepath}/tmp in ${basepath}/plexdrive"
+		echo -e "Searching for files from ${basepath}/local/tmp in ${basepath}/plexdrive"
 
 		local tmpfiles=$(find "${basepath}/local/tmp" -maxdepth 5 -type f)
 		for tmpfile in ${tmpfiles}; do
@@ -677,6 +677,20 @@ seed_hardlink_with_plexdrive_symlink()
 			fi
 		done
 	fi
+}
+
+create_content_structure()
+{
+	mkdir -v ~/content
+	chmod 770 ~/content
+	chmod g+s ~/content
+	setfacl -m d:u::rwX,d:g::rwX,d:o::rwX,u::rwX,g::rwX,o::--X ~/content
+
+	mkdir -v ~/content/local
+	mkdir -v ~/content/local/media
+	mkdir -v ~/content/local/tmp
+	mkdir -v ~/content/plexdrive
+	mkdir -v ~/content/unionfs
 }
 
 timezone_set_est5edt()
