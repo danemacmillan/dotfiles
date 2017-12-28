@@ -684,7 +684,7 @@ create_content_structure()
 	mkdir -v ~/content
 	chmod 770 ~/content
 	chmod g+s ~/content
-	setfacl -m d:u::rwX,d:g::rwX,d:o::rwX,u::rwX,g::rwX,o::--X ~/content
+	setfacl -R -m d:u::rwX,d:g::rwX,d:o::--X,u::rwX,g::rwX,o::--X ~/content
 
 	mkdir -v ~/content/local
 	mkdir -v ~/content/local/media
