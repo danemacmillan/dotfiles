@@ -666,7 +666,7 @@ seed_hardlink_with_plexdrive_symlink()
 			; then
 
 				echo -e "\nSeeking: ${tmp_filepath}"
-				local plexdrive_filepath=$(readlink -s -q -f "$(find ${basepath}/plexdrive/media -maxdepth 5 -type f -name "${tmp_filename}")")
+				local plexdrive_filepath=$(readlink -s -q -f "$(find ${basepath}/plexdrive/media -maxdepth 5 -type f -iname "${tmp_filename}")")
 				if [[ -f "${plexdrive_filepath}" ]]; then
 					#echo "${tmp_filepath}"
 					#echo "${plexdrive_filepath}"
