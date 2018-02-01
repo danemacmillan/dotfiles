@@ -115,6 +115,18 @@ export CLOUDSDK_PYTHON=""
 export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
+# Set common rclone options as environment variables.
+# @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
+RCLONE_STATS=1s
+RCLONE_VERBOSE=2
+RCLONE_DRIVE_USE_TRASH=true
+RCLONE_DRIVE_CHUNK_SIZE=64M
+RCLONE_NO_TRAVERSE=
+RCLONE_CHECKERS=20
+RCLONE_TRANSFERS=10
+
+
+##
 # Aliases
 if [[ -e "${HOME}/.aliases" ]]; then
 	source "${HOME}/.aliases"
