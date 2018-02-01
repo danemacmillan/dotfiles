@@ -117,14 +117,14 @@ export GOOGLE_APPLICATION_CREDENTIALS=""
 ##
 # Set common rclone options as environment variables.
 # @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
-RCLONE_BWLIMIT=4M
-RCLONE_CHECKERS=10
-RCLONE_DRIVE_CHUNK_SIZE=64M
-RCLONE_DRIVE_USE_TRASH=true
-RCLONE_NO_TRAVERSE=
-RCLONE_STATS=1s
-RCLONE_TRANSFERS=1
-RCLONE_VERBOSE=1
+export RCLONE_BWLIMIT=4M
+export RCLONE_CHECKERS=10
+export RCLONE_DRIVE_CHUNK_SIZE=64M
+export RCLONE_DRIVE_USE_TRASH=true
+export RCLONE_NO_TRAVERSE=
+export RCLONE_STATS=1s
+export RCLONE_TRANSFERS=1
+export RCLONE_VERBOSE=1
 
 
 ##
