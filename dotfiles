@@ -14,7 +14,6 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # @TODO
 #  - abstract into function.
 #  - do symlinking with cp command so no need to manually track files.
-#  - verify vimperator config directory.
 
 ##
 # Cleanup any legacy associations from older versions of this dotfiles repo.
@@ -118,7 +117,6 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.path" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.rsync_excludes" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.siegerc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.tmux.conf" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.vimperatorrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
 
 # TODO ALSO ADD NPM build: npm install -g diff-so-fancy
