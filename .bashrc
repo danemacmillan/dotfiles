@@ -118,14 +118,15 @@ export GOOGLE_APPLICATION_CREDENTIALS=""
 # Set common rclone options as environment variables.
 # @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
 export RCLONE_BWLIMIT=4M
-export RCLONE_CHECKERS=10
+export RCLONE_CHECKERS=8
 export RCLONE_DRIVE_CHUNK_SIZE=64M
 export RCLONE_DRIVE_USE_TRASH=true
-export RCLONE_EXCLUDE=".unionfs-fuse/"
-export RCLONE_NO_TRAVERSE=true
+export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache}"
+#export RCLONE_NO_TRAVERSE=true
+export RCLONE_SKIP_LINKS=true
 export RCLONE_STATS=1s
 export RCLONE_TRANSFERS=1
-export RCLONE_VERBOSE=1
+export RCLONE_VERBOSE="1"
 
 
 ##
