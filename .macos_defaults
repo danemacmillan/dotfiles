@@ -20,4 +20,8 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
 # Speed up Mission Control animation. Note that MacOS Sierra seems to ignore this.
 defaults write com.apple.dock expose-animation-duration -float 0
 
+# Change location of screenshots
+#defaults write com.apple.screencapture location ~/Documents/screenshots
+#killall SystemUIServer
+
 killall Dock
