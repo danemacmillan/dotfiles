@@ -363,21 +363,6 @@ firefox_profile()
 }
 
 ##
-# Use imgcat script to retrieve images from the Web as well.
-#
-# @author Dane MacMillan <work@danemacmillan.com>
-# @link https://github.com/danemacmillan/dotfiles
-# @license MIT
-imget()
-{
-	if [[ ! -d "$HOME/tmp" ]]; then
-		mkdir $HOME/tmp
-	fi
-
-	imgcat $(wget $1 -q -O $HOME/tmp/imgcat.tmp; echo $HOME/tmp/imgcat.tmp)
-}
-
-##
 # A better cat utility.
 #
 # This is for lazy people who just want to cat out documents to their terminal.
