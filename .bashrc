@@ -96,7 +96,7 @@ export LESSHISTFILE=/dev/null
 ##
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
-export RSYNC_PARTIAL_DIR="{HOME}/tmp/rsync-partials"
+export RSYNC_PARTIAL_DIR="${HOME}/tmp/rsync-partials"
 
 # Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
 export EVENT_NOKQUEUE=1
