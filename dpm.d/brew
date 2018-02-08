@@ -16,6 +16,7 @@ ctags
 curl
 diff-so-fancy
 dos2unix
+exiftool
 findutils
 fontconfig
 freetype
