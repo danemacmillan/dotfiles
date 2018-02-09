@@ -252,17 +252,21 @@ EXEC 01;38;5;203
 .php 00;38;5;183
 
 # Files with potentially sensitive data
-.bash_history 00;38;5;46
+*history 00;38;5;46
 .csv 00;38;5;46
-*irc.conf 00;38;5;46 # weechat
 .json 00;38;5;46
-*rclone.conf 00;38;5;46
-#*local.xml.* 00;38;5;46 # magento
-.mysql_history 00;38;5;46
 .sql 01;38;5;46
 .sql.gz 01;48;5;236;38;5;46
 .yaml 00;38;5;46
 .yml 00;38;5;46
+*id_rsa 00;38;5;46
+*irc.conf 00;38;5;46 # weechat
+*rclone.conf 00;38;5;46 # rclone
+*htpassword 00;38;5;46
+*local.xml 00;38;5;46
+*config.xml 00;38;5;46
+*config.php 00;38;5;46
+*env.php 00;38;5;46
 
 # Files to clean regularly
 .torrent 00;38;5;9
