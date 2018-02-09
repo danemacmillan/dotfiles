@@ -10,15 +10,46 @@
 # @license MIT
 
 ##
-# Standard
-if [[ -d "/usr/local/sbin" ]]; then
-	export PATH="/usr/local/sbin:${PATH}"
+# Store homebrew install path, if available.
+export HOMEBREW_INSTALL_PATH="$(command_exists brew && brew --prefix)"
+export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
+
+##
+# Reset base path if on MacOS, so nothing unusual finds its way into it.
+# Note that this will also stick /usr/local/sbin into the path, but in a
+# preferred location, instead of at the beginning.
+if [[ -e "/etc/paths" ]]; then
+	export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 fi
 
 ##
-# Standard
-if [[ -d "/usr/local/bin" ]]; then
-	export PATH="/usr/local/bin:${PATH}"
+# On MacOS, add GNU coreutils and other GNU tools to the path, instead of
+# using the BSD ones that come with the distribution. Note that this may
+# cause issues with some native applications. I've not experienced it, but
+# it could happen. Also, this just assumes that if the coreutils package is
+# installed, so are the other ones listed inside the conditional block.
+if [[ -e "${HOMEBREW_FORMULA_PATH}/coreutils" ]] ; then
+	export PATH="${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnubin:$PATH"
+	export MANPATH="${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnuman:$MANPATH"
+
+	export PATH="${HOMEBREW_FORMULA_PATH}/curl/bin:$PATH"
+	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-getopt/libexec/gnubin:$PATH"
+	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-indent/libexec/gnubin:$PATH"
+	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-sed/libexec/gnubin:$PATH"
+	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-tar/libexec/gnubin:$PATH"
+fi
+
+# Source google-cloud-sdk gcloud utilities
+# https://cloud.google.com/sdk/docs/quickstarts
+if [[ -e "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]]; then
+	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+fi
+
+##
+# Go lang binaries
+if [[ -d "${HOME}/go" ]]; then
+	export PATH="${HOME}/go/bin:${PATH}"
+	export GOPATH="${HOME}/go"
 fi
 
 ##
@@ -28,38 +59,9 @@ if [[ -d "${HOME}/.composer/vendor/bin" ]]; then
 fi
 
 ##
-# Go lang binaries
-if [[ -d "${HOME}/go" ]]; then
-	export PATH="${HOME}/go/bin:${PATH}"
-fi
-
-##
-# Add user bin if it exists.
+# Add user bin.
+# This one should always be last, as it should be able to overwrite everything.
 if [[ -d "${HOME}/bin" ]]; then
 	export PATH="${HOME}/bin:${PATH}"
 fi
 
-##
-# Go lang
-export GOPATH="${HOME}/go"
-
-##
-# MacOS
-if command_exists brew ; then
-	# These are really slow, so just use hardcoded path.
-	#HOMEBREW_INSTALL_PATH="$(brew --prefix)"
-	#HOMEBREW_INSTALL_PATH_COREUTILS="$(brew --prefix coreutils)"
-	HOMEBREW_INSTALL_PATH="/usr/local"
-	HOMEBREW_INSTALL_PATH_COREUTILS="${HOMEBREW_INSTALL_PATH}/opt/coreutils"
-	# Assumes that coreutils and other GNU tools have replaced OSX'
-	export PATH="${HOMEBREW_INSTALL_PATH_COREUTILS}/libexec/gnubin:$PATH"
-	export PATH="${HOMEBREW_INSTALL_PATH}/opt/gnu-tar/libexec/gnubin:$PATH"
-	export PATH="${HOMEBREW_INSTALL_PATH}/opt/curl/bin:$PATH"
-	export MANPATH="${HOMEBREW_INSTALL_PATH_COREUTILS}/libexec/gnuman:$MANPATH"
-
-	# Source google-cloud-sdk gcloud utilities
-	# https://cloud.google.com/sdk/docs/quickstarts
-	if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]]; then
-		source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-	fi
-fi

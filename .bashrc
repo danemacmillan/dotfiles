@@ -27,23 +27,15 @@ shopt -s nocaseglob;
 #
 # Note that this will work on both MacOS and CentOS. On the latter, the path
 # will simply be "/etc/bash_completion" as brew will return nothing.
-export DOTFILES_BASHCOMPLETION="$(command_exists brew && brew --prefix)"
-if [[ -e "${DOTFILES_BASHCOMPLETION}/etc/bash_completion" ]]; then
-	source "${DOTFILES_BASHCOMPLETION}/etc/bash_completion"
+if [[ -e "${HOMEBREW_INSTALL_PATH}/etc/bash_completion" ]]; then
+	source "${HOMEBREW_INSTALL_PATH}/etc/bash_completion"
 fi
 
 ##
-# __git_ps1 for MacOS
-export DOTFILES_GITPS1="$(command_exists brew && brew --prefix git)"
-if [[ -e "${DOTFILES_GITPS1}/etc/bash_completion.d/git-prompt.sh" ]]; then
-	source "${DOTFILES_GITPS1}/etc/bash_completion.d/git-prompt.sh"
-fi
-
-##
-# __git_ps1 for CentOS
-if ! command_exists __git_ps1 \
-	&& [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]] \
-; then
+# __git_ps1 for MacOS or other systems
+if [[ -e "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh" ]]; then
+	source "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh"
+elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
 	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
 fi
 
@@ -67,7 +59,7 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 if [[ $- == *i* ]] \
 	&& command_exists tput \
 	&& [[ $(tput colors) -ge 256 ]] \
-	&& [[ -e ~/.dir_colors ]] \
+	&& [[ -e "${HOME}/.dir_colors" ]] \
 ; then
 	eval $(dircolors -b "${HOME}/.dir_colors")
 fi
@@ -98,6 +90,20 @@ export LESSHISTFILE=/dev/null
 # flag when running rsync.
 export RSYNC_PARTIAL_DIR="${HOME}/tmp/rsync-partials"
 
+##
+# Set common rclone options as environment variables.
+# @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
+export RCLONE_BWLIMIT=4M
+export RCLONE_CHECKERS=8
+export RCLONE_DRIVE_CHUNK_SIZE=64M
+export RCLONE_DRIVE_USE_TRASH=true
+export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache}"
+#export RCLONE_NO_TRAVERSE=true
+export RCLONE_SKIP_LINKS=true
+export RCLONE_STATS=1s
+export RCLONE_TRANSFERS=1
+export RCLONE_VERBOSE="1"
+
 # Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
 export EVENT_NOKQUEUE=1
 
@@ -115,21 +121,6 @@ export CLOUDSDK_PYTHON=""
 export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
-# Set common rclone options as environment variables.
-# @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
-export RCLONE_BWLIMIT=4M
-export RCLONE_CHECKERS=8
-export RCLONE_DRIVE_CHUNK_SIZE=64M
-export RCLONE_DRIVE_USE_TRASH=true
-export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache}"
-#export RCLONE_NO_TRAVERSE=true
-export RCLONE_SKIP_LINKS=true
-export RCLONE_STATS=1s
-export RCLONE_TRANSFERS=1
-export RCLONE_VERBOSE="1"
-
-
-##
 # Aliases
 if [[ -e "${HOME}/.aliases" ]]; then
 	source "${HOME}/.aliases"
@@ -139,12 +130,6 @@ fi
 # Bash prompt, like PS1
 if [[ -e "${HOME}/.bash_prompt" ]]; then
 	source "${HOME}/.bash_prompt"
-fi
-
-if command_exists gcloud \
-	&& [[ -e "${HOME}/.gcp" ]] \
-; then
-	source "${HOME}/.gcp"
 fi
 
 ##
