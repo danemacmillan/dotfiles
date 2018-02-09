@@ -253,6 +253,7 @@ EXEC 01;38;5;203
 
 # Files with potentially sensitive data
 *history 00;38;5;46
+*auth 00;38;5;46
 .csv 00;38;5;46
 .json 00;38;5;46
 .sql 01;38;5;46
