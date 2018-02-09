@@ -112,6 +112,7 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_max_files = 0
 let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 "https://coderwall.com/p/hk_bwg/how-to-speed-up-ctrlp
 let g:ctrlp_custom_ignore = {
@@ -247,7 +248,7 @@ set number
 " Enable syntax highlighting
 syntax on
 " Highlight current line
-set cursorline
+"set cursorline
 " Make tabs as wide as two spaces
 set tabstop=2
 set softtabstop=2
