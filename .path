@@ -22,6 +22,10 @@ if [[ -e "/etc/paths" ]]; then
 	export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 fi
 
+if [[ -e "/Library/Frameworks/Mono.framework/Versions/Current/Commands" ]]; then
+	export PATH="/Library/Frameworks/Mono.framework/Versions/Current/Commands:$PATH"
+fi
+
 ##
 # On MacOS, add GNU coreutils and other GNU tools to the path, instead of
 # using the BSD ones that come with the distribution. Note that this may
@@ -50,6 +54,12 @@ fi
 if [[ -d "${HOME}/go" ]]; then
 	export PATH="${HOME}/go/bin:${PATH}"
 	export GOPATH="${HOME}/go"
+fi
+
+##
+# Rust
+if [[ -d "${HOME}/.cargo/bin" ]]; then
+	export PATH="${HOME}/.cargo/bin:${PATH}"
 fi
 
 ##
