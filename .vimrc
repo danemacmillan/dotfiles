@@ -248,7 +248,13 @@ set number
 " Enable syntax highlighting
 syntax on
 " Highlight current line
-"set cursorline
+" The cursorline is a massive performance hog and slows scrolling to a crawl.
+" set cursorline
+set nocursorline
+set lazyredraw
+set ttyfast
+set foldlevel=0
+
 " Make tabs as wide as two spaces
 set tabstop=2
 set softtabstop=2
