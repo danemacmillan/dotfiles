@@ -30,6 +30,11 @@ echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
 # Create directories that will not be tracked by the repo.
 #
 # Their contents could be via symlinks from `.dotfiles/*`, though.
+if [[ ! -d "${HOME}/.config/alacritty" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.config/alacritty' directory.${RESET}"
+	mkdir -p "${HOME}/.config/alacritty"
+fi
+
 if [[ ! -d "${HOME}/.config/htop" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.config/htop' directory.${RESET}"
 	mkdir -p "${HOME}/.config/htop"
@@ -87,6 +92,7 @@ fi
 # the user home directory, as they are only used internally by these dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 ln -vsfn "${DOTFILES_DIRECTORY}"/bin/* "${HOME}/bin/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.config/alacritty/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 ln -vsfn "${DOTFILES_DIRECTORY}/.config/htop/htoprc" "${HOME}/.config/htop/htoprc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.ssh/rc" "${HOME}/.ssh/rc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.agignore" "${HOME}/"
