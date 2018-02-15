@@ -25,9 +25,11 @@ if [[ $- == *i* ]]; then
 	# Foreground
 	BLACK=$(tput setaf 0)
 	RED=$(tput setaf 1)
-	GREEN=$(tput setaf 2)
+	#GREEN=$(tput setaf 2)
+	GREEN=$(tput setaf 34)
 	YELLOW=$(tput setaf 3)
-	BLUE=$(tput setaf 4)
+	#BLUE=$(tput setaf 4)
+	BLUE=$(tput setaf 33)
 	PURPLE=$(tput setaf 5)
 	CYAN=$(tput setaf 6)
 	WHITE=$(tput setaf 7)
