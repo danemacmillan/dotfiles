@@ -45,3 +45,5 @@ set visible-stats on
 
 # Use Alt/Meta + Delete to delete the preceding word
 "\e[3;3~": kill-word
+
+set bell-style none
