@@ -172,7 +172,7 @@ CAPABILITY 30;41
 STICKY_OTHER_WRITABLE 48;5;64;38;5;230
 
 # Directory that is other-writable (o+w) and not sticky.
-OTHER_WRITABLE 48;5;02;38;5;04
+OTHER_WRITABLE 48;5;02;38;5;20
 
 # Directory with the sticky bit set (+t) and not other-writable.
 STICKY 48;5;33;38;5;230
