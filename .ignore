@@ -1,0 +1,100 @@
+##
+# General ignore file respected by:
+# - silver_searcher (ag) https://github.com/ggreer/the_silver_searcher
+# - ripgrep (rg) https://github.com/BurntSushi/ripgrep
+#
+# They both came to a gentlemen's agreement in this thread, which is a marvel
+# to read, just because of the sheer speed they agreed upon a standard:
+# - https://news.ycombinator.com/item?id=12567328
+#
+# Note that ag is aliased to "ag --hidden" which will search for hidden files
+# by default. That is not the same as ignoring these files, as ag by
+# default does not search any hidden files.
+
+## General files to ignore
+#*~
+*.lock
+.DS_Store
+*.DS_Store
+*.DS_Store?
+*.localized
+*.swp
+*.out
+Thumbs.db
+composer.phar
+composer
+Desktop.ini
+desktop.ini
+._*
+ehthumbs.db
+.Spotlight-V100
+.Trashes
+.cache/
+log
+tmp
+
+## IDEs
+.idea/
+.idea_modules/
+nbproject/
+
+## VCS ignores
+.git/
+.hg/
+.svn/
+
+## Vim
+.vim/.netrwhist
+.vim/bundle
+
+## Binaries, though ag should ignore all by default
+*.so
+*.dat
+*.jpeg
+*.jpg
+*.png
+*.gif
+*.dmg
+*.iso
+*.doc
+*.docx
+
+## Misc filesystem
+*.sql
+*.gz
+*.zip
+*.tar.gz
+*.tgz
+*.bz2
+*.tar.bz2
+*.tbz
+*.tbz2
+
+# Linus CLI releases directory
+releases/.core/
+releases/*/
+
+## General directories to ignore
+.Trash/
+.composer/
+.cpan/
+.cpanm/
+.npm/
+.vagrant/
+.vim/
+.vscode/
+.weechat/
+Applications/
+Desktop/
+Documents/
+Downloads/
+Library/
+Movies/
+Music/
+Parallels/
+Pictures/
+Public/
+bower_components/
+node_modules/
+tmp/
+
