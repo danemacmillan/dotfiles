@@ -99,6 +99,7 @@ fi
 ##
 # Misc
 alias c='clear'
+alias x='exit'
 alias vi='vim'
 #alias mysql='mycli'
 #alias btop="mytop -u user -p '' -h localhost -d database"
