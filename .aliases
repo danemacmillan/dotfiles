@@ -139,10 +139,10 @@ if command_exists brew ; then
 	# Depends on Firefox Tools Adapter: https://developer.mozilla.org/en-US/docs/Tools/Firefox_Tools_Adapter
 	# TODO: Add checking.
 	alias debugios='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app; sleep 2s; ios_webkit_debug_proxy'
-
 	alias elcapinstallercreate="sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/ElCapInstaller --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction"
 	alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 	alias flushdns="dscacheutil -flushcache"
+	alias rebuildopenwithmenu='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user; killall Finder; echo "Rebuilt Open With, relaunching Finder"'
 
 	alias update="\
 		softwareupdate -i -a --verbose; \
