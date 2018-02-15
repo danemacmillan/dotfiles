@@ -24,7 +24,8 @@ if [[ $- == *i* ]]; then
 
 	# Foreground
 	BLACK=$(tput setaf 0)
-	RED=$(tput setaf 1)
+	#RED=$(tput setaf 1)
+	RED=$(tput setaf 160)
 	#GREEN=$(tput setaf 2)
 	GREEN=$(tput setaf 34)
 	YELLOW=$(tput setaf 3)
@@ -36,10 +37,13 @@ if [[ $- == *i* ]]; then
 
 	# Background
 	BG_BLACK=$(tput setab 0)
-	BG_RED=$(tput setab 1)
-	BG_GREEN=$(tput setab 2)
+	#BG_RED=$(tput setab 1)
+	BG_RED=$(tput setab 160)
+	#BG_GREEN=$(tput setab 2)
+	BG_GREEN=$(tput setab 34)
 	BG_YELLOW=$(tput setab 3)
-	BG_BLUE=$(tput setab 4)
+	#BG_BLUE=$(tput setab 4)
+	BG_BLUE=$(tput setab 33)
 	BG_PURPLE=$(tput setab 5)
 	BG_CYAN=$(tput setab 6)
 	BG_WHITE=$(tput setab 7)
