@@ -93,7 +93,7 @@ export RSYNC_PARTIAL_DIR="${HOME}/tmp/rsync-partials"
 ##
 # Set common rclone options as environment variables.
 # @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
-export RCLONE_BWLIMIT=07:00,512 17:00,1M 21:00,1M 23:00,1.5M 01:00,2.5M"
+export RCLONE_BWLIMIT="07:00,512 17:00,1M 21:00,1M 23:00,1.5M 01:00,2.5M"
 export RCLONE_CHECKERS=8
 export RCLONE_DRIVE_CHUNK_SIZE=64M
 export RCLONE_DRIVE_USE_TRASH=true
@@ -102,7 +102,7 @@ export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,
 export RCLONE_SKIP_LINKS=true
 export RCLONE_STATS=1s
 export RCLONE_TRANSFERS=1
-export RCLONE_VERBOSE="1"
+export RCLONE_VERBOSE=1
 
 # Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
 export EVENT_NOKQUEUE=1
