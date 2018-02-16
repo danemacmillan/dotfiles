@@ -93,7 +93,7 @@ export RSYNC_PARTIAL_DIR="${HOME}/tmp/rsync-partials"
 ##
 # Set common rclone options as environment variables.
 # @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
-export RCLONE_BWLIMIT=4M
+export RCLONE_BWLIMIT=07:00,512 17:00,1M 21:00,1.25M 23:00,2.0M 01:00,2.5M"
 export RCLONE_CHECKERS=8
 export RCLONE_DRIVE_CHUNK_SIZE=64M
 export RCLONE_DRIVE_USE_TRASH=true
