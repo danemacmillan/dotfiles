@@ -111,7 +111,7 @@ let g:ctrlp_by_filename = 0
 let g:ctrlp_regexp = 1
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_max_files = 0
-let g:ctrlp_use_caching = 1
+let g:ctrlp_use_caching = 0
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 "https://coderwall.com/p/hk_bwg/how-to-speed-up-ctrlp
@@ -119,17 +119,21 @@ let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public$|tmp$',
 	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
 	\ }
-if executable('ag')
-	" https://www.mankier.com/1/ag
-	let g:ctrlp_user_command = 'ag --ignore-case --nogroup --hidden --follow
-		\ -U -p ~/.agignore
-		\ -l -m 10000
-		\ --ignore .git
-		\ --ignore .svn
-		\ --ignore .hg
-		\ --ignore .DS_Store
-		\ --ignore "**/*.pyc"
-		\ %s -g ""'
+" if executable('ag')
+	" " https://www.mankier.com/1/ag
+	" let g:ctrlp_user_command = 'ag --ignore-case --nogroup --hidden --follow
+	" 	\ -U -p ~/.agignore
+	" 	\ -l -m 10000
+	" 	\ --ignore .git
+	" 	\ --ignore .svn
+	" 	\ --ignore .hg
+	" 	\ --ignore .DS_Store
+	" 	\ --ignore "**/*.pyc"
+	" 	\ %s -g ""'
+" endif
+
+if executable('rg')
+	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 endif
 
 " Syntastic
