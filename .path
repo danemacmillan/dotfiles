@@ -14,6 +14,9 @@
 export HOMEBREW_INSTALL_PATH="$(command_exists brew && brew --prefix)"
 export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
 
+# Common path, if not already included, and it exists.
+[[ ":${PATH}:" != *":/usr/local/bin:"* ]] && [[ -e "/usr/local/bin" ]] && export PATH="/usr/local/bin:${PATH}"
+
 ##
 # Reset base path if on MacOS, so nothing unusual finds its way into it.
 # Note that this will also stick /usr/local/sbin into the path, but in a
