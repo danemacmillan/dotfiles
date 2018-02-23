@@ -92,9 +92,10 @@ alias historypurgelast='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
 alias phpdebug='PHP_CLI_DEBUG="true" PHP_IDE_CONFIG="serverName=develop.vagrant.dev" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=10.0.2.2" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp"'
 alias phpdebug2='PHP_CLI_DEBUG="true" PHP_IDE_CONFIG="serverName=phoenix" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=10.211.55.15" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp"'
 if command_exists linus \
+	&& [[ -e "${HOME}/bin/linus" ]] \
 	&& php -m |grep -q xdebug \
 ; then
-	alias linusdebug='PHP_CLI_DEBUG="true" PHP_IDE_CONFIG="serverName=linuscli" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=192.168.70.1" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp" linus'
+	alias linusdebug='PHP_CLI_DEBUG="true" PHP_IDE_CONFIG="serverName=linuscli" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=192.168.70.1" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp" ${HOME}/bin/linus'
 fi
 
 
