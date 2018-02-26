@@ -46,3 +46,21 @@ if [[ "${HAS_SSH}" ]]; then
 fi
 
 export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
+
+# https://superuser.com/a/517110
+
+#function prompt_right() {
+#  echo -e "${LIGHTGREY}\D{%H:%M}${DARKGREY}:\D{%S}"
+#}
+
+#function prompt_left() {
+#  #echo -e "\033[0;35m${RANDOM}\033[0m"
+#	echo -e "${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
+#}
+
+#function prompt() {
+#    compensate=30
+#    PS1=$(printf "%*s\r%s\n\$ " "$(($(tput cols)+${compensate}))" "$(prompt_right)" "$(prompt_left)")
+#}
+#PROMPT_COMMAND=prompt
+
