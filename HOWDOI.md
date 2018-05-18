@@ -176,3 +176,13 @@ https://support.plex.tv/hc/en-us/articles/200288586-Installation
 - `ssh ip.address.of.server -L 8888:localhost:32400`
 - `http://localhost:8888/web`
 
+# Quickly debug a PHP problem in production that evades all logging
+
+Place this snippet around where the problem occurs. This is not a substitute
+for proper logging, but sometimes it helps when in a bind and there is no
+adequate logging in place.
+
+- `@file_put_contents('debuglive.txt', var_export($client, true), FILE_APPEND);`
+
+# Grant permissions in MySQL
+
