@@ -46,6 +46,17 @@ if [[ -e "${HOMEBREW_FORMULA_PATH}/coreutils" ]] ; then
 	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-tar/libexec/gnubin:$PATH"
 fi
 
+##
+# PHP 7.1, if it is installed. Note that if a user has 7.2 installed, this will
+# supersede it.
+if [[ -d "/usr/local/opt/php@7.1/bin" ]]; then
+	export PATH="/usr/local/opt/php@7.1/bin:${PATH}"
+fi
+
+if [[ -d "/usr/local/opt/php@7.1/sbin" ]]; then
+	export PATH="/usr/local/opt/php@7.1/sbin:${PATH}"
+fi
+
 # Source google-cloud-sdk gcloud utilities
 # https://cloud.google.com/sdk/docs/quickstarts
 if [[ -e "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]]; then
