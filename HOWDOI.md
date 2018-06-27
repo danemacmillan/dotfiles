@@ -184,5 +184,10 @@ adequate logging in place.
 
 - `@file_put_contents('debuglive.txt', var_export($client, true), FILE_APPEND);`
 
+# See MySQL configuration variable values
+
+- `SHOW VARIABLES LIKE '%timeout%';`
+- `SHOW VARIABLES LIKE '%size%';`
+
 # Grant permissions in MySQL
 
