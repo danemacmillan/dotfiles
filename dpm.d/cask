@@ -1,4 +1,4 @@
-#1password
+1password
 #adobe-reader
 #android-file-transfer
 coteditor
@@ -6,10 +6,9 @@ cyberduck
 #deluge
 #dictunifier
 firefox
-firefox-nightly
+#firefox-nightly
 font-droid-sans-mono-for-powerline
 font-inconsolata-for-powerline
-font-meslo-lg-for-powerline
 gas-mask
 google-chrome
 #google-chrome-canary
@@ -24,7 +23,7 @@ licecap
 mac2imgur
 macdown
 osxfuse
-parallels-desktop
+parallels
 phpstorm
 #plex-media-player
 rowanj-gitx
@@ -34,5 +33,5 @@ sizeup
 #sonos
 #teamviewer
 vagrant
-virtualbox
+#virtualbox
 #vlc
