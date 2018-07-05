@@ -4,7 +4,8 @@ autoconf
 automake
 bash
 bash-completion
-bfg
+# This requires Java
+#bfg
 bitlbee
 brew-cask-completion
 cask
