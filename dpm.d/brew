@@ -59,6 +59,7 @@ node
 openssl
 pcre
 phantomjs
+php@7.1
 pv
 python
 rclone
