@@ -689,6 +689,12 @@ timezone_set_est5edt()
 	fi
 }
 
+
+rclone_toggle_bwlimit()
+{
+	kill -SIGUSR2 $(pidof rclone)
+}
+
 ##
 # Import a MySQL dump piped through pv to get progress. Pimped.
 #
