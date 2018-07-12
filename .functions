@@ -409,6 +409,30 @@ cat()
 }
 
 ##
+# Backup user directory files to GDrive using rclone.
+#
+# Backup very specific things on Dane MacMillan's machines.
+#
+# I do not recommend others run this.
+#
+# @TODO Modify this now that it is a function. This used to be an alias, hence
+# the chaining.
+backup()
+{
+  date \
+  && echo 'Syncing to iCloud Drive...' \
+  && rclone copy ~/ ~/Documents/dotfiles/ --include={/.ssh/**,/.weechat/irc.conf,/.boto,/.extra,/.gitconfig.local,/.rclone.conf,/linus.yaml} --copy-links \
+  && rclone sync ~/Downloads/ ~/Documents/downloads/ --transfers 10 --max-size 2000M --bwlimit off --checksum \
+  && rclone copy ~/Library/Group\ Containers/2BUA8C4S2C.com.agilebits/Library/Application\ Support/1Password/Backups/ ~/Documents/1password/ --transfers 10 --bwlimit off \
+  && rclone sync ~/Pictures/Photo\ Booth\ Library/ ~/Documents/images/photobooth/ --transfers 10 --bwlimit off --checksum \
+  && echo 'Backing up to Google Drive...' \
+  && rclone copy ~/Desktop/ macmillanator:/Desktop --transfers 5 --max-size 1000M \
+  && rclone copy ~/Documents/ macmillanator:/Documents --transfers 5 --max-size 15000M \
+  && rclone sync ~/Pictures/ macmillanator:/Pictures --transfers 5 --checkers 20 --checksum \
+  && date
+}
+
+##
 # Basic function to back up Plex Media Server data.
 #
 # This excludes the Cache directory, as recommended in:
