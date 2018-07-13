@@ -65,6 +65,7 @@ pv
 python
 rclone
 readline
+rg
 rlwrap
 rsync
 ssh-copy-id
