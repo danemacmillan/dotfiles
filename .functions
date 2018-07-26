@@ -424,6 +424,7 @@ backup()
   && rclone copy ~/ ~/Documents/dotfiles/ --include={/.ssh/**,/.weechat/irc.conf,/.boto,/.extra,/.gitconfig.local,/.rclone.conf,/linus.yaml} --copy-links \
   && rclone sync ~/hack/vagrantshell/sites/phoenix.vagrant.localhost/.idea/ ~/Documents/hack/phpstorm/phoenix.vagrant.localhost/.idea/ --transfers 10 --bwlimit off --checksum \
   && rclone move ~/Library/Group\ Containers/2BUA8C4S2C.com.agilebits/Library/Application\ Support/1Password/Backups/ ~/Documents/1password/ --transfers 10 --bwlimit off \
+  && rclone sync ~/Library/Preferences/ ~/Documents/preferences/ --transfers 10 --bwlimit off \
   && rclone sync ~/Pictures/Photo\ Booth\ Library/ ~/Documents/images/photobooth/ --transfers 10 --bwlimit off --checksum \
   && echo 'Backing up to Google Drive...' \
   && rclone copy ~/Desktop/ macmillanator:/Desktop --transfers 5 --max-size 1000M \
