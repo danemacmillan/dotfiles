@@ -7,12 +7,15 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # CentOS carries a very old version, so replace it with the one defined in the
 # ius repo.
 #
+# By default, this will only run if PHP is not already installed. This is to
+# ensure that existing systems do not accidentally have their versions changed.
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 #
 name="php"
-version="php55u"
+version="php71u"
 yum_enablerepo=""
 
 if [[ -n "$1" ]]; then
@@ -48,6 +51,7 @@ if ! command_exists ${name}; then
 	${version}-mhash \
 	${version}-mysqlnd \
 	${version}-opcache \
+	${version}-pear \
 	${version}-pecl-geoip \
 	${version}-pecl-jsonc \
 	${version}-pecl-memcached \
@@ -59,11 +63,17 @@ if ! command_exists ${name}; then
 	${version}-soap \
 	${version}-xml
 
-	# Composer
-	if ! command_exists composer; then
-		echo -e "${GREEN}Installing composer${RESET}"
-		curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
-	fi
-
 	echo -e "${GREEN}${name} installed.${RESET}"
 fi
+
+## TODO
+# This is for remi-safe, enabled by default. All others are disabled by default.
+# Remi-safe is used in vagrantshell only for php56. This repo allows a parallel
+# installation of PHP in another version.
+#yum -y install http://rpms.remirepo.net/enterprise/remi-release-6.rpm
+#Install remi-safe version of PHP 5.6.
+#PHP_VERSION_REMI_SAFE="php56-php"
+#$PHP_VERSION_REMI_SAFE-ioncube-loader
+# These conflict with IUS.
+# $PHP_VERSION_REMI_SAFE-pecl-memcached
+# $PHP_VERSION_REMI_SAFE-pecl-memcached-debuginfo

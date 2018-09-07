@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install PHP Composer.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+if command_exists php \
+    && ! command_exists composer \
+; then
+    echo -e "${RESET}${BBLUE}Installing PHP Composer.${RESET}"
+    curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
+fi

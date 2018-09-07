@@ -297,6 +297,8 @@ __dpm_install_yum()
 # installment through the dotfiles framework.
 # TODO: Add md5 checks to prevent unnecessary downloads.
 # TODO: Move this into external process. Run Git updates also.
+# TODO 3: Move this into standard dpm script that can be called as a general
+# package installation.
 __dpm_install_extras()
 {
 	# Vim Vundle
@@ -341,6 +343,9 @@ __dpm_install()
 			if [[ -f $packages_dir/$package_manager ]]; then
 				# TODO possibly use single installer, with modular checkers for each
 				# manager type, so case is no longer needed.
+				# TODO 2: Add a default case, so that "dpm" has its own
+				# directory, thus designating packages that can be installed
+				# the same across multiple operating systems.
 				case "$package_manager" in
 					aptget)
 						__dpm_install_aptget "$packages_dir" $directory_index

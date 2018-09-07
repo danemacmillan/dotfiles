@@ -1,4 +1,8 @@
+##
 # Base
+
+kernel-headers
+kernel-devel
 epel-release
 #groupinstall "Development Tools"
 https://centos6.iuscommunity.org/ius-release.rpm
@@ -7,7 +11,9 @@ http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.
 yum-plugin-replace
 yum-utils
 
+##
 # General
+
 at
 atop
 autoconf
@@ -15,66 +21,85 @@ autofs
 automake
 bash-completion
 bind-utils
-#bitlbee
+binutils-devel
+bzip2-devel
 ca-certificates
 cmake
 cpp
 cppunit
 curl
-epel-release
+elfutils-libelf-devel
+expat-devel
 expect
 fio
 funionfs
 fuse
-https://github.com/GoogleCloudPlatform/gcsfuse/releases/download/v0.20.1/gcsfuse-0.20.1-1.x86_64.rpm
 gcc
 gcc-c++
+gd-devel
+git
 gettext
 gnutls-devel
 golang
 gpg
 hdparm
 htop
+ImageMagick-devel
 ioping
-kernel-devel
+libc-client-devel
+libcap-devel
 libcurl
 libcurl-devel
+libevent-devel
+libicu-devel
 libdwarf-devel
 libgcrypt-devel
 libmcrypt-devel
 libtool
+libxml2-devel
+libxslt-devel
 lsof
 lua
 lua-devel
 lynx
 make
-make
-#memcached
 mytop
 ncdu
 ncurses-devel
 nfs-utils
 nfs-utils-lib
 nmap
+oniguruma-devel
+openldap-devel
 openssl
 openssl-devel
+pam-devel
 parted
 patch
+pcre-devel
 perl-ExtUtils-Embed
 pv
 python-devel
-redis
+python27
+python27-devel
+python27-pip
+python27-virtualenv
+python36u
+python36u-devel
+python36u-pip
+python36u-virtualenv
+readline-devel
 rpm-build
 rpm-devel
 ruby
 ruby-devel
-#setroubleshoot
+setroubleshoot
 smartmontools
 strace
 symlinks
 tbb-devel
 the_silver_searcher
-v8-devel
+tuned
 vim
 vim-common
 vim-enhanced
@@ -82,24 +107,29 @@ vim-minimal
 wget
 zlib-devel
 
-# New Relic if you want it.
-http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
-#newrelic-php5
+##
+# Everything below this is a mix of standard yum RPM packages, and custom dpm
+# functionality, which either compile, or perform extra dependency and version
+# checks. All of these should be installed after the general ones.
 
-# These packages should only be installed after the general ones, as they
-# either compile, or perform extra dependency and version checks.
-#chromedriver
-cloud_sql_proxy
-#elasticsearch
+##
+# Server stuff and misc tools.
+
+#bitlbee
 git2u
+googlecloudtools
+#memcached
+#memcached-devel
 #mysql
+#newrelic
 #nginx
 nodejs
-#php
+php
+phpcomposer
 rclone
+#redis
 rsync31u
 #teamcity
 tmux
 #varnish
 #weechat
-

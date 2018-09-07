@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install New Relic daemon and other services.
+#
+# Cloud SQL Proxy:
+# - https://docs.newrelic.com/docs/agents/php-agent/installation/php-agent-installation-redhat-centos
+#
+# To uninstall, read documentation:
+# - https://docs.newrelic.com/docs/agents/php-agent/advanced-installation/using-newrelic-install-script
+# - `newrelic-install uninstall` or everything: `newrelic-install purge`
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+echo -e "${RESET}${BBLUE}Installing New Relic daemon and other services.${RESET}"
+
+yum -y install http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
+yum -y install newrelic-php5
+newrelic-install install
+
+echo -e "Restart all currently running daemons, like Nginx, PHP-FPM, etc."

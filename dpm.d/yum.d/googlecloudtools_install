@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install Google Cloud Platform's various tools:
+#
+# Google Cloud SDK:
+# - https://cloud.google.com/sdk/docs/downloads-interactive#linux
+#
+# Cloud SQL Proxy:
+# - https://cloud.google.com/sql/docs/mysql/sql-proxy
+# - https://cloud.google.com/sql/docs/mysql/connect-admin-proxy#install
+#
+# GCS Fuse
+# - https://github.com/GoogleCloudPlatform/gcsfuse/blob/master/docs/installing.md
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+echo -e "${RESET}${BBLUE}Installing Google Cloud Tools, if any missing.${RESET}"
+
+cd ${HOME}
+
+# Google Cloud SDK
+if ! command_exists gcloud ; then
+    curl https://sdk.cloud.google.com | bash
+    exec -l $SHELL
+    gcloud init
+fi
+
+# Google Cloud SQL Proxy
+if ! command_exists cloud_sql_proxy ; then
+    wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+    chmod +x cloud_sql_proxy
+    mv cloud_sql_proxy "/usr/local/bin/"
+fi
+
+# GCS Fuse
+if ! command_exists gcsfuse ; then
+    yum -y install https://github.com/GoogleCloudPlatform/gcsfuse/releases/download/v0.23.0/gcsfuse-0.23.0-1.x86_64.rpm
+fi
