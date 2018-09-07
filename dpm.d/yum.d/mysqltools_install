@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Install Percona's MySQL version of its client and tools.
+#
+# To install the server, run the `mysqlserver_install` script.
+#
+# Notes:
+# - If you get PID/sock issues, ensure permissions are set.
+# - If mysqld won't start, check the standard mysql log files, and check
+# /var/log/messages log for mysql issues, like running out of memory (ensure
+# the box has enough), or SELinux not permitting actions (like preventing
+# access to ~/.my.cnf).
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+if ! command_exists mysqldump; then
+	echo -e "${RESET}${BBLUE}Installing MySQL tools.${RESET}"
+
+	yum -y install \
+	http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm \
+	Percona-Server-client-56 \
+	Percona-Server-devel-56 \
+	percona-toolkit \
+	percona-xtrabackup \
+	mysql-utilities \
+	mysqlreport \
+	mysqltuner
+
+	echo -e "${GREEN}MySQL tools installed.${RESET}"
+fi
