@@ -174,3 +174,4 @@ fi
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
 source "${HOME}/.bash_profile"
 echo -e "${WHITE}${BOLD}Done!${RESET}\n"
+exec -l $SHELL
