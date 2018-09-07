@@ -43,7 +43,8 @@ if ! command_exists ${name}; then
 	#mysql_install_db
 	#/etc/init.d/mysql restart
 	#mysql_secure_installation
-	#/etc/init.d/mysql stop
+	/etc/init.d/mysql stop
+	chkconfig mysql off
 
 	echo -e "${GREEN}${name} installed.${RESET}"
 fi

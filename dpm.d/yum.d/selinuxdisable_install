@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Disable SELinux on CentOS.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+echo -e "${RESET}${BBLUE}Disabling SELinux.${RESET}"
+
+yum -y install setroubleshoot
+
+# Set SELinux to permissive mode for Nginx
+# This is done because for a virtual environment, we do not want SELINUX to be
+# overriding permissions.
+# TODO read this: http://nginx.com/blog/nginx-se-linux-changes-upgrading-rhel-6-6/
+#echo -e "Setting SELinux enforcing of Nginx policy to permissive mode."
+#semanage permissive -a httpd_t
+echo -e "Disabling SELinux."
+setenforce 0
+sed -i -e 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+sed -i -e 's/SELINUX=permissive/SELINUX=disabled/g' /etc/sysconfig/selinux

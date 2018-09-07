@@ -63,6 +63,9 @@ if ! command_exists ${name}; then
 	${version}-soap \
 	${version}-xml
 
+    /etc/init.d/php-fpm stop
+	chkconfig php-fpm off
+
 	echo -e "${GREEN}${name} installed.${RESET}"
 fi
 

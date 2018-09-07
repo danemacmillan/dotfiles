@@ -93,7 +93,6 @@ rpm-build
 rpm-devel
 ruby
 ruby-devel
-setroubleshoot
 smartmontools
 strace
 symlinks
@@ -122,13 +121,14 @@ googlecloudtools
 #memcached-devel
 #mysql
 #newrelic
-#nginx
+nginx
 nodejs
 php
 phpcomposer
 rclone
 #redis
 rsync31u
+selinuxdisable
 #teamcity
 tmux
 #varnish

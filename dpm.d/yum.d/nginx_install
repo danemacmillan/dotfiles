@@ -4,9 +4,6 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 ##
 # Install nginx version from ius.
 #
-# CentOS carries a very old version, so replace it with the one defined in the
-# ius repo.
-#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
