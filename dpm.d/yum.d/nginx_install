@@ -23,5 +23,8 @@ if ! command_exists ${name}; then
 	http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm \
 	${version}
 
+	/etc/init.d/nginx stop
+	chkconfig nginx on
+
 	echo -e "${GREEN}${name} installed.${RESET}"
 fi

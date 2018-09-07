@@ -114,12 +114,14 @@ zlib-devel
 ##
 # Server stuff and misc tools.
 
+selinuxdisable
+
 #bitlbee
 git2u
 googlecloudtools
 #memcached
 #memcached-devel
-#mysql
+mysql
 #newrelic
 nginx
 nodejs
@@ -128,7 +130,6 @@ phpcomposer
 rclone
 #redis
 rsync31u
-selinuxdisable
 #teamcity
 tmux
 #varnish
