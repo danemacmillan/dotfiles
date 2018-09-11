@@ -121,6 +121,8 @@ git2u
 googlecloudtools
 #memcached
 #memcached-devel
+#mongo
+#mongodb-server
 #mysqlserver
 mysqltools
 #newrelic
