@@ -102,7 +102,7 @@ export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,
 export RCLONE_SKIP_LINKS=true
 export RCLONE_STATS=1s
 export RCLONE_TRANSFERS=1
-export RCLONE_VERBOSE=1
+#export RCLONE_VERBOSE=1
 
 # Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
 export EVENT_NOKQUEUE=1
