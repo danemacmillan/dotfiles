@@ -30,19 +30,21 @@ source_directory="${DPM_INSTALL_DIRECTORY}/${name}"
 echo -e "${RESET}${BBLUE}Removing any existing version of ${name}${RESET}"
 yum -y remove tmux
 
-echo -e "${RESET}${BBLUE}Downloading, compiling, and installing ${name} ${GREEN}${version}${RESET}"
-cd "${DPM_INSTALL_DIRECTORY}" \
-&& wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz \
-&& tar -xf libevent-2.1.8-stable.tar.gz \
-&& cd libevent-2.1.8-stable \
-&& ./configure --prefix=/usr/local \
-&& make \
-&& sudo make install \
-&& cd "${DPM_INSTALL_DIRECTORY}" \
-&& wget "${source_url}" \
-&& tar -xf "tmux-${version}.tar.gz" \
-&& cd "tmux-${version}" \
-&& LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local \
-&& make \
-&& sudo make install \
-&& echo -e "${GREEN}${name} installed.${RESET}"
+if ! command_exists tmux ; then
+    echo -e "${RESET}${BBLUE}Downloading, compiling, and installing ${name} ${GREEN}${version}${RESET}"
+    cd "${DPM_INSTALL_DIRECTORY}" \
+    && wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz \
+    && tar -xf libevent-2.1.8-stable.tar.gz \
+    && cd libevent-2.1.8-stable \
+    && ./configure --prefix=/usr/local \
+    && make \
+    && sudo make install \
+    && cd "${DPM_INSTALL_DIRECTORY}" \
+    && wget "${source_url}" \
+    && tar -xf "tmux-${version}.tar.gz" \
+    && cd "tmux-${version}" \
+    && LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local \
+    && make \
+    && sudo make install \
+    && echo -e "${GREEN}${name} installed.${RESET}"
+fi
