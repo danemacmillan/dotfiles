@@ -105,6 +105,8 @@ alias x='exit'
 alias vi='vim'
 #alias mysql='mycli'
 #alias btop="mytop -u user -p '' -h localhost -d database"
+alias copyidrsa="pbcopy < ${HOME}/.ssh/id_rsa"
+alias copyidrsapub="pbcopy < ${HOME}/.ssh/id_rsa.pub"
 
 ##
 # My E-key is somewhat busted. Also, general typos I always make.
