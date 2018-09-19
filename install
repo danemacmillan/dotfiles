@@ -23,6 +23,12 @@
 ## Update install script and readme.
 ## http://stackoverflow.com/questions/4642915/passing-parameters-to-bash-when-executing-a-script-fetched-by-curl
 
+# Common path, if not already included, and it exists.
+# Fresh environments like on CentOS do not include this path. If this path is
+# not available during installation, each user will redundantly install things
+# that have been added to this PATH.
+[[ ":${PATH}:" != *":/usr/local/bin:"* ]] && [[ -e "/usr/local/bin" ]] && export PATH="/usr/local/bin:${PATH}"
+
 # Determine OS to determine the package manager used to install packages.
 OS=$(uname | awk '{print tolower($0)}')
 case "${OS}" in
