@@ -422,6 +422,8 @@ cat()
 # For example, files with the ".icloud" extension are excluded.
 backup()
 {
+	export RCLONE_VERBOSE=1
+
   date \
   && echo 'Syncing to iCloud Drive...' \
   && rclone copy ~/ ~/Documents/dotfiles/ --include={/.ssh/**,/.weechat/irc.conf,/.boto,/.extra,/.gitconfig.local,/.rclone.conf,/linus.yaml} --copy-links \
