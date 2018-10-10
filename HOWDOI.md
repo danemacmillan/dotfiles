@@ -63,6 +63,10 @@ Instructions:
 - `openssl genrsa -out server.2048.key 2048`
 - `openssl req -new -sha256 -key server.2048.key -out server.2048.csr`
 
+## Generate a self-signed SSL certificate
+
+- `openssl req -new -x509 -nodes -sha1 -days 3650 -key server.2048.key > server.2048.crt`
+
 # Generate a new `SSH` keypair
 
 Note that it's probably best to just keep the filename as `id_rsa`, unless
