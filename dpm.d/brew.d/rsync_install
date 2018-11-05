@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Ensure correct, non-MacOS version of rsync is installed.
+#
+# MacOS carries a very old version, so replace it with the one defined in brew.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+brew install rsync

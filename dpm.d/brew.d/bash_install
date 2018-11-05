@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Ensure correct, non-MacOS version of bash is installed.
+#
+# MacOS carries a very old version, so replace it with the one defined in brew.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+# Note that to use the new version of Bash, add its path to `/etc/shells`.
+brew install bash

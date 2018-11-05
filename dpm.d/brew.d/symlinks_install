@@ -26,5 +26,6 @@ cd "${DPM_INSTALL_DIRECTORY}" \
 cd "${source_directory}" \
 && git checkout "${version}" \
 && make \
-&& ln -vsfn "${source_directory}/symlinks" "${HOME}/bin/" \
+&& mv "${source_directory}/symlinks" "${HOME}/bin/" \
+&& rm -rf "${source_directory}" \
 && echo -e "${GREEN}${name} installed.${RESET}"

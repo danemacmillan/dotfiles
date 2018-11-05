@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+source "${HOME}/.dotfiles/.dotfiles_includes"
+
+##
+# Ensure correct, non-MacOS version of git is installed.
+#
+# MacOS carries an old version, so replace it with the one defined in brew.
+#
+# The PATH is already updated in these dotfiles for MacOS, so the version of
+# `git` that `brew` installs will take precedence.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+
+brew install git
