@@ -31,9 +31,10 @@ if [ -d "$HOME/dpm.d" ]; then
 fi
 export DOTFILES_PACKAGES_DIR
 
-# Create .dotfiles-packages directory to store various downloaded packages.
-if [[ ! -d "$HOME/.dotfiles-packages" ]]; then
-	mkdir "$HOME/.dotfiles-packages"
+# Create directory to store various downloaded packages.
+if [[ ! -d "${DPM_INSTALL_DIRECTORY}" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${DPM_INSTALL_DIRECTORY}' directory.${RESET}"
+	mkdir -p "${DPM_INSTALL_DIRECTORY}"
 fi
 
 ##
@@ -196,7 +197,7 @@ __dpm_install_brew()
 		# Get homebrew and some niceties.
 	if ! command_exists brew; then
 		echo "${BLUE}${BOLD}Installing homebrew${RESET}"
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	fi
 
 	if [ -f $packages_dir/$package ]; then

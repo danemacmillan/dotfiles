@@ -57,11 +57,6 @@ if [[ ! -d "${HOME}/tmp" ]]; then
 	mkdir -p "${HOME}/tmp"
 fi
 
-if [[ ! -d "${DPM_INSTALL_DIRECTORY}" ]]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${DPM_INSTALL_DIRECTORY}' directory.${RESET}"
-	mkdir -p "${DPM_INSTALL_DIRECTORY}"
-fi
-
 ##
 # Copy file templates that will not be tracked by the repo.
 if [[ ! -f "${HOME}/.extra" ]]; then

@@ -38,17 +38,15 @@ case "${OS}" in
     OS="nix";;
 esac
 
-echo -e "Preparing dotfiles install for ${OS} OS.\n"
+echo -e "Preparing dotfiles install for the OS.\n"
 
-if ! command -v git >/dev/null 2>&1; then
-	if command -v yum >/dev/null 2>&1; then
-		echo "Installing git."
-		yum -y install git
-	elif [[ "${OS}" == "osx" ]]; then
-			echo "Installing homebrew in order to install git."
-			ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-			brew install git
-	fi
+if command -v yum >/dev/null 2>&1; then
+    echo "Installing git."
+    yum -y install git
+elif [[ "${OS}" == "osx" ]]; then
+    echo "Installing Homebrew, then git."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/local/bin/brew install git
 fi
 
 dotfiles_repo="git@github.com:danemacmillan/dotfiles.git"
