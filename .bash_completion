@@ -19,6 +19,7 @@ if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completio
 	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
 fi
 
+
 ##
 # Completion for proprietary Linus Shops CLI tool.
 #
@@ -32,36 +33,6 @@ if command_exists linus; then
 	fi
 fi
 
-##
-# Include custom bash_completion content here.
-
-##
-# Autocompletion for https://github.com/netz98/n98-magerun
-_n98-magerun()
-{
-    local cur opts cmd commandlist
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    cmd="${COMP_WORDS[0]}"
-
-    # gets the word-to-complete without (-n) considering ":" as word breaks
-    _get_comp_words_by_ref -n : cur
-
-    # workaround for php bug
-    commandlist=$(echo "" | "$cmd" --raw --no-ansi list)
-
-    # regex to remove command help, wrtie everything on one line with space separated
-    opts=$(echo "$commandlist" | sed "s/\s.*//g" | paste -sd " ")
-
-    COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-
-    # removes colon containing prefix from COMPREPLY items
-    __ltrim_colon_completions "$cur"
-    return 0
-}
-complete -F _n98-magerun n98-magerun.phar
-complete -F _n98-magerun n98-magerun
-complete -F _n98-magerun magerun
 
 ##
 # Custom completion for vshell command.
@@ -85,3 +56,45 @@ _vshell()
 	fi
 }
 complete -F _vshell vshell
+
+
+###-begin-pm2-completion-###
+### credits to npm for the completion file model
+#
+# Installation: pm2 completion >> ~/.bashrc  (or ~/.zshrc)
+#
+
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
+
+if type complete &>/dev/null; then
+  _pm2_completion () {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           pm2 completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -o default -F _pm2_completion pm2
+elif type compctl &>/dev/null; then
+  _pm2_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       pm2 completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _pm2_completion + -f + pm2
+fi
+###-end-pm2-completion-###
