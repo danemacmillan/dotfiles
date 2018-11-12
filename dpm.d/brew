@@ -59,7 +59,6 @@ nmap
 node
 openssl
 pcre
-phantomjs
 php@7.1
 pidof
 pv

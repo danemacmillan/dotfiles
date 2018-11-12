@@ -78,6 +78,7 @@ parted
 patch
 pcre-devel
 perl-ExtUtils-Embed
+poppler-utils
 pv
 python-devel
 python27
