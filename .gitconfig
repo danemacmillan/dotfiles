@@ -121,7 +121,7 @@
 
 	# https://github.com/so-fancy/diff-so-fancy
 	#pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified):'
-	#pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 # Colors http://nathanhoad.net/how-to-colours-in-git
 
@@ -129,7 +129,7 @@
 
 	# Use colors in Git commands that are capable of colored output when
 	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
-	ui = auto
+	ui = true
 
 [color "branch"]
 
@@ -139,10 +139,12 @@
 
 [color "diff"]
 
-	meta = yellow bold
-	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
+	meta = yellow
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	commit = yellow bold
+	whitespace = red reverse
 
 [color "status"]
 
@@ -203,3 +205,10 @@
 	# Include user-specific info like git credentials.
 	path = ~/.gitconfig.local
 
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[diff-so-fancy]
+	useUnicodeRuler = false
