@@ -19,7 +19,7 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # @license MIT
 #
 name="tmux"
-version="2.3"
+version="2.8"
 if [[ -n "$1" ]]; then
 	version="$1"
 fi
