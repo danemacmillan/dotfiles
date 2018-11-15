@@ -167,6 +167,7 @@
 	# Detect copies as well as renames
 	renames = copies
 	tool = Kaleidoscope
+	context = 5
 
 [difftool]
 
