@@ -20,9 +20,10 @@ alias ll="ls --color -lAhvi --group-directories-first ${LS_IGNORES}"
 #alias llt="LC_COLLATE=C ls --color -lAhvt --group-directories-first ${LS_IGNORES}" # Sort by newest first.
 alias llt="ls --color -lAhvti --group-directories-first ${LS_IGNORES}" # Sort by newest first.
 alias ..='cd ..'
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ,,='cd -'
 #alias imgls="imgls *.jpg *.jpeg *.gif *.png"
 alias rm='rm -rf'
 # Note that -a is recursive, and, more importantly, preserves all ACLs, should
@@ -120,7 +121,7 @@ alias gut="git"
 
 ##
 # Complete nonsense
-alias fuuu='imgcat $HOME/.dotfiles/img/hacking.gif'
+alias fuuu="imgcat $HOME/.dotfiles/img/hacking.gif"
 
 ##
 # CentOS-specific Aliases
