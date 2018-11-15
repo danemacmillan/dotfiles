@@ -122,8 +122,7 @@
 	# https://github.com/so-fancy/diff-so-fancy
 	#pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified):'
 	pager = diff-so-fancy | less --tabs=4 -RFX
-
-# Colors http://nathanhoad.net/how-to-colours-in-git
+	#pager = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less -r
 
 [color]
 
@@ -151,6 +150,17 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+
+[color "diff-highlight"]
+
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[diff-so-fancy]
+
+	useUnicodeRuler = false
 
 [diff]
 
@@ -195,7 +205,9 @@
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
 	#default = matching
 	default = current
+
 [filter "lfs"]
+
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
@@ -205,10 +217,3 @@
 	# Include user-specific info like git credentials.
 	path = ~/.gitconfig.local
 
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[diff-so-fancy]
-	useUnicodeRuler = false
