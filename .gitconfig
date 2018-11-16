@@ -12,9 +12,6 @@
 	# View status of working tree but suppress listing untracked files
 	ss = status -uno
 
-	# Show the diff between the latest commit and the current state
-	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-
 	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
@@ -77,6 +74,10 @@
 
 	# Prune deleted remote branches and delete local merged branches
 	purge = !"git fetch --all -p && git branch --merged | grep -v develop | grep -v stage | grep -v master | xargs -n 1 git branch -d"
+
+	ydiff = !"ydiff -s -w80 --wrap -U10"
+
+	d = !"git ydiff"
 
 [apply]
 
