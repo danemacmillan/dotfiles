@@ -297,3 +297,6 @@ EXEC 01;38;5;203
 .sample      00;38;5;240
 .example      00;38;5;240
 
+# Files offloaded to iCloud
+.icloud 01;48;5;17;38;5;12
+
