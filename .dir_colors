@@ -217,7 +217,7 @@ EXEC 01;38;5;203
 .apk    01;48;5;236;38;5;45
 .gem    01;48;5;236;38;5;45
 
-# Files of special interest
+# Miscellaneous code and config files
 .tex             00;38;5;245
 .rdf             00;38;5;245
 .owl             00;38;5;245
@@ -227,19 +227,17 @@ EXEC 01;38;5;203
 .xml             00;38;5;245
 *Makefile        00;38;5;245
 *Rakefile        00;38;5;245
-*Dockerfile      00;38;5;245
 *build.xml       00;38;5;245
 *rc              00;38;5;245
 *1               00;38;5;245
 .nfo             00;38;5;245
-*README          00;38;5;245
-*README.txt      00;38;5;245
-*readme.txt      00;38;5;245
 .md              00;38;5;245
-*README.markdown 00;38;5;245
 .ini             00;38;5;245
 .cfg             00;38;5;245
 .conf            00;38;5;245
+.cnf             00;38;5;245
+*my.cnf          00;38;5;245
+*motd            00;38;5;245
 .h               00;38;5;245
 .hpp             00;38;5;245
 .c               00;38;5;245
@@ -249,7 +247,28 @@ EXEC 01;38;5;203
 .objc            00;38;5;245
 .sqlite          00;38;5;245
 .go              00;38;5;245
-.php 00;38;5;183
+.repo            00;38;5;245
+.php             01;38;5;245
+.phtml           01;38;5;245
+.js              01;38;5;245
+
+# READMEs
+*README          01;38;5;245;04
+*README.md       01;38;5;245;04
+*README.MD       01;38;5;245;04
+*README.markdown 01;38;5;245;04
+*README.txt      01;38;5;245;04
+*readme.txt      01;38;5;245;04
+
+# Common repository root configuration files
+.editorconfig    00;38;5;240
+.gitignore       00;38;5;240
+.gitattributes   00;38;5;240
+*LICENSE         00;38;5;240
+*LICENSE.md      00;38;5;240
+*VagrantFile     00;38;5;240
+*Dockerfile      00;38;5;240
+*modman          00;38;5;240
 
 # Files with potentially sensitive data
 *history 00;38;5;46
@@ -269,34 +288,41 @@ EXEC 01;38;5;203
 *config.php 00;38;5;46
 *env.php 00;38;5;46
 
-# Files to clean regularly
-.torrent 00;38;5;9
-
-# "unimportant" files as logs and backups
-.log        00;38;5;240
-.bak        00;38;5;240
-.aux        00;38;5;240
-.lof        00;38;5;240
-.lol        00;38;5;240
-.lot        00;38;5;240
-.out        00;38;5;240
-.toc        00;38;5;240
-.bbl        00;38;5;240
-.blg        00;38;5;240
-*~          00;38;5;240
-*#          00;38;5;240
-.part       00;38;5;240
-.incomplete 00;38;5;240
-.swp        00;38;5;240
-.tmp        00;38;5;240
-.temp       00;38;5;240
-.o          00;38;5;240
-.pyc        00;38;5;240
-.class      00;38;5;240
-.cache      00;38;5;240
-.sample      00;38;5;240
-.example      00;38;5;240
+# "unimportant" files, such as logs and backups
+.log        00;38;5;238
+.bak        00;38;5;238
+.aux        00;38;5;238
+.lof        00;38;5;238
+.lol        00;38;5;238
+.lot        00;38;5;238
+.out        00;38;5;238
+.toc        00;38;5;238
+.bbl        00;38;5;238
+.blg        00;38;5;238
+*~          00;38;5;238
+*#          00;38;5;238
+.part       00;38;5;238
+.incomplete 00;38;5;238
+.swp        00;38;5;238
+.tmp        00;38;5;238
+.temp       00;38;5;238
+.o          00;38;5;238
+.pyc        00;38;5;238
+.class      00;38;5;238
+.cache      00;38;5;238
+.sample     00;38;5;238
+.example    00;38;5;238
+.torrent    04;38;5;238
 
 # Files offloaded to iCloud
 .icloud 01;48;5;17;38;5;12
+
+# Miscellaneous files to highlight
+.pdf 00;38;5;196
+.txt 00;38;5;255
+.doc 00;38;5;111
+.docx 00;38;5;111
+.docm 00;38;5;111
+.numbers 00;38;5;111
+.pages 00;38;5;111
 
