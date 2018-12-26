@@ -25,3 +25,9 @@ defaults write com.apple.dock expose-animation-duration -float 0
 #killall SystemUIServer
 
 killall Dock
+
+# Create symlink to iCloud Drive in user home directory.
+if [[ ! -e "$HOME/iCloud" ]]; then
+	ln -vsfn "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
+fi
+
