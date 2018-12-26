@@ -16,9 +16,9 @@ alias how="vi ${HOME}/.dotfiles/HOWDOI.md"
 # Filesystem
 LS_IGNORES="--ignore=.DS_Store --ignore='Icon'$'\r' --ignore=.CFUserTextEncoding --ignore=.localized"
 #alias ll="LC_COLLATE=C ls --color -lAhv --group-directories-first ${LS_IGNORES}"
-alias ll="ls --color -lAhvi --group-directories-first ${LS_IGNORES}"
+alias ll="ls --color -lAhviN --group-directories-first ${LS_IGNORES}"
 #alias llt="LC_COLLATE=C ls --color -lAhvt --group-directories-first ${LS_IGNORES}" # Sort by newest first.
-alias llt="ls --color -lAhvti --group-directories-first ${LS_IGNORES}" # Sort by newest first.
+alias llt="ls --color -lAhvtiN --group-directories-first ${LS_IGNORES}" # Sort by newest first.
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
