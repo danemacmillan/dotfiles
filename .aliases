@@ -15,10 +15,23 @@ alias how="vi ${HOME}/.dotfiles/HOWDOI.md"
 ##
 # Filesystem
 LS_IGNORES="--ignore=.DS_Store --ignore='Icon'$'\r' --ignore=.CFUserTextEncoding --ignore=.localized"
-#alias ll="LC_COLLATE=C ls --color -lAhv --group-directories-first ${LS_IGNORES}"
-alias ll="ls --color -lAhviN --group-directories-first ${LS_IGNORES}"
-#alias llt="LC_COLLATE=C ls --color -lAhvt --group-directories-first ${LS_IGNORES}" # Sort by newest first.
-alias llt="ls --color -lAhvtiN --group-directories-first ${LS_IGNORES}" # Sort by newest first.
+LS_DEFAULTS="-lAhviNp"
+# List symlinked directories alongside regular directories.
+# Modified from https://unix.stackexchange.com/a/412041/103243
+lsdirfirst() {
+	local lsoptions="${LS_DEFAULTS}"
+  if [[ -n "${1}" ]]; then
+    local lsoptions="${1}"
+  fi
+
+	ls --color ${LS_IGNORES} ${lsoptions} -q "$@" |
+		awk '{if(/^total [0-9\.]+\w+?$/ || /\/$/) n=1; else n=2; print n, $0}' |
+		sort -sk1,1 | cut -d' ' -f2-
+}
+alias lll="ls --color --group-directories-first ${LS_DEFAULTS} ${LS_IGNORES}" # Original ll without function.
+alias ll="lsdirfirst ${LS_DEFAULTS}"
+alias llt="lsdirfirst ${LS_DEFAULTS}t" # Sort by newest first.
+alias llx="lsdirfirst ${LS_DEFAULTS}X" # Sort by extension.
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
