@@ -47,3 +47,8 @@ set visible-stats on
 "\e[3;3~": kill-word
 
 set bell-style none
+
+# Display color of tab suggestion item
+set colored-stats on
+
+
