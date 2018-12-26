@@ -135,8 +135,8 @@ RESET 0
 DIR 01;38;5;33
 
 # Symbolic link. (If you set this to 'target' instead of a numerical value, the color is as for the file pointed to.)
-#LINK target
-LINK 00;38;5;37
+LINK target
+#LINK 00;38;5;37
 
 # Regular file with more than one link.
 MULTIHARDLINK 00
