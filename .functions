@@ -377,6 +377,12 @@ cat()
 {
 	local filepath="${1}"
 
+	if [[ "${filepath}" == *.icloud ]] \
+		&& command_exists icd \
+	; then
+		icd "${filepath}"
+	fi
+
 	case "${filepath}" in
 		http:*|https:*)
 			local md5hashpathstring=$(calculate_md5_hash "${filepath}")
