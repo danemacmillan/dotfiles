@@ -440,7 +440,7 @@ backup()
 
   date
   echo 'Backing up to Google Drive...'
-  rclone copy ~/Library/Mobile\ Documents/com~apple~CloudDocs/archives/ macmillanator:/archives/ --transfers 1 --max-size 50000M
+  rclone copy ~/iCloud/archives/ macmillanator:/archives/ --transfers 1 --max-size 50000M
   rclone sync ~/Desktop/ macmillanator:/Desktop/ --transfers 5 --max-size 1000M
   rclone copy ~/Documents/ macmillanator:/Documents/ --transfers 5 --max-size 50000M
   #rclone sync ~/Pictures/ macmillanator:/Pictures/ --transfers 5 --checkers 20 --checksum
