@@ -30,7 +30,7 @@ lsdirfirst() {
 }
 alias lll="ls --color --group-directories-first ${LS_DEFAULTS} ${LS_IGNORES}" # Original ll without function.
 alias ll="lsdirfirst ${LS_DEFAULTS}"
-alias llt="lsdirfirst ${LS_DEFAULTS}t" # Sort by newest first.
+alias llt="ls --color ${LS_DEFAULTS}t ${LS_IGNORES}" # Sort by newest first.
 alias llx="lsdirfirst ${LS_DEFAULTS}X" # Sort by extension.
 alias ..='cd ..'
 alias ...='cd ../..'
