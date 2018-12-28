@@ -434,17 +434,17 @@ backup()
   echo 'Syncing to iCloud Drive...'
   rclone copy ~/ ~/Documents/dotfiles/ --include={/.ssh/**,/.weechat/irc.conf,/.boto,/.extra,/.gitconfig.local,/.rclone.conf,/linus.yaml} --copy-links
   rclone sync ~/hack/vagrantshell/sites/phoenix.vagrant.test/.idea/ ~/Documents/hack/phpstorm/phoenix.vagrant.test/.idea/ --transfers 10 --bwlimit off --checksum
-  rclone move ~/Library/Group\ Containers/2BUA8C4S2C.com.agilebits/Library/Application\ Support/1Password/Backups/ ~/Library/Mobile\ Documents/com~apple~CloudDocs/archives/1password/ --transfers 10 --bwlimit off
+  rclone move ~/Library/Group\ Containers/2BUA8C4S2C.com.agilebits/Library/Application\ Support/1Password/Backups/ ~/iCloud/Archives/1password/ --transfers 10 --bwlimit off
   rclone sync ~/Library/Preferences/ ~/Documents/preferences/ --transfers 10 --bwlimit off
   rclone sync ~/Pictures/Photo\ Booth\ Library/ ~/Documents/images/photobooth/ --transfers 10 --bwlimit off --checksum
 
   date
   echo 'Backing up to Google Drive...'
-  rclone copy ~/iCloud/archives/ macmillanator:/archives/ --transfers 1 --max-size 50000M
+  rclone copy ~/iCloud/Archives/ macmillanator:/Archives/ --transfers 1 --max-size 50000M
   rclone sync ~/Desktop/ macmillanator:/Desktop/ --transfers 5 --max-size 1000M
   rclone copy ~/Documents/ macmillanator:/Documents/ --transfers 5 --max-size 50000M
   #rclone sync ~/Pictures/ macmillanator:/Pictures/ --transfers 5 --checkers 20 --checksum
-  rclone sync ~/Downloads/ macmillanator:/Downloads/ --transfers 5
+  rclone sync ~/Downloads/ macmillanator:/Downloads/ --transfers 5 --max-size 1000M
   date
 }
 
