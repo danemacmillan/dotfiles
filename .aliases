@@ -165,12 +165,13 @@ if command_exists brew ; then
 		dotfiles; \
 		composer selfupdate; \
 		npm install npm@latest -g; \
+		command_exists gcloud && gcloud components update --quiet; \
 		brew update; \
 		brew upgrade; \
 		brew cleanup; \
 		brew doctor; \
 		brew cask doctor; \
 		brew prune; \
-		command_exists gcloud && gcloud components update --quiet \
+		brew cask outdated \
 	"
 fi
