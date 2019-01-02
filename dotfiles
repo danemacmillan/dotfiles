@@ -87,7 +87,7 @@ fi
 # the user home directory, as they are only used internally by these dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 ln -vsfn "${DOTFILES_DIRECTORY}"/bin/* "${HOME}/bin/"
-#ln -vsfn "${DOTFILES_DIRECTORY}/.config/alacritty/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
+ln -vsfn "${DOTFILES_DIRECTORY}/.config/alacritty/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 ln -vsfn "${DOTFILES_DIRECTORY}/.config/htop/htoprc" "${HOME}/.config/htop/htoprc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.ssh/rc" "${HOME}/.ssh/rc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.aliases" "${HOME}/"
