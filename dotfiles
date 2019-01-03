@@ -109,6 +109,7 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.hgrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.ignore" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.inputrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.macos_defaults" "${HOME}/"
+ln -vsfn "${DOTFILES_DIRECTORY}/.mackup" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.mozconfig" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.my.cnf" "${HOME}/.my.cnf.sample"
 ln -vsfn "${DOTFILES_DIRECTORY}/.myclirc" "${HOME}/"
@@ -134,6 +135,15 @@ fi
 
 ##
 # Symlink trackable directories that could exist, and back up to `tmp`.
+if [[ -e "${HOME}/.mackup" ]] \
+	&& [[ ! -L "${HOME}/.mackup" ]] \
+	&& [[ ! -e "${HOME}/tmp/.mackup" ]] \
+; then
+	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.mackup directory to ~/tmp.${RESET}"
+	mv "${HOME}/.mackup" "${HOME}/tmp/.mackup"
+fi
+ln -vsfn "${DOTFILES_DIRECTORY}/.mackup" "${HOME}/"
+
 if [[ -e "${HOME}/.vim" ]] \
 	&& [[ ! -L "${HOME}/.vim" ]] \
 	&& [[ ! -e "${HOME}/tmp/.vim" ]] \
