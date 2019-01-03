@@ -26,10 +26,4 @@ if [[ -e "${HOME}/Documents/screenshots" ]]; then
 	killall SystemUIServer
 fi
 
-# Create symlink to iCloud Drive in user home directory.
-if [[ ! -e "${HOME}/iCloud" ]]; then
-	ln -vsfn "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
-fi
-
 killall Dock
-

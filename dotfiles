@@ -120,7 +120,17 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.siegerc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.tmux.conf" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
 
-# TODO ALSO ADD NPM build: npm install -g diff-so-fancy
+##
+# Create symlink to iCloud Drive.
+#
+# This will be placed in the user home directory if the iCloud Drive
+# directory path exists. This will only exist on MacOS.
+if [[ ! -e "${HOME}/iCloud" ]] \
+	&& [[ -e "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" ]] \
+; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/iCloud' symlink.${RESET}"
+	ln -vsfn "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
+fi
 
 ##
 # Symlink trackable directories that could exist, and back up to `tmp`.
@@ -154,9 +164,14 @@ fi
 
 ##
 # Install dotfiles package manager packages.
-#dpm --install
+#
+# Note that this needs to be sourced so the hashes are available in the session,
+# and also needs to be run at the beginning of a session in case new additions
+# are made to the dpm files, which can then immediately be updated by comparing
+# against the value of these hashes made at the beginning of a session.
 source "${DOTFILES_DIRECTORY}/dpm" --install
 
+##
 # Use local, most recent version of Bash, if available.
 export PREFERRED_SHELL="/usr/local/bin/bash"
 if [[ "${SHELL}" != "${PREFERRED_SHELL}" ]] \
