@@ -157,6 +157,16 @@ fi
 #dpm --install
 source "${DOTFILES_DIRECTORY}/dpm" --install
 
+# Use local, most recent version of Bash, if available.
+export PREFERRED_SHELL="/usr/local/bin/bash"
+if [[ "${SHELL}" != "${PREFERRED_SHELL}" ]] \
+	&& [[ -e "${PREFERRED_SHELL}" ]] \
+; then
+	echo -e "${BLUE}${BOLD}Updating default SHELL to ${PREFERRED_SHELL}. This will require sudo.${RESET}"
+	echo -e "Close and re-open the terminal for this change to take effect."
+	sudo chsh -s "${PREFERRED_SHELL}" $(whoami)
+fi
+
 ##
 # Source any MacOS-specific defaults
 if command_exists defaults ; then
