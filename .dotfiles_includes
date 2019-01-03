@@ -12,7 +12,6 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 export DOTFILES_DIRECTORY="${HOME}/.dotfiles"
-export DOTFILES_INCLUDES="${DOTFILES_DIRECTORY}/.dotfiles_includes"
 export DPM_INSTALL_DIRECTORY="${HOME}/tmp"
 
 # Detect OS so dotfiles seamlessly work across OSX and Linux.
