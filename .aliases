@@ -123,7 +123,7 @@ alias copyidrsa="pbcopy < ${HOME}/.ssh/id_rsa"
 alias copyidrsapub="pbcopy < ${HOME}/.ssh/id_rsa.pub"
 # Replace current shell with new shell. This utlimately refreshes all the
 # variables, functions, settings, etc that were just added in current session.
-alias R="exec -l $SHELL"
+alias R="echo -e '${BBLUE}Reloading shell...${RESET}'; exec -l $SHELL"
 
 ##
 # My E-key is somewhat busted. Also, general typos I always make.
