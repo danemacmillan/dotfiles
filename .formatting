@@ -11,7 +11,9 @@
 
 ## Color variables
 
-if [[ $- == *i* ]]; then
+# It should be sufficient that a TTY check is made.
+#if [[ $- == *i* ]]; then
+if tty -s ; then
 	# Formatting
 	RESET=$(tput sgr0)
 	BOLD=$(tput bold)
@@ -81,12 +83,6 @@ colors()
 	echo ' Underline       $(tput sgr 0 1)'
 	echo ' Reset           $(tput sgr0)'
 	echo
-}
-
-# http://www.commandlinefu.com/commands/view/6533/print-all-256-colors-for-testing-term-or-for-a-quick-reference
-colors2()
-{
-	( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )
 }
 
 ##
