@@ -48,3 +48,10 @@ tags
 .weechat/*.log
 .weechat/*.upgrade
 .weechat/weechat_fifo*
+
+# Miscellaneous dotfiles
+.bash_history
+.extra
+.gitconfig.local
+.rclone.conf
+linus.yaml
