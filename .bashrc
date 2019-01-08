@@ -134,6 +134,6 @@ fi
 
 ##
 # Source .extra file if it exists. This file will never get added to repo.
-if [[ -f "${HOME}/.extra" ]]; then
+if [[ -e "${HOME}/.extra" ]]; then
 	source "${HOME}/.extra"
 fi
