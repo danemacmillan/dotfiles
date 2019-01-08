@@ -1,5 +1,6 @@
 ack
 aspell
+atool
 autoconf
 automake
 bash
@@ -34,6 +35,7 @@ gnu-tar
 gnupg
 gnutls
 guile
+highlight
 htop-osx
 httperf
 hub
@@ -64,6 +66,7 @@ php@7.1
 pidof
 pv
 python
+ranger
 rclone
 readline
 rg
@@ -79,6 +82,7 @@ tsung
 unrar
 vagrant-completion
 vim
+w3m
 weechat
 weighttp
 wget
