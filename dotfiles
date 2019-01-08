@@ -69,10 +69,10 @@ if [[ ! -f "${HOME}/.gitconfig.local" ]]; then
 	cp -v "${DOTFILES_DIRECTORY}/.gitconfig.local" "${HOME}/.gitconfig.local"
 fi
 
-if [[ ! -f "${HOME}/.hgrc.local" ]]; then
-	echo -e "${BLUE}${BOLD}Copying '.hgrc.local' template file for custom changes. Add your Mercurial credentials here.${RESET}"
-	cp -v "${DOTFILES_DIRECTORY}/.hgrc.local" "${HOME}/.hgrc.local"
-fi
+#if [[ ! -f "${HOME}/.hgrc.local" ]]; then
+#	echo -e "${BLUE}${BOLD}Copying '.hgrc.local' template file for custom changes. Add your Mercurial credentials here.${RESET}"
+#	cp -v "${DOTFILES_DIRECTORY}/.hgrc.local" "${HOME}/.hgrc.local"
+#fi
 
 if [[ ! -f "${HOME}/.ssh/config" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.ssh/config' template file for custom SSH credentials.${RESET}"
@@ -105,7 +105,7 @@ ln -vsfn "${DOTFILES_DIRECTORY}/.functions" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.gitconfig" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.gitignore" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.grcat" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.hgrc" "${HOME}/"
+#ln -vsfn "${DOTFILES_DIRECTORY}/.hgrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.ignore" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.inputrc" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.macos_defaults" "${HOME}/"
