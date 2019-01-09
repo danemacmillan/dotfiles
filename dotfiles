@@ -19,6 +19,7 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # Cleanup any legacy associations from older versions of this dotfiles repo.
 unalias dotfiles 2&>/dev/null
 rm "${HOME}/.dfconfig" 2&>/dev/null
+rm -rf "${HOME}/.dotfiles-packages" 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
 
 ##
@@ -30,17 +31,17 @@ echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
 # Create directories that will not be tracked by the repo.
 #
 # Their contents could be via symlinks from `.dotfiles/*`, though.
-if [[ ! -d "${HOME}/.config/alacritty" ]]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.config/alacritty' directory.${RESET}"
-	mkdir -p "${HOME}/.config/alacritty"
+if [[ ! -e "${XDG_CONFIG_HOME}/alacritty" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_CONFIG_HOME}/alacritty' directory.${RESET}"
+	mkdir "${XDG_CONFIG_HOME}/alacritty"
 fi
 
-if [[ ! -d "${HOME}/.config/htop" ]]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.config/htop' directory.${RESET}"
-	mkdir -p "${HOME}/.config/htop"
+if [[ ! -e "${XDG_CONFIG_HOME}/htop" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_CONFIG_HOME}/htop' directory.${RESET}"
+	mkdir "${XDG_CONFIG_HOME}/htop"
 fi
 
-if [[ ! -d "${HOME}/.ssh" ]]; then
+if [[ ! -e "${HOME}/.ssh" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.ssh' directory.${RESET}"
 	mkdir -p "${HOME}/.ssh"
 	chown -R $USER:$USER "${HOME}/.ssh"
@@ -52,6 +53,10 @@ if [[ ! -d "${HOME}/bin" ]]; then
 	mkdir -p "${HOME}/bin"
 fi
 
+# Note that this will likely already be created by the `.xdg` file, by
+# creating the i`$XDG_RUNTIME_DIR` environment variable and directory.
+# Nevertheless, if another OS sets that variable differently, this user tmp
+# directory should still be created.
 if [[ ! -d "${HOME}/tmp" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/tmp' directory.${RESET}"
 	mkdir -p "${HOME}/tmp"
@@ -59,12 +64,12 @@ fi
 
 ##
 # Copy file templates that will not be tracked by the repo.
-if [[ ! -f "${HOME}/.extra" ]]; then
+if [[ ! -e "${HOME}/.extra" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.extra' template file for custom dotfiles edits that will not be tracked.${RESET}"
 	cp -v "${DOTFILES_DIRECTORY}/.extra" "${HOME}/.extra"
 fi
 
-if [[ ! -f "${HOME}/.gitconfig.local" ]]; then
+if [[ ! -e "${HOME}/.gitconfig.local" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.gitconfig.local' template file for custom changes. Add your Git credentials here.${RESET}"
 	cp -v "${DOTFILES_DIRECTORY}/.gitconfig.local" "${HOME}/.gitconfig.local"
 fi
@@ -74,7 +79,7 @@ fi
 #	cp -v "${DOTFILES_DIRECTORY}/.hgrc.local" "${HOME}/.hgrc.local"
 #fi
 
-if [[ ! -f "${HOME}/.ssh/config" ]]; then
+if [[ ! -e "${HOME}/.ssh/config" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.ssh/config' template file for custom SSH credentials.${RESET}"
 	cp -v "${DOTFILES_DIRECTORY}/.ssh/config" "${HOME}/.ssh/config"
 	chmod 600 "${HOME}"/.ssh/*
@@ -87,8 +92,8 @@ fi
 # the user home directory, as they are only used internally by these dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 ln -vsfn "${DOTFILES_DIRECTORY}"/bin/* "${HOME}/bin/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.config/alacritty/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
-ln -vsfn "${DOTFILES_DIRECTORY}/.config/htop/htoprc" "${HOME}/.config/htop/htoprc"
+ln -vsfn "${DOTFILES_DIRECTORY}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
+ln -vsfn "${DOTFILES_DIRECTORY}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
 #ln -vsfn "${DOTFILES_DIRECTORY}/.ssh/rc" "${HOME}/.ssh/rc"
 ln -vsfn "${DOTFILES_DIRECTORY}/.aliases" "${HOME}/"
 ln -vsfn "${DOTFILES_DIRECTORY}/.bash_completion" "${HOME}/"
