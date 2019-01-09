@@ -136,10 +136,6 @@ alias exot="exit"
 alias gut="git"
 
 ##
-# Complete nonsense
-alias fuuu="imgcat $HOME/.dotfiles/img/hacking.gif"
-
-##
 # CentOS-specific Aliases
 if command_exists yum ; then
 	alias update="\
