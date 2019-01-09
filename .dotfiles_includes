@@ -25,6 +25,11 @@ case $OS in
     OS='nix';;
 esac
 
+# Initialize XDG standard in environment.
+if [[ -f "${DOTFILES_DIRECTORY}/.xdg" ]]; then
+	source "${DOTFILES_DIRECTORY}/.xdg"
+fi
+
 # Pull in base formatting templates.
 if [[ -f "${DOTFILES_DIRECTORY}/.formatting" ]]; then
 	if tty -s ; then
