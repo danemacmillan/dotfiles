@@ -164,7 +164,7 @@ if command_exists brew ; then
 	alias rebuildopenwithmenu='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user; killall Finder; echo "Rebuilt Open With, relaunching Finder"'
 
 	alias update="\
-		softwareupdate -i -a --verbose; \
+		softwareupdate --install --all --verbose; \
 		dotfiles; \
 		composer selfupdate; \
 		npm install npm@latest -g; \
