@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "${HOME}/.dotfiles/.dotfiles_includes"
+source "${DOTFILES_INCLUDES_PATH}"
 
 ##
 # Install latest version of nodejs and npm.

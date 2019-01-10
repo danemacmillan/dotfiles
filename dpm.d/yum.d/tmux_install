@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "${HOME}/.dotfiles/.dotfiles_includes"
+source "${DOTFILES_INCLUDES_PATH}"
 
 ##
 # Download, compile, and install latest version of tmux.
