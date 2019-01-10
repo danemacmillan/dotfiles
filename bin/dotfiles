@@ -81,7 +81,7 @@ fi
 ##
 # Symlink all trackable files.
 #
-# Note that not all files within the `.dotfiles` directory are symlinked into
+# Note that not all files within the `$DOTFILES_PATH` directory are symlinked into
 # the user home directory, as they are only used internally by these dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 ###ln -vsfn "${DOTFILES_PATH}"/bin/* "${HOME}/bin/"
