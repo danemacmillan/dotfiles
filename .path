@@ -11,7 +11,7 @@
 
 ##
 # Store homebrew install path, if available.
-export HOMEBREW_INSTALL_PATH="$(command_exists brew && brew --prefix)"
+export HOMEBREW_INSTALL_PATH="$(command -v brew >/dev/null 2>&1 && brew --prefix)"
 export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
 
 # Common path, if not already included, and it exists.
@@ -92,6 +92,12 @@ fi
 # Composer global installs
 if [[ -d "${HOME}/.composer/vendor/bin" ]]; then
 	export PATH="${HOME}/.composer/vendor/bin:${PATH}"
+fi
+
+##
+# Add this dotfiles repo's bin to path.
+if [[ -e "${DOTFILES_PATH}" ]]; then
+	export PATH="${DOTFILES_PATH}/bin:${PATH}"
 fi
 
 ##

@@ -1,5 +1,7 @@
 # vim: ft=sh
-source "${HOME}/.dotfiles/.dotfiles_includes"
+source "${HOME}/.dotfiles_includes"
+
+echo $(dirname "${BASH_SOURCE[0]}")
 
 ##
 # .bashrc
@@ -7,10 +9,6 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-
-##
-# Update PATH
-source "${HOME}/.path"
 
 ##
 # Make sure aliases expand in non-interactive mode. For example, when running
@@ -21,28 +19,6 @@ shopt -s expand_aliases
 # Case-insensitive globbing
 # http://tldp.org/LDP/abs/html/globbingref.html
 shopt -s nocaseglob;
-
-##
-# Add tab completion for many Bash commands.
-#
-# Note that this will work on both MacOS and CentOS. On the latter, the path
-# will simply be "/etc/bash_completion" as brew will return nothing.
-if [[ -e "${HOMEBREW_INSTALL_PATH}/etc/bash_completion" ]]; then
-	source "${HOMEBREW_INSTALL_PATH}/etc/bash_completion"
-fi
-
-##
-# __git_ps1 for MacOS or other systems
-if [[ -e "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh" ]]; then
-	source "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh"
-elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
-	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
-fi
-
-##
-# Verify and export package manager variables for dotfiles, and Generate MD5s.
-#dpm --verify
-source "${DOTFILES_DIRECTORY}/dpm" --verify
 
 ##
 # Set default editor
@@ -77,18 +53,15 @@ shopt -s histappend
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 ##
-# Disable MySQL history logging
+# Disable various history logging.
 export MYSQL_HISTFILE=/dev/null
 export MYCLI_HISTFILE=/dev/null
-
-##
-# Stop less from making history file
 export LESSHISTFILE=/dev/null
 
 ##
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
-export RSYNC_PARTIAL_DIR="${HOME}/tmp/rsync-partials"
+export RSYNC_PARTIAL_DIR="${XDG_RUNTIME_DIR}/rsync-partials"
 
 ##
 # Set common rclone options as environment variables.
@@ -98,21 +71,23 @@ export RCLONE_CHECKERS=8
 export RCLONE_DRIVE_CHUNK_SIZE=64M
 export RCLONE_DRIVE_USE_TRASH=true
 export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache,*.icloud,com.apple.homed.plist,com.apple.homed.notbackedup.plist}"
-#export RCLONE_NO_TRAVERSE=true
 export RCLONE_SKIP_LINKS=true
 export RCLONE_STATS=1s
 export RCLONE_TRANSFERS=1
 #export RCLONE_VERBOSE=1
 
-# Don't use kqueue. Tmux will choke on MacOS Sierra with it enabled.
+##
+# https://github.com/tmux/tmux/issues/475
 export EVENT_NOKQUEUE=1
 
+##
 # Since gcloud 132.0.0, Python 2.6 is deprecated. On CentOS this is a problem.
 # This variable points the gcloud tool to a supported version without breaking
 # CentOS' yum utility, which depends on 2.6.x.
 # https://cloud.google.com/sdk/docs/release-notes#13200_2016-10-26
 export CLOUDSDK_PYTHON=""
 
+##
 # Allow specifying the auth credentials file. Having this set will override
 # any account set with gcloud. Note that this is commonly used for Service
 # Accounts within the iam+ section, which can also be passed to most utilities
@@ -121,15 +96,37 @@ export CLOUDSDK_PYTHON=""
 export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
+# Add tab completion for many Bash commands.
+#
+# Note that this will work on both MacOS and CentOS. On the latter, the path
+# will simply be "/etc/bash_completion" as brew will return nothing.
+if [[ -e "${HOMEBREW_INSTALL_PATH}/etc/bash_completion" ]]; then
+	source "${HOMEBREW_INSTALL_PATH}/etc/bash_completion"
+fi
+
+##
+# __git_ps1 for MacOS or other systems
+if [[ -e "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh" ]]; then
+	source "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh"
+elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
+	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
+fi
+
+##
+# Verify and export package manager variables for dotfiles, and Generate MD5s.
+# Only source this, because executing it will not add hashes to current shell.
+source "${DOTFILES_PATH}/bin/dpm" --verify
+
+##
 # Aliases
-if [[ -e "${HOME}/.aliases" ]]; then
-	source "${HOME}/.aliases"
+if [[ -e "${DOTFILES_PATH}/.aliases" ]]; then
+	source "${DOTFILES_PATH}/.aliases"
 fi
 
 ##
 # Bash prompt, like PS1
-if [[ -e "${HOME}/.bash_prompt" ]]; then
-	source "${HOME}/.bash_prompt"
+if [[ -e "${DOTFILES_PATH}/.bash_prompt" ]]; then
+	source "${DOTFILES_PATH}/.bash_prompt"
 fi
 
 ##

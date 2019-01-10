@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-source "${HOME}/.dotfiles/.dotfiles_includes"
+# Include dependencies if this file is being executed. If it is being sourced,
+# the dependencies are already available.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+	source "${DOTFILES_INCLUDES_PATH}"
+fi
 
 ##
 # dpm - Dotfiles package manager.
@@ -21,7 +25,7 @@ source "${HOME}/.dotfiles/.dotfiles_includes"
 # - Move package install hash tracking from in-memory Bash variable, to
 # file-based, so that after an install, the hashes update in the current shell.
 
-export DOTFILES_PACKAGE_MANAGER_DIRECTORY="${HOME}/.dotfiles/dpm.d"
+export DOTFILES_PACKAGE_MANAGER_DIRECTORY="${DOTFILES_PATH}/dpm.d"
 
 # Determine paths for installing packages.
 # Note that creating one in the user home directory means it, too, will be used.
@@ -137,7 +141,7 @@ __dpm_delegate_install_command()
 	local package_manager="$1"
 	local package_manager_command="$2"
 	local package_manager_package="$3"
-	local package_manager_override_directory="${HOME}/.dotfiles/dpm.d/${package_manager}.d"
+	local package_manager_override_directory="${DOTFILES_PACKAGE_MANAGER_DIRECTORY}/${package_manager}.d"
 	local package_manager_package_override="${package_manager_override_directory}/${package_manager_package}${install_string_suffix}"
 
 	if [[ -f "${package_manager_package_override}" ]]; then

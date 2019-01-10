@@ -1,5 +1,4 @@
 # vim: ft=sh
-source "${HOME}/.dotfiles/.dotfiles_includes"
 
 ##
 # .bash_completion

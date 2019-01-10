@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
-source "${HOME}/.dotfiles/.dotfiles_includes"
+# Source includes if not available.
+if [[ -z "${DOTFILES_PATH}" ]]; then
+	cd "$(dirname "${BASH_SOURCE[0]}")" && source "../.dotfiles_includes" && cd -
+fi
+
+# Being sourced.
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+	echo "SOURCED"
+	#echo $(dirname "${BASH_SOURCE[0]}")
+	#source ".dotfiles_includes"
+	echo $DOTFILES_PATH
+else
+	echo "EXECUTED"
+	echo $DOTFILES_PATH
+fi
+
+echo $(dirname "${BASH_SOURCE[0]}")
+
+
+
+
+
 
 ##
 # Dotfiles - dotfiles
@@ -25,7 +46,7 @@ symlinks -d "${HOME}" 2&>/dev/null
 ##
 # Update repo from upstream.
 echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
-(cd "${DOTFILES_DIRECTORY}" && git stash && git pull && git stash pop)
+(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
 
 ##
 # Create directories that will not be tracked by the repo.
@@ -66,22 +87,22 @@ fi
 # Copy file templates that will not be tracked by the repo.
 if [[ ! -e "${HOME}/.extra" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.extra' template file for custom dotfiles edits that will not be tracked.${RESET}"
-	cp -v "${DOTFILES_DIRECTORY}/.extra" "${HOME}/.extra"
+	cp -v "${DOTFILES_PATH}/.extra" "${HOME}/.extra"
 fi
 
 if [[ ! -e "${HOME}/.gitconfig.local" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.gitconfig.local' template file for custom changes. Add your Git credentials here.${RESET}"
-	cp -v "${DOTFILES_DIRECTORY}/.gitconfig.local" "${HOME}/.gitconfig.local"
+	cp -v "${DOTFILES_PATH}/.gitconfig.local" "${HOME}/.gitconfig.local"
 fi
 
 #if [[ ! -f "${HOME}/.hgrc.local" ]]; then
 #	echo -e "${BLUE}${BOLD}Copying '.hgrc.local' template file for custom changes. Add your Mercurial credentials here.${RESET}"
-#	cp -v "${DOTFILES_DIRECTORY}/.hgrc.local" "${HOME}/.hgrc.local"
+#	cp -v "${DOTFILES_PATH}/.hgrc.local" "${HOME}/.hgrc.local"
 #fi
 
 if [[ ! -e "${HOME}/.ssh/config" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.ssh/config' template file for custom SSH credentials.${RESET}"
-	cp -v "${DOTFILES_DIRECTORY}/.ssh/config" "${HOME}/.ssh/config"
+	cp -v "${DOTFILES_PATH}/.ssh/config" "${HOME}/.ssh/config"
 	chmod 600 "${HOME}"/.ssh/*
 fi
 
@@ -91,40 +112,41 @@ fi
 # Note that not all files within the `.dotfiles` directory are symlinked into
 # the user home directory, as they are only used internally by these dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
-ln -vsfn "${DOTFILES_DIRECTORY}"/bin/* "${HOME}/bin/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
-ln -vsfn "${DOTFILES_DIRECTORY}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
-#ln -vsfn "${DOTFILES_DIRECTORY}/.ssh/rc" "${HOME}/.ssh/rc"
-ln -vsfn "${DOTFILES_DIRECTORY}/.aliases" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.bash_completion" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.bash_profile" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.bash_prompt" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.bash_sessions_disable" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.bashrc" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.ctags" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.digrc" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.dir_colors" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.editorconfig" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.formatting" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.functions" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.gitconfig" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.gitignore" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.grcat" "${HOME}/"
-#ln -vsfn "${DOTFILES_DIRECTORY}/.hgrc" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.ignore" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.inputrc" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.macos_defaults" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.mackup.cfg" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.mozconfig" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.my.cnf" "${HOME}/.my.cnf.sample"
-ln -vsfn "${DOTFILES_DIRECTORY}/.myclirc" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.mytop" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.npmrc" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.path" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.rsync_excludes" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.siegerc" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.tmux.conf" "${HOME}/"
-ln -vsfn "${DOTFILES_DIRECTORY}/.vimrc" "${HOME}/"
+###ln -vsfn "${DOTFILES_PATH}"/bin/* "${HOME}/bin/"
+ln -vsfn "${DOTFILES_PATH}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
+ln -vsfn "${DOTFILES_PATH}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
+#ln -vsfn "${DOTFILES_PATH}/.ssh/rc" "${HOME}/.ssh/rc"
+###ln -vsfn "${DOTFILES_PATH}/.aliases" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.bash_completion" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
+###ln -vsfn "${DOTFILES_PATH}/.bash_prompt" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.bashrc" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.ctags" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.digrc" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.dir_colors" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.dotfiles_includes" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
+###ln -vsfn "${DOTFILES_PATH}/.formatting" "${HOME}/"
+###ln -vsfn "${DOTFILES_PATH}/.functions" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.gitconfig" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.gitignore" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.grcat" "${HOME}/"
+#ln -vsfn "${DOTFILES_PATH}/.hgrc" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.ignore" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.inputrc" "${HOME}/"
+###ln -vsfn "${DOTFILES_PATH}/.macos_defaults" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.mackup.cfg" "${HOME}/"
+#ln -vsfn "${DOTFILES_PATH}/.mozconfig" "${HOME}/"
+#ln -vsfn "${DOTFILES_PATH}/.my.cnf" "${HOME}/.my.cnf.sample"
+ln -vsfn "${DOTFILES_PATH}/.myclirc" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.mytop" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.npmrc" "${HOME}/"
+###ln -vsfn "${DOTFILES_PATH}/.path" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.rsync_excludes" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.siegerc" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.tmux.conf" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.vimrc" "${HOME}/"
 
 ##
 # Create symlink to iCloud Drive.
@@ -147,7 +169,7 @@ if [[ -e "${HOME}/.mackup" ]] \
 	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.mackup directory to ~/tmp.${RESET}"
 	mv "${HOME}/.mackup" "${HOME}/tmp/.mackup"
 fi
-ln -vsfn "${DOTFILES_DIRECTORY}/.mackup" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.mackup" "${HOME}/"
 
 if [[ -e "${HOME}/.vim" ]] \
 	&& [[ ! -L "${HOME}/.vim" ]] \
@@ -156,7 +178,7 @@ if [[ -e "${HOME}/.vim" ]] \
 	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.vim directory to ~/tmp.${RESET}"
 	mv "${HOME}/.vim" "${HOME}/tmp/.vim"
 fi
-ln -vsfn "${DOTFILES_DIRECTORY}/.vim" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.vim" "${HOME}/"
 
 if [[ -e "${HOME}/.weechat" ]] \
 	&& [[ ! -L "${HOME}/.weechat" ]] \
@@ -165,17 +187,17 @@ if [[ -e "${HOME}/.weechat" ]] \
 	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.weechat directory to ~/.weechat.${RESET}"
 	mv "${HOME}/.weechat" "${HOME}/tmp/.weechat"
 fi
-ln -vsfn "${DOTFILES_DIRECTORY}/.weechat" "${HOME}/"
+ln -vsfn "${DOTFILES_PATH}/.weechat" "${HOME}/"
 
 ##
 # Add `dotfiles` and `dpm` executable scripts into `~/bin`.
-if [[ ! -f "$HOME/bin/dotfiles" ]]; then
-	ln -vsfn "${DOTFILES_DIRECTORY}/dotfiles" "${HOME}/bin/"
-fi
-
-if [[ ! -f "$HOME/bin/dpm" ]]; then
-	ln -vsfn "${DOTFILES_DIRECTORY}/dpm" "${HOME}/bin/"
-fi
+#if [[ ! -f "$HOME/bin/dotfiles" ]]; then
+#	ln -vsfn "${DOTFILES_PATH}/dotfiles" "${HOME}/bin/"
+#fi
+#
+#if [[ ! -f "$HOME/bin/dpm" ]]; then
+#	ln -vsfn "${DOTFILES_PATH}/dpm" "${HOME}/bin/"
+#fi
 
 ##
 # Install dotfiles package manager packages.
@@ -184,7 +206,7 @@ fi
 # and also needs to be run at the beginning of a session in case new additions
 # are made to the dpm files, which can then immediately be updated by comparing
 # against the value of these hashes made at the beginning of a session.
-source "${DOTFILES_DIRECTORY}/dpm" --install
+source "${DOTFILES_PATH}/dpm" --install
 
 ##
 # Use local, most recent version of Bash, if available.
@@ -201,7 +223,7 @@ fi
 # Source any MacOS-specific defaults
 if command_exists defaults ; then
 	echo -e "${BLUE}${BOLD}Setting MacOS defaults.${RESET}"
-	source "${HOME}/.macos_defaults"
+	source "${DOTFILES_PATH}/.macos_defaults"
 fi
 
 ##
@@ -209,4 +231,7 @@ fi
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
 source "${HOME}/.bash_profile"
 echo -e "${WHITE}${BOLD}Done!${RESET}\n"
+
+
+
 

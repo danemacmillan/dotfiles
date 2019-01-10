@@ -8,36 +8,109 @@
 # there is only one file that needs to be sourced to gain a tonne of
 # functionality.
 #
+# Note that the $DOTFILES_PATH environment variable is very important, and is
+# the first thing determined.
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-export DOTFILES_DIRECTORY="${HOME}/.dotfiles"
-export DPM_INSTALL_DIRECTORY="${HOME}/tmp"
 
-# Detect OS so dotfiles seamlessly work across OSX and Linux.
-# I only use OSX and CentOS, so additional cases will need
-# to be defined for another OS.
-export OS=$(uname | awk '{print tolower($0)}')
-case $OS in
-  darwin*)
-    OS='osx';;
-  linux*)
-    OS='nix';;
-esac
+echo "INCLUDES---"
+# This should only be defined once. This script being sourced from other places,
+# so this ensures no extraneous calls.
+if [[ -z ${DOTFILES_PATH} ]]; then
+	##
+	# Get the absolute root directory path to the current script.
+	#
+	# Note that if MacOS had coreutils' `readlink -f` option available by default,
+	# this would be reduced to:
+	#
+	#  export DOTFILES_ROOT=$(dirname $(readlink -f "${BASH_SOURCE[0]}"))
+	#
+	# Nevertheless, it does not, and the DOTFILES_PATH environment variable needs to
+	# be available to everything else before files can begin getting sourced.
+	#
+	# I also have an alternative that will work on MacOS by default, because PHP is
+	# installed by default, but this does not guarantee it will work on other
+	# operating systems by default:
+	#
+	#  export SOURCE_DIRECTORY="$(php -r 'echo dirname(realpath($argv[1]));' -- "${BASH_SOURCE[0]}")"
+	#
+	# This cannot be placed in `.functions` because that depends on `.path`, and
+	#
+	# The original solution that this function is based on:
+	#
+	#   https://stackoverflow.com/a/246128/2973534
+	#
+	# @author Dane MacMillan <work@danemacmillan.com>
+	# @link https://github.com/danemacmillan/dotfiles
+	# @license MIT
+	get_absolute_root_directory_from_path()
+	{
+		local DIR=''
 
-# Initialize XDG standard in environment.
-if [[ -f "${DOTFILES_DIRECTORY}/.xdg" ]]; then
-	source "${DOTFILES_DIRECTORY}/.xdg"
+		# If no value provided, the source path is the current script.
+		local SOURCE="${BASH_SOURCE[0]}"
+		if [[ -n "${1}" ]]; then
+			SOURCE="${1}"
+		fi
+
+		# Resolve $SOURCE until the file is no longer a symlink.
+		while [ -h "$SOURCE" ]; do
+			DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+			SOURCE="$(readlink "$SOURCE")"
+			# If $SOURCE was a relative symlink, we need to resolve it relative to the
+			# path where the symlink file was located.
+			[[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+		done
+		DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
+		echo $DIR
+	}
+
+	# Assign self-discovered dotfiles path that will be used for everything.
+	# This will allow dotfiles to be installed anywhere and always know how to
+	# reference its install path.
+	export DOTFILES_PATH=$(get_absolute_root_directory_from_path)
+
+	# Provide environment variable to be able to quickly source this file itself.
+	export DOTFILES_INCLUDES_PATH="${DOTFILES_PATH}/$(basename "${BASH_SOURCE[0]}")"
+
+	# Initialize XDG standard in environment.
+	if [[ -e "${DOTFILES_PATH}/.xdg" ]]; then
+		source "${DOTFILES_PATH}/.xdg"
+	fi
+
+	# Assign dotfiles' DPM install directory.
+	export DPM_INSTALL_DIRECTORY="${XDG_RUNTIME_DIR}"
+	echo "INCLUDE: $DOTFILES_PATH"
+
+	# Update PATH.
+	if [[ -e "${DOTFILES_PATH}/.path" ]]; then
+		source "${DOTFILES_PATH}/.path"
+	fi
+
+	# Detect OS so dotfiles seamlessly work across OSX and Linux.
+	# I only use OSX and CentOS, so additional cases will need
+	# to be defined for another OS.
+	export OS=$(uname | awk '{print tolower($0)}')
+	case $OS in
+		darwin*)
+			OS='osx';;
+		linux*)
+			OS='nix';;
+	esac
+
 fi
 
 # Pull in base formatting templates.
-if [[ -f "${DOTFILES_DIRECTORY}/.formatting" ]]; then
+if [[ -f "${DOTFILES_PATH}/.formatting" ]]; then
 	if tty -s ; then
-		source "${DOTFILES_DIRECTORY}/.formatting"
+		source "${DOTFILES_PATH}/.formatting"
 	fi
 fi
 
 # Pull in base functions.
-if [[ -f "${DOTFILES_DIRECTORY}/.functions" ]]; then
-	source "${DOTFILES_DIRECTORY}/.functions"
+if [[ -f "${DOTFILES_PATH}/.functions" ]]; then
+	source "${DOTFILES_PATH}/.functions"
 fi
