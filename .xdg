@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 ##
 # Create XDG environment variables and directories.
 #
