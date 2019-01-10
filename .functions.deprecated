@@ -250,3 +250,97 @@ magevents()
 		echo "ag / silver_searcher is required."
 	fi
 }
+
+
+##
+# Migrate predefined local user private files to remote SSH user environment.
+#
+# That this will not remove the source files after migration. It will also
+# create any necessary paths on the remote if they do not already exist.
+#
+# This is useful for migrating private SSH keys and other sensitive data to a
+# new remote SSH user environment that typically should not exist in a public
+# repository, like for dotfiles.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @license MIT
+#
+# @TODO Make it accept extra rsync and ssh parameters.
+migrate_privates()
+{
+	local command_name="migrate_privates"
+
+	local filepaths=( \
+		".extra" \
+		".gitconfig.local" \
+		".ssh/id_rsa" \
+		".ssh/id_rsa.pub" \
+		".weechat/irc.conf" \
+	)
+
+	local destination=""
+	if [[ -n "$1" ]]; then
+		local destination="$1"
+	fi
+
+	if [[ -n ${destination} ]]; then
+		for filepath in "${filepaths[@]}"; do
+			if [[ -e "${HOME}/${filepath}" ]]; then
+				local filepath_destination="${destination}"
+				local filepath_base="$(dirname ${filepath})"
+
+				# Handle separator to use based on destination pattern.
+				local filepath_separator=""
+				if [[ "${destination}" =~ ^.+\:.+$ ]]; then
+					if [[ ! "${destination}" =~ ^.+\/$ ]]; then
+						local filepath_separator="/"
+					fi
+				elif [[ "${destination}" =~ ^.+\:$ ]]; then
+					local filepath_separator="~/"
+				else
+					local filepath_separator=":~/"
+				fi
+
+				local filepath_destination="${destination}${filepath_separator}${filepath_base}"
+
+				# Figure out path to be created if it does not exist on the remote.
+				[[ "${filepath_destination}" =~ ^(.+)\:(.*)$ ]]
+				local host="${BASH_REMATCH[1]}"
+				local build_path="${BASH_REMATCH[2]}"
+
+				if [[ "${build_path}" =~ ^(.*)\/\.$ ]]; then
+					local build_path="${BASH_REMATCH[1]}"
+				fi
+
+				if [[ "${build_path}" == "" ]]; then
+					local build_path="~/"
+				fi
+
+				#echo -e "Separator: ${filepath_separator}"
+				#echo -e "Path: ${filepath_destination}"
+				#echo -e "Host: ${host}"
+				#echo -e "Build: ${build_path}"
+
+				rsync -hrLtDzpuvq --no-motd --rsync-path="mkdir -p ${build_path} && rsync" "${HOME}/${filepath}" "${filepath_destination}" -e "ssh -q" \
+					&& echo -e "Migrated ${YELLOW}${HOME}/${filepath}${RESET} -> ${YELLOW}${destination}${filepath_separator}${filepath}${RESET}" \
+					|| echo -e "${RED}Error migrating ${YELLOW}${filepath}${RESET} -> ${YELLOW}${filepath_destination}${RESET}"
+			fi
+		done
+	else
+		echo -e "Migrate predefined local user (${USER}) private files to remote SSH user environment."
+		echo -e "\nAny destination path specified will be created if it does not exist. However, if the"
+		echo -e "user does not have the permissions to create a directory at the path, it will fail."
+		echo -e "\nDiscovered files that will migrate with this command:"
+		for filepath in "${filepaths[@]}"; do
+			if [[ -e "${HOME}/${filepath}" ]]; then
+				echo -e "  - ${YELLOW}${HOME}/${filepath}${RESET}"
+			fi
+		done
+		echo -e "\nUsage:\n  ${BCYAN}${command_name}${RESET} ${GREEN}USER@HOST[:PATH]${RESET}"
+		echo -e "\nExamples:"
+		echo -e "\n Migrate private files to a new remote host:\n  ${command_name} user@host"
+		echo -e "\n Migrate private files to remote host (defined in ~/.ssh/config as stage):\n  ${command_name} stage"
+		echo -e "\n Same as above, but to non-existent path on remote that will be created:\n  ${command_name} stage:~/foo/bar/nonexistent/path"
+		return 1
+	fi
+}
