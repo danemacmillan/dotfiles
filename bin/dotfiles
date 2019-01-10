@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-# Source includes if not available.
-if [[ -z "${DOTFILES_PATH}" ]]; then
+# Include dependencies if this file is being executed. If it is being sourced,
+# the dependencies are already available.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 	cd "$(dirname "${BASH_SOURCE[0]}")" && source "../.dotfiles_includes" && cd -
 fi
+
+
 
 # Being sourced.
 if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
