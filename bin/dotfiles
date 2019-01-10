@@ -206,7 +206,7 @@ ln -vsfn "${DOTFILES_PATH}/.weechat" "${HOME}/"
 # and also needs to be run at the beginning of a session in case new additions
 # are made to the dpm files, which can then immediately be updated by comparing
 # against the value of these hashes made at the beginning of a session.
-source "${DOTFILES_PATH}/dpm" --install
+source "${DOTFILES_PATH}/bin/dpm" --install
 
 ##
 # Use local, most recent version of Bash, if available.
