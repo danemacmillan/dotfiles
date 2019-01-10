@@ -2,7 +2,7 @@
 # Include dependencies if this file is being executed. If it is being sourced,
 # the dependencies are already available.
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-	cd "$(dirname "${BASH_SOURCE[0]}")" && source "../.dotfiles_includes" && cd -
+	cd "$(dirname "${BASH_SOURCE[0]}")" && source "../.dotfiles_includes" && cd - >/dev/null 2>&1
 fi
 
 ##
@@ -23,13 +23,6 @@ fi
 # Update repo from upstream.
 echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
 (cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
-
-##
-# Cleanup any legacy associations from older versions of this dotfiles repo.
-unalias dotfiles 2&>/dev/null
-rm "${HOME}/.dfconfig" 2&>/dev/null
-rm -rf "${HOME}/.dotfiles-packages" 2&>/dev/null
-symlinks -d "${HOME}" 2&>/dev/null
 
 ##
 # Create directories that will not be tracked by the repo.
@@ -208,6 +201,14 @@ if command_exists defaults ; then
 	echo -e "${BLUE}${BOLD}Setting MacOS defaults.${RESET}"
 	source "${DOTFILES_PATH}/.macos_defaults"
 fi
+
+##
+# Cleanup any legacy associations from older versions of this dotfiles repo.
+echo -e "${BLUE}${BOLD}Cleaning up any legacy dotfiles data.${RESET}"
+unalias dotfiles 2&>/dev/null
+rm "${HOME}/.dfconfig" 2&>/dev/null
+rm -rf "${HOME}/.dotfiles-packages" 2&>/dev/null
+symlinks -d "${HOME}" 2&>/dev/null
 
 ##
 # Update terminal
