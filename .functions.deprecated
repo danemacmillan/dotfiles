@@ -1,0 +1,252 @@
+
+
+
+
+##
+# Basic function to back up Plex Media Server data.
+#
+# This excludes the Cache directory, as recommended in:
+# https://support.plex.tv/hc/en-us/articles/201539237-Backing-Up-Plex-Media-Server-Data
+#
+# TODO combine with other quick backup scripts and abstract.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+backup_plexmetadata()
+{
+	local command_name="${FUNCNAME[0]}"
+
+	local destination_rootpath="${HOME}"
+	local destination_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
+	local destination_path="${destination_rootpath}/${destination_filename}"
+	local source_path="/var/lib/plexmediaserver"
+
+	echo -e "${command_name} start: $(date)"
+
+	date > "/var/log/${command_name}.log" \
+		&& zip -db -vr "${destination_path}" "${source_path}" -x ${source_path}/Library/Application\ Support/Plex\ Media\ Server/Cache/\* -x ${source_path}/Library/Application\ Support/Plex\ Media\ Server/Preferences.xml -x ${source_path}/Library/Application\ Support/Plex\ Media\ Server/plexmediaserver.pid \
+		&& date >> "/var/log/${command_name}.log"
+
+	echo -e "${command_name} end zip: $(date)"
+
+		# Very specific to me. Temporary.
+	if command_exists rclone; then
+		rclone -v moveto ${destination_path} gd:servers/plexbox/${destination_filename} --stats 1s \
+			&& echo -e "${command_name} end transfer: $(date)"
+	fi
+}
+
+##
+# Back up plexdrive files and databases.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+backup_plexdrive()
+{
+	local command_name="${FUNCNAME[0]}"
+
+	local destination_rootpath="${HOME}"
+	local destination_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
+	local destination_path="${destination_rootpath}/${destination_filename}"
+	local source_path="${HOME}/.plexdrive"
+
+	if [[ -e "${source_path}" ]]; then
+		echo -e "${command_name} start: $(date)"
+
+		date > "/var/log/${command_name}.log" \
+			&& zip -db -vr "${destination_path}" "${source_path}" \
+			&& date >> "/var/log/${command_name}.log"
+
+		echo -e "${command_name} end zip: $(date)"
+
+		# Very specific to me. Temporary.
+		if command_exists rclone; then
+			rclone -v moveto ${destination_path} gd:servers/plex/${destination_filename} --stats 1s \
+				&& echo -e "${command_name} end transfer: $(date)" \
+				&& date >> "/var/log/${command_name}.log"
+		fi
+	fi
+}
+
+##
+# Back up deluge files and state.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+backup_deluge()
+{
+	local command_name="${FUNCNAME[0]}"
+
+	local destination_rootpath="${HOME}"
+	local destination_filename="${command_name}.$(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M).zip"
+	local destination_path="${destination_rootpath}/${destination_filename}"
+	local source_path="/var/lib/deluge"
+
+	if [[ -e "${source_path}" ]]; then
+		echo -e "${command_name} start: $(date)"
+
+		date > "/var/log/${command_name}.log" \
+			&& zip -db -vr "${destination_path}" "${source_path}" \
+			&& date >> "/var/log/${command_name}.log"
+
+		echo -e "${command_name} end zip: $(date)"
+
+		# Very specific to me. Temporary.
+		if command_exists rclone; then
+			rclone -v moveto ${destination_path} gd:servers/transfers/${destination_filename} --stats 1s \
+				&& echo -e "${command_name} end transfer: $(date)" \
+				&& date >> "/var/log/${command_name}.log"
+		fi
+	fi
+}
+
+# Temporary and specific.
+plexbox_import_run()
+{
+	if command_exists rclone; then
+		rclone -v copy gd:servers/plexbox ~/plexbox --stats 1s
+		cd ~/plexbox && unzip "*.zip"
+
+		if [[ ! -d ~/.plexdrive ]]; then
+			mv ~/plexbox/root/.plexdrive ~
+			if ! command_exists plexdrive; then
+				~/.dotfiles/dpm.d/yum.d/plexdrive_install
+			fi
+		fi
+
+		if [[ ! -d /var/lib/plexmediaserver ]]; then
+			mv -f ~/plexbox/var/lib/plexmediaserver /var/lib
+			rm -rf /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/Preferences.xml
+			rm -rf /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/plexmediaserver.pid
+
+			groupadd plex \
+				; groupadd video \
+				; adduser plex -g plex -G video -d /var/lib/plexmediaserver -s /sbin/nologin
+
+			chown -R plex:plex /var/lib/plexmediaserver
+		fi
+
+		echo -e 'Run as non-root: bash -c "$(wget -qO - https://raw.githubusercontent.com/mrworf/plexupdate/master/extras/installer.sh)"'
+		echo -e "Wait for it to install."
+		echo -e "Run on your local machine: ssh $(ipp) -L 8888:localhost:32400"
+		echo -e "Browse to: http://localhost:8888/web"
+		echo -e "Add Dynamic DNS cron update for server to update domain with ephemereal IP."
+	fi
+}
+
+
+
+
+##
+# Deploy Dane MacMillan's dotfiles to a remote server.
+#
+# Note that this does not accept extra rsync or SSH parameters. Add a remote
+# host to a `.ssh/config` file and reference the name, or ensure that the
+# remote host is on the implied port of 22.
+#
+# THIS IS NOT WORKING. IT IS A WORK IN PROGRESS.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @license MIT
+function dotfiles_deploy_remote()
+{
+	local command_name="dotfiles_deploy_remote"
+
+	local destination=""
+	if [[ -n "$1" ]]; then
+		local destination="$1"
+	fi
+
+	if [[ -n "${destination}" ]]; then
+		local dotfiles_install_string="curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -"
+		migrate_privates "${destination}"
+#		ssh -t "${destination}" su ${USER} -c "${dotfiles_install_string}"
+		migrate_privates "${destination}"
+	else
+		echo -e "Deploy Dane MacMillan's dotfiles to a remote server. This will ask for sudo password."
+		echo -e "\nUsage:\n  ${BCYAN}${command_name}${RESET} ${GREEN}USER@HOST${RESET}"
+		echo -e "\nExamples:"
+		echo -e "\n Deploy dotfiles to remote server:\n  ${command_name} user@host"
+		echo -e "\n Deploy dotfiles to remote server (defined in ~/.ssh/config as stage):\n  ${command_name} stage"
+		return 1
+	fi
+}
+
+
+##
+# Create a local SSH tunnel to a remote service.
+# This is just a stub to remember the command.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+tun()
+{
+	local username="$1"
+	local service_local="$2"
+	local service_remote="$3"
+	ssh -f -T -N -L $service_local:$service_remote -pPORT $username@$remote_server
+}
+
+##
+# Remotely execute SQL and save output locally.
+# This is just a stub to remember the command.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+rrmy()
+{
+	ssh -T -pPORT USERNAME@SERVER "mysql -u USERNAME -pPASSWORD -Bs" < "cool.sql" > output.txt
+	# Or if no script to execute, use -Bse.
+}
+
+
+##
+# Get current OS version and other information.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+v()
+{
+	case $OS in
+		osx)
+			system_profiler SPSoftwareDataType
+			;;
+		# Note, at this point nix is technically CentOS. Update .bashrc to
+		# represent more OSes.
+		nix)
+			echo -e "Operating System:\n"
+			echo -e "    `cat /etc/redhat-release`\n"
+			;;
+	esac
+
+	echo -e "Kernel & Architecture:\n"
+	echo -e "    `uname -r -v -p`\n"
+}
+
+
+##
+# Find all Magento events in current path or path provided.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+magevents()
+{
+	if hash ag 2>/dev/null ; then
+		local magento_path=""
+		if [[ -n "$1" ]]; then
+			magento_path="$1"
+			ag --php -A 5 -C 0 --depth 50 -f -i "Mage::dispatchEvent" "$magento_path"
+		else
+			echo "Provide path to search for Magento events."
+		fi
+	else
+		echo "ag / silver_searcher is required."
+	fi
+}
