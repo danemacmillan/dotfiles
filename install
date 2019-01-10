@@ -56,7 +56,6 @@ fi
 
 dotfiles_install_directory=".dotfiles"
 
-cd "${HOME}" \
-&& git clone "${dotfiles_repo}" "${dotfiles_install_directory}" \
+git clone "${dotfiles_repo}" "${dotfiles_install_directory}" \
 && cd "${dotfiles_install_directory}" \
-&& source dotfiles
+&& source bin/dotfiles

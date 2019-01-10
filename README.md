@@ -11,11 +11,11 @@ on GitHub:
 
 If you have an SSH key installed on the destination:
 
-`curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -`
+`cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -`
 
 If you do not have an SSH key installed on the destination:
 
-`curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -s -- nossh`
+`cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -s -- nossh`
 
 ### Notes
 
