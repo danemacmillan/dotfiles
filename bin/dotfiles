@@ -20,16 +20,16 @@ fi
 #  - do symlinking with cp command so no need to manually track files.
 
 ##
+# Update repo from upstream.
+echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
+(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
+
+##
 # Cleanup any legacy associations from older versions of this dotfiles repo.
 unalias dotfiles 2&>/dev/null
 rm "${HOME}/.dfconfig" 2&>/dev/null
 rm -rf "${HOME}/.dotfiles-packages" 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
-
-##
-# Update repo from upstream.
-echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
-(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
 
 ##
 # Create directories that will not be tracked by the repo.
