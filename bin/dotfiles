@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-# Include dependencies if this file is being executed. If it is being sourced,
-# the dependencies are already available.
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-	cd "$(dirname "${BASH_SOURCE[0]}")" && source "../.dotfiles_includes" && cd - >/dev/null 2>&1
-fi
+cd "$(dirname "${BASH_SOURCE[0]}")" && source "../.dotfiles_includes" && cd - >/dev/null 2>&1
 
 ##
 # Dotfiles - dotfiles
