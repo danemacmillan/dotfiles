@@ -81,17 +81,14 @@ fi
 ##
 # Symlink all trackable files.
 #
-# Note that not all files within the `$DOTFILES_PATH` directory are symlinked into
-# the user home directory, as they are only used internally by these dotfiles.
+# Note that not all files within the `$DOTFILES_PATH` directory are symlinked
+# into the user home directory, as they are only used internally by these
+# dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
-###ln -vsfn "${DOTFILES_PATH}"/bin/* "${HOME}/bin/"
 ln -vsfn "${DOTFILES_PATH}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
 ln -vsfn "${DOTFILES_PATH}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
-#ln -vsfn "${DOTFILES_PATH}/.ssh/rc" "${HOME}/.ssh/rc"
-###ln -vsfn "${DOTFILES_PATH}/.aliases" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.bash_completion" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
-###ln -vsfn "${DOTFILES_PATH}/.bash_prompt" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.bashrc" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.ctags" "${HOME}/"
@@ -99,22 +96,15 @@ ln -vsfn "${DOTFILES_PATH}/.digrc" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.dir_colors" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.dotfiles_includes" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
-###ln -vsfn "${DOTFILES_PATH}/.formatting" "${HOME}/"
-###ln -vsfn "${DOTFILES_PATH}/.functions" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.gitconfig" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.gitignore" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.grcat" "${HOME}/"
-#ln -vsfn "${DOTFILES_PATH}/.hgrc" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.ignore" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.inputrc" "${HOME}/"
-###ln -vsfn "${DOTFILES_PATH}/.macos_defaults" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.mackup.cfg" "${HOME}/"
-#ln -vsfn "${DOTFILES_PATH}/.mozconfig" "${HOME}/"
-#ln -vsfn "${DOTFILES_PATH}/.my.cnf" "${HOME}/.my.cnf.sample"
 ln -vsfn "${DOTFILES_PATH}/.myclirc" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.mytop" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.npmrc" "${HOME}/"
-###ln -vsfn "${DOTFILES_PATH}/.path" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.rsync_excludes" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.siegerc" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.tmux.conf" "${HOME}/"
