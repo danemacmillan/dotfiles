@@ -380,7 +380,7 @@ cat()
 	if [[ "${filepath}" == *.icloud ]] \
 		&& command_exists icd \
 	; then
-		icd "${filepath}"
+		brctl download "${filepath}"
 	fi
 
 	case "${filepath}" in
