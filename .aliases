@@ -10,7 +10,7 @@
 # @license MIT
 
 # View and edit danemacmillan's HOWDOI.md file.
-alias how="vi ${HOME}/.dotfiles/HOWDOI.md"
+alias how='vi "${DOTFILES_PATH}/HOWDOI.md"'
 
 ##
 # Filesystem
