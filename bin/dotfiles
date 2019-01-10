@@ -207,11 +207,14 @@ rm -rf "${HOME}/.dotfiles-packages" 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
 
 ##
+# Create symlink to dotfiles install path into home directory, for quick access.
+if [[ ! -e "${HOME}/.dotfiles" ]]; then
+	echo -e "${BLUE}${BOLD}Creating symlink to dotfiles install path into home directory.${RESET}"
+	ln -vsfn "${DOTFILES_PATH}" "${HOME}/"
+fi
+
+##
 # Update terminal
 echo -e "${BLUE}${BOLD}Updating terminal with new profile.${RESET}"
 source "${HOME}/.bash_profile"
-echo -e "${WHITE}${BOLD}Done!${RESET}\n"
-
-
-
-
+echo -e "${WHITE}${BOLD}Done!${RESET}"
