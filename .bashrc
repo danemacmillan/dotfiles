@@ -1,8 +1,6 @@
 # vim: ft=sh
 source "${HOME}/.dotfiles_includes"
 
-echo $(dirname "${BASH_SOURCE[0]}")
-
 ##
 # .bashrc
 #

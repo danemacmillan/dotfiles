@@ -15,7 +15,6 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 
-echo "INCLUDES---"
 # This should only be defined once. This script being sourced from other places,
 # so this ensures no extraneous calls.
 if [[ -z ${DOTFILES_PATH} ]]; then
@@ -83,7 +82,6 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 
 	# Assign dotfiles' DPM install directory.
 	export DPM_INSTALL_DIRECTORY="${XDG_RUNTIME_DIR}"
-	echo "INCLUDE: $DOTFILES_PATH"
 
 	# Update PATH.
 	if [[ -e "${DOTFILES_PATH}/.path" ]]; then

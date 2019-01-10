@@ -5,26 +5,6 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 	cd "$(dirname "${BASH_SOURCE[0]}")" && source "../.dotfiles_includes" && cd -
 fi
 
-
-
-# Being sourced.
-if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
-	echo "SOURCED"
-	#echo $(dirname "${BASH_SOURCE[0]}")
-	#source ".dotfiles_includes"
-	echo $DOTFILES_PATH
-else
-	echo "EXECUTED"
-	echo $DOTFILES_PATH
-fi
-
-echo $(dirname "${BASH_SOURCE[0]}")
-
-
-
-
-
-
 ##
 # Dotfiles - dotfiles
 #
