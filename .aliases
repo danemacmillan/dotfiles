@@ -167,10 +167,9 @@ if command_exists brew ; then
 		command_exists gcloud && gcloud components update --quiet; \
 		brew update; \
 		brew upgrade; \
-		brew cleanup; \
 		brew doctor; \
 		brew cask doctor; \
-		brew prune; \
+		brew cleanup; \
 		brew cask outdated \
 	"
 fi
