@@ -38,12 +38,12 @@ echo -e "${BLUE}${BOLD}Creating any missing directories.${RESET}"
 
 if [[ ! -e "${XDG_CONFIG_HOME}/alacritty" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_CONFIG_HOME}/alacritty' directory.${RESET}"
-	mkdir "${XDG_CONFIG_HOME}/alacritty"
+	mkdir -p "${XDG_CONFIG_HOME}/alacritty"
 fi
 
 if [[ ! -e "${XDG_CONFIG_HOME}/htop" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_CONFIG_HOME}/htop' directory.${RESET}"
-	mkdir "${XDG_CONFIG_HOME}/htop"
+	mkdir -p "${XDG_CONFIG_HOME}/htop"
 fi
 
 if [[ ! -e "${HOME}/.ssh" ]]; then
@@ -55,9 +55,14 @@ fi
 
 # If .vim exists as a symlink, move its contents temporarily, then rename to
 # actual directory, then create directories.
-#[[ ! -L "${HOME}/.vim" ]]
+if [[ -L "${HOME}/.vim" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Replacing ~/.vim directory symlink.${RESET}"
+	cp -Lr "${HOME}/.vim" "${HOME}/.vim_tmp"
+	unlink "${HOME}/.vim"
+	mv "${HOME}/.vim_tmp" "${HOME}/.vim"
+fi
 if [[ ! -e "${HOME}/.vim" ]] ; then
-	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.vim directory to ~/tmp.${RESET}"
+	echo -e "${RESET}${BLUE}${BOLD}Creating .vim directories.${RESET}"
 	mkdir -p "${HOME}"/.vim/{backups,bundle,swaps,undo}
 fi
 
