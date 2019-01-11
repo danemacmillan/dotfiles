@@ -15,9 +15,11 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../.dotfiles_includes" && cd - >/
 #  - abstract into function.
 #  - do symlinking with cp command so no need to manually track files.
 
+echo -e "${BLUE}${BOLD}Running dotfiles chores...${RESET}"
+
 ##
 # Update repo from upstream.
-echo -e "${BLUE}${BOLD}Updating dotfiles.${RESET}"
+echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
 (cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
 
 ##
@@ -32,6 +34,8 @@ symlinks -d "${HOME}" 2&>/dev/null
 # Create directories that will not be tracked by the repo.
 #
 # Their contents could be via symlinks from `$DOTFILES_PATH/*`, though.
+echo -e "${BLUE}${BOLD}Creating any missing directories.${RESET}"
+
 if [[ ! -e "${XDG_CONFIG_HOME}/alacritty" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_CONFIG_HOME}/alacritty' directory.${RESET}"
 	mkdir "${XDG_CONFIG_HOME}/alacritty"
@@ -49,6 +53,15 @@ if [[ ! -e "${HOME}/.ssh" ]]; then
 	chmod 700 "${HOME}/.ssh"
 fi
 
+# If .vim exists as a symlink, move its contents temporarily, then rename to
+# actual directory, then create directories.
+#[[ ! -L "${HOME}/.vim" ]]
+if [[ ! -e "${HOME}/.vim" ]] ; then
+	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.vim directory to ~/tmp.${RESET}"
+	mkdir -p "${HOME}"/.vim/{backups,bundle,swaps,undo}
+fi
+
+
 if [[ ! -d "${HOME}/bin" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/bin' directory.${RESET}"
 	mkdir -p "${HOME}/bin"
@@ -65,6 +78,8 @@ fi
 
 ##
 # Copy file templates that will not be tracked by the repo.
+echo -e "${BLUE}${BOLD}Copying any file templates.${RESET}"
+
 if [[ ! -e "${HOME}/.extra" ]]; then
 	echo -e "${BLUE}${BOLD}Copying '.extra' template file for custom dotfiles edits that will not be tracked.${RESET}"
 	cp -v "${DOTFILES_PATH}/.extra" "${HOME}/.extra"
@@ -141,15 +156,6 @@ if [[ -e "${HOME}/.mackup" ]] \
 fi
 ln -vsfn "${DOTFILES_PATH}/.mackup" "${HOME}/"
 
-if [[ -e "${HOME}/.vim" ]] \
-	&& [[ ! -L "${HOME}/.vim" ]] \
-	&& [[ ! -e "${HOME}/tmp/.vim" ]] \
-; then
-	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.vim directory to ~/tmp.${RESET}"
-	mv "${HOME}/.vim" "${HOME}/tmp/.vim"
-fi
-ln -vsfn "${DOTFILES_PATH}/.vim" "${HOME}/"
-
 if [[ -e "${HOME}/.weechat" ]] \
 	&& [[ ! -L "${HOME}/.weechat" ]] \
 	&& [[ ! -e "${HOME}/tmp/.weechat" ]] \
@@ -158,16 +164,6 @@ if [[ -e "${HOME}/.weechat" ]] \
 	mv "${HOME}/.weechat" "${HOME}/tmp/.weechat"
 fi
 ln -vsfn "${DOTFILES_PATH}/.weechat" "${HOME}/"
-
-##
-# Add `dotfiles` and `dpm` executable scripts into `~/bin`.
-#if [[ ! -f "$HOME/bin/dotfiles" ]]; then
-#	ln -vsfn "${DOTFILES_PATH}/dotfiles" "${HOME}/bin/"
-#fi
-#
-#if [[ ! -f "$HOME/bin/dpm" ]]; then
-#	ln -vsfn "${DOTFILES_PATH}/dpm" "${HOME}/bin/"
-#fi
 
 ##
 # Install dotfiles package manager packages.
