@@ -106,7 +106,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=""
 # faster than original `bash-completion` package.
 # Read: https://superuser.com/a/1393343/496301
 if [[ -f "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion" ]]; then
-	time source "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion"
+	source "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion"
 elif [[ -e "/etc/bash_completion" ]]; then
 	source "/etc/bash_completion"
 fi
