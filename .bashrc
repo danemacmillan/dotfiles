@@ -96,10 +96,19 @@ export GOOGLE_APPLICATION_CREDENTIALS=""
 ##
 # Add tab completion for many Bash commands.
 #
-# Note that this will work on both MacOS and CentOS. On the latter, the path
-# will simply be "/etc/bash_completion" as brew will return nothing.
-if [[ -e "${HOMEBREW_INSTALL_PATH}/etc/bash_completion" ]]; then
-	source "${HOMEBREW_INSTALL_PATH}/etc/bash_completion"
+# It should be noted that loading all the completions adds significant overhead
+# to the overall load time of a new shell. Every other operation is at most a
+# a few ms, but completions are always slow.
+#
+# Add `time` to beginning of source line to see real time.
+#
+# MacOS using homebrew's `bash-completion@2` package, which is significantly
+# faster than original `bash-completion` package.
+# Read: https://superuser.com/a/1393343/496301
+if [[ -f "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion" ]]; then
+	time source "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion"
+elif [[ -e "/etc/bash_completion" ]]; then
+	source "/etc/bash_completion"
 fi
 
 ##

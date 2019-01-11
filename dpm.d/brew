@@ -4,7 +4,7 @@ atool
 autoconf
 automake
 bash
-bash-completion
+bash-completion@2
 # This requires Java
 #bfg
 bitlbee
