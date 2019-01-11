@@ -83,11 +83,6 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	# Assign dotfiles' DPM install directory.
 	export DPM_INSTALL_DIRECTORY="${XDG_RUNTIME_DIR}"
 
-	# Update PATH.
-	if [[ -e "${DOTFILES_PATH}/.path" ]]; then
-		source "${DOTFILES_PATH}/.path"
-	fi
-
 	# Detect OS so dotfiles seamlessly work across OSX and Linux.
 	# I only use OSX and CentOS, so additional cases will need
 	# to be defined for another OS.
@@ -99,6 +94,11 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 			OS='nix';;
 	esac
 
+fi
+
+# Update PATH.
+if [[ -e "${DOTFILES_PATH}/.path" ]]; then
+	source "${DOTFILES_PATH}/.path"
 fi
 
 # Pull in base formatting templates.

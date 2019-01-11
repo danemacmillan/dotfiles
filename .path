@@ -11,8 +11,10 @@
 
 ##
 # Store homebrew install path, if available.
-export HOMEBREW_INSTALL_PATH="$(command -v brew >/dev/null 2>&1 && brew --prefix)"
-export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
+if [[ -z ${HOMEBREW_INSTALL_PATH} ]]; then
+	export HOMEBREW_INSTALL_PATH="$(command -v brew >/dev/null 2>&1 && brew --prefix)"
+	export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
+fi
 
 # Common path, if not already included, and it exists.
 [[ ":${PATH}:" != *":/usr/local/bin:"* ]] && [[ -e "/usr/local/bin" ]] && export PATH="/usr/local/bin:${PATH}"
