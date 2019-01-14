@@ -66,8 +66,7 @@ if [[ ! -e "${HOME}/.vim" ]] ; then
 	mkdir -p "${HOME}"/.vim/{backups,bundle,swaps,undo}
 fi
 
-
-if [[ ! -d "${HOME}/bin" ]]; then
+if [[ ! -e "${HOME}/bin" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/bin' directory.${RESET}"
 	mkdir -p "${HOME}/bin"
 fi
