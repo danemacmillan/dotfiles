@@ -3,14 +3,23 @@
 ##
 # .bash_completion
 #
-# This includes third-party bash completion scripts, and custom ones.
+# This includes third-party bash completion scripts that are eagerly loaded.
+#
+# IMPORTANT: Do not add new completions here!
+#
+# This file only exists for backwards-compatibility with bash_completion prior
+# to version 2, which only supported eager loading of completions. For all new
+# completions to take advantage of non-eager loading, add them to the following
+# directory: ${XDG_DATA_HOME}/bash-completion/completions
+#
+# Read more about this:
+# - https://github.com/scop/bash-completion#faq
+# - https://github.com/scop/bash-completion/blob/master/bash_completion#L2034
+# - https://github.com/scop/bash-completion/blob/master/doc/bash_completion.txt
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-
-##
-# Third party bash completion.
 
 # Source google-cloud-sdk gcloud utilities
 # https://cloud.google.com/sdk/docs/quickstarts
@@ -18,51 +27,11 @@ if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completio
 	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
 fi
 
-
-##
-# Completion for proprietary Linus Shops CLI tool.
-#
-# @author Dane MacMillan <work@danemacmillan.com>
-#
-if command_exists linus; then
-	eval $(linus _completion -g -p linus)
-
-	if php -m |grep -q xdebug; then
-		eval $(linus _completion -g -p linusdebug)
-	fi
-fi
-
-
-##
-# Custom completion for vshell command.
-#
-# The vshell command is part of the VagrantShell repo located at
-# https://github.com/danemacmillan/vagrantshell
-#
-# @author Dane MacMillan <work@danemacmillan.com>
-#
-_vshell()
-{
-	local cur prev opts
-	COMPREPLY=()
-	cur="${COMP_WORDS[COMP_CWORD]}"
-	prev="${COMP_WORDS[COMP_CWORD-1]}"
-	opts="help map restart update xdebug xhprof"
-
-	if [[ ${cur} == * ]] ; then
-		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-		return 0
-	fi
-}
-complete -F _vshell vshell
-
-
 ###-begin-pm2-completion-###
 ### credits to npm for the completion file model
 #
 # Installation: pm2 completion >> ~/.bashrc  (or ~/.zshrc)
 #
-
 COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
 COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
 export COMP_WORDBREAKS

@@ -46,6 +46,22 @@ if [[ ! -e "${XDG_CONFIG_HOME}/htop" ]]; then
 	mkdir -p "${XDG_CONFIG_HOME}/htop"
 fi
 
+# Non-eager bash_completion (v2) directory.
+#
+# As long as bash_completion version 2 is installed, putting completions in
+# this directory essentially means that the completions will only load the
+# moment they are needed, versus having them parsed and in memory all the time
+# (eager) if the ~/.bash_completion file or /etc/completion.d paths exist.
+#
+# Read more about this:
+# - https://github.com/scop/bash-completion#faq
+# - https://github.com/scop/bash-completion/blob/master/bash_completion#L2034
+# - https://github.com/scop/bash-completion/blob/master/doc/bash_completion.txt
+if [[ ! -e "${XDG_DATA_HOME}/bash-completion/completions" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating non-eager bash_completion (v2) directory.${RESET}"
+	mkdir -p "${XDG_DATA_HOME}/bash-completion/completions"
+fi
+
 if [[ ! -e "${HOME}/.ssh" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.ssh' directory.${RESET}"
 	mkdir -p "${HOME}/.ssh"
@@ -112,8 +128,11 @@ fi
 # into the user home directory, as they are only used internally by these
 # dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
+# XDG
 ln -vsfn "${DOTFILES_PATH}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
 ln -vsfn "${DOTFILES_PATH}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
+ln -vsfn "${DOTFILES_PATH}"/.local/share/bash-completion/completions/* "${XDG_DATA_HOME}/bash-completion/completions/"
+# Non-XDG
 ln -vsfn "${DOTFILES_PATH}/.bash_completion" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
 ln -vsfn "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
@@ -187,6 +206,30 @@ if [[ "${SHELL}" != "${PREFERRED_SHELL}" ]] \
 	echo -e "${BLUE}${BOLD}Updating default SHELL to ${PREFERRED_SHELL}. This will require sudo.${RESET}"
 	echo -e "Close and re-open the terminal for this change to take effect."
 	sudo chsh -s "${PREFERRED_SHELL}" $(whoami)
+fi
+
+##
+# Fix up rclone completion.
+#
+# Rclone uses the old version of bash_completion, which ALWAYS eagerly loads
+# completion files into memory. That causes extremely slow shell startups.
+# Rclone has a massive completion file, which adds several hundred ms to the
+# start up times.
+#
+# This will check if modern bash_completion (v2) is available,
+# check if an rclone completion file exists at the old location, and if both
+# these conditions are true, it will be recreated at the non-eager location,
+# that loads completions only when requested.
+#
+# For now this has only been tested on MacOS.
+# brew --prefix rclone
+if [[ -e "/usr/local/share/bash-completion/completions" ]] \
+	&& [[ ! -e "/usr/local/share/bash-completion/completions/rclone" ]] \
+	&& [[ -e "/usr/local/opt/rclone/etc/bash_completion.d/rclone" ]] \
+; then
+	rm /usr/local/etc/bash_completion.d/rclone 2&>/dev/null
+	rm /etc/bash_completion.d/rclone 2&>/dev/null
+	ln -s /usr/local/opt/rclone/etc/bash_completion.d/rclone /usr/local/share/bash-completion/completions
 fi
 
 ##

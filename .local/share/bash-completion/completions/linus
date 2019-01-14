@@ -1,0 +1,14 @@
+##
+# Completion for proprietary Linus Shops CLI tool.
+#
+# Read: https://github.com/scop/bash-completion#faq
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+if command_exists linus; then
+	eval $(linus _completion -g -p linus)
+
+	if php -m |grep -q xdebug; then
+		eval $(linus _completion -g -p linusdebug)
+	fi
+fi
+

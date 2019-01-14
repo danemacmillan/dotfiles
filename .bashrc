@@ -111,29 +111,15 @@ if [[ -e "${DOTFILES_PATH}/.bash_prompt" ]]; then
 fi
 
 ##
-# Assign non-zero length value to this variable to disable bash completion.
-#
-# If this is desired, it is recommended that the variable be redeclared and a
-# value assigned in the .extra file that is later sourced. Alternatively,
-# disable these completions, then define a custom subset.
-#
-# A main reason for wanting to disable completions is due to the speed
-# improvement on some systems that have many completions. Read the other
-# comments where completions are sourced.
-export DOTFILES_DISABLE_COMPLETION=""
-
-##
-# Source .extra file if it exists. This file will never get added to repo.
-if [[ -e "${HOME}/.extra" ]]; then
-	source "${HOME}/.extra"
-fi
-
-##
 # Add tab completion for many Bash commands.
 #
-# It should be noted that loading all the completions adds significant overhead
-# to the overall load time of a new shell. Every other operation is at most a
-# a few ms, but completions are always slow.
+# Note that these dotfiles install `bash_completion@2`, and fully leverages
+# non-eager completion loading from the core library, as well as by using the
+# user path at ${XDG_DATA_HOME}/bash-completion/completions. That path can be
+# used to override any non-eager completion by simply creating a file that
+# matches the utility's name.
+#
+# Read: https://github.com/scop/bash-completion#faq
 #
 # Add `time` to beginning of source line to see real time.
 #
@@ -146,5 +132,11 @@ if [[ -z "${DOTFILES_DISABLE_COMPLETION:+''}" ]]; then
 	elif [[ -e "/etc/bash_completion" ]]; then
 		source "/etc/bash_completion"
 	fi
+fi
+
+##
+# Source .extra file if it exists. This file will never get added to repo.
+if [[ -e "${HOME}/.extra" ]]; then
+	source "${HOME}/.extra"
 fi
 
