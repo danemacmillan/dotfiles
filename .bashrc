@@ -112,14 +112,6 @@ elif [[ -e "/etc/bash_completion" ]]; then
 fi
 
 ##
-# __git_ps1 for MacOS or other systems
-if [[ -e "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh" ]]; then
-	source "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh"
-elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
-	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
-fi
-
-##
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
 # Only source this, because executing it will not add hashes to current shell.
 source "${DOTFILES_PATH}/bin/dpm" --verify

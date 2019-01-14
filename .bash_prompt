@@ -45,6 +45,14 @@ if [[ "${HAS_SSH}" ]]; then
 	HOST_STYLE='\[${BLUE}${BOLD}\]://';
 fi
 
+##
+# __git_ps1 for MacOS or other systems
+if [[ -e "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh" ]]; then
+	source "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh"
+elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
+	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
+fi
+
 if command_exists __git_ps1 ; then
 	export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
 fi
