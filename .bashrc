@@ -94,24 +94,6 @@ export CLOUDSDK_PYTHON=""
 export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
-# Add tab completion for many Bash commands.
-#
-# It should be noted that loading all the completions adds significant overhead
-# to the overall load time of a new shell. Every other operation is at most a
-# a few ms, but completions are always slow.
-#
-# Add `time` to beginning of source line to see real time.
-#
-# MacOS using homebrew's `bash-completion@2` package, which is significantly
-# faster than original `bash-completion` package.
-# Read: https://superuser.com/a/1393343/496301
-if [[ -f "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion" ]]; then
-	source "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion"
-elif [[ -e "/etc/bash_completion" ]]; then
-	source "/etc/bash_completion"
-fi
-
-##
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
 # Only source this, because executing it will not add hashes to current shell.
 source "${DOTFILES_PATH}/bin/dpm" --verify
@@ -129,7 +111,40 @@ if [[ -e "${DOTFILES_PATH}/.bash_prompt" ]]; then
 fi
 
 ##
+# Assign non-zero length value to this variable to disable bash completion.
+#
+# If this is desired, it is recommended that the variable be redeclared and a
+# value assigned in the .extra file that is later sourced. Alternatively,
+# disable these completions, then define a custom subset.
+#
+# A main reason for wanting to disable completions is due to the speed
+# improvement on some systems that have many completions. Read the other
+# comments where completions are sourced.
+export DOTFILES_DISABLE_COMPLETION=""
+
+##
 # Source .extra file if it exists. This file will never get added to repo.
 if [[ -e "${HOME}/.extra" ]]; then
 	source "${HOME}/.extra"
 fi
+
+##
+# Add tab completion for many Bash commands.
+#
+# It should be noted that loading all the completions adds significant overhead
+# to the overall load time of a new shell. Every other operation is at most a
+# a few ms, but completions are always slow.
+#
+# Add `time` to beginning of source line to see real time.
+#
+# MacOS using homebrew's `bash-completion@2` package, which is significantly
+# faster than original `bash-completion` package.
+# Read: https://superuser.com/a/1393343/496301
+if [[ -z "${DOTFILES_DISABLE_COMPLETION:+''}" ]]; then
+	if [[ -f "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion" ]]; then
+		source "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion"
+	elif [[ -e "/etc/bash_completion" ]]; then
+		source "/etc/bash_completion"
+	fi
+fi
+
