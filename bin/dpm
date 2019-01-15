@@ -443,3 +443,9 @@ if [[ "$1" == "--clear-hashes" ]]; then
 	__dpm_hashes_clear
 fi
 
+# Run a force install, which will verify all packages again.
+if [[ "${1}" == "--force-install" ]]; then
+	__dpm_hashes_clear
+	__dpm_install
+fi
+
