@@ -243,6 +243,8 @@ __dpm_install_brew()
 		echo "${BLUE}${BOLD}Installing homebrew and dependencies.${RESET}"
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 		brew install jq
+		# Note that this also needs md5sum, so check what package it comes from, or
+		# whether it needs coreutils right away.
 	fi
 
 	if [ -e "$packages_dir/$package" ]; then
