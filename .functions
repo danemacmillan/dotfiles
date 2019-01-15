@@ -54,12 +54,13 @@ calculate_md5_hash()
 	fi
 
 	# OSX comes with md5 tool by default, not md5sum.
-	if hash md5 2>/dev/null; then
-		local md5tool=md5
-		local cut_offset=4
-	fi
+	# If space in path, cut -d "=" -f2 | cut -d " " -f2
+	#if hash md5 2>/dev/null; then
+	#	local md5tool=md5
+	#	local cut_offset=4
+	#fi
 
-	if [[ -f "${file_path}" ]]; then
+	if [[ -e "${file_path}" ]]; then
 		echo $($md5tool "${file_path}" | cut -d " " -f$cut_offset)
 	else
 		echo $($md5tool <<< "${file_path}" | cut -d " " -f$cut_offset)
