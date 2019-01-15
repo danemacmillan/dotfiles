@@ -77,7 +77,7 @@ __dpm_verify()
 
 	local directory_index=0
 	# Loop through everything and generate relevant MD5 hashes.
-	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
+	for packages_dir in "${DOTFILES_PACKAGES_DIR[@]}"; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
 			if [ -f "$packages_dir/$package_manager" ]; then
 				# This dynamically generates variable names and assigns MD5s.
@@ -144,14 +144,14 @@ __dpm_delegate_install_command()
 	local package_manager_override_directory="${DOTFILES_PACKAGE_MANAGER_DIRECTORY}/${package_manager}.d"
 	local package_manager_package_override="${package_manager_override_directory}/${package_manager_package}${install_string_suffix}"
 
-	if [[ -f "${package_manager_package_override}" ]]; then
+	if [[ -e "${package_manager_package_override}" ]]; then
 		echo -e "  --> Executing install override for ${GREEN}${package_manager_package}${RESET} from '${package_manager_package_override}'"
 		# Note that the script MUST be executable in order for this to work. There
 		# is no point in sourcing a script and keeping it in memory when it will
 		# be run infrequently. There is no desire for the script to affect the
 		# running context. Executing it ensures a new process is used, and it also
 		# also ensures intent.
-		${package_manager_package_override}
+		"${package_manager_package_override}"
 	else
 		# Install the package using standard package manager utility.
 		${package_manager_command} ${package_manager_package}
@@ -166,7 +166,7 @@ __dpm_install_aptget()
 	local packages_dir="$1"
 	local directory_index="$2"
 
-	if [ -f $packages_dir/$package ]; then
+	if [ -e "$packages_dir/$package" ]; then
 		local packages_file="$packages_dir/$package"
 		local packages_md5_new=$(calculate_md5_hash "$packages_file")
 		local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_aptget_$directory_index)
@@ -185,9 +185,49 @@ __dpm_install_aptget()
 					echo -e "${GREEN}${line}${RESET}"
 					__dpm_delegate_install_command "$package" "$package_manager_command" "$line"
 				fi
-			done < $packages_dir/$package
+			done < "$packages_dir/$package"
 		fi
 	fi
+}
+
+##
+# Get friendly GUI name of installed Cask.
+#
+# The install name of a Cask is typically all lowercase and dash separated.
+# There installed names are typically GUI-friendly, with capitalization and
+# spaces. This will return the friendly name, which can then be used to check
+# MacOS' /Applications/ paths.
+__dpm_brew_cask_get_appname()
+{
+	brew cask info --json=v1 "${1}" 2>/dev/null | jq -r ".[0].name[0]"
+}
+##
+# Get the installed pathname of a cask.
+#
+# This is typically something like "App Name.app"
+#
+# This is not perfect, as not all packages define artifacts or names properly.
+__dpm_brew_cask_get_pathname()
+{
+	brew cask info --json=v1 "${1}" 2>/dev/null | jq -rS ".[0].artifacts[][0]?" 2>/dev/null |cut -d$'\n' -f1 2>/dev/null
+}
+
+##
+# Check if a command line utility or GUI application is installed.
+__dpm_app_exists()
+{
+	local app_pathname="${1}"
+	local package_manager="${2}"
+
+	case "${package_manager}" in
+		*cask*)
+			app_pathname=$(__dpm_brew_cask_get_pathname "${app_pathname}")
+			[[ -n "$app_pathname" ]] && [[ -e "/Applications/$app_pathname" ]]
+			;;
+		*)
+			command_exists "${app_pathname}"
+			;;
+	esac
 }
 
 ##
@@ -198,64 +238,75 @@ __dpm_install_brew()
 	local packages_dir="$1"
 	local directory_index="$2"
 
-		# Get homebrew and some niceties.
+	# Get homebrew and some niceties.
 	if ! command_exists brew; then
-		echo "${BLUE}${BOLD}Installing homebrew${RESET}"
+		echo "${BLUE}${BOLD}Installing homebrew and dependencies.${RESET}"
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		brew install jq
 	fi
 
-	if [ -f $packages_dir/$package ]; then
+	if [ -e "$packages_dir/$package" ]; then
+		echo -e "${BBLUE}Updating homebrew formulae.${RESET}"
+		brew update
+
 		# Use three distinct packages for brew.
 		for subpackage in "tap" "brew" "cask"; do
 			local packages_file="$packages_dir/$subpackage"
 			local packages_md5_new=$(calculate_md5_hash "$packages_file")
 			local package_name="$package"
 
-			if [ -f $packages_dir/$subpackage ]; then
+			if [ -e "$packages_dir/$subpackage" ]; then
 				case "$subpackage" in
 					tap)
 						local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_tap_$directory_index)
 						local package_manager_command="brew tap"
-						local package_manager_command_list="brew tap"
+						local package_manager_command_list="$(brew tap)"
 						local package_name+=" $subpackage"
 						;;
 					brew)
 						local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_brew_$directory_index)
 						local package_manager_command="brew install"
-						local package_manager_command_list="brew list -1"
+						local package_manager_command_list="$(brew list -1)"
 						;;
 					cask)
 						local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_cask_$directory_index)
 						local package_manager_command="brew cask install"
-						local package_manager_command_list="brew cask list -1"
+						local package_manager_command_list="$(brew cask list -1)"
 						local package_name+=" $subpackage"
 						;;
 				esac
 
 				if [[ "$packages_md5_old" != "$packages_md5_new" ]]; then
-					echo -e "${BLUE}${BOLD}Individually checking/installing ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
-					echo -e "${GREEN}Updating homebrew. Twice.${RESET}"
-					brew update && brew update
+					echo -e "${BLUE}${BOLD}Checking ${GREEN}${REVERSE} $package_name ${RESET}${BLUE}${BOLD} packages from $packages_dir${RESET}"
+
 					while read line; do
-						# A hash check is insufficient, as not all packages are
-						# installed as an executable CLI tool. This is why check is against
-						# list of packages.
 						if [[ -n "$line" ]] \
 							&& [[ ${line:0:1} != '#' ]] \
-							&& (! $package_manager_command_list | grep -q "^${line}\$" \
-								&& ! command_exists "${line}") \
 						; then
-							echo -e "${GREEN}${line}${RESET}"
-							__dpm_delegate_install_command "$subpackage" "$package_manager_command" "$line"
+							echo -ne " ${EMOJI_PACKAGE} ${GREEN}${line}${RESET}:  "
+
+							# Only install items that not in the install list, does not exist
+							# on the command line, or does not exist at a path.
+							if ! $(echo "$package_manager_command_list" | grep -q "^${line}\$") \
+								&& ! $(__dpm_app_exists "${line}" "$subpackage") \
+							; then
+								echo -e "${EMOJI_EXPLOSION}${BCYAN} verifying...${RESET}"
+								#__dpm_delegate_install_command "$subpackage" "$package_manager_command" "$line"
+							else
+								echo -e "${EMOJI_CHECKMARK}${RESET}"
+							fi
 						fi
-					done < $packages_dir/$subpackage
-					echo -e "${GREEN}Running cleanup, prune, and doctor on homebrew.${RESET}"
-					brew cleanup
-					brew prune
-					brew doctor
+					done < "$packages_dir/$subpackage"
 				fi
 			fi
 		done
+
+		echo -e "${BBLUE}Running cleanup and doctor on homebrew.${RESET}"
+		brew cleanup
+		brew doctor
+		echo -e "${BBLUE}Searching for outdated software.${RESET}"
+		brew outdated
+		brew cask outdated
 	fi
 }
 
@@ -267,7 +318,7 @@ __dpm_install_yum()
 	local packages_dir="$1"
 	local directory_index="$2"
 
-	if [ -f $packages_dir/$package ]; then
+	if [ -e "$packages_dir/$package" ]; then
 		local packages_file="$packages_dir/$package"
 		local packages_md5_new=$(calculate_md5_hash "$packages_file")
 		local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_yum_$directory_index)
@@ -288,7 +339,7 @@ __dpm_install_yum()
 					echo -e "${GREEN}${line}${RESET}"
 					__dpm_delegate_install_command "$package" "$package_manager_command" "$line"
 				fi
-			done < $packages_dir/$package
+			done < "$packages_dir/$package"
 			yum clean all
 		fi
 	fi
@@ -343,9 +394,9 @@ __dpm_install()
 	# Loop through hashes for each directory provided.
 	local directory_index=0
 	# Install packages from various defined package manager types.
-	for packages_dir in ${DOTFILES_PACKAGES_DIR[@]}; do
+	for packages_dir in "${DOTFILES_PACKAGES_DIR[@]}"; do
 		for package_manager in ${DOTFILES_PACKAGE_MANAGERS[@]}; do
-			if [[ -f $packages_dir/$package_manager ]]; then
+			if [[ -e "$packages_dir/$package_manager" ]]; then
 				# TODO possibly use single installer, with modular checkers for each
 				# manager type, so case is no longer needed.
 				# TODO 2: Add a default case, so that "dpm" has its own
@@ -391,3 +442,4 @@ fi
 if [[ "$1" == "--clear-hashes" ]]; then
 	__dpm_hashes_clear
 fi
+
