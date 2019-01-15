@@ -1,4 +1,6 @@
+homebrew/core
+homebrew/cask
+homebrew/cask-fonts
+homebrew/cask-versions
 beeftornado/rmtree
-caskroom/cask
-caskroom/fonts
-caskroom/versions
+
