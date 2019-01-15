@@ -291,7 +291,7 @@ __dpm_install_brew()
 								&& ! $(__dpm_app_exists "${line}" "$subpackage") \
 							; then
 								echo -e "${EMOJI_EXPLOSION}${BCYAN} verifying...${RESET}"
-								#__dpm_delegate_install_command "$subpackage" "$package_manager_command" "$line"
+								__dpm_delegate_install_command "$subpackage" "$package_manager_command" "$line"
 							else
 								echo -e "${EMOJI_CHECKMARK}${RESET}"
 							fi
