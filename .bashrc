@@ -96,7 +96,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=""
 ##
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
 # Only source this, because executing it will not add hashes to current shell.
-source "${DOTFILES_PATH}/bin/dpm" --verify
+#source "${DOTFILES_PATH}/bin/dpm" --verify
 
 ##
 # Aliases
