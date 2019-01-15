@@ -1,5 +1,4 @@
 ack
-alacritty
 aspell
 atool
 autoconf
@@ -37,16 +36,16 @@ gnupg
 gnutls
 guile
 highlight
-htop-osx
+htop
 httperf
 hub
-icloud-control
 iftop
 ioping
 ios-webkit-debug-proxy
 iperf3
 jmeter
 jpegoptim
+jq
 lua
 lynx
 mackup
