@@ -79,7 +79,7 @@ if [[ -L "${HOME}/.vim" ]]; then
 fi
 if [[ ! -e "${HOME}/.vim" ]] ; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating .vim directories.${RESET}"
-	mkdir -p "${HOME}"/.vim/{backups,bundle,swaps,undo}
+	mkdir -p "${HOME}"/.vim/{autoload,backups,plugged,swaps,undo}
 fi
 
 if [[ ! -e "${HOME}/bin" ]]; then
