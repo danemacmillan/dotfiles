@@ -44,11 +44,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-" Theme.
-set background=dark
-colorscheme solarized
-"colorscheme gruvbox
-"colorscheme darcula
+" Theme
+"
+" .vimrc typically throws an error about this if the theme is not installed
+" yet. This usually happens the first time this .vimrc is used. Silence those
+" pesky warnings.
+"
+" Available color schemes: solarized, gruvbox, darcula
+silent! set background=dark
+silent! colorscheme solarized
 let g:solarized_termcolors=256
 let g:gruvbox_contrast_dark = "hard"
 " Make invisible characters less prominent.
