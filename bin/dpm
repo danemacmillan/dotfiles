@@ -240,11 +240,19 @@ __dpm_install_brew()
 
 	# Get homebrew and some niceties.
 	if ! command_exists brew; then
-		echo "${BLUE}${BOLD}Installing homebrew and dependencies.${RESET}"
-		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		echo "${BLUE}${BOLD}Installing homebrew.${RESET}"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
+
+	if ! command_exists jq; then
+		echo "${BBLUE}Installing dpm dependency: jq"
 		brew install jq
-		# Note that this also needs md5sum, so check what package it comes from, or
-		# whether it needs coreutils right away.
+	fi
+
+	# Specifically md5sum
+	if [[ ! -e "/usr/local/opt/coreutils" ]]; then
+		echo "${BBLUE}Installing dpm dependency: coreutils"
+		brew install coreutils
 	fi
 
 	if [ -e "$packages_dir/$package" ]; then

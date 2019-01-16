@@ -126,12 +126,10 @@ fi
 # MacOS using homebrew's `bash-completion@2` package, which is significantly
 # faster than original `bash-completion` package.
 # Read: https://superuser.com/a/1393343/496301
-if [[ -z "${DOTFILES_DISABLE_COMPLETION:+''}" ]]; then
-	if [[ -f "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion" ]]; then
-		source "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion"
-	elif [[ -e "/etc/bash_completion" ]]; then
-		source "/etc/bash_completion"
-	fi
+if [[ -e "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion" ]]; then
+	source "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion"
+elif [[ -e "/etc/bash_completion" ]]; then
+	source "/etc/bash_completion"
 fi
 
 ##

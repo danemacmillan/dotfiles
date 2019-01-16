@@ -23,14 +23,6 @@ echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
 (cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
 
 ##
-# Cleanup any legacy associations from older versions of this dotfiles repo.
-echo -e "${BLUE}${BOLD}Cleaning up any legacy dotfiles data.${RESET}"
-unalias dotfiles 2&>/dev/null
-rm "${HOME}/.dfconfig" 2&>/dev/null
-rm -rf "${HOME}/.dotfiles-packages" 2&>/dev/null
-symlinks -d "${HOME}" 2&>/dev/null
-
-##
 # Create directories that will not be tracked by the repo.
 #
 # Their contents could be via symlinks from `$DOTFILES_PATH/*`, though.
@@ -57,9 +49,15 @@ fi
 # - https://github.com/scop/bash-completion#faq
 # - https://github.com/scop/bash-completion/blob/master/bash_completion#L2034
 # - https://github.com/scop/bash-completion/blob/master/doc/bash_completion.txt
+#
+# This will also uninstall outdated version of bash-completion package.
 if [[ ! -e "${XDG_DATA_HOME}/bash-completion/completions" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating non-eager bash_completion (v2) directory.${RESET}"
 	mkdir -p "${XDG_DATA_HOME}/bash-completion/completions"
+	if command_exists brew; then
+		brew uninstall bash-completion
+		rm /usr/local/etc/bash_completion
+	fi
 fi
 
 if [[ ! -e "${HOME}/.ssh" ]]; then
@@ -245,6 +243,22 @@ if [[ ! -e "${HOME}/.dotfiles" ]]; then
 	echo -e "${BLUE}${BOLD}Creating symlink to dotfiles install path into home directory.${RESET}"
 	ln -vsfn "${DOTFILES_PATH}" "${HOME}/"
 fi
+
+##
+# Cleanup any legacy associations from older versions of this dotfiles repo.
+echo -e "${BLUE}${BOLD}Cleaning up any legacy dotfiles data.${RESET}"
+unalias dotfiles 2&>/dev/null
+rm "${HOME}/.dfconfig" 2&>/dev/null
+rm -rf "${HOME}/.dotfiles-packages" 2&>/dev/null
+symlinks -d "${HOME}" 2&>/dev/null
+unlink "${HOME}/.aliases" 2&>/dev/null
+unlink "${HOME}/.bash_prompt" 2&>/dev/null
+unlink "${HOME}/.formatting" 2&>/dev/null
+unlink "${HOME}/.functions" 2&>/dev/null
+unlink "${HOME}/.hgrc" 2&>/dev/null
+unlink "${HOME}/.mozconfig" 2&>/dev/null
+unlink "${HOME}/.my.cnf.sample" 2&>/dev/null
+unlink "${HOME}/.path" 2&>/dev/null
 
 ##
 # Update terminal
