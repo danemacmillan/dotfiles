@@ -1,152 +1,94 @@
+""
 " .vimrc at https://github.com/danemacmillan/dotfiles
-"
-" Sections:
-" 1. Vundle installer for plugins.
-" 2. Standard vimrc configurations.
 "
 " Notes:
 " <leader> is equal to \
-"
 
+" Only use modern vim.
+set nocompatible
 
-"
-" 1. Begin Vim Vundle configs
-"
+filetype plugin indent on
 
-set nocompatible              " be iMproved, required
-filetype on                   " required for compatibility with Mac OS X, See https://github.com/gmarik/Vundle.vim/issues/167#issuecomment-51679609
-filetype off                  " required
+" Vim-Plug
+call plug#begin('~/.vim/plugged')
+	Plug 'altercation/vim-colors-solarized'
+	Plug 'morhetz/gruvbox'
+	Plug 'blueshirts/darcula'
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin('~/.vim/bundle')
-	Plugin 'gmarik/Vundle.vim'
-	Plugin 'Solarized'
-	Plugin 'editorconfig/editorconfig-vim'
-	Plugin 'tpope/vim-fugitive'
-	Plugin 'tpope/vim-surround'
-	Plugin 'tpope/vim-commentary'
-	Plugin 'kien/ctrlp.vim'
-	Plugin 'closetag.vim'
-	Plugin 'Tagbar'
-	Plugin 'delimitMate.vim'
-	Plugin 'elzr/vim-json'
-	Plugin 'bling/vim-airline'
-	Plugin 'ntpeters/vim-better-whitespace'
-	Plugin 'nathanaelkane/vim-indent-guides'
-	Plugin 'airblade/vim-gitgutter'
-	Plugin 'bling/vim-bufferline'
-	Plugin 'ap/vim-css-color'
-	Plugin 'SuperTab'
-	Plugin 'mbbill/undotree'
-	Plugin 'xolox/vim-misc'
-	if (has('ctags'))
-		Plugin 'taglist.vim'
-		Plugin 'xolox/vim-easytags'
-	endif
-	if (has('lua') && (v:version > 703 || v:version == 703 && has('patch885')))
-		Plugin 'Shougo/neocomplete.vim'
-	endif
-	"Plugin 'scrooloose/nerdtree'
-	"Plugin 'scrooloose/syntastic'
-call vundle#end()
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+	Plug 'editorconfig/editorconfig-vim'
+	Plug 'tpope/vim-fugitive'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-commentary'
+	Plug 'alvan/vim-closetag'
+	Plug 'majutsushi/tagbar'
+	Plug 'raimondi/delimitmate'
+	Plug 'elzr/vim-json'
+	Plug 'ntpeters/vim-better-whitespace'
+	Plug 'nathanaelkane/vim-indent-guides'
+	Plug 'airblade/vim-gitgutter'
+	Plug 'ap/vim-css-color'
+	Plug 'ervandew/supertab'
+	Plug 'mbbill/undotree'
+	Plug 'scrooloose/nerdtree'
+	Plug 'scrooloose/nerdcommenter'
 
-" Map Vundle commands
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" see :h vundle for more details or wiki for FAQ
-nnoremap <leader>pl :PluginList<CR>
-nnoremap <leader>pi :PluginInstall!<CR>
-nnoremap <leader>ps :PluginSearch!<Space>
-nnoremap <leader>pc :PluginClean!<CR>
+	"Plug 'kien/ctrlp.vim'
+	Plug '/usr/local/opt/fzf'
+	Plug 'junegunn/fzf.vim'
 
-"
-" 2. Begin standard vimrc configs.
-"
+	Plug 'stanangeloff/php.vim'
+	Plug 'shawncplus/phpcomplete.vim'
+	Plug 'jetbrains/phpstorm-stubs'
 
-" Use the Solarized Dark theme
-" Installed using Vundler (see above)
-" .vimrc typically throws an error about this the first time Vundler is
-" run, so suppress the message so the plugins install without interruption.
-"silent! set background=dark
-silent! set background=dark
-silent! colorscheme solarized
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+	"Plug 'itchyny/lightline.vim'
+  Plug 'ryanoasis/vim-devicons'
+call plug#end()
 
-" Tagbar
-let g:tagbar_usearrows = 1
-nnoremap <F8> :TagbarToggle<CR>
+" Theme.
+set background=dark
+colorscheme solarized
+"colorscheme gruvbox
+"colorscheme darcula
+let g:solarized_termcolors=256
+let g:gruvbox_contrast_dark = "hard"
 
-" Taglist
-let Tlist_Use_Right_Window = 1
-nnoremap <F9> :TlistToggle<CR>
+" Always show status line
+set laststatus=2
 
-" NERDTREE
-"let g:NERDTreeShowHidden=1
-"nnoremap <leader>n :NERDTreeToggle<CR>
-
-" Customize Airline
-"https://github.com/bling/vim-airline/wiki/FAQ
+" Airline
+" https://github.com/vim-airline/vim-airline/wiki/FAQ
 let g:airline_powerline_fonts = 1
-let g:airline_theme= 'dark'
+let g:airline_theme= 'solarized'
+"let g:airline_theme= 'jellybeans'
 " Displaying nice buffers
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
-" CtrlP
-" https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-let g:ctrlp_map = '<space>'
-let g:ctrlp_cmd = 'CtrlP'
- " r will use nearest .git, which doesn't play well with symlinks
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_follow_symlinks = 2
-let g:ctrlp_by_filename = 0
-let g:ctrlp_regexp = 1
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_max_files = 0
-let g:ctrlp_use_caching = 0
-let g:ctrlp_clear_cache_on_exit = 1
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-"https://coderwall.com/p/hk_bwg/how-to-speed-up-ctrlp
-let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public$|tmp$',
-	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
-	\ }
-" if executable('ag')
-	" " https://www.mankier.com/1/ag
-	" let g:ctrlp_user_command = 'ag --ignore-case --nogroup --hidden --follow
-	" 	\ -U -p ~/.agignore
-	" 	\ -l -m 10000
-	" 	\ --ignore .git
-	" 	\ --ignore .svn
-	" 	\ --ignore .hg
-	" 	\ --ignore .DS_Store
-	" 	\ --ignore "**/*.pyc"
-	" 	\ %s -g ""'
-" endif
 
-if executable('rg')
-	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-endif
+" Tagbar
+let g:tagbar_usearrows = 1
+nnoremap <F8> :TagbarToggle<CR>
 
-" Syntastic
-if exists('g:syntastic_check_on_open')
-	set statusline+=%#warningmsg#
-	set statusline+=%{SyntasticStatuslineFlag()}
-	set statusline+=%*
-	let g:syntastic_always_populate_loc_list = 1
-	let g:syntastic_auto_loc_list = 1
-	let g:syntastic_check_on_open = 1
-	let g:syntastic_check_on_wq = 0
-	let g:syntastic_php_checkers = ['phpcs']
-endif
+" NERDTREE
+let g:NERDTreeShowHidden=1
+nnoremap <leader>n :NERDTreeToggle<CR>
+" Auto-open.
+"au VimEnter *  NERDTree
+" Close if only buffer left.
+" https://stackoverflow.com/a/4319165/2973534
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Auto-focus on document.
+autocmd VimEnter * wincmd p
+" Open when no file specified.
+autocmd StdinReadPre * let g:isReadingFromStdin = 1
+autocmd VimEnter * if !argc() && !exists('g:isReadingFromStdin') | NERDTree | endif
+
+" FZF search.
+map ; :Files<CR>
 
 " Indent guides
 let g:indent_guides_start_level = 2
@@ -154,17 +96,6 @@ let g:indent_guides_guide_size = 0
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
-
-" Neocomplete
-" disable autocomplpop.
-let g:acp_enableatstartup = 0
-" use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Better whitespace
 let g:strip_whitespace_on_save = 1
@@ -181,12 +112,6 @@ endif
 " Map buffer cycling
 set pastetoggle=<F2>
 nnoremap <S-Tab> :bprevious<CR>
-" Hit spacebar, followed by first characters of buffer filename, enter.
-" This is not really necessary, considering CtrlP is mapped to ',' which
-" includes buffers in its searches.
-" Just use CtrlP, which is more elegant and already available.
-"nnoremap <space> :b<space>
-nnoremap , :CtrlPBuffer<CR>
 
 " Pasting between different systems when line numbers are visible means that
 " they will be included in the paste. This will strip them. Only strip
@@ -211,23 +136,32 @@ nnoremap <S-d> "_dd
 
 " Set default file format
 set ff=unix
+
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
+
 " Enhance command-line completion
 set wildmenu
+
 " Allow cursor keys in insert mode
 set esckeys
+
 " Allow backspace in insert mode
 set backspace=indent,eol,start
+
 " Optimize for fast terminal connections
 set ttyfast
+
 " Add the g flag to search/replace by default
 set gdefault
+
 " Use UTF-8 without BOM
 set encoding=utf-8 nobomb
+
 " Don’t add empty newlines at the end of files
 set binary
 set noeol
+
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
@@ -244,17 +178,21 @@ set viminfo+=n~/.vim/.viminfo
 " Respect modeline in files
 set modeline
 set modelines=4
+
 " Disable per-directory .vimrc files and disable unsafe commands in them
 set noexrc
 set secure
+
 " Enable line numbers
 set number
+
 " Enable syntax highlighting
 syntax on
+
 " Highlight current line
-" The cursorline is a massive performance hog and slows scrolling to a crawl.
-" set cursorline
-set nocursorline
+" The cursorline can be a huge performance hog and slows scrolling to a crawl.
+set cursorline
+"set nocursorline
 set lazyredraw
 set ttyfast
 set foldlevel=0
@@ -263,36 +201,47 @@ set foldlevel=0
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+
 " Show “invisible” characters
 " triangle-headed rightwards arrow: http://unicode-table.com/en/279D/
 set lcs=tab:➝\ ,trail:·,eol:¬,nbsp:_
 set list
+
 " Highlight searches
 set hlsearch
+
 " Ignore case of searches
 set ignorecase
+
 " Highlight dynamically as pattern is typed
 set incsearch
-" Always show status line
-set laststatus=2
+
 " Enable mouse in all modes
 set mouse=a
 " Disable error bells
 set noerrorbells
+
 " Don’t reset cursor to start of line when moving around.
 set nostartofline
+
 " Show the cursor position
 set ruler
+
 " Don’t show the intro message when starting Vim
 set shortmess=atI
+
 " Show the current mode
 set showmode
+
 " Set title string to just be filename
 set titlestring=%t
+
 " Show the filename in the window titlebar
 set title
+
 " Show the (partial) command as it’s being typed
 set showcmd
+
 "
 set linespace=0
 
@@ -312,8 +261,7 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 " Treat extensionless files as bash scripts.
 au BufRead,BufNewFile * setfiletype sh
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
+" Jump to the last position when reopening a file.
 if has("autocmd")
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
