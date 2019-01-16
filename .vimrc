@@ -53,6 +53,8 @@ colorscheme solarized
 "colorscheme darcula
 let g:solarized_termcolors=256
 let g:gruvbox_contrast_dark = "hard"
+" Make invisible characters less prominent.
+let g:solarized_visibility = "low"
 
 " Always show status line
 set laststatus=2
