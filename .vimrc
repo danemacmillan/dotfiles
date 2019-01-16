@@ -32,7 +32,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree'
 	Plug 'scrooloose/nerdcommenter'
 
-	"Plug 'kien/ctrlp.vim'
 	Plug '/usr/local/opt/fzf'
 	Plug 'junegunn/fzf.vim'
 
@@ -42,7 +41,6 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	"Plug 'itchyny/lightline.vim'
   Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -69,7 +67,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-
 
 " Tagbar
 let g:tagbar_usearrows = 1
