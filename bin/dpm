@@ -359,27 +359,24 @@ __dpm_install_yum()
 # package installation.
 __dpm_install_extras()
 {
-	# Vim Vundle
+	# Vim Plug
 	if command_exists vim \
 		&& command_exists git \
 	; then
-		echo -e "${BLUE}${BOLD}Updating Vim Vundle and its plugins.${RESET}"
-		local vim_vundle_directory="${HOME}/.vim/bundle/Vundle.vim"
-		local vim_vundle_repo="https://github.com/VundleVim/Vundle.vim.git"
+		echo -e "${BLUE}${BOLD}Updating Vim plugins and upgrading Vim-Plug.${RESET}"
 
-		if [[ ! -d ${vim_vundle_directory} ]]; then
-			git clone ${vim_vundle_repo} ${vim_vundle_directory}
-		else
-			(cd ${vim_vundle_directory} \
-			&& git remote set-url origin ${vim_vundle_repo} \
-			&& git pull)
+		local vim_plug_path="${HOME}/.vim/autoload/plug.vim"
+		local vim_plug_url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+
+		if [[ ! -e ${vim_plug_path} ]]; then
+			curl -fLo "${vim_plug_path}" --create-dirs ${vim_plug_url}
 		fi
 
 		# Install Vim plugins defined in .vimrc file.
-		# Depending on the location that Vundler installs a plugin, there
+		# Depending on the location that Vim-Plug installs a plugin, there
 		# may be an authentication prompt for username and password.
-		#vim +PluginInstall +qall 2&> /dev/null
-		vim +PluginInstall +qall
+		#(vim +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade +qall! 2&> /dev/null)
+		(vim +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade +qall!)
 	fi
 }
 
