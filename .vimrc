@@ -80,11 +80,11 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 " Close if only buffer left.
 " https://stackoverflow.com/a/4319165/2973534
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Auto-focus on document.
-autocmd VimEnter * wincmd p
 " Open when no file specified.
 autocmd StdinReadPre * let g:isReadingFromStdin = 1
 autocmd VimEnter * if !argc() && !exists('g:isReadingFromStdin') | NERDTree | endif
+" Auto-focus on document.
+autocmd VimEnter * wincmd p
 
 " FZF search.
 map ; :Files<CR>
@@ -252,7 +252,7 @@ else
 endif
 
 " Start scrolling three lines before the horizontal window border
-set scrolloff=3
+set scrolloff=10
 
 " Save a file as root
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
