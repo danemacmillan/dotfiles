@@ -126,8 +126,21 @@ fi
 # MacOS using homebrew's `bash-completion@2` package, which is significantly
 # faster than original `bash-completion` package.
 # Read: https://superuser.com/a/1393343/496301
-if [[ -e "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion" ]]; then
-	source "${HOMEBREW_INSTALL_PATH}/share/bash-completion/bash_completion"
+#
+# Note that brew recommends sourcing /usr/local/etc/profile.d/bash_completion.sh
+# for either version of bash-completion. These dotfiles have chosen to
+# explicitly look for version 2, and if found, assign a backwards-compatible
+# directory to look for old-style, eagerly-loaded bash completion files, then
+# source the new, faster ones that are non-eager. Doing so allows the old
+# bash-completion files to be picked up, of which there are several, including
+# those for git completion and vagrant completion. This works because
+# version 2 of bash completion checks for a `$BASH_COMPLETION_COMPAT_DIR`
+# variable, and if found, will immediately source all the files found under it.
+if [[ -e "/usr/local/share/bash-completion/bash_completion" ]]; then
+	export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+	source "/usr/local/share/bash-completion/bash_completion"
+elif [[ -e "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
+	source "/usr/local/etc/profile.d/bash_completion.sh"
 elif [[ -e "/etc/bash_completion" ]]; then
 	source "/etc/bash_completion"
 fi

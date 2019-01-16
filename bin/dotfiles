@@ -50,13 +50,14 @@ fi
 # - https://github.com/scop/bash-completion/blob/master/bash_completion#L2034
 # - https://github.com/scop/bash-completion/blob/master/doc/bash_completion.txt
 #
-# This will also uninstall outdated version of bash-completion package.
+# This will also uninstall outdated version of bash-completion package. The
+# existence of this specific path signals that modern v2 bash completions are
+# in use.
 if [[ ! -e "${XDG_DATA_HOME}/bash-completion/completions" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating non-eager bash_completion (v2) directory.${RESET}"
 	mkdir -p "${XDG_DATA_HOME}/bash-completion/completions"
 	if command_exists brew; then
 		brew uninstall bash-completion
-		rm /usr/local/etc/bash_completion
 	fi
 fi
 
