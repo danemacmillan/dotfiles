@@ -3,8 +3,23 @@
 ##
 # Create XDG environment variables and directories.
 #
-# This should follow the standard as closely as possible:
+# Note that this only implements the XDG Base Directory Specification from:
 # - https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+#
+# For additional information about support, and partial support
+# workarounds read:
+# - https://wiki.archlinux.org/index.php/XDG_Base_Directory
+#
+# Consider implementing some of the "Partial" implementations listed on that
+# document, like:
+# - tmux
+# - Vagrant
+#
+# The xdg-user-dirs specification is not implemented, because the specified
+# directories typically already exist on popular operating systems, though
+# they don't typically create the corresponding $XDG_* environment variables.
+# Regardless, to learn more about the xdg-user-dirs specification, read:
+# - https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
 #
 # Note that on some operating systems, namely MacOS, the $TMPDIR environment
 # variable has a trailing forward slash. This is corrected in an ephemeral
