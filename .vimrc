@@ -36,8 +36,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'junegunn/fzf.vim'
 
 	Plug 'stanangeloff/php.vim'
-	Plug 'shawncplus/phpcomplete.vim'
 	Plug 'jetbrains/phpstorm-stubs'
+	Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+	"Plug 'w0rp/ale'
 
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
@@ -110,6 +111,24 @@ nnoremap <F5> :UndotreeToggle<CR>
 if has("persistent_undo")
 	set undodir='~/.vim/undo/'
 	set undofile
+endif
+
+" Ale
+if exists('g:ale_php_phpcs_executable')
+	let g:ale_php_phpcs_executable = "phpcs"
+	"let g:ale_php_phpcs_standard = "PSR2"
+	"let g:ale_php_phpcs_standard = "~/hack/vagrantshell/sites/linus/vendor/linusshops/sniffs/phpcs/LinusShopsMagento2/ruleset.xml"
+	let g:ale_php_phpcs_standard = "PSR2"
+	let g:ale_sign_column_always = 1
+	let g:airline#extensions#ale#enabled = 1
+	let g:ale_sign_error = '>>'
+	let g:ale_sign_warning = '--'
+	let g:ale_set_highlights = 1
+	let g:ale_linters = {
+	\   'php': ['php'],
+	\}
+	let g:ale_lint_on_save = 1
+	let g:ale_lint_on_text_changed = 0
 endif
 
 " Map buffer cycling
