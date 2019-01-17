@@ -95,6 +95,9 @@ fi
 if [[ -d "${HOME}/.composer/vendor/bin" ]]; then
 	export PATH="${HOME}/.composer/vendor/bin:${PATH}"
 fi
+if [[ -d "${XDG_CONFIG_HOME}/composer/vendor/bin" ]]; then
+	export PATH="${XDG_CONFIG_HOME}/composer/vendor/bin:${PATH}"
+fi
 
 ##
 # Add this dotfiles repo's bin to path.
