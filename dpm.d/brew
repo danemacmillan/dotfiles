@@ -13,6 +13,7 @@ cask
 casperjs
 cmake
 cmatrix
+composer
 coreutils
 cowsay
 ctags
@@ -90,5 +91,4 @@ wget
 
 # Build these myself via dpm.d/
 cloud_sql_proxy
-phpcomposer
 symlinks
