@@ -30,6 +30,59 @@ now()
 }
 
 ##
+# Get relative path of path against current directory, or second provided path.
+#
+# Solution based on combination of answers from:
+# - https://stackoverflow.com/q/2564634/2973534
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+relpath()
+{
+	local path="${1}"
+	local relativeto="${2}"
+
+	if [[ -z "${relativeto}" ]]; then
+		relativeto="${PWD}"
+	fi
+
+	if command_exists realpath; then
+		realpath --relative-to="${relativeto}" "${path}"
+	else
+		perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' "${path}" "${relativeto}"
+	fi
+}
+
+##
+# Create a relative symlink.
+#
+# This will figure out the best way to create a relative symlink, given an
+# absolute path (link target) and the destination path (link name).
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+ln_relative()
+{
+	local target="${1}"
+	local link_name="${2}"
+
+	local testfile="${XDG_RUNTIME_DIR}/ln_relative_testfile"
+	local testfile2="${XDG_RUNTIME_DIR}/ln_relative_testfile2"
+	touch "${testfile}"
+
+	if ln -sr "${testfile}" "${testfile2}" &>/dev/null; then
+		ln -vsfnr "${target}" "${link_name}"
+	else
+		local relative_path=$(relpath "${target}" "${link_name}")
+		ln -vsfn "${target}" "${link_name}"
+	fi
+
+	rm -f "${testfile}" "${testfile2}" &>/dev/null
+}
+
+##
 # Calculate MD5 hashes regardless of tool, and ensure identical output.
 #
 # The file contents themselves are hashed when a valid file path is provided,
