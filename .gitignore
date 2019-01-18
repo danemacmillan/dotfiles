@@ -8,7 +8,6 @@
 *.out
 Thumbs.db
 composer.phar
-composer
 Desktop.ini
 desktop.ini
 ._*
