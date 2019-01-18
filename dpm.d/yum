@@ -25,6 +25,7 @@ binutils-devel
 bzip2-devel
 ca-certificates
 cmake
+coreutils
 cpp
 cppunit
 curl
