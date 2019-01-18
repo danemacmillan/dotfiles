@@ -151,3 +151,11 @@ if [[ -e "${HOME}/.extra" ]]; then
 	source "${HOME}/.extra"
 fi
 
+##
+# Source a host-specific configuration file if it exists.
+#
+# This allows multiple host-specific configurations to exist, but only become
+# active if the dot-prefixed file name matches the hostname of the machine.
+if [[ -e "${HOME}/.$(hostname -f)" ]]; then
+	source "${HOME}/.$(hostname -f)"
+fi
