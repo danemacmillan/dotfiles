@@ -128,32 +128,32 @@ fi
 # dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 # XDG
-ln -vsfn "${DOTFILES_PATH}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
-ln -vsfn "${DOTFILES_PATH}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
-ln -vsfn "${DOTFILES_PATH}"/.local/share/bash-completion/completions/* "${XDG_DATA_HOME}/bash-completion/completions/"
+ln_relative "${DOTFILES_PATH}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
+ln_relative "${DOTFILES_PATH}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
+ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/* "${XDG_DATA_HOME}/bash-completion/completions/"
 # Non-XDG
-ln -vsfn "${DOTFILES_PATH}/.bash_completion" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.bashrc" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.ctags" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.digrc" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.dir_colors" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.dotfiles_includes" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.gitconfig" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.gitignore" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.grcat" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.ignore" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.inputrc" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.mackup.cfg" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.myclirc" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.mytop" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.npmrc" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.rsync_excludes" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.siegerc" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.tmux.conf" "${HOME}/"
-ln -vsfn "${DOTFILES_PATH}/.vimrc" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.bash_completion" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.bashrc" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.ctags" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.digrc" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.dir_colors" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.dotfiles_includes" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.gitconfig" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.gitignore" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.grcat" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.ignore" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.inputrc" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.mackup.cfg" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.myclirc" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.mytop" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.npmrc" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.rsync_excludes" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.siegerc" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.tmux.conf" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/.vimrc" "${HOME}/"
 
 ##
 # Create symlink to iCloud Drive.
@@ -164,7 +164,7 @@ if [[ ! -e "${HOME}/iCloud" ]] \
 	&& [[ -e "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" ]] \
 ; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/iCloud' symlink.${RESET}"
-	ln -vsfn "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
+	ln_relative "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
 fi
 
 ##
@@ -176,7 +176,9 @@ if [[ -e "${HOME}/.mackup" ]] \
 	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.mackup directory to ~/tmp.${RESET}"
 	mv "${HOME}/.mackup" "${HOME}/tmp/.mackup"
 fi
-ln -vsfn "${DOTFILES_PATH}/.mackup" "${HOME}/"
+if [[ ! -e "${HOME}/.mackup" ]]; then
+	ln_relative "${DOTFILES_PATH}/.mackup" "${HOME}/"
+fi
 
 if [[ -e "${HOME}/.weechat" ]] \
 	&& [[ ! -L "${HOME}/.weechat" ]] \
@@ -185,7 +187,19 @@ if [[ -e "${HOME}/.weechat" ]] \
 	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.weechat directory to ~/.weechat.${RESET}"
 	mv "${HOME}/.weechat" "${HOME}/tmp/.weechat"
 fi
-ln -vsfn "${DOTFILES_PATH}/.weechat" "${HOME}/"
+if [[ ! -e "${HOME}/.weechat" ]]; then
+	ln_relative "${DOTFILES_PATH}/.weechat" "${HOME}/"
+fi
+
+##
+# Create symlink to dotfiles install path into home directory, for quick access.
+#
+# This will not occur if the .dotfiles directory itself has been cloned to this
+# path. This is only for clones to alternative locations.
+if [[ ! -e "${HOME}/.dotfiles" ]]; then
+	echo -e "${BLUE}${BOLD}Creating symlink to dotfiles install path into home directory.${RESET}"
+	ln_relative "${DOTFILES_PATH}" "${HOME}/"
+fi
 
 ##
 # Install dotfiles package manager packages.
@@ -236,13 +250,6 @@ fi
 if command_exists defaults ; then
 	echo -e "${BLUE}${BOLD}Setting MacOS defaults.${RESET}"
 	source "${DOTFILES_PATH}/.macos_defaults"
-fi
-
-##
-# Create symlink to dotfiles install path into home directory, for quick access.
-if [[ ! -e "${HOME}/.dotfiles" ]]; then
-	echo -e "${BLUE}${BOLD}Creating symlink to dotfiles install path into home directory.${RESET}"
-	ln -vsfn "${DOTFILES_PATH}" "${HOME}/"
 fi
 
 ##
