@@ -54,7 +54,7 @@ elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
 fi
 
 if command_exists __git_ps1 ; then
-	export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\h\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
+	export PS1="${USER_STYLE}\u\\[${RESET}${CYAN}\]@${HOST_STYLE}\H\\[${RESET}${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
 fi
 
 # https://superuser.com/a/517110
