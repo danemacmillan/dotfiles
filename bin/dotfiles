@@ -38,6 +38,11 @@ if [[ ! -e "${XDG_CONFIG_HOME}/htop" ]]; then
 	mkdir -p "${XDG_CONFIG_HOME}/htop"
 fi
 
+if [[ ! -e "${XDG_DATA_HOME}/bash" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_DATA_HOME}/bash' directory.${RESET}"
+	mkdir -p "${XDG_DATA_HOME}/bash"
+fi
+
 # Non-eager bash_completion (v2) directory.
 #
 # As long as bash_completion version 2 is installed, putting completions in

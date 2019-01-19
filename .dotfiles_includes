@@ -83,6 +83,9 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	# Assign dotfiles' DPM install directory.
 	export DPM_INSTALL_DIRECTORY="${XDG_RUNTIME_DIR}"
 
+	# Get consistent hostname.
+	export DOTFILES_HOSTNAME=$(hostname -f)
+
 	# Detect OS so dotfiles seamlessly work across OSX and Linux.
 	# I only use OSX and CentOS, so additional cases will need
 	# to be defined for another OS.
@@ -93,7 +96,6 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 		linux*)
 			OS='nix';;
 	esac
-
 fi
 
 # Update PATH.
