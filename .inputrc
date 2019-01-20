@@ -19,11 +19,14 @@ set completion-ignore-case on
 # Treat hyphens and underscores as equivalent
 set completion-map-case on
 
-# Immediately add a trailing slash when autocompleting symlinks to directories
-set mark-symlinked-directories on
-
-# Do the same for actual directories
+# If set to ‘on’, completed directory names have a slash appended. The default
+# is ‘on’.
 set mark-directories on
+
+# If set to ‘on’, completed names which are symbolic links to directories have
+# a slash appended (subject to the value of mark-directories). The default
+# is ‘off’.
+set mark-symlinked-directories on
 
 # Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 set match-hidden-files off
