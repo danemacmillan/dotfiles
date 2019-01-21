@@ -67,6 +67,7 @@ export RSYNC_PARTIAL_DIR="${XDG_RUNTIME_DIR}/rsync-partials"
 ##
 # Tmux
 export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"
+export TMUX_PLUGIN_MANAGER_PATH="${XDG_DATA_HOME}/tmux/plugins"
 
 ##
 # Weechat
