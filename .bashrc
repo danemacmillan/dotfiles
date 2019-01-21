@@ -65,6 +65,10 @@ export LESSHISTFILE=/dev/null
 export RSYNC_PARTIAL_DIR="${XDG_RUNTIME_DIR}/rsync-partials"
 
 ##
+# Tmux
+export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"
+
+##
 # Weechat
 export WEECHAT_HOME="${XDG_CONFIG_HOME}/weechat"
 
@@ -80,10 +84,6 @@ export RCLONE_SKIP_LINKS=true
 export RCLONE_STATS=1s
 export RCLONE_TRANSFERS=1
 #export RCLONE_VERBOSE=1
-
-##
-# https://github.com/tmux/tmux/issues/475
-export EVENT_NOKQUEUE=1
 
 ##
 # Since gcloud 132.0.0, Python 2.6 is deprecated. On CentOS this is a problem.

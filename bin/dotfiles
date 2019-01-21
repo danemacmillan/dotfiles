@@ -38,6 +38,11 @@ if [[ ! -e "${XDG_CONFIG_HOME}/htop" ]]; then
 	mkdir -p "${XDG_CONFIG_HOME}/htop"
 fi
 
+if [[ ! -e "${XDG_CONFIG_HOME}/tmux" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_CONFIG_HOME}/tmux' directory.${RESET}"
+	mkdir -p "${XDG_CONFIG_HOME}/tmux"
+fi
+
 if [[ ! -e "${XDG_DATA_HOME}/bash" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_DATA_HOME}/bash' directory.${RESET}"
 	mkdir -p "${XDG_DATA_HOME}/bash"
@@ -142,6 +147,7 @@ echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 # XDG
 ln_relative "${DOTFILES_PATH}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
 ln_relative "${DOTFILES_PATH}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
+ln_relative "${DOTFILES_PATH}/.config/tmux/tmux.conf" "${XDG_CONFIG_HOME}/tmux/tmux.conf"
 ln_relative "${DOTFILES_PATH}/.config/weechat" "${XDG_CONFIG_HOME}/weechat"
 ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/linus "${XDG_DATA_HOME}/bash-completion/completions/"
 ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/vshell "${XDG_DATA_HOME}/bash-completion/completions/"
@@ -166,7 +172,6 @@ ln_relative "${DOTFILES_PATH}/.mytop" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.npmrc" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.rsync_excludes" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.siegerc" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/.tmux.conf" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.vimrc" "${HOME}/"
 
 ##
