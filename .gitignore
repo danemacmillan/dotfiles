@@ -47,6 +47,10 @@ tags
 .weechat/*.log
 .weechat/*.upgrade
 .weechat/weechat_fifo*
+.config/weechat/irc.conf
+.config/weechat/*.log
+.config/weechat/*.upgrade
+.config/weechat/weechat_fifo*
 
 # Miscellaneous dotfiles
 .bash_history

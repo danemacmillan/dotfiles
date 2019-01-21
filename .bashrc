@@ -65,6 +65,10 @@ export LESSHISTFILE=/dev/null
 export RSYNC_PARTIAL_DIR="${XDG_RUNTIME_DIR}/rsync-partials"
 
 ##
+# Weechat
+export WEECHAT_HOME="${XDG_CONFIG_HOME}/weechat"
+
+##
 # Set common rclone options as environment variables.
 # @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
 export RCLONE_BWLIMIT="07:00,512 17:00,1M 21:00,1M 23:00,1.5M 01:00,2.5M"
