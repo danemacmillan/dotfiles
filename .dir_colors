@@ -296,7 +296,6 @@ EXEC 01;38;5;203
 .local 00;38;5;229
 .extra 00;38;5;229
 *known_hosts 00;38;5;229
-*config 00;38;5;229
 
 # "unimportant" files, such as logs and backups
 .log        00;38;5;238

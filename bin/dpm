@@ -2,7 +2,7 @@
 # Include dependencies if this file is being executed. If it is being sourced,
 # the dependencies are already available.
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-	source "${DOTFILES_INCLUDES_PATH}"
+	source "${DOTFILES_BOOTSTRAP_FILE}"
 fi
 
 ##

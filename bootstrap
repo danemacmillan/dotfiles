@@ -1,12 +1,16 @@
+#!/usr/bin/env false
 # vim: ft=sh
 
 ##
-# .dotfiles_includes
+# bootstrap
 #
-# The purpose of this script is to provide dependencies used throughout these
-# dotfiles for building scripts. This makes it easier to develop new scripts, as
-# there is only one file that needs to be sourced to gain a tonne of
-# functionality.
+# The purpose of this script is to bootstrap these dotfiles by providing
+# essential dependencies used throughout these dotfiles for building scripts.
+# This makes it easier to develop new scripts, as there is only one file that
+# needs to be sourced to gain a tonne of functionality.
+#
+# This is also the main file that contains essential environment variables that
+# all other scripts will source in.
 #
 # Note that the $DOTFILES_PATH environment variable is very important, and is
 # the first thing determined.
@@ -73,7 +77,7 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	export DOTFILES_PATH=$(get_absolute_root_directory_from_path)
 
 	# Provide environment variable to be able to quickly source this file itself.
-	export DOTFILES_INCLUDES_PATH="${DOTFILES_PATH}/$(basename "${BASH_SOURCE[0]}")"
+	export DOTFILES_BOOTSTRAP_FILE="${DOTFILES_PATH}/$(basename "${BASH_SOURCE[0]}")"
 
 	# Initialize XDG standard in environment.
 	if [[ -e "${DOTFILES_PATH}/.xdg" ]]; then

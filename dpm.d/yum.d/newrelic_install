@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "${DOTFILES_INCLUDES_PATH}"
+source "${DOTFILES_BOOTSTRAP_FILE}"
 
 ##
 # Install New Relic daemon and other services.
