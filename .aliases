@@ -7,8 +7,13 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 
+##
 # View and edit danemacmillan's HOWDOI.md file.
 alias how='vi "${DOTFILES_PATH}/HOWDOI.md"'
+
+##
+# Quickly change to these dotfiles' install path.
+alias d='cd "${DOTFILES_PATH}"'
 
 ##
 # Directory listing.
