@@ -290,6 +290,12 @@ EXEC 01;38;5;203
 *config.php 00;38;5;46
 *env.php 00;38;5;46
 
+# Files that may contain specific, environment-specific data that is not
+# sensitive. It it just important to highlight files that may have
+# been tweaked for local environment customizations.
+.local 00;38;5;229
+.extra 00;38;5;229
+
 # "unimportant" files, such as logs and backups
 .log        00;38;5;238
 .bak        00;38;5;238
