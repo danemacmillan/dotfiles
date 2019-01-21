@@ -164,6 +164,6 @@ fi
 #
 # This allows multiple host-specific configurations to exist, but only become
 # active if the dot-prefixed file name matches the hostname of the machine.
-if [[ -e "${HOME}/.$(hostname -f)" ]]; then
-	source "${HOME}/.$(hostname -f)"
+if [[ -e "${HOME}/.$(hostname -f).local" ]]; then
+	source "${HOME}/.$(hostname -f).local"
 fi
