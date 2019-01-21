@@ -49,7 +49,6 @@ shopt -s cmdhist
 shopt -s histappend
 #export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-export DOTFILES_BASH_HISTORY_PATH="${XDG_DATA_HOME}/bash/${DOTFILES_HOSTNAME}.${USER}.bash_history"
 if [[ -e "${DOTFILES_BASH_HISTORY_PATH}" ]]; then
 	export HISTFILE="${DOTFILES_BASH_HISTORY_PATH}"
 fi

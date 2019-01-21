@@ -42,6 +42,12 @@ if [[ ! -e "${XDG_DATA_HOME}/bash" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_DATA_HOME}/bash' directory.${RESET}"
 	mkdir -p "${XDG_DATA_HOME}/bash"
 fi
+if [[ ! -e "${DOTFILES_BASH_HISTORY_PATH}" ]]; then
+	touch "${DOTFILES_BASH_HISTORY_PATH}"
+	if [[ -e "${HOME}/.bash_history" ]]; then
+		mv "${HOME}/.bash_history" "${DOTFILES_BASH_HISTORY_PATH}"
+	fi
+fi
 
 # Non-eager bash_completion (v2) directory.
 #

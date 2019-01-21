@@ -86,6 +86,9 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	# Get consistent hostname.
 	export DOTFILES_HOSTNAME=$(hostname -f)
 
+	# Change path for storing bash history.
+	export DOTFILES_BASH_HISTORY_PATH="${XDG_DATA_HOME}/bash/${DOTFILES_HOSTNAME}.${USER}.history"
+
 	# Detect OS so dotfiles seamlessly work across OSX and Linux.
 	# I only use OSX and CentOS, so additional cases will need
 	# to be defined for another OS.
