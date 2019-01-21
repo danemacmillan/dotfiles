@@ -198,8 +198,8 @@ if [[ -e "${HOME}/.weechat" ]] \
 	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.weechat directory to ~/.weechat.${RESET}"
 	mv "${HOME}/.weechat" "${HOME}/tmp/.weechat"
 fi
-if [[ ! -e "${HOME}/.weechat" ]]; then
-	ln_relative "${DOTFILES_PATH}/.weechat" "${HOME}/"
+if [[ ! -e "${XDG_CONFIG_HOME}/weechat" ]]; then
+	ln_relative "${DOTFILES_PATH}/.config/weechat" "${XDG_CONFIG_HOME}/weechat"
 fi
 
 ##
@@ -269,6 +269,7 @@ symlinks -d "${HOME}" 2&>/dev/null
 [[ -L "${HOME}/.mozconfig" ]] && unlink "${HOME}/.mozconfig"
 [[ -L "${HOME}/.my.cnf.sample" ]] && unlink "${HOME}/.my.cnf.sample"
 [[ -L "${HOME}/.path" ]] && unlink "${HOME}/.path"
+[[ -L "${HOME}/.weechat" ]] && unlink "${HOME}/.weechat"
 
 ##
 # Update terminal
