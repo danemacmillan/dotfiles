@@ -138,11 +138,14 @@ fi
 # into the user home directory, as they are only used internally by these
 # dotfiles.
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
+
 # XDG
 ln_relative "${DOTFILES_PATH}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
 ln_relative "${DOTFILES_PATH}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
+ln_relative "${DOTFILES_PATH}/.config/weechat" "${XDG_CONFIG_HOME}/weechat"
 ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/linus "${XDG_DATA_HOME}/bash-completion/completions/"
 ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/vshell "${XDG_DATA_HOME}/bash-completion/completions/"
+
 # Non-XDG
 ln_relative "${DOTFILES_PATH}/.bash_completion" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
@@ -189,17 +192,6 @@ if [[ -e "${HOME}/.mackup" ]] \
 fi
 if [[ ! -e "${HOME}/.mackup" ]]; then
 	ln_relative "${DOTFILES_PATH}/.mackup" "${HOME}/"
-fi
-
-if [[ -e "${HOME}/.weechat" ]] \
-	&& [[ ! -L "${HOME}/.weechat" ]] \
-	&& [[ ! -e "${HOME}/tmp/.weechat" ]] \
-; then
-	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.weechat directory to ~/.weechat.${RESET}"
-	mv "${HOME}/.weechat" "${HOME}/tmp/.weechat"
-fi
-if [[ ! -e "${XDG_CONFIG_HOME}/weechat" ]]; then
-	ln_relative "${DOTFILES_PATH}/.config/weechat" "${XDG_CONFIG_HOME}/weechat"
 fi
 
 ##
