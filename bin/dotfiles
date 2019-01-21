@@ -151,7 +151,6 @@ ln_relative "${DOTFILES_PATH}/.bashrc" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.ctags" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.digrc" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.dir_colors" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/.dotfiles_includes" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.gitconfig" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.gitignore" "${HOME}/"
@@ -201,16 +200,6 @@ if [[ -e "${HOME}/.weechat" ]] \
 fi
 if [[ ! -e "${HOME}/.weechat" ]]; then
 	ln_relative "${DOTFILES_PATH}/.weechat" "${HOME}/"
-fi
-
-##
-# Create symlink to dotfiles install path into home directory, for quick access.
-#
-# This will not occur if the .dotfiles directory itself has been cloned to this
-# path. This is only for clones to alternative locations.
-if [[ ! -e "${HOME}/.dotfiles" ]]; then
-	echo -e "${BLUE}${BOLD}Creating symlink to dotfiles install path into home directory.${RESET}"
-	ln_relative "${DOTFILES_PATH}" "${HOME}/"
 fi
 
 ##
@@ -273,6 +262,7 @@ rm -rf "${HOME}/.dotfiles-packages" 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
 unlink "${HOME}/.aliases" 2&>/dev/null
 unlink "${HOME}/.bash_prompt" 2&>/dev/null
+unlink "${HOME}/.dotfiles_includes" 2&>/dev/null
 unlink "${HOME}/.formatting" 2&>/dev/null
 unlink "${HOME}/.functions" 2&>/dev/null
 unlink "${HOME}/.hgrc" 2&>/dev/null

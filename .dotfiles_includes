@@ -117,3 +117,16 @@ fi
 if [[ -f "${DOTFILES_PATH}/.functions" ]]; then
 	source "${DOTFILES_PATH}/.functions"
 fi
+
+# Create symlink from dotfiles install path into home directory.
+#
+# This will not occur if the .dotfiles directory itself has been cloned to
+# this path, or already exists. This is only for clones to alternative locations, so that it
+# is quicker to access, as the HOME directory is a popular location for them.
+#
+# Note that this is also necessary so that the .bashrc file can include this
+# file itself. This is related to the problem of determining the DOTFILES_PATH
+# variable in as clean a way as possible, without symlinking unnecessarily.
+if [[ ! -e "${HOME}/.dotfiles" ]]; then
+	ln_relative "${DOTFILES_PATH}" "${HOME}/"
+fi
