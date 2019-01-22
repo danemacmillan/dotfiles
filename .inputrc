@@ -5,6 +5,7 @@
 #
 # Documentation:
 # - https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File-Syntax.html#Readline-Init-File-Syntax
+# - https://ss64.com/bash/syntax-inputrc.html
 #
 # Some inspiration:
 # - https://github.com/paulirish/dotfiles/blob/master/.inputrc
@@ -12,6 +13,11 @@
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
+
+# Tabbing will instead cycle through all options instead of presenting them
+# as a row of items beneath. I don't really like this, but the option was
+# nice to see. Perhaps reconsider in the future.
+#"\t": menu-complete
 
 # Case-insensitive tab completion
 set completion-ignore-case on
