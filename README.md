@@ -12,16 +12,15 @@ environments.
 > in your home directory that match the files in this repo. Back them up if you 
 > do not want to lose them.
 
-If you just built the machine and *at least* have the RSA key from the machine 
-on GitHub:
+The install command to use depends on whether the host machine's SSH key has
+been [added to GitHub](https://github.com/settings/keys_. If it is a new 
+machine that does not have a key, or this distinction is confusing, go 
+with "No."
 
-If you have an SSH key installed on the destination:
-
-`cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -`
-
-If you do not have an SSH key installed on the destination:
-
-`cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -s -- nossh`
+| Host SSH Key on GitHub | Install command |
+| --------------- | --------------- |
+| Yes             | `cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install \| bash -` |
+| No              | `cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install \| bash -s -- nossh` |
 
 ### Update
 
