@@ -13,7 +13,7 @@ environments.
 > do not want to lose them.
 
 The install command to use depends on whether the host machine's SSH key has
-been [added to GitHub](https://github.com/settings/keys_. If it is a new 
+been [added to GitHub](https://github.com/settings/keys). If it is a new 
 machine that does not have a key, or this distinction is confusing, go 
 with "No."
 
