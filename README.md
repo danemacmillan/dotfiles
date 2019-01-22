@@ -1,7 +1,6 @@
 # Dane MacMillan's `dotfiles`
 
 These are all the settings you will incrementally set and ultimately forget. 
-
 `dotfiles` attempts to work seamlessly between MacOS and most GNU/Linux 
 environments.
 
@@ -48,9 +47,25 @@ Tools that natively support the specification will leverage these environment
 variables and directories without additional work. If the variables and
 directories were already available, `dotfiles` will respect them.
 
+##### Partial Support
+
 A number of tools do not natively support the specification, so in some
 instances `dotfiles` have modified environment variables and configurations
-so that these tools can emulate support.
+so that they can emulate support. For the purpose of distinction, these
+tools will be referred to as having [partial](https://wiki.archlinux.org/index.php/XDG_Base_Directory#Partial)
+support. This section highlights all of the tools with partial support.
+
+###### Bash
+
+- `.bash_history`: `export HISTFILE="${XDG_DATA_HOME}/bash/${DOTFILES_HOSTNAME}.${USER}.history"`.
+
+###### Tmux
+
+- TODO
+
+###### Weechat
+
+- TODO
 
 ### :zap: Packages
 
