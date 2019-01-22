@@ -32,7 +32,7 @@ Add documentation.
 
 ## Technical Details
 
-It is worth highlighting some of the features available in these `dotfiles`.
+These are some features or configuration choices worth highlighting.
 
 ### :zap: XDG Base Directory Specification
 
