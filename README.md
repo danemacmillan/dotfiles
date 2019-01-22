@@ -17,10 +17,10 @@ been [added to GitHub](https://github.com/settings/keys_. If it is a new
 machine that does not have a key, or this distinction is confusing, go 
 with "No."
 
-| Host SSH Key on GitHub | Install command |
-| --------------- | --------------- |
-| Yes             | `cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install \| bash -` |
-| No              | `cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install \| bash -s -- nossh` |
+| SSH Key on GitHub | Install Command |
+| :---------------- | :-------------- |
+| Yes               | `cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install \| bash -` |
+| No                | `cd ~ && curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install \| bash -s -- nossh` |
 
 ### Update
 
