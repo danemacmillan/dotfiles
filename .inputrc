@@ -14,11 +14,6 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 
-# Tabbing will instead cycle through all options instead of presenting them
-# as a row of items beneath. I don't really like this, but the option was
-# nice to see. Perhaps reconsider in the future.
-#"\t": menu-complete
-
 # Case-insensitive tab completion
 set completion-ignore-case on
 
@@ -63,3 +58,10 @@ set bell-style none
 
 # Display color of tab suggestion item
 set colored-stats on
+
+# Tabbing will cycle through all path options. I do not like this behaviour.
+#"\t": menu-complete
+# With the above enabled, these will ensure that a first TAB will display all
+# path options before cycling through them all.
+#set menu-complete-display-prefix on
+#set show-all-if-ambiguous on
