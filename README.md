@@ -37,7 +37,7 @@ Add documentation.
 
 It is worth highlighting some of the features available in these `dotfiles`.
 
-### XDG Base Directory Specification
+### :zap: XDG Base Directory Specification
 
 The [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
 is created for operating systems that do not support it by default. This is 
@@ -52,7 +52,7 @@ A number of tools do not natively support the specification, so in some
 instances `dotfiles` have modified environment variables and configurations
 so that these tools can emulate support.
 
-### Packages
+### :zap: Packages
 
 `dotfiles` include a package management-like script for handling
 dependencies from a wide array of package manager types. This is what enables
