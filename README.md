@@ -8,7 +8,8 @@ environments.
 
 ### Install
 
-> :warning: Take note
+> :warning: Note
+>
 > The installation will unforgivingly replace all the files in your home 
 > directory that match the files in this repo. Back them up if you do not want 
 > to lose them.
