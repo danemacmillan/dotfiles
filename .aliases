@@ -79,11 +79,9 @@ alias R="echo -e '${BBLUE}Reloading shell...${RESET}'; exec -l $SHELL"
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-# By default ag/silver_searcher should search hidden files. Note that this is
-# not the same as the ignores in `.agignore`.
-alias ag="ag --hidden --column -B0 -A0 --color-path='30;43' --color-line-number='30;1' --color-match='1;32'"
-# Enhance ripgrep (ag) as well with good defaults.
-alias rg="rg --hidden --search-zip --smart-case --no-ignore-vcs --maxdepth=20"
+
+# Enhance ripgrep (rg) with good defaults.
+alias rg='rg --hidden --search-zip --smart-case --no-ignore-vcs --maxdepth=20 --ignore-file="${XDG_CONFIG_HOME}/ripgrep/ignore"'
 
 ##
 # Network
