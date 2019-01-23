@@ -145,6 +145,12 @@ alias historypurgelast='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
 alias rsync='rsync --exclude-from="${XDG_CONFIG_HOME}/rsync/excludes"'
 
 ##
+# Npm
+alias npm_list_global_installs='npm list -g --depth 0'
+alias npm_global_install_path='echo $(npm root -g)'
+alias npm_config_list='npm config ls -l'
+
+##
 # Misc
 alias c='clear'
 alias v='vim'

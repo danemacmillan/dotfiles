@@ -99,6 +99,17 @@ export RCLONE_TRANSFERS=1
 #export RCLONE_VERBOSE=1
 
 ##
+# NPM
+#
+# To see all directories in use: `npm config ls -l | grep /`
+#
+# Full discussion about XDG support for NPM:
+# - https://github.com/npm/npm/issues/6675
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
+export NPM_CONFIG_TMP="${XDG_RUNTIME_DIR}/npm"
+
+##
 # Since gcloud 132.0.0, Python 2.6 is deprecated. On CentOS this is a problem.
 # This variable points the gcloud tool to a supported version without breaking
 # CentOS' yum utility, which depends on 2.6.x.
