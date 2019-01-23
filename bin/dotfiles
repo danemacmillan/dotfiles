@@ -158,7 +158,6 @@ ln_relative "${DOTFILES_PATH}/.bashrc" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.ctags" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.digrc" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/.mackup.cfg" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.mytop" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.vimrc" "${HOME}/"
 
@@ -172,19 +171,6 @@ if [[ ! -e "${HOME}/iCloud" ]] \
 ; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/iCloud' symlink.${RESET}"
 	ln_relative "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
-fi
-
-##
-# Symlink trackable directories that could exist, and back up to `tmp`.
-if [[ -e "${HOME}/.mackup" ]] \
-	&& [[ ! -L "${HOME}/.mackup" ]] \
-	&& [[ ! -e "${HOME}/tmp/.mackup" ]] \
-; then
-	echo -e "${RESET}${BLUE}${BOLD}Backing up existing ~/.mackup directory to ~/tmp.${RESET}"
-	mv "${HOME}/.mackup" "${HOME}/tmp/.mackup"
-fi
-if [[ ! -e "${HOME}/.mackup" ]]; then
-	ln_relative "${DOTFILES_PATH}/.mackup" "${HOME}/"
 fi
 
 ##
