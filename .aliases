@@ -155,6 +155,10 @@ alias npm_config_list='npm config ls -l'
 alias mycli='mycli --myclirc="${XDG_CONFIG_HOME}/mycli/myclirc"'
 
 ##
+# Siege
+alias siege='siege --rc="${XDG_CONFIG_HOME}/siege/siegerc"'
+
+##
 # Misc
 alias c='clear'
 alias v='vim'

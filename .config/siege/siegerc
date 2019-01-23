@@ -106,7 +106,7 @@ logging = true
 #     logfile = ${HOME}/var/log/siege.log
 #     logfile = ${LOGFILE}
 #
-logfile = ${HOME}/siege.log
+logfile = ${XDG_RUNTIME_DIR}/siege.log
 
 #
 # HTTP protocol.  Options HTTP/1.1 and HTTP/1.0.
