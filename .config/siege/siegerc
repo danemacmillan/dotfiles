@@ -159,7 +159,7 @@ connection = close
 # Default number of simulated  concurrent users
 # ex: concurrent = 25
 #
-concurrent = 150
+concurrent = 10
 
 #
 # Default duration of the siege.  The right hand argument has
