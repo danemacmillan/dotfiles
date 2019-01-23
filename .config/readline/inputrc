@@ -64,4 +64,5 @@ set colored-stats on
 # With the above enabled, these will ensure that a first TAB will display all
 # path options before cycling through them all.
 #set menu-complete-display-prefix on
-#set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set show-all-if-ambiguous on

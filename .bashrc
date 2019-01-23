@@ -60,6 +60,10 @@ export MYCLI_HISTFILE=/dev/null
 export LESSHISTFILE=/dev/null
 
 ##
+# Readline
+export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
+
+##
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
 # https://download.samba.org/pub/rsync/rsync.html
