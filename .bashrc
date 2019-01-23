@@ -30,12 +30,14 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # GNU LS_COLORS for other flavours, like CentOS.
 # Note that these dotfiles install GNU's `ls`, so the below will work on MacOS,
 # and ignore the CLICOLOR and LSCOLORS variables above.
+export DIRCOLORS_DATABASE_PATH="${XDG_CONFIG_HOME}/dircolors/dircolors"
 if [[ $- == *i* ]] \
+	&& command_exists dircolors \
 	&& command_exists tput \
 	&& [[ $(tput colors) -ge 256 ]] \
-	&& [[ -e "${HOME}/.dir_colors" ]] \
+	&& [[ -e "${DIRCOLORS_DATABASE_PATH}" ]] \
 ; then
-	eval $(dircolors -b "${HOME}/.dir_colors")
+	eval $(dircolors -b "${DIRCOLORS_DATABASE_PATH}")
 fi
 
 ##

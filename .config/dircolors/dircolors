@@ -1,5 +1,5 @@
 ##
-# .dir_colors
+# dircolors
 #
 # 256 color terminal colors for use with GNU's `ls` utility with --color flag.
 #
@@ -9,7 +9,7 @@
 # database, instead of manually updating `LS_COLORS`, place the following in
 # a user's `.bashrc` file. Add whatever conditional checking desired:
 #
-#  eval $(dircolors -b "${HOME}/.dir_colors")
+#  eval $(dircolors -b "${XDG_CONFIG_HOME}/dircolors/dircolors")
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 # @license MIT
