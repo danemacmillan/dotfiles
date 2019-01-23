@@ -151,6 +151,10 @@ alias npm_global_install_path='echo $(npm root -g)'
 alias npm_config_list='npm config ls -l'
 
 ##
+# MyCLI
+alias mycli='mycli --myclirc="${XDG_CONFIG_HOME}/mycli/myclirc"'
+
+##
 # Misc
 alias c='clear'
 alias v='vim'
