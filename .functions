@@ -673,7 +673,7 @@ rcp()
 	fi
 
 	if [[ -n ${source} && -n ${destination} ]]; then
-		rsync -hrltDz --info=progress2 --partial --partial-dir '$HOME/tmp/rsync-partials/' --exclude-from=$HOME/.rsync_excludes ${options} -e ssh ${source} ${destination}
+		rsync -hrltDz --info=progress2 --partial --partial-dir="${RSYNC_PARTIAL_DIR}" --exclude-from="${RSYNC_EXCLUDE_FROM}" ${options} -e ssh ${source} ${destination}
 	else
 		echo -e "Rsync over SSH with useful defaults selected: partial file resumption, full progress."
 		echo -e "\nUsage:\n  ${BCYAN}rcp${RESET} ${GREEN}[[USER@]HOST:]SOURCE [[USER@]HOST:]DESTINATION ${YELLOW}[-RSYNC_OPTIONS]${RESET}"

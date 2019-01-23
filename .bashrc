@@ -62,7 +62,10 @@ export LESSHISTFILE=/dev/null
 ##
 # Set rsync partials directory. Note that this does not imply the --partial
 # flag when running rsync.
+# https://download.samba.org/pub/rsync/rsync.html
 export RSYNC_PARTIAL_DIR="${XDG_RUNTIME_DIR}/rsync-partials"
+# This is an unofficial Rsync environment variable.
+export RSYNC_EXCLUDE_FROM="${XDG_CONFIG_HOME}/rsync/excludes"
 
 ##
 # Tmux
