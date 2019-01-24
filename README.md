@@ -4,7 +4,7 @@ These are all the settings you will incrementally set and ultimately forget.
 `dotfiles` attempts to work seamlessly between MacOS and most GNU/Linux 
 environments.
 
-`dotfiles` strictly adheres to the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) ("XDG" or "XDG spec" or "XDG specification").
+Additionally, it strictly adheres to the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) ("XDG" or "XDG spec" or "XDG specification").
 This is good for anyone who wants a *clean* `${HOME}`, especially MacOS users
 who do not natively benefit from the XDG spec.
 
@@ -32,7 +32,33 @@ Just run `dotfiles` from anywhere. It is in the `$PATH`.
 
 ## Customize
 
-Add documentation.
+Local customizations can be made to `dotfiles` without actually touching the
+code. It generates several local config templates at `${XDG_DATA_HOME}/doftiles`.
+That path usually expands to `${HOME}/.local/shared/dotfiles`.
+
+#### `${XDG_DATA_HOME}/doftiles/shell.local`
+
+This is the second-to-last file sourced by `${HOME}/.bashrc`. Write in any local
+configuration and environment changes here. 
+
+#### `${XDG_DATA_HOME}/doftiles/${DOTFILES_HOSTNAME}.shell.local`
+
+This is the last file sourced by `${HOME}/.bashrc`. This one is even more
+specific than the previous one, as it includes the hostname of the machine. This
+is useful when sharing environments across machines, and each machine requires
+slight changes.
+
+For example, my machine generates a file called `macmillanator.local.shell.local`.
+I have a virtual machine that shares the same `${HOME}`, so on that machine,
+`dotfiles` also generates a `vagrant.test.shell.local` file. Both of these files
+co-exist, and do not interfere with each other's respective environments.
+Putting all local configuration changes in `shell.local` would mean both
+environments share the same changes, which is not always desired.
+
+#### `${XDG_DATA_HOME}/doftiles/gitconfig.local`
+
+This file is included at the bottom of the global git config. It is typically
+used to store personal credentials.
 
 ## Technical Details
 
@@ -49,8 +75,8 @@ Tools that natively support the specification will leverage these environment
 variables and directories without additional work. If the variables and
 directories were already available, `dotfiles` will respect them.
 
-Read [the source](xdg_base_directory_specification) to see how the XDG spec 
-environment variables and directories are created.
+Read [the source](https://github.com/danemacmillan/dotfiles/blob/master/source/xdg_base_directory_specification) 
+to see how the XDG spec environment variables and directories are created.
 
 ##### Partial Support
 
@@ -61,7 +87,7 @@ these tools will be referred to as having [partial](https://wiki.archlinux.org/i
 support.
 
 To see all of the tools adhering to the XDG spec, both with official support 
-and partial workarounds, look in `home/.config` and `home/.local`.
+and partial workarounds, look in [`home/.config`](https://github.com/danemacmillan/dotfiles/tree/master/home/.config) and [`home/.local`](https://github.com/danemacmillan/dotfiles/tree/master/home/.local).
 
 ### Repository Organization
 
@@ -107,36 +133,6 @@ systems. `bin/dpm` is the tool used for this. It will eventually become its own
 repository.
 
 TODO: explain how this works.
-
-## Local Customizations
-
-Local customizations can be made to `dotfiles` without actually touching the
-code. It generates several local config templates at `${XDG_DATA_HOME}/doftiles`.
-That typically expands to `${HOME}/.local/shared/dotfiles`.
-
-#### `${XDG_DATA_HOME}/doftiles/shell.local`
-
-This is the second-to-last file sourced by `${HOME}/.bashrc`. Write in any local
-configuration and environment changes here. 
-
-#### `${XDG_DATA_HOME}/doftiles/${DOTFILES_HOSTNAME}.shell.local`
-
-This is the last file sourced by `${HOME}/.bashrc`. This one is even more
-specific than the previous one, as it includes the hostname of the machine. This
-is useful when sharing environments across machines, and each machine requires
-slight changes.
-
-For example, my machine generates a file called `macmillanator.local.shell.local`.
-I have a virtual machine that shares the same `${HOME}`, so on that machine,
-`dotfiles` also generates a `vagrant.test.shell.local` file. Both of these files
-co-exist, and do not interfere with each other's respective environments.
-Putting all local configuration changes in `shell.local` would mean both
-environments share the same changes, which is not desired.
-
-#### `${XDG_DATA_HOME}/doftiles/gitconfig.local`
-
-This file is included at the bottom of the global git config. It is typically
-used to store personal credentials.
 
 ## Nods
 
