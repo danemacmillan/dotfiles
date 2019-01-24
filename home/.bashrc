@@ -132,14 +132,14 @@ export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
 # Aliases
-if [[ -e "${DOTFILES_PATH}/source/.aliases" ]]; then
-	source "${DOTFILES_PATH}/source/.aliases"
+if [[ -e "${DOTFILES_PATH}/source/alias" ]]; then
+	source "${DOTFILES_PATH}/source/alias"
 fi
 
 ##
 # Bash prompt, like PS1
-if [[ -e "${DOTFILES_PATH}/source/.bash_prompt" ]]; then
-	source "${DOTFILES_PATH}/source/.bash_prompt"
+if [[ -e "${DOTFILES_PATH}/source/prompt_string" ]]; then
+	source "${DOTFILES_PATH}/source/prompt_string"
 fi
 
 ##

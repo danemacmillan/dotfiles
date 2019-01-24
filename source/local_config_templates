@@ -1,7 +1,15 @@
 # vim: ft=sh
 
 ##
-# dotfiles_generate_local_templates
+# local_config_templates
+#
+# This generates local config templates that should be used to enhance the
+# core dotfiles. These configs are not part of the repository, so cannot
+# be accidentally added.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
 
 # Ensure that local dotfiles configs directory exists.
 mkdir -p "${DOTFILES_LOCAL_CONFIGS_PATH}"

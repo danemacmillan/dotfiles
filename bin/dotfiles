@@ -99,7 +99,7 @@ fi
 ##
 # Generate local configs that can be customized. These do not go in repo.
 echo -e "${BLUE}${BOLD}Generating local configs in: ${XDG_DATA_HOME}/dotfiles.${RESET}"
-source "${DOTFILES_PATH}/source/generate_local_templates"
+source "${DOTFILES_PATH}/source/local_config_templates"
 
 ##
 # Symlink all trackable files.
@@ -193,7 +193,7 @@ fi
 # Source any MacOS-specific defaults
 if command_exists defaults ; then
 	echo -e "${BLUE}${BOLD}Setting MacOS defaults.${RESET}"
-	source "${DOTFILES_PATH}/source/.macos_defaults"
+	source "${DOTFILES_PATH}/source/os.macos"
 fi
 
 ##

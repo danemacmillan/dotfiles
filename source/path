@@ -100,7 +100,13 @@ if [[ -d "${XDG_CONFIG_HOME}/composer/vendor/bin" ]]; then
 fi
 
 ##
-# Add this dotfiles repo's bin to path.
+# Add secondary dotfiles repo's bin to path.
+if [[ -e "${DOTFILES_PATH}" ]]; then
+	export PATH="${DOTFILES_PATH}/home/bin:${PATH}"
+fi
+
+##
+# Add primary dotfiles repo's bin to path.
 if [[ -e "${DOTFILES_PATH}" ]]; then
 	export PATH="${DOTFILES_PATH}/bin:${PATH}"
 fi
