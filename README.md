@@ -82,8 +82,8 @@ to see how the XDG spec environment variables and directories are created.
 
 A number of tools do not natively support the specification, so in those
 instances `dotfiles` have modified environment variables, aliases, and 
-configurations so that they can emulate support. For the purpose of distinction, 
-these tools will be referred to as having [partial](https://wiki.archlinux.org/index.php/XDG_Base_Directory#Partial)
+configurations so that they can emulate support. These tools will be referred 
+to as having [partial](https://wiki.archlinux.org/index.php/XDG_Base_Directory#Partial)
 support.
 
 To see all of the tools adhering to the XDG spec, both with official support 
@@ -94,9 +94,8 @@ and partial workarounds, look in [`home/.config`](https://github.com/danemacmill
 `dotfiles` is organized into a very deliberate, tidy structure. The effort was
 made to ensure a distinction existed between the *canonical dotfiles* that 
 comprise all the plain settings and configurations, and the *control dotfiles* 
-that  typically arise from the need to manage the canonical ones. I never liked having
-them mixed together in the `{$HOME}` directory, and the XDG spec offered the
-promise to fix this.
+that  typically arise from the need to manage the canonical ones. I never liked 
+having them mixed together in the `{$HOME}` directory.
 
 ```
 dotfiles
