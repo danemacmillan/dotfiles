@@ -81,7 +81,7 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 
 	# Initialize XDG standard in environment.
 	if [[ -e "${DOTFILES_PATH}/.xdg" ]]; then
-		source "${DOTFILES_PATH}/.xdg"
+		source "${DOTFILES_PATH}/source/.xdg"
 	fi
 
 	# Assign dotfiles' DPM install directory.
@@ -109,20 +109,20 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 fi
 
 # Update PATH.
-if [[ -e "${DOTFILES_PATH}/.path" ]]; then
-	source "${DOTFILES_PATH}/.path"
+if [[ -e "${DOTFILES_PATH}/source/.path" ]]; then
+	source "${DOTFILES_PATH}/source/.path"
 fi
 
 # Pull in base formatting templates.
-if [[ -f "${DOTFILES_PATH}/.formatting" ]]; then
+if [[ -f "${DOTFILES_PATH}/source/.formatting" ]]; then
 	if tty -s ; then
-		source "${DOTFILES_PATH}/.formatting"
+		source "${DOTFILES_PATH}/source/.formatting"
 	fi
 fi
 
 # Pull in base functions.
-if [[ -f "${DOTFILES_PATH}/.functions" ]]; then
-	source "${DOTFILES_PATH}/.functions"
+if [[ -f "${DOTFILES_PATH}/source/.functions" ]]; then
+	source "${DOTFILES_PATH}/source/.functions"
 fi
 
 # Create symlink from dotfiles install path into home directory.
@@ -135,5 +135,5 @@ fi
 # file itself. This is related to the problem of determining the DOTFILES_PATH
 # variable in as clean a way as possible, without symlinking unnecessarily.
 if [[ ! -e "${HOME}/.dotfiles" ]]; then
-	ln_relative "${DOTFILES_PATH}" "${HOME}/"
+	ln_relative "${DOTFILES_PATH}" "${HOME}/.dotfiles"
 fi

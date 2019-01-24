@@ -430,7 +430,7 @@ __dpm_install()
 	__dpm_install_extras
 
 	# Update terminal session hashes.
-	source dpm --verify
+	#source dpm --verify
 }
 
 # Run package verification when flag passed. .bashrc does this every time so

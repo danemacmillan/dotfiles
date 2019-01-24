@@ -38,6 +38,10 @@ symlinks -d "${HOME}" 2&>/dev/null
 [[ -L "${HOME}/.weechat" ]] && unlink "${HOME}/.weechat"
 
 ##
+# Create local files that can be customized.
+source "${DOTFILES_PATH}/source/dotfiles_generate_local_templates"
+
+##
 # Update repo from upstream.
 echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
 (cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
@@ -220,7 +224,7 @@ fi
 # Source any MacOS-specific defaults
 if command_exists defaults ; then
 	echo -e "${BLUE}${BOLD}Setting MacOS defaults.${RESET}"
-	source "${DOTFILES_PATH}/.macos_defaults"
+	source "${DOTFILES_PATH}/source/.macos_defaults"
 fi
 
 ##
