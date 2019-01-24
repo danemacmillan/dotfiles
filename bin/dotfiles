@@ -38,10 +38,6 @@ symlinks -d "${HOME}" 2&>/dev/null
 [[ -L "${HOME}/.weechat" ]] && unlink "${HOME}/.weechat"
 
 ##
-# Create local files that can be customized.
-source "${DOTFILES_PATH}/source/dotfiles_generate_local_templates"
-
-##
 # Update repo from upstream.
 echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
 (cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
@@ -113,24 +109,9 @@ if [[ ! -d "${HOME}/tmp" ]]; then
 fi
 
 ##
-# Copy file templates that will not be tracked by the repo.
-echo -e "${BLUE}${BOLD}Copying any file templates.${RESET}"
-
-if [[ ! -e "${HOME}/.extra" ]]; then
-	echo -e "${BLUE}${BOLD}Copying '.extra' template file for custom dotfiles edits that will not be tracked.${RESET}"
-	cp -v "${DOTFILES_PATH}/.extra" "${HOME}/.extra"
-fi
-
-if [[ ! -e "${HOME}/.gitconfig.local" ]]; then
-	echo -e "${BLUE}${BOLD}Copying '.gitconfig.local' template file for custom changes. Add your Git credentials here.${RESET}"
-	cp -v "${DOTFILES_PATH}/.gitconfig.local" "${HOME}/.gitconfig.local"
-fi
-
-if [[ ! -e "${HOME}/.ssh/config" ]]; then
-	echo -e "${BLUE}${BOLD}Copying '.ssh/config' template file for custom SSH credentials.${RESET}"
-	cp -v "${DOTFILES_PATH}/.ssh/config" "${HOME}/.ssh/config"
-	chmod 600 "${HOME}"/.ssh/*
-fi
+# Generate local configs that can be customized. These do not go in repo.
+echo -e "${BLUE}${BOLD}Generating local configs in: ${XDG_DATA_HOME}/dotfiles.${RESET}"
+source "${DOTFILES_PATH}/source/dotfiles_generate_local_templates"
 
 ##
 # Symlink all trackable files.
