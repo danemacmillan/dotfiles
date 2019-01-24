@@ -39,6 +39,7 @@ symlinks -d "${HOME}" 2&>/dev/null
 
 ##
 # Create local files that can be customized.
+echo "TEMPLATES!"
 source "${DOTFILES_PATH}/source/dotfiles_generate_local_templates"
 
 ##
@@ -141,28 +142,28 @@ fi
 echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 
 # XDG
-ln_relative "${DOTFILES_PATH}/.config/alacritty" "${XDG_CONFIG_HOME}/alacritty"
-ln_relative "${DOTFILES_PATH}/.config/bash-completion" "${XDG_CONFIG_HOME}/bash-completion"
-ln_relative "${DOTFILES_PATH}/.config/dircolors" "${XDG_CONFIG_HOME}/dircolors"
-ln_relative "${DOTFILES_PATH}/.config/git" "${XDG_CONFIG_HOME}/git"
-ln_relative "${DOTFILES_PATH}/.config/htop" "${XDG_CONFIG_HOME}/htop"
-ln_relative "${DOTFILES_PATH}/.config/npm" "${XDG_CONFIG_HOME}/npm"
-ln_relative "${DOTFILES_PATH}/.config/mycli" "${XDG_CONFIG_HOME}/mycli"
-ln_relative "${DOTFILES_PATH}/.config/readline" "${XDG_CONFIG_HOME}/readline"
-ln_relative "${DOTFILES_PATH}/.config/ripgrep" "${XDG_CONFIG_HOME}/ripgrep"
-ln_relative "${DOTFILES_PATH}/.config/rsync" "${XDG_CONFIG_HOME}/rsync"
-ln_relative "${DOTFILES_PATH}/.config/siege" "${XDG_CONFIG_HOME}/siege"
-ln_relative "${DOTFILES_PATH}/.config/tmux" "${XDG_CONFIG_HOME}/tmux"
-ln_relative "${DOTFILES_PATH}/.config/vim" "${XDG_CONFIG_HOME}/vim"
-ln_relative "${DOTFILES_PATH}/.config/weechat" "${XDG_CONFIG_HOME}/weechat"
-ln_relative "${DOTFILES_PATH}/.local/share/bash-completion/completions/linus" "${XDG_DATA_HOME}/bash-completion/completions/"
-ln_relative "${DOTFILES_PATH}/.local/share/bash-completion/completions/vshell" "${XDG_DATA_HOME}/bash-completion/completions/"
+ln_relative "${DOTFILES_PATH}/home/.config/alacritty" "${XDG_CONFIG_HOME}/alacritty"
+ln_relative "${DOTFILES_PATH}/home/.config/bash-completion" "${XDG_CONFIG_HOME}/bash-completion"
+ln_relative "${DOTFILES_PATH}/home/.config/dircolors" "${XDG_CONFIG_HOME}/dircolors"
+ln_relative "${DOTFILES_PATH}/home/.config/git" "${XDG_CONFIG_HOME}/git"
+ln_relative "${DOTFILES_PATH}/home/.config/htop" "${XDG_CONFIG_HOME}/htop"
+ln_relative "${DOTFILES_PATH}/home/.config/npm" "${XDG_CONFIG_HOME}/npm"
+ln_relative "${DOTFILES_PATH}/home/.config/mycli" "${XDG_CONFIG_HOME}/mycli"
+ln_relative "${DOTFILES_PATH}/home/.config/readline" "${XDG_CONFIG_HOME}/readline"
+ln_relative "${DOTFILES_PATH}/home/.config/ripgrep" "${XDG_CONFIG_HOME}/ripgrep"
+ln_relative "${DOTFILES_PATH}/home/.config/rsync" "${XDG_CONFIG_HOME}/rsync"
+ln_relative "${DOTFILES_PATH}/home/.config/siege" "${XDG_CONFIG_HOME}/siege"
+ln_relative "${DOTFILES_PATH}/home/.config/tmux" "${XDG_CONFIG_HOME}/tmux"
+ln_relative "${DOTFILES_PATH}/home/.config/vim" "${XDG_CONFIG_HOME}/vim"
+ln_relative "${DOTFILES_PATH}/home/.config/weechat" "${XDG_CONFIG_HOME}/weechat"
+ln_relative "${DOTFILES_PATH}/home/.local/share/bash-completion/completions/linus" "${XDG_DATA_HOME}/bash-completion/completions/"
+ln_relative "${DOTFILES_PATH}/home/.local/share/bash-completion/completions/vshell" "${XDG_DATA_HOME}/bash-completion/completions/"
 
 # Non-XDG
-ln_relative "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/.bashrc" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/home/.bash_profile" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/home/.bash_sessions_disable" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/home/.bashrc" "${HOME}/"
+ln_relative "${DOTFILES_PATH}/home/.editorconfig" "${HOME}/"
 
 ##
 # Create symlink to iCloud Drive.
