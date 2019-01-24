@@ -89,7 +89,7 @@ if [[ -L "${HOME}/.vim" ]]; then
 fi
 if [[ ! -e "${HOME}/.vim" ]] ; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating .vim directories.${RESET}"
-	mkdir -p "${HOME}"/.vim/{autoload,backups,plugged,swaps,undo}
+	mkdir -p "${XDG_DATA_HOME}"/vim/{autoload,backups,plugged,swaps,undo}
 fi
 
 if [[ ! -e "${HOME}/bin" ]]; then
@@ -147,6 +147,7 @@ ln_relative "${DOTFILES_PATH}/.config/ripgrep" "${XDG_CONFIG_HOME}/ripgrep"
 ln_relative "${DOTFILES_PATH}/.config/rsync" "${XDG_CONFIG_HOME}/rsync"
 ln_relative "${DOTFILES_PATH}/.config/siege" "${XDG_CONFIG_HOME}/siege"
 ln_relative "${DOTFILES_PATH}/.config/tmux" "${XDG_CONFIG_HOME}/tmux"
+ln_relative "${DOTFILES_PATH}/.config/vim" "${XDG_CONFIG_HOME}/vim"
 ln_relative "${DOTFILES_PATH}/.config/weechat" "${XDG_CONFIG_HOME}/weechat"
 ln_relative "${DOTFILES_PATH}/.local/share/bash-completion/completions/linus" "${XDG_DATA_HOME}/bash-completion/completions/"
 ln_relative "${DOTFILES_PATH}/.local/share/bash-completion/completions/vshell" "${XDG_DATA_HOME}/bash-completion/completions/"
@@ -156,7 +157,7 @@ ln_relative "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bashrc" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/.vimrc" "${HOME}/"
+#ln_relative "${DOTFILES_PATH}/.vimrc" "${HOME}/"
 
 ##
 # Create symlink to iCloud Drive.

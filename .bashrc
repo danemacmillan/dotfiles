@@ -23,6 +23,11 @@ shopt -s nocaseglob;
 export EDITOR=vim
 
 ##
+# Use custom directory for vim.
+export VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc"
+#export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
+##
 # Color
 # BSD LSCOLORS for MacOS.
 export CLICOLOR=1
