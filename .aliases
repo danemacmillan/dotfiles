@@ -172,10 +172,14 @@ alias dig='dig +nocmd any +multiline +noall +answer'
 alias ctags='ctags --recurse=yes --tag-relative=yes --exclude=.git --exclude=.svn'
 
 ##
+# Vim
+alias vim='vim -u "${XDG_CONFIG_HOME}/vim/vimrc"'
+alias vi='vim'
+alias v='vim'
+
+##
 # Misc
 alias c='clear'
-alias v='vim'
-alias vi='vim'
 
 ##
 # PHP
