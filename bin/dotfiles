@@ -79,17 +79,9 @@ if [[ ! -e "${HOME}/.ssh" ]]; then
 	chmod 700 "${HOME}/.ssh"
 fi
 
-# If .vim exists as a symlink, move its contents temporarily, then rename to
-# actual directory, then create directories.
-if [[ -L "${HOME}/.vim" ]]; then
-	echo -e "${RESET}${BLUE}${BOLD}Replacing ~/.vim directory symlink.${RESET}"
-	cp -Lr "${HOME}/.vim" "${HOME}/.vim_tmp"
-	unlink "${HOME}/.vim"
-	mv "${HOME}/.vim_tmp" "${HOME}/.vim"
-fi
-if [[ ! -e "${HOME}/.vim" ]] ; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating .vim directories.${RESET}"
-	mkdir -p "${XDG_DATA_HOME}"/vim/{autoload,backups,plugged,swaps,undo}
+if [[ ! -e "${XDG_DATA_HOME}/vim" ]] ; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating ${XDG_DATA_HOME}/vim directories.${RESET}"
+	mkdir -p "${XDG_DATA_HOME}"/vim/{autoload,backup,plugged,swap,undo}
 fi
 
 if [[ ! -e "${HOME}/bin" ]]; then
@@ -157,7 +149,6 @@ ln_relative "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bashrc" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
-#ln_relative "${DOTFILES_PATH}/.vimrc" "${HOME}/"
 
 ##
 # Create symlink to iCloud Drive.

@@ -4,18 +4,10 @@
 " Notes:
 " <leader> is equal to \
 
-
-" Set runtime paths. This adds one directory before, then two sections after.
-" The reason for this is that there are other values already part of the path,
-" and this is the least destructive way to add to it, by prepending and
-" appending.
-set runtimepath^=$XDG_CONFIG_HOME/vim
-set runtimepath+=$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
-"set runtimepath+=$XDG_CONFIG_HOME/vim/after
-
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-
-let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+" vimrc file has been moved from default ~/.vimrc to an XDG path, so ensure
+" vim has proper runtime paths to use. Note that Vim-Plug's autoload directory
+" should be under $XDG_DATA_HOME, and this is why that path is also added.
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_DATA_HOME/vim,$VIM,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
 
 " Only use modern vim.
 set nocompatible
@@ -196,19 +188,17 @@ set binary
 set noeol
 
 " Centralize backups, swapfiles and undo history
-set backupdir=$XDG_DATA_HOME/vim/backups
-set directory=$XDG_DATA_HOME/vim/swaps
+set backupdir=$XDG_DATA_HOME/vim/backup
+set directory=$XDG_DATA_HOME/vim/swap
 if exists("&undodir")
 	set undodir=$XDG_DATA_HOME/vim/undo
 endif
 
 " Don’t create backups when editing files in certain directories
-set backupskip=/tmp/*,/private/tmp/*,$XDG_RUNTIME_DIR/*
+set backupskip=/tmp/*,/private/tmp/*,$XDG_RUNTIME_DIR
 
 " Set .viminfo location
 set viminfo+=n$XDG_DATA_HOME/vim/viminfo
-
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_DATA_HOME/vim/autoload,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 
 " Respect modeline in files
 set modeline
