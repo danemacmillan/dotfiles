@@ -1,0 +1,5 @@
+# This file is here to prevent Apple's Terminal app from creating special
+# sessions that tie into Apple's Resume feature. The mere existence of this
+# file in a user's home directory prevents all of the special handling.
+#
+# Read more about this in the /etc/bashrc_Apple_Terminal file.

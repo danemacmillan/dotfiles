@@ -54,9 +54,6 @@ shopt -s histappend
 if [[ -e "${DOTFILES_BASH_HISTORY_PATH}" ]]; then
 	export HISTFILE="${DOTFILES_BASH_HISTORY_PATH}"
 fi
-# Apple-specific history management related to "Resume." To completely disable
-# everything related to this, add `~/.bash_sessions_disable`.
-export SHELL_SESSION_HISTORY=0
 
 ##
 # Disable various history logging.
