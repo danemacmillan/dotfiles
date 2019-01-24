@@ -24,18 +24,6 @@ unalias dotfiles 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
 [[ -e "${XDG_CONFIG_HOME}/alacritty" ]] && rm -rf "${XDG_CONFIG_HOME}/alacritty"
 [[ -e "${XDG_CONFIG_HOME}/htop" ]] && rm -rf "${XDG_CONFIG_HOME}/htop"
-[[ -f "${HOME}/.dfconfig" ]] && rm "${HOME}/.dfconfig"
-[[ -d "${HOME}/.dotfiles-packages" ]] && rm -rf "${HOME}/.dotfiles-packages"
-[[ -L "${HOME}/.aliases" ]] && unlink "${HOME}/.aliases"
-[[ -L "${HOME}/.bash_prompt" ]] && unlink "${HOME}/.bash_prompt"
-[[ -L "${HOME}/.dotfiles_includes" ]] && unlink "${HOME}/.dotfiles_includes"
-[[ -L "${HOME}/.formatting" ]] && unlink "${HOME}/.formatting"
-[[ -L "${HOME}/.functions" ]] && unlink "${HOME}/.functions"
-[[ -L "${HOME}/.hgrc" ]] && unlink "${HOME}/.hgrc"
-[[ -L "${HOME}/.mozconfig" ]] && unlink "${HOME}/.mozconfig"
-[[ -L "${HOME}/.my.cnf.sample" ]] && unlink "${HOME}/.my.cnf.sample"
-[[ -L "${HOME}/.path" ]] && unlink "${HOME}/.path"
-[[ -L "${HOME}/.weechat" ]] && unlink "${HOME}/.weechat"
 
 ##
 # Update repo from upstream.
