@@ -18,17 +18,17 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../bootstrap" && cd - >/dev/null 
 echo -e "${BLUE}${BOLD}Running dotfiles chores...${RESET}"
 
 ##
+# Update repo from upstream.
+echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
+(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
+
+##
 # Cleanup any legacy associations from older versions of this dotfiles repo.
 echo -e "${BLUE}${BOLD}Cleaning up any legacy dotfiles data.${RESET}"
 unalias dotfiles 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
 [[ -e "${XDG_CONFIG_HOME}/alacritty" ]] && rm -rf "${XDG_CONFIG_HOME}/alacritty"
 [[ -e "${XDG_CONFIG_HOME}/htop" ]] && rm -rf "${XDG_CONFIG_HOME}/htop"
-
-##
-# Update repo from upstream.
-echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
-(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
 
 ##
 # Create directories that will not be tracked by the repo.

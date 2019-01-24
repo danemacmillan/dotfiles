@@ -387,7 +387,7 @@ __dpm_install_extras()
 		# Depending on the location that Vim-Plug installs a plugin, there
 		# may be an authentication prompt for username and password.
 		#(vim +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade +qall! 2&> /dev/null)
-		(vim +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade +qall!)
+		(vim -u "${XDG_CONFIG_HOME}/vim/vimrc" +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade +qall!)
 	fi
 }
 
