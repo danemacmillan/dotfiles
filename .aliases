@@ -166,6 +166,12 @@ alias siege='siege --rc="${XDG_CONFIG_HOME}/siege/siegerc"'
 alias dig='dig +nocmd any +multiline +noall +answer'
 
 ##
+# ctags
+#
+# This replaces need for ~/.ctags config.
+alias ctags='ctags --recurse=yes --tag-relative=yes --exclude=.git --exclude=.svn'
+
+##
 # Misc
 alias c='clear'
 alias v='vim'

@@ -148,14 +148,13 @@ ln_relative "${DOTFILES_PATH}/.config/rsync" "${XDG_CONFIG_HOME}/rsync"
 ln_relative "${DOTFILES_PATH}/.config/siege" "${XDG_CONFIG_HOME}/siege"
 ln_relative "${DOTFILES_PATH}/.config/tmux" "${XDG_CONFIG_HOME}/tmux"
 ln_relative "${DOTFILES_PATH}/.config/weechat" "${XDG_CONFIG_HOME}/weechat"
-ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/linus "${XDG_DATA_HOME}/bash-completion/completions/"
-ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/vshell "${XDG_DATA_HOME}/bash-completion/completions/"
+ln_relative "${DOTFILES_PATH}/.local/share/bash-completion/completions/linus" "${XDG_DATA_HOME}/bash-completion/completions/"
+ln_relative "${DOTFILES_PATH}/.local/share/bash-completion/completions/vshell" "${XDG_DATA_HOME}/bash-completion/completions/"
 
 # Non-XDG
 ln_relative "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bashrc" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/.ctags" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.editorconfig" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.vimrc" "${HOME}/"
 
