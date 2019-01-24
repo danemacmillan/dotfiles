@@ -64,7 +64,7 @@ used to store personal credentials.
 
 These are some features or configuration choices worth highlighting.
 
-### :zap: XDG Base Directory Specification
+### :bookmark_tabs: XDG Base Directory Specification
 
 The [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
 is created for operating systems that do not support it by default. This is 
