@@ -1,7 +1,7 @@
 # vim: ft=sh
 
 ##
-# .bash_completion
+# bash_completion
 #
 # This includes third-party bash completion scripts that are eagerly loaded.
 #

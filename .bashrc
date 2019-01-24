@@ -164,6 +164,16 @@ fi
 # those for git completion and vagrant completion. This works because
 # version 2 of bash completion checks for a `$BASH_COMPLETION_COMPAT_DIR`
 # variable, and if found, will immediately source all the files found under it.
+#
+# Additionally, the $BASH_COMPLETION_USER_FILE environment variable is set,
+# which by default points to `~/.bash_completion`, but instead has been moved to
+# an XDG directory. Note that this user file is sourced eagerly as well, so
+# should not be used, except in cases where a popular tool does not offer a
+# better alternative. For the purpose of distinguishing old-style eager
+# completions from modern non-eager completions, this user completion file
+# has been added to a path under $XDG_CONFIG_HOME. Non-eager user completions
+# are available under the new path, under $XDG_DATA_HOME.
+export BASH_COMPLETION_USER_FILE="${XDG_CONFIG_HOME}/bash-completion/bash_completion"
 if [[ -e "/usr/local/share/bash-completion/bash_completion" ]]; then
 	export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 	source "/usr/local/share/bash-completion/bash_completion"

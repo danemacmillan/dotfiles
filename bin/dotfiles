@@ -136,6 +136,7 @@ echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
 
 # XDG
 ln_relative "${DOTFILES_PATH}/.config/alacritty/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
+ln_relative "${DOTFILES_PATH}/.config/bash-completion" "${XDG_CONFIG_HOME}/bash-completion"
 ln_relative "${DOTFILES_PATH}/.config/dircolors" "${XDG_CONFIG_HOME}/dircolors"
 ln_relative "${DOTFILES_PATH}/.config/git" "${XDG_CONFIG_HOME}/git"
 ln_relative "${DOTFILES_PATH}/.config/htop/htoprc" "${XDG_CONFIG_HOME}/htop/htoprc"
@@ -151,7 +152,6 @@ ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/linus "$
 ln_relative "${DOTFILES_PATH}"/.local/share/bash-completion/completions/vshell "${XDG_DATA_HOME}/bash-completion/completions/"
 
 # Non-XDG
-ln_relative "${DOTFILES_PATH}/.bash_completion" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bash_profile" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bash_sessions_disable" "${HOME}/"
 ln_relative "${DOTFILES_PATH}/.bashrc" "${HOME}/"
