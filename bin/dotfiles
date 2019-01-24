@@ -99,10 +99,10 @@ if [[ ! -e "${HOME}/bin" ]]; then
 	mkdir -p "${HOME}/bin"
 fi
 
-# Note that this will likely already be created by the `.xdg` file, by
-# creating the i`$XDG_RUNTIME_DIR` environment variable and directory.
-# Nevertheless, if another OS sets that variable differently, this user tmp
-# directory should still be created.
+# Note that this will likely already be created by the
+# `xdg_base_directory_specification` file, by creating the `$XDG_RUNTIME_DIR`
+# environment variable and directory. Nevertheless, if another OS sets that
+# variable differently, this user tmp directory should still be created.
 if [[ ! -d "${HOME}/tmp" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/tmp' directory.${RESET}"
 	mkdir -p "${HOME}/tmp"
@@ -111,7 +111,7 @@ fi
 ##
 # Generate local configs that can be customized. These do not go in repo.
 echo -e "${BLUE}${BOLD}Generating local configs in: ${XDG_DATA_HOME}/dotfiles.${RESET}"
-source "${DOTFILES_PATH}/source/dotfiles_generate_local_templates"
+source "${DOTFILES_PATH}/source/generate_local_templates"
 
 ##
 # Symlink all trackable files.
