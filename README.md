@@ -89,7 +89,7 @@ support.
 To see all of the tools adhering to the XDG spec, both with official support 
 and partial workarounds, look in [`home/.config`](https://github.com/danemacmillan/dotfiles/tree/master/home/.config) and [`home/.local`](https://github.com/danemacmillan/dotfiles/tree/master/home/.local).
 
-### Repository Organization
+### :file_folder: Repository Organization
 
 `dotfiles` is organized into a very deliberate, tidy structure. The effort was
 made to ensure a distinction existed between the *canonical dotfiles* that 
