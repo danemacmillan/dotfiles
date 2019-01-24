@@ -159,6 +159,13 @@ alias mycli='mycli --myclirc="${XDG_CONFIG_HOME}/mycli/myclirc"'
 alias siege='siege --rc="${XDG_CONFIG_HOME}/siege/siegerc"'
 
 ##
+# Dig
+#
+# This is better than having a ~/.digrc file to maintain, which simply passes
+# the first line of that file as a string.
+alias dig='dig +nocmd any +multiline +noall +answer'
+
+##
 # Misc
 alias c='clear'
 alias v='vim'
