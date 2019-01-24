@@ -23,9 +23,9 @@ source_directory=""
 
 echo -e "${RESET}${BBLUE}Installing ${name} ${GREEN}${version}${RESET}"
 
-./deluge_install
-./plexdrive_install
-./plexmediaserver_install
+deluge_install
+plexdrive_install
+plexmediaserver_install
 
 echo -e "${GREEN}${name} installed.${RESET}"
 

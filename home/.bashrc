@@ -188,9 +188,9 @@ elif [[ -e "/etc/bash_completion" ]]; then
 fi
 
 ##
-# Source .extra file if it exists. This file will never get added to repo.
-if [[ -e "${HOME}/.extra" ]]; then
-	source "${HOME}/.extra"
+# Source extra file if it exists. This file will never get added to repo.
+if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/extra" ]]; then
+	source "${DOTFILES_LOCAL_CONFIGS_PATH}/extra"
 fi
 
 ##
@@ -198,6 +198,6 @@ fi
 #
 # This allows multiple host-specific configurations to exist, but only become
 # active if the dot-prefixed file name matches the hostname of the machine.
-if [[ -e "${HOME}/.$(hostname -f).local" ]]; then
-	source "${HOME}/.$(hostname -f).local"
+if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell" ]]; then
+	source "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell"
 fi

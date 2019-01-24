@@ -213,5 +213,5 @@
 [include]
 
 	# Include user-specific info like git credentials.
-	path = ~/.gitconfig.local
+	path = ~/.local/share/dotfiles/gitconfig
 

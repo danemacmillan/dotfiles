@@ -93,6 +93,9 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	# Change path for storing bash history.
 	export DOTFILES_BASH_HISTORY_PATH="${XDG_DATA_HOME}/bash/${DOTFILES_HOSTNAME}.${USER}.history"
 
+	# This is where all local configs are stored.
+	export DOTFILES_LOCAL_CONFIGS_PATH="${XDG_DATA_HOME}/dotfiles"
+
 	# Detect OS so dotfiles seamlessly work across OSX and Linux.
 	# I only use OSX and CentOS, so additional cases will need
 	# to be defined for another OS.

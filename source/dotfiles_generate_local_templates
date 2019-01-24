@@ -1,0 +1,36 @@
+# vim: ft=sh
+
+##
+# dotfiles_generate_local_templates
+
+# Ensure that local dotfiles configs directory exists.
+mkdir -p "${DOTFILES_LOCAL_CONFIGS_PATH}"
+
+# This is the second-to-last file that is sourced from ~/.bashrc.
+if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/shell" ]]; then
+cat >"${DOTFILES_LOCAL_CONFIGS_PATH}/shell" <<EOL
+# vim: ft=sh
+
+# Use this file to add extra functionality to the dotfiles without having it
+# tracked in the working tree.
+EOL
+fi
+
+# This is the last file that is sourced from ~/.bashrc.
+if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell" ]]; then
+cat >"${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell" <<EOL
+# vim: ft=sh
+
+# Use this file to add extra functionality to the dotfiles without having it
+# tracked in the working tree.
+EOL
+fi
+
+# Add custom git configurations. This is incldued at the end of main config.
+if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/gitconfig" ]]; then
+cat >"${DOTFILES_LOCAL_CONFIGS_PATH}/gitconfig" <<EOL
+[user]
+	name =
+	email =
+EOL
+fi
