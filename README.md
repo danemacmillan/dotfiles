@@ -113,7 +113,8 @@ dotfiles
 #### `dotfiles/home`
 
 These are the files that contain all of the configurations for a new
-environment, from all variety of tools and utilities.
+environment, from all variety of tools and utilities. This is what I refer to
+as *canonical dotfiles*.
 
 The contents of this directory are what appears in a user's `${HOME}` directory.
 Note that there are very few files at the root. That means that the `${HOME}`
@@ -138,11 +139,6 @@ systems. `bin/dpm` is the tool used for this. It will eventually become its own
 repository.
 
 TODO: explain how this works.
-
-## Nods
-
-- https://github.com/mathiasbynens/dotfiles (for many of his excellent OSX configs)
-- https://github.com/kenorb/dotfiles
 
 ## Author
 
