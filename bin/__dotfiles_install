@@ -58,4 +58,4 @@ dotfiles_install_directory=".dotfiles"
 
 git clone "${dotfiles_repo}" "${dotfiles_install_directory}" \
 && cd "${dotfiles_install_directory}" \
-&& source bin/dotfiles
+&& source dotfiles

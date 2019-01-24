@@ -10,11 +10,6 @@
 # workarounds read:
 # - https://wiki.archlinux.org/index.php/XDG_Base_Directory
 #
-# Consider implementing some of the "Partial" implementations listed on that
-# document, like:
-# - tmux
-# - Vagrant
-#
 # The xdg-user-dirs specification is not implemented, because the specified
 # directories typically already exist on popular operating systems, though
 # they don't typically create the corresponding $XDG_* environment variables.
