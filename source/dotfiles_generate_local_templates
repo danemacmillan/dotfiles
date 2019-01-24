@@ -6,31 +6,38 @@
 # Ensure that local dotfiles configs directory exists.
 mkdir -p "${DOTFILES_LOCAL_CONFIGS_PATH}"
 
-# This is the second-to-last file that is sourced from ~/.bashrc.
-if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/shell" ]]; then
-cat >"${DOTFILES_LOCAL_CONFIGS_PATH}/shell" <<EOL
-# vim: ft=sh
 
-# Use this file to add extra functionality to the dotfiles without having it
-# tracked in the working tree.
-EOL
+# Old version of `shell.local`.
+if [[ -e "${HOME}/.extra" ]]; then
+	mv "${HOME}/.extra" "${DOTFILES_LOCAL_CONFIGS_PATH}/shell.local"
 fi
 
-# This is the last file that is sourced from ~/.bashrc.
-if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell" ]]; then
-cat >"${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell" <<EOL
-# vim: ft=sh
+# This is the second-to-last file that is sourced from ~/.bashrc.
+if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/shell.local" ]]; then
+echo '# vim: ft=sh
 
 # Use this file to add extra functionality to the dotfiles without having it
-# tracked in the working tree.
-EOL
+# tracked in the working tree.' > "${DOTFILES_LOCAL_CONFIGS_PATH}/shell.local"
+fi
+
+
+# This is the last file that is sourced from ~/.bashrc.
+if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell.local" ]]; then
+echo '# vim: ft=sh
+
+# Use this file to add extra functionality to the dotfiles without having it
+# tracked in the working tree.' > "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell.local"
+fi
+
+
+# Old version of `gitconfig.local`.
+if [[ -e "${HOME}/.gitconfig.local" ]]; then
+	mv "${HOME}/.gitconfig.local" "${DOTFILES_LOCAL_CONFIGS_PATH}/gitconfig.local"
 fi
 
 # Add custom git configurations. This is incldued at the end of main config.
-if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/gitconfig" ]]; then
-cat >"${DOTFILES_LOCAL_CONFIGS_PATH}/gitconfig" <<EOL
-[user]
+if [[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}/gitconfig.local" ]]; then
+echo '[user]
 	name =
-	email =
-EOL
+	email =' > "${DOTFILES_LOCAL_CONFIGS_PATH}/gitconfig.local"
 fi

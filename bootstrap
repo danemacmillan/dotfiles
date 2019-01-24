@@ -80,7 +80,7 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	export DOTFILES_BOOTSTRAP_FILE="${DOTFILES_PATH}/$(basename "${BASH_SOURCE[0]}")"
 
 	# Initialize XDG standard in environment.
-	if [[ -e "${DOTFILES_PATH}/.xdg" ]]; then
+	if [[ -e "${DOTFILES_PATH}/source/.xdg" ]]; then
 		source "${DOTFILES_PATH}/source/.xdg"
 	fi
 

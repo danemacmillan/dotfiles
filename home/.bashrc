@@ -132,14 +132,14 @@ export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
 # Aliases
-if [[ -e "${DOTFILES_PATH}/.aliases" ]]; then
-	source "${DOTFILES_PATH}/.aliases"
+if [[ -e "${DOTFILES_PATH}/source/.aliases" ]]; then
+	source "${DOTFILES_PATH}/source/.aliases"
 fi
 
 ##
 # Bash prompt, like PS1
-if [[ -e "${DOTFILES_PATH}/.bash_prompt" ]]; then
-	source "${DOTFILES_PATH}/.bash_prompt"
+if [[ -e "${DOTFILES_PATH}/source/.bash_prompt" ]]; then
+	source "${DOTFILES_PATH}/source/.bash_prompt"
 fi
 
 ##
@@ -189,8 +189,8 @@ fi
 
 ##
 # Source extra file if it exists. This file will never get added to repo.
-if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/extra" ]]; then
-	source "${DOTFILES_LOCAL_CONFIGS_PATH}/extra"
+if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/shell.local" ]]; then
+	source "${DOTFILES_LOCAL_CONFIGS_PATH}/shell.local"
 fi
 
 ##
@@ -198,6 +198,6 @@ fi
 #
 # This allows multiple host-specific configurations to exist, but only become
 # active if the dot-prefixed file name matches the hostname of the machine.
-if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell" ]]; then
-	source "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell"
+if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell.local" ]]; then
+	source "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell.local"
 fi

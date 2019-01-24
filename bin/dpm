@@ -25,13 +25,13 @@ fi
 # - Move package install hash tracking from in-memory Bash variable, to
 # file-based, so that after an install, the hashes update in the current shell.
 
-export DOTFILES_PACKAGE_MANAGER_DIRECTORY="${DOTFILES_PATH}/dpm.d"
+export DOTFILES_PACKAGE_MANAGER_DIRECTORY="${DOTFILES_PATH}/dpm"
 
 # Determine paths for installing packages.
-# Note that creating one in the user home directory means it, too, will be used.
+# Note that creating one at $XDG_DATA_HOME/dpm means it will also be used.
 DOTFILES_PACKAGES_DIR=("${DOTFILES_PACKAGE_MANAGER_DIRECTORY}")
-if [ -d "$HOME/dpm.d" ]; then
-	DOTFILES_PACKAGES_DIR+=("$HOME/dpm.d")
+if [ -d "${XDG_DATA_HOME}/dpm" ]; then
+	DOTFILES_PACKAGES_DIR+=("${XDG_DATA_HOME}/dpm")
 fi
 export DOTFILES_PACKAGES_DIR
 

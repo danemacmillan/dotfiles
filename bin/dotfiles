@@ -39,7 +39,6 @@ symlinks -d "${HOME}" 2&>/dev/null
 
 ##
 # Create local files that can be customized.
-echo "TEMPLATES!"
 source "${DOTFILES_PATH}/source/dotfiles_generate_local_templates"
 
 ##
