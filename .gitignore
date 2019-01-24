@@ -43,14 +43,13 @@ bower_components/
 tags
 
 ## Weechat
-.weechat/irc.conf
-.weechat/*.log
-.weechat/*.upgrade
-.weechat/weechat_fifo*
-.config/weechat/irc.conf
-.config/weechat/*.log
-.config/weechat/*.upgrade
-.config/weechat/weechat_fifo*
+home/.config/weechat/irc.conf
+home/.config/weechat/*.log
+home/.config/weechat/*.upgrade
+home/.config/weechat/weechat_fifo*
+
+## Rclone
+home/.config/rclone/rclone.conf
 
 # Miscellaneous dotfiles
 .bash_history
