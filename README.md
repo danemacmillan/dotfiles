@@ -28,7 +28,7 @@ with "No."
 
 ### Update
 
-Just run `dotfiles` from anywhere. It is in the `$PATH`.
+Just run `dotfiles` from anywhere. It is in the `${PATH}`.
 
 ## Customize
 
@@ -91,13 +91,18 @@ and partial workarounds, look in [`home/.config`](https://github.com/danemacmill
 
 ### Repository Organization
 
-`dotfiles` is organized into a very deliberate, tidy structure.
+`dotfiles` is organized into a very deliberate, tidy structure. The effort was
+made to ensure a distinction existed between the *canonical dotfiles* that 
+comprise all the plain settings and configurations, and the *control dotfiles* 
+that  typically arise from the need to manage the canonical ones. I never liked having
+them mixed together in the `{$HOME}` directory, and the XDG spec offered the
+promise to fix this.
 
 ```
 dotfiles
 ├── /bin          -> Essential executable scripts for dotfiles. Available in $PATH.
 ├── /dpm          -> Dotfiles package manager ("dpm"): TODO EXPLAIN
-├── /home         -> Canonical dot files that mirror ${HOME}.
+├── /home         -> Canonical dotfiles that mirror ${HOME}. Symlink targets.
 │   ├── /.config  -> ${XDG_CONFIG_HOME}
 │   ├── /.local   -> ${XDG_DATA_HOME}
 │   └── /bin      -> Miscellaneous executable scripts. Available in $PATH.
