@@ -1,9 +1,9 @@
-HOWDOI
-======
+HOWDOI.md
+=========
 
 The purpose of this document is to write down commands or sequences of commands
 that I execute just infrequently enough to always forget. This file can be
-summoned by running the `how` command provided by these dotfiles, or by simply
+summoned by running the `how` alias provided by these dotfiles, or by simply
 opening it in a text editor. Note that unless specified, these are steps for
 `CentOS`, or other things I personally use, regardless of OS. Ensure the
 title for each heading reads like, "How do I... Do this thing."

@@ -8,12 +8,16 @@
 # @license MIT
 
 ##
-# View and edit danemacmillan's HOWDOI.md file.
-alias how='vi "${DOTFILES_PATH}/HOWDOI.md"'
-
-##
-# Quickly change to these dotfiles' install path.
-alias d='cd "${DOTFILES_PATH}"'
+# Changing directories.
+alias ,,='cd -'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+alias ........='cd ../../../../../../..'
+alias .........='cd ../../../../../../../..'
 
 ##
 # Directory listing.
@@ -38,18 +42,6 @@ alias llt="ls --color ${LS_DEFAULTS}t ${LS_IGNORES}" # Sort by newest first.
 alias llx="lsdirfirst ${LS_DEFAULTS}X" # Sort by extension.
 
 ##
-# Changing directories.
-alias ,,='cd -'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-alias .......='cd ../../../../../..'
-alias ........='cd ../../../../../../..'
-alias .........='cd ../../../../../../../..'
-
-##
 # Filesystem.
 alias rm='rm -rf'
 # Note that -a is recursive, and, more importantly, preserves all ACLs, should
@@ -68,23 +60,7 @@ alias belinux="find . -type f -exec dos2unix {} \;"
 alias path='echo -e ${PATH//:/\\n}'
 
 ##
-# Replace current shell with new shell.
-#
-# This utlimately refreshes all the variables, functions, settings, etc that
-# were just added in current session.
-alias R="echo -e '${BBLUE}Reloading shell...${RESET}'; exec -l $SHELL"
-
-##
-# Searching.
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-
-# Enhance ripgrep (rg) with good defaults.
-alias rg='rg --hidden --search-zip --smart-case --no-ignore-vcs --maxdepth=20 --ignore-file="${XDG_CONFIG_HOME}/ripgrep/ignore"'
-
-##
-# Network
+# Network.
 #alias listen='lsof -i -P | grep LISTEN'
 alias listen='lsof -Pnl +M -i4'
 alias nsp='netstat -tulpn'
@@ -104,19 +80,34 @@ alias copyidrsa="pbcopy < ${HOME}/.ssh/id_rsa"
 alias copyidrsapub="pbcopy < ${HOME}/.ssh/id_rsa.pub"
 
 ##
-# Tmux
+# Replace current shell with new shell.
 #
-# Create "default" and "other" tmux sessions.
-alias tmux='tmux -f "${XDG_CONFIG_HOME}/tmux/tmux.conf"'
-alias t='tmux has-session -t default > /dev/null 2>&1 && tmux a -t default || tmux new -s default'
-alias t0='t'
-alias t1='tmux has-session -t other > /dev/null 2>&1 && tmux a -t other || tmux new -s other'
+# This utlimately refreshes all the variables, functions, settings, etc that
+# were just added in current session.
+alias R="echo -e '${BBLUE}Reloading shell...${RESET}'; exec -l $SHELL"
 
 ##
-# The myriad of ways in which I like to exit a shell.
+# Clear
+alias c='clear'
+
+##
+# Ctags
 #
-# My E-key is somewhat busted. Also, general typos I always make.
-# I don't know how to ever eit.
+# This replaces need for ~/.ctags config.
+alias ctags='ctags --recurse=yes --tag-relative=yes --exclude=.git --exclude=.svn'
+
+##
+# Dig
+#
+# This is better than having a ~/.digrc file to maintain, which simply passes
+# the first line of that file as a string.
+alias dig='dig +nocmd any +multiline +noall +answer'
+
+##
+# Exit
+#
+# The myriad ways in which I like to exit a shell. My E-key is somewhat busted.
+# Also, general typos I always make.
 alias x='exit'
 alias xit="exit"
 alias eexit="exit"
@@ -127,6 +118,7 @@ alias \:q='exit'
 
 ##
 # Git
+#
 # Aliases and typos.
 alias gut="git"
 command_exists hub && alias git="hub"
@@ -134,15 +126,22 @@ command_exists hub && alias git="hub"
 #alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
 
 ##
+# Grep
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+##
 # History
+#
 # Purge all history
 alias historypurgeall='cat /dev/null > ~/.bash_history && history -c && history -w'
 # Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
 alias historypurgelast='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
 
 ##
-# Rsync
-alias rsync='rsync --exclude-from="${XDG_CONFIG_HOME}/rsync/excludes"'
+# MyCLI
+alias mycli='mycli --myclirc="${XDG_CONFIG_HOME}/mycli/myclirc"'
 
 ##
 # Npm
@@ -151,38 +150,8 @@ alias npm_global_install_path='echo $(npm root -g)'
 alias npm_config_list='npm config ls -l'
 
 ##
-# MyCLI
-alias mycli='mycli --myclirc="${XDG_CONFIG_HOME}/mycli/myclirc"'
-
-##
-# Siege
-alias siege='siege --rc="${XDG_CONFIG_HOME}/siege/siegerc"'
-
-##
-# Dig
-#
-# This is better than having a ~/.digrc file to maintain, which simply passes
-# the first line of that file as a string.
-alias dig='dig +nocmd any +multiline +noall +answer'
-
-##
-# ctags
-#
-# This replaces need for ~/.ctags config.
-alias ctags='ctags --recurse=yes --tag-relative=yes --exclude=.git --exclude=.svn'
-
-##
-# Vim
-alias vim='vim -u "${XDG_CONFIG_HOME}/vim/vimrc"'
-alias vi='vim'
-alias v='vim'
-
-##
-# Misc
-alias c='clear'
-
-##
 # PHP
+#
 # Get the number of php-fpm processes, and their average size in MB.
 #alias fpmstat='ps aux | grep php-fpm | wc -l ; ps --no-headers -o "rss,cmd" -C php-fpm | awk '{ sum+=$1 } END { printf ("%d%s\n", sum/NR/1024,"M") }'
 alias fpmstat="ps aux | grep php-fpm | wc -l ; ps --no-headers -o \"rss,cmd\" -C php-fpm | awk '{ sum+=\$1 } END { printf (\"%d%s\n\", sum/NR/1024,\"M\") }'"
@@ -194,6 +163,51 @@ if command_exists linus \
 ; then
 	alias linusdebug='PHP_CLI_DEBUG="true" COMPOSER_ALLOW_XDEBUG=1 PHP_IDE_CONFIG="serverName=linuscli" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=192.168.70.1" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp" ${HOME}/bin/linus'
 fi
+
+##
+# Ripgrep
+#
+# rg with good defaults.
+alias rg='rg --hidden --search-zip --smart-case --no-ignore-vcs --maxdepth=20 --ignore-file="${XDG_CONFIG_HOME}/ripgrep/ignore"'
+
+##
+# Rsync
+alias rsync='rsync --exclude-from="${XDG_CONFIG_HOME}/rsync/excludes"'
+
+##
+# Siege
+alias siege='siege --rc="${XDG_CONFIG_HOME}/siege/siegerc"'
+
+##
+# Tmux
+#
+# Create "default" and "other" tmux sessions.
+alias tmux='tmux -f "${XDG_CONFIG_HOME}/tmux/tmux.conf"'
+alias t='tmux has-session -t default > /dev/null 2>&1 && tmux a -t default || tmux new -s default'
+alias t0='t'
+alias t1='tmux has-session -t other > /dev/null 2>&1 && tmux a -t other || tmux new -s other'
+
+##
+# Vim
+alias vim='vim -u "${XDG_CONFIG_HOME}/vim/vimrc"'
+alias vi='vim'
+alias v='vim'
+
+################################################################################
+
+##
+# Dotfiles-related aliases.
+alias d='cd "${DOTFILES_PATH}"'
+alias d-local='cd "${DOTFILES_LOCAL_CONFIGS_PATH}"'
+
+alias d-alias='${EDITOR} "${DOTFILES_PATH}/source/alias"'
+alias d-function='${EDITOR} "${DOTFILES_PATH}/source/function"'
+alias d-path='${EDITOR} "${DOTFILES_PATH}/source/path"'
+alias how='${EDITOR} "${DOTFILES_PATH}/HOWDOI.md"'
+
+alias xdg='printenv | grep XDG | sort'
+
+################################################################################
 
 ##
 # CentOS-specific Aliases
@@ -212,6 +226,11 @@ fi
 ##
 # MacOS-specific Aliases
 if command_exists brew ; then
+
+	##
+	# Check for outdated software.
+	alias outdated='brew outdated; brew cask outdated; composer global outdated'
+
 	# Depends on Firefox Tools Adapter: https://developer.mozilla.org/en-US/docs/Tools/Firefox_Tools_Adapter
 	# TODO: Add checking.
 	alias debugios='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app; sleep 2s; ios_webkit_debug_proxy'
@@ -221,8 +240,7 @@ if command_exists brew ; then
 	alias rebuildopenwithmenu='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user; killall Finder; echo "Rebuilt Open With, relaunching Finder"'
 	alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
-	alias update="\
-		softwareupdate --install --all --verbose; \
+	alias update="softwareupdate --install --all --verbose; \
 		dotfiles; \
 		composer selfupdate; \
 		composer selfupdate --clean-backups; \
