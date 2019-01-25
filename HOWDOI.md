@@ -8,11 +8,11 @@ opening it in a text editor. Note that unless specified, these are steps for
 `CentOS`, or other things I personally use, regardless of OS. Ensure the
 title for each heading reads like, "How do I... Do this thing."
 
-# Turn off line numbers and invisibles in Vim
+## Turn off line numbers and invisibles in Vim
 
 - These dotfiles provide an `<F4>` key shortcut to toggle them.
 
-# Find, format, mount, and auto-mount an attached disk
+## Find, format, mount, and auto-mount an attached disk
 
 - `ll /dev/disk/by-id`
 - `mkfs.ext4 -F -E lazy_itable_init=0,discard /dev/disk/by-id/[DISK_NAME]`
@@ -20,19 +20,19 @@ title for each heading reads like, "How do I... Do this thing."
 - `mount -o discard,defaults /dev/disk/by-id/[DISK_NAME] /[MNT_DIR]`
 - `vi /etc/fstab`, then paste, `/dev/disk/by-id/[DISK_NAME] /[MNT_DIR] ext4 discard,defaults 1 1`
 
-# Remount a current mount without downtime
+## Remount a current mount without downtime
 
 This example remounts whatever is mounted to the root.
 
 - `mount -o remount /`
 
-# Resize a disk that has changed in size
+## Resize a disk that has changed in size
 
 - Ensure the disk is mounted and note its size: `df -h`
 - `resize2fs /dev/disk/by-id/[DISK_NAME]`
 - Note the new size of the mounted disk
 
-# Mount a Google Cloud Storage bucket as disk on filesystem
+## Mount a Google Cloud Storage bucket as disk on filesystem
 
 Be sure to read:
 
@@ -47,27 +47,27 @@ Instructions:
 - Regular mount: `gcsfuse -o allow_other -file-mode=777 -dir-mode=777 bucket-name /mnt/bucket-name`
 - Persist mount in `/etc/fstab`: `bucket-name /mnt/bucket-name gcsfuse rw,allow_other,file_mode=777,dir_mode=777`
 
-# Update, query, and delete kernels on CentOS
+## Update, query, and delete kernels on CentOS
 
 - `yum update kernel`
 - `rpm -q kernel`
 - Delete kernels that are not the current or latest: `yum erase kernel-2.6.32-642.3.1.el6.x86_64`
 
-# Rsync stuff
+## Rsync stuff
 
 - `rsync -hrltD --info=progress2 --exclude=catalog/product/cache --exclude=css --exclude=css_secure --exclude=js -e ssh [REMOTE_ADDR]:/media /web/sites/`
 - `rsync -hrltD --info=progress2 -e ssh [REMOTE_ADDR]:/db/dev-latest.sql.gz ./`
 
-# Generate an `RSA` key and `CSR` for an `SSL` certificate
+## Generate an `RSA` key and `CSR` for an `SSL` certificate
 
 - `openssl genrsa -out server.2048.key 2048`
 - `openssl req -new -sha256 -key server.2048.key -out server.2048.csr`
 
-## Generate a self-signed SSL certificate
+### Generate a self-signed SSL certificate
 
 - `openssl req -new -x509 -nodes -sha256 -days 3650 -key server.2048.key > server.2048.crt`
 
-# Generate a new `SSH` keypair
+## Generate a new `SSH` keypair
 
 Note that it's probably best to just keep the filename as `id_rsa`, unless
 you also want to manage a bunch of special `.ssh/config` entries that
@@ -83,26 +83,26 @@ it was generated. Do not use old keys.
 - Custom dotfiles function: `newsshkey` or `newsshkey [username]`
 - Manually: `ssh-keygen -b 4096 -f ~/.ssh/[username].id_rsa -C "[username]@4096_$(date +%Y_%m_%d_%H%M%S)"`
 
-# Safely replace a native yum package with one from another RPM
+## Safely replace a native yum package with one from another RPM
 
 The `yum-plugin-replace` package is installed with these dotfiles.
 
 - `yum -y replace git --replace-with git2u`
 
-# List all versions of a yum repo from a specific repository
+## List all versions of a yum repo from a specific repository
 
 - `yum --enablerepo ius-archive list --showduplicates php70u-pecl-redis`
 
-# Show yum history and get more info about an entry
+## Show yum history and get more info about an entry
 
 - `yum history`
 - `yum history info {id}`
 
-# Index relevant Magento indexes with N98
+## Index relevant Magento indexes with N98
 
 - `date && ./n98-magerun.phar -vvv index:reindex catalog_product_attribute,catalog_product_price,catalog_url,catalog_category_flat,catalog_category_product,cataloginventory_stock,catalog_product_flat && date`
 
-# Format a crontab
+## Format a crontab
 
 ```
 SHELL=/bin/bash
@@ -122,7 +122,7 @@ LWEBROOT="/[PATH]"
 08        20      *        *            *            date && cd $LWEBROOT && ./n98-magerun -vvv index:reindex catalog_product_flat && date
 ```
 
-# Mount a remote filesystem with SSHFS on OSX
+## Mount a remote filesystem with SSHFS on OSX
 
 Note that if an `.ssh/config` file with a `home` rule, as in the example, does
 not exist, the regular syntax will need to be used. Use `-p###` for port.
@@ -130,7 +130,7 @@ not exist, the regular syntax will need to be used. Use `-p###` for port.
 - `mkdir -p /Volumes/[MOUNT_NAME]`
 - `sshfs home:/home/danemacmillan/ /Volumes/home -o auto_cache,reconnect,defer_permissions,noappledouble,negative_vncache,volname=UbuntuHome`
 
-# Create a new group and add a new user to it
+## Create a new group and add a new user to it
 
 - `groupadd linus`
 - `useradd -G wheel,linus -c "Dane MacMillan" danemacmillan`
@@ -138,16 +138,16 @@ not exist, the regular syntax will need to be used. Use `-p###` for port.
 - Add group after: `usermod -a -G linus danemacmillan`
 - Disable logins: `usermod -s /sbin/nologin danemacmillan`
 
-# Change a git repository's remote URL
+## Change a git repository's remote URL
 
 - `git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git`
 
-# Create an email SPF record
+## Create an email SPF record
 
 - Example: `IN TXT "v=spf1 mx a ptr a:email.kayako.com include:_spf.google.com include:servers.mcsv.net include:spf.mandrillapp.com ~all"`
 - Really good generator: [http://www.spfwizard.net/](http://www.spfwizard.net/)
 
-# Make a directory shared among multiple users with `setgid` bit and `ACL`s
+## Make a directory shared among multiple users with `setgid` bit and `ACL`s
 
 - Ensure the parent directory has the desired owners and permissions.
 - Read current ACLs with `getfacl parentdir`
@@ -158,7 +158,7 @@ ensure that permissions are defined for all new files and directories based on
 this ACL rule.
 - Recursively remove all ACLs: `setfacl -R -b parentdir`
 
-# Interact with Redis
+## Interact with Redis
 
 Note that any changes made to a live Redis instance's config will also need to
 be copied into its config file in order for it to persist after restart.
@@ -173,14 +173,14 @@ be copied into its config file in order for it to persist after restart.
 - Set instance as master again: `SLAVEOF NO ONE`
 - Flush DB 0 from host: `redis-cli -h instance-name-or-ip -n 0 flushdb`
 
-# Remotely access a fresh PMS install
+## Remotely access a fresh PMS install
 
 https://support.plex.tv/hc/en-us/articles/200288586-Installation
 
 - `ssh ip.address.of.server -L 8888:localhost:32400`
 - `http://localhost:8888/web`
 
-# Quickly debug a PHP problem in production that evades all logging
+## Quickly debug a PHP problem in production that evades all logging
 
 Place this snippet around where the problem occurs. This is not a substitute
 for proper logging, but sometimes it helps when in a bind and there is no
@@ -188,10 +188,10 @@ adequate logging in place.
 
 - `@file_put_contents('debuglive.txt', var_export($client, true), FILE_APPEND);`
 
-# See MySQL configuration variable values
+## See MySQL configuration variable values
 
 - `SHOW VARIABLES LIKE '%timeout%';`
 - `SHOW VARIABLES LIKE '%size%';`
 
-# Grant permissions in MySQL
+## Grant permissions in MySQL
 
