@@ -87,7 +87,8 @@ to as having [partial](https://wiki.archlinux.org/index.php/XDG_Base_Directory#P
 support.
 
 To see all of the tools adhering to the XDG spec, both with official support 
-and partial workarounds, look in [`home/.config`](https://github.com/danemacmillan/dotfiles/tree/master/home/.config) and [`home/.local`](https://github.com/danemacmillan/dotfiles/tree/master/home/.local).
+and partial workarounds, look in [`home/.config`](https://github.com/danemacmillan/dotfiles/tree/master/home/.config) 
+and [`home/.local/share`](https://github.com/danemacmillan/dotfiles/tree/master/home/.local/share).
 
 ### :file_folder: Repository Organization
 
