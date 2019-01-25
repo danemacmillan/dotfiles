@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export DOTFILES_PATH=""
 cd "$(dirname "${BASH_SOURCE[0]}")" && source "../bootstrap" && cd - >/dev/null 2>&1
 
 ##
@@ -27,6 +28,8 @@ echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
 echo -e "${BLUE}${BOLD}Cleaning up any legacy dotfiles data.${RESET}"
 unalias dotfiles 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
+[[ -e "${HOME}/.gitconfig" ]] && unlink "${HOME}/.gitconfig"
+[[ -f "${HOME}/.hgrc.local" ]] && rm "${HOME}/.hgrc.local"
 [[ -e "${XDG_CONFIG_HOME}/alacritty" ]] && rm -rf "${XDG_CONFIG_HOME}/alacritty"
 [[ -e "${XDG_CONFIG_HOME}/htop" ]] && rm -rf "${XDG_CONFIG_HOME}/htop"
 
