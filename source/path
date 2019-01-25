@@ -71,10 +71,8 @@ fi
 # https://cloud.google.com/sdk/docs/quickstarts
 if [[ -e "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]]; then
 	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-fi
-
-if [[ -d "${HOME}/google-cloud-sdk/bin" ]]; then
-	export PATH="${HOME}/google-cloud-sdk/bin:${PATH}"
+elif [[ -e "${HOME}/google-cloud-sdk/path.bash.inc" ]]; then
+ source "${HOME}/google-cloud-sdk/path.bash.inc"
 fi
 
 ##
