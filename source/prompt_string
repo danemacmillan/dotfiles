@@ -1,12 +1,11 @@
 # vim: ft=sh
 
 ##
-# .bash_prompt
+# prompt_string
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-#
 
 ##
 # PS1

@@ -1,8 +1,14 @@
 # vim: ft=sh
 
 ##
+# ui_ux
+#
 # Color variables and functions to be used throughout bash.
 # There are often-used symbols at the bottom.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
 
 # Escape sequences are: \e, \033, \x1B
 # This one (\x1B) works across OSX, Unix, Linux, while the other two do not.

@@ -1,6 +1,16 @@
 # vim: ft=sh
 
 ##
+# function
+#
+# Contained in this file are functions that are sourced into every new
+# environment by default.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+
+##
 # Check if command line utility exists.
 #
 # This is based on discussion at:

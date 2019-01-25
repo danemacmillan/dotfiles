@@ -12,7 +12,8 @@
 # @license MIT
 
 # Ensure that local dotfiles configs directory exists.
-mkdir -p "${DOTFILES_LOCAL_CONFIGS_PATH}"
+[[ ! -e "${DOTFILES_LOCAL_CONFIGS_PATH}" ]] \
+&& mkdir -p "${DOTFILES_LOCAL_CONFIGS_PATH}"
 
 
 # Old version of `shell.local`.
@@ -75,3 +76,8 @@ Host *
 	chmod 600 "${HOME}"/.ssh/*
 fi
 
+
+# Ensure that strict permissions are always applied.
+[[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}" ]] \
+&& chmod 700 "${DOTFILES_LOCAL_CONFIGS_PATH}" \
+&& chmod 600 "${DOTFILES_LOCAL_CONFIGS_PATH}"/*
