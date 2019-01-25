@@ -45,6 +45,15 @@ now()
 # Solution based on combination of answers from:
 # - https://stackoverflow.com/q/2564634/2973534
 #
+# TODO:
+# - Fix differences between CentOS and MacOS resolving path. On CentOS, if
+# there is a specific link name provided, this will cause the returned path to
+# possibly nest one more parent dir. For example,
+# `relpath "${DOTFILES_PATH}" "${HOME}/.dotfiles"` will work fine on MacOS, but
+# on CentOS, it will prepend an additional `../`. Removing the ".dotfiles" link
+# name will then resolve the path properly, but that means link names cannot
+# be different from the target name.
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
