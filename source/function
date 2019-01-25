@@ -86,7 +86,7 @@ ln_relative()
 		ln -vsfnr "${target}" "${link_name}"
 	else
 		local relative_path=$(relpath "${target}" "${link_name}")
-		ln -vsfn "${target}" "${link_name}"
+		ln -vsfn "${relative_path}" "${link_name}"
 	fi
 
 	rm -f "${testfile}" "${testfile2}" &>/dev/null
