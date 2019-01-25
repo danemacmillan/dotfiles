@@ -68,7 +68,7 @@ php@7.1
 pidof
 pv
 python
-ranger
+#ranger
 rclone
 readline
 rg
@@ -83,7 +83,7 @@ tsung
 unrar
 vagrant-completion
 vim
-w3m
+#w3m
 weechat
 weighttp
 wget
