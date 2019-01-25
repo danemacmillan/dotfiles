@@ -124,6 +124,11 @@ alias gut="git"
 command_exists hub && alias git="hub"
 # Just for reference. Do not rewrite history.
 #alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
+# Using custom loop function that will operate in eacch subdirectory,
+# merge canonical branches up to either develop, stage, or master.
+alias ldevelop="loop 'git checkout develop' 'git pull'"
+alias lstage="loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout develop'"
+alias lmaster="loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout master' 'git pull' 'git merge stage' 'git push' 'git checkout develop'"
 
 ##
 # Grep
