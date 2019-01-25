@@ -212,8 +212,7 @@ alias xdg='printenv | grep XDG | sort'
 ##
 # CentOS-specific Aliases
 if command_exists yum ; then
-	alias update="\
-		dotfiles; \
+	alias update="dotfiles; \
 		composer selfupdate; \
 		composer selfupdate --clean-backups; \
 		npm install npm@latest -g; \
