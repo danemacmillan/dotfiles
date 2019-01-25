@@ -1,6 +1,8 @@
 # vim: ft=sh
 
 ##
+# xdg_base_directory_specification
+#
 # Create XDG environment variables and directories.
 #
 # Note that this only implements the XDG Base Directory Specification from:
@@ -32,7 +34,19 @@ __tmpdir="${TMPDIR%/}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-"${__tmpdir:-/tmp}/${USER}"}"
 unset __tmpdir
 
-[[ ! -e ${XDG_DATA_HOME} ]] && mkdir -p ${XDG_DATA_HOME}
-[[ ! -e ${XDG_CONFIG_HOME} ]] && mkdir -p ${XDG_CONFIG_HOME}
-[[ ! -e ${XDG_CACHE_HOME} ]] && mkdir -p ${XDG_CACHE_HOME}
-[[ ! -e ${XDG_RUNTIME_DIR} ]] && mkdir -p ${XDG_RUNTIME_DIR} && chmod 700 ${XDG_RUNTIME_DIR}
+[[ ! -e "${XDG_DATA_HOME}" ]] && mkdir -p "${XDG_DATA_HOME}"
+[[ ! -e "${XDG_CONFIG_HOME}" ]] && mkdir -p "${XDG_CONFIG_HOME}"
+[[ ! -e "${XDG_CACHE_HOME}" ]] && mkdir -p "${XDG_CACHE_HOME}"
+[[ ! -e "${XDG_RUNTIME_DIR}" ]] && mkdir -p "${XDG_RUNTIME_DIR}" && chmod 700 "${XDG_RUNTIME_DIR}"
+
+##
+# Unofficial XDG, though should be part of it.
+#
+# References:
+# - https://www.freedesktop.org/software/systemd/man/file-hierarchy.html#Home%20Directory
+# - https://theos.kyriasis.com/~kyrias/basedir-spec.html
+export XDG_BIN_HOME="${XDG_BIN_HOME:-${HOME}/.local/bin}"
+export XDG_LIB_HOME="${XDG_LIB_HOME:-${HOME}/.local/lib}"
+
+[[ ! -e "${XDG_BIN_HOME}" ]] && mkdir -p "${XDG_BIN_HOME}"
+[[ ! -e "${XDG_LIB_HOME}" ]] && mkdir -p "${XDG_LIB_HOME}"

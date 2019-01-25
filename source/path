@@ -1,7 +1,7 @@
 # vim: ft=sh
 
 ##
-# .path
+# path
 #
 # Central location for defining additional paths.
 #
@@ -100,21 +100,19 @@ if [[ -d "${XDG_CONFIG_HOME}/composer/vendor/bin" ]]; then
 fi
 
 ##
-# Add secondary dotfiles repo's bin to path.
-if [[ -e "${DOTFILES_PATH}" ]]; then
-	export PATH="${DOTFILES_PATH}/home/bin:${PATH}"
-fi
-
-##
-# Add primary dotfiles repo's bin to path.
+# Add primary dotfiles' repo's bin to path.
 if [[ -e "${DOTFILES_PATH}" ]]; then
 	export PATH="${DOTFILES_PATH}/bin:${PATH}"
 fi
 
 ##
-# Add user bin.
-# This one should always be last, as it should be able to overwrite everything.
-if [[ -d "${HOME}/bin" ]]; then
+# Add user bins.
+#
+# These should always be last, as they should be able to overwrite everything.
+if [[ -e "${XDG_BIN_HOME}" ]]; then
+	export PATH="${XDG_BIN_HOME}:${PATH}"
+fi
+if [[ -e "${HOME}/bin" ]]; then
 	export PATH="${HOME}/bin:${PATH}"
 fi
 
