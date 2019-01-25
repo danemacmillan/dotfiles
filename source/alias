@@ -250,7 +250,6 @@ if command_exists brew ; then
 		brew upgrade; \
 		brew doctor; \
 		brew cask doctor; \
-		brew cleanup; \
-		brew cask outdated \
+		brew cleanup \
 	"
 fi
