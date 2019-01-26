@@ -1,5 +1,5 @@
 # vim: ft=sh
-source "${HOME}/.dotfiles/bootstrap"
+source "${HOME}/.dotfiles/source/bootstrap"
 
 ##
 # .bashrc

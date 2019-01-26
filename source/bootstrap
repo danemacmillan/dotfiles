@@ -74,10 +74,10 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	# Assign self-discovered dotfiles path that will be used for everything.
 	# This will allow dotfiles to be installed anywhere and always know how to
 	# reference its install path.
-	export DOTFILES_PATH=$(get_absolute_root_directory_from_path)
+	export DOTFILES_PATH="$(dirname "$(get_absolute_root_directory_from_path)")"
 
 	# Provide environment variable to be able to quickly source this file itself.
-	export DOTFILES_BOOTSTRAP_FILE="${DOTFILES_PATH}/$(basename "${BASH_SOURCE[0]}")"
+	export DOTFILES_BOOTSTRAP_FILE="${DOTFILES_PATH}/source/$(basename "${BASH_SOURCE[0]}")"
 
 	# Initialize XDG standard in environment.
 	if [[ -e "${DOTFILES_PATH}/source/xdg_base_directory_specification" ]]; then
