@@ -8,7 +8,7 @@
 # @license MIT
 
 ##
-# Changing directories.
+# Change directories.
 alias ,,='cd -'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -36,10 +36,13 @@ lsdirfirst()
 		awk '{if(/^total [0-9\.]+\w+?$/ || /\/$/) n=1; else n=2; print n, $0}' |
 		sort -sk1,1 | cut -d' ' -f2-
 }
-alias lll="ls --color --group-directories-first ${LS_DEFAULTS} ${LS_IGNORES}" # Original ll without function.
+# Original ll without function.
+alias lll="ls --color --group-directories-first ${LS_DEFAULTS} ${LS_IGNORES}"
 alias ll="lsdirfirst ${LS_DEFAULTS}"
-alias llt="ls --color ${LS_DEFAULTS}t ${LS_IGNORES}" # Sort by newest first.
-alias llx="lsdirfirst ${LS_DEFAULTS}X" # Sort by extension.
+# Sort by newest first.
+alias llt="ls --color ${LS_DEFAULTS}t ${LS_IGNORES}"
+# Sort by extension.
+alias llx="lsdirfirst ${LS_DEFAULTS}X"
 
 ##
 # Filesystem.
@@ -61,30 +64,21 @@ alias path='echo -e ${PATH//:/\\n}'
 
 ##
 # Network.
-#alias listen='lsof -i -P | grep LISTEN'
 alias listen='lsof -Pnl +M -i4'
 alias nsp='netstat -tulpn'
 alias ss='lsof -i'
-alias ipp="dig +short myip.opendns.com @resolver1.opendns.com"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-alias vs="vagrant global-status --prune"
-# See http://ipinfo.io/developers for more info.
-alias ipgeo="curl ipinfo.io"
-alias vmt="/usr/bin/vmware-toolbox-cmd"
+alias ip="curl -H 'Accept: application/json' ipinfo.io/json && echo -e '\n' && ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias flushdns='sudo killall -HUP mDNSResponder'
+alias networkscan="arp -a"
 # Full port scan, service version, and OS scan (sudo required).
 alias portscan="sudo nmap -vv -Pn -p1-65535 -sV -O --reason"
-#alias mysql='mycli'
-#alias btop="mytop -u user -p '' -h localhost -d database"
-alias copyidrsa="pbcopy < ${HOME}/.ssh/id_rsa"
-alias copyidrsapub="pbcopy < ${HOME}/.ssh/id_rsa.pub"
 
 ##
 # Replace current shell with new shell.
 #
-# This utlimately refreshes all the variables, functions, settings, etc that
+# This ultimately refreshes all the variables, functions, settings, etc that
 # were just added in current session.
-alias R="echo -e '${BBLUE}Reloading shell...${RESET}'; exec -l $SHELL"
+alias R="echo -e '${BBLUE}Reloading shell...${RESET}'; exec -l ${SHELL}"
 
 ##
 # Clear
@@ -94,14 +88,14 @@ alias c='clear'
 # Ctags
 #
 # This replaces need for ~/.ctags config.
-alias ctags='ctags --recurse=yes --tag-relative=yes --exclude=.git --exclude=.svn'
+alias ctags='\ctags --recurse=yes --tag-relative=yes --exclude=.git --exclude=.svn'
 
 ##
 # Dig
 #
 # This is better than having a ~/.digrc file to maintain, which simply passes
 # the first line of that file as a string.
-alias dig='dig +nocmd any +multiline +noall +answer'
+alias dig='\dig +nocmd any +multiline +noall +answer'
 
 ##
 # Exit
@@ -146,7 +140,8 @@ alias historypurgelast='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
 
 ##
 # MyCLI
-alias mycli='mycli --myclirc="${XDG_CONFIG_HOME}/mycli/myclirc"'
+alias mycli='\mycli --myclirc="${XDG_CONFIG_HOME}/mycli/myclirc"'
+#alias mysql='mycli'
 
 ##
 # Npm
@@ -173,15 +168,20 @@ fi
 # Ripgrep
 #
 # rg with good defaults.
-alias rg='rg --hidden --search-zip --smart-case --no-ignore-vcs --maxdepth=20 --ignore-file="${XDG_CONFIG_HOME}/ripgrep/ignore"'
+alias rg='\rg --hidden --search-zip --smart-case --no-ignore-vcs --maxdepth=20 --ignore-file="${XDG_CONFIG_HOME}/ripgrep/ignore"'
 
 ##
 # Rsync
-alias rsync='rsync --exclude-from="${XDG_CONFIG_HOME}/rsync/excludes"'
+alias rsync='\rsync --exclude-from="${XDG_CONFIG_HOME}/rsync/excludes"'
 
 ##
 # Siege
-alias siege='siege --rc="${XDG_CONFIG_HOME}/siege/siegerc"'
+alias siege='\siege --rc="${XDG_CONFIG_HOME}/siege/siegerc"'
+
+##
+# SSH
+alias copyidrsa="pbcopy < ${HOME}/.ssh/id_rsa"
+alias copyidrsapub="pbcopy < ${HOME}/.ssh/id_rsa.pub"
 
 ##
 # Tmux
@@ -193,8 +193,12 @@ alias t0='t'
 alias t1='tmux has-session -t other > /dev/null 2>&1 && tmux a -t other || tmux new -s other'
 
 ##
+# Vagrant
+alias vs="vagrant global-status --prune"
+
+##
 # Vim
-alias vim='vim -u "${XDG_CONFIG_HOME}/vim/vimrc"'
+alias vim='\vim -u "${XDG_CONFIG_HOME}/vim/vimrc"'
 alias vi='vim'
 alias v='vim'
 
