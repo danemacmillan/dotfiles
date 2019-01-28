@@ -35,7 +35,8 @@ echo -e "${BLUE}${BOLD}Cleaning up any legacy dotfiles data.${RESET}"
 unalias dotfiles 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
 symlinks -d "${HOME}/bin" 2&>/dev/null
-[[ -e "${HOME}/.gitconfig" ]] && unlink "${HOME}/.gitconfig"
+[[ -L "${HOME}/.gitconfig" ]] && unlink "${HOME}/.gitconfig"
+[[ -L "${HOME}/.gitignore" ]] && unlink "${HOME}/.gitignore"
 [[ -f "${HOME}/.hgrc.local" ]] && rm "${HOME}/.hgrc.local"
 [[ -e "${XDG_CONFIG_HOME}/alacritty" ]] && rm -rf "${XDG_CONFIG_HOME}/alacritty"
 [[ -e "${XDG_CONFIG_HOME}/htop" ]] && rm -rf "${XDG_CONFIG_HOME}/htop"
