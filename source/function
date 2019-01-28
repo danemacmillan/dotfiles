@@ -221,8 +221,14 @@ tt()
 	FILES_WITH_LINKS="`find $CHECKDIR -follow -maxdepth 1 -type f | wc -l`"
 	FILES_LINKS="`expr $FILES_WITH_LINKS - $FILES`"
 
-	echo "Directories: `expr $DIRECTORIES_WITH_LINKS - $DIRECTORY_PADDING` (`expr $DIRECTORIES_LINKS`)"
-	echo "Files: $FILES_WITH_LINKS ($FILES_LINKS)"
+	local all_directories=$(find . -type d | wc -l)
+	local all_files=$(find . -type f | wc -l)
+
+	echo "Directories at root: `expr $DIRECTORIES_WITH_LINKS - $DIRECTORY_PADDING` (`expr $DIRECTORIES_LINKS`)"
+	echo "Files at root: $FILES_WITH_LINKS ($FILES_LINKS)"
+	echo ""
+	echo "All directories recursively: $all_directories"
+	echo "All files recursively: $all_files"
 }
 
 ##
