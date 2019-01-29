@@ -27,6 +27,10 @@ export EDITOR=vim
 export VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc"
 
 ##
+# Location of projects. The `p` alias changes to this path.
+export PROJECTS_PATH="${HOME}/projects"
+
+##
 # Color
 # BSD LSCOLORS for MacOS.
 export CLICOLOR=1

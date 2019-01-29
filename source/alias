@@ -216,6 +216,8 @@ alias how='${EDITOR} "${DOTFILES_PATH}/HOWDOI.md"'
 
 alias xdg='printenv | grep XDG | sort'
 
+alias p='cd ${PROJECTS_PATH}'
+
 ################################################################################
 
 ##
