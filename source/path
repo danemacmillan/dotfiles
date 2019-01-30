@@ -83,6 +83,15 @@ if [[ -d "${HOME}/go" ]]; then
 fi
 
 ##
+# Ruby/RubyGems
+if [[ -e "/usr/local/opt/ruby/bin" ]]; then
+	export PATH="/usr/local/opt/ruby/bin:${PATH}"
+fi
+if [[ -e "/usr/local/lib/ruby/gems/2.6.0/bin" ]]; then
+	export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
+fi
+
+##
 # Rust
 if [[ -d "${HOME}/.cargo/bin" ]]; then
 	export PATH="${HOME}/.cargo/bin:${PATH}"
