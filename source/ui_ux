@@ -43,6 +43,7 @@ if tty -s ; then
 	CYAN=$(tput setaf 6)
 	WHITE=$(tput setaf 7)
 	LIGHTGREY=$(tput setaf 138)
+	VERYLIGHTGREY=$(tput setaf 239)
 	DARKGREY=$(tput setaf 238)
 
 	# Background
@@ -57,7 +58,8 @@ if tty -s ; then
 	BG_PURPLE=$(tput setab 5)
 	BG_CYAN=$(tput setab 6)
 	BG_WHITE=$(tput setab 7)
-
+	BG_LIGHTGREY=$(tput setab 138)
+	BG_VERYDARKGREY=$(tput setab 234)
 	BG_DEEPPURPLE=$(tput setab 17)
 
 	# Combinations

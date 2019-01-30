@@ -30,22 +30,24 @@ if [[ -d "/vagrant" ]]; then
 	export GIT_PS1_SHOWUNTRACKEDFILES=
 fi
 
-# Highlight the user name when logged in as root.
+PS1_BACKGROUND=''
 USER_STYLE='\[${GREEN}\]';
 USER_BANG='\[${CYAN}${BOLD}\]\$'
+HOST_STYLE='\[${BLUE}${BOLD}\]';
+PS1_PATH=''
+
+# Highlight the hostname when connected via SSH.
+if [[ "${HAS_SSH}" ]]; then
+	PS1_BACKGROUND='\[${BG_VERYDARKGREY}\]'
+	USER_STYLE='\[${RED}ssh://${VERYLIGHTGREY}\]';
+	USER_BANG='\[${WHITE}\]#'
+	HOST_STYLE='\[${UNDERLINE}${BBLUE}\]';
+fi
+
+# Highlight the user name when logged in as root.
 if [[ "${USER}" == "root" ]]; then
 	USER_STYLE='\[${RED}\]';
 	USER_BANG='\[${RED}\]#'
-fi
-
-# Highlight the hostname when connected via SSH.
-PS1_BACKGROUND=''
-HOST_STYLE='\[${BLUE}${BOLD}\]';
-if [[ "${HAS_SSH}" ]]; then
-	USER_STYLE='\[${WHITE}\]';
-	USER_BANG='\[${RED}\]%'
-	PS1_BACKGROUND='\[${BG_DEEPPURPLE}\]'
-	HOST_STYLE='\[${WHITE}${BOLD}\]://\[${BBLUE}\]';
 fi
 
 ##
