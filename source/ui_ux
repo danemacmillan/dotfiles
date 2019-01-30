@@ -58,6 +58,8 @@ if tty -s ; then
 	BG_CYAN=$(tput setab 6)
 	BG_WHITE=$(tput setab 7)
 
+	BG_DEEPPURPLE=$(tput setab 17)
+
 	# Combinations
 	BBLUE="${BOLD}${BLUE}"
 	BCYAN="${BOLD}${CYAN}"
