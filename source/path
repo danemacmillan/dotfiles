@@ -90,6 +90,9 @@ fi
 if [[ -e "/usr/local/lib/ruby/gems/2.6.0/bin" ]]; then
 	export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 fi
+if [[ -e "${XDG_DATA_HOME}/gem/bin" ]]; then
+	export PATH="${XDG_DATA_HOME}/gem/bin:${PATH}"
+fi
 
 ##
 # Rust
