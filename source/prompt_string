@@ -39,7 +39,7 @@ PS1_PATH=''
 # Highlight the hostname when connected via SSH.
 if [[ "${HAS_SSH}" ]]; then
 	PS1_BACKGROUND='\[${BG_VERYDARKGREY}\]'
-	USER_STYLE='\[${RED}ssh://${VERYLIGHTGREY}\]';
+	USER_STYLE='\[${RED}ssh://${WHITEISHGREY}\]';
 	USER_BANG='\[${WHITE}\]#'
 	HOST_STYLE='\[${UNDERLINE}${BBLUE}\]';
 fi

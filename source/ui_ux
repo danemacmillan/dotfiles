@@ -43,7 +43,8 @@ if tty -s ; then
 	CYAN=$(tput setaf 6)
 	WHITE=$(tput setaf 7)
 	LIGHTGREY=$(tput setaf 138)
-	VERYLIGHTGREY=$(tput setaf 239)
+	DARKISHGREY=$(tput setaf 239)
+	WHITEISHGREY=$(tput setaf 242)
 	DARKGREY=$(tput setaf 238)
 
 	# Background
