@@ -49,6 +49,10 @@ if [[ $- == *i* ]] \
 fi
 
 ##
+# GNUPG
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+
+##
 # Set bash history configs
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
