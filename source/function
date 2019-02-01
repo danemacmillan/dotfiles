@@ -111,6 +111,9 @@ ln_relative()
 #
 # background "echo "foo" && echo "bar""
 #
+# Note that this works well with the jobs, fg, and bg commands, as well as
+# Ctrl+Z.
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
