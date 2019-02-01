@@ -118,7 +118,7 @@ background()
 {
 	local commands="${@}"
 
-	nohup bash -c "${commands}" >> "${XDG_RUNTIME_DIR}/background.nohup.log" 2>&1 &
+	nohup bash -lc "${commands}" >> "${XDG_RUNTIME_DIR}/background.nohup.log" 2>&1 &
 }
 
 ##
