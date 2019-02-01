@@ -102,6 +102,26 @@ ln_relative()
 }
 
 ##
+# Call process with nohup, and execute using bash, so loops can work.
+#
+# This runs a process in the background.
+#
+# In order to pass chained commands, wrap entire string in double quotation
+# marks. For example:
+#
+# background "echo "foo" && echo "bar""
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+background()
+{
+	local commands="${@}"
+
+	nohup bash -c "${commands}" >> "${XDG_RUNTIME_DIR}/background.nohup.log" 2>&1 &
+}
+
+##
 # Calculate MD5 hashes regardless of tool, and ensure identical output.
 #
 # The file contents themselves are hashed when a valid file path is provided,
