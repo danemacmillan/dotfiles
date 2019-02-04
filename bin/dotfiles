@@ -35,6 +35,7 @@ echo -e "${BLUE}${BOLD}Cleaning up any legacy dotfiles data.${RESET}"
 unalias dotfiles 2&>/dev/null
 symlinks -d "${HOME}" 2&>/dev/null
 symlinks -d "${HOME}/bin" 2&>/dev/null
+[[ -d "${HOME}/.dotfiles-packages" ]] && rm -rf "${HOME}/.dotfiles-packages"
 [[ -L "${HOME}/.gitconfig" ]] && unlink "${HOME}/.gitconfig"
 [[ -L "${HOME}/.gitignore" ]] && unlink "${HOME}/.gitignore"
 [[ -f "${HOME}/.hgrc.local" ]] && rm "${HOME}/.hgrc.local"
