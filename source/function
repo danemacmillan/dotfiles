@@ -37,6 +37,7 @@ command_exists()
 now()
 {
 	echo $(date +'%Y%m%d%H%M%S-%b-%d-%a-%H%M')
+	#echo $(date +\%Y\%m\%d\%H\%M\%S-\%b-\%d-\%a-\%H\%M)
 }
 
 ##

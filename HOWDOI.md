@@ -195,3 +195,14 @@ adequate logging in place.
 
 ## Grant permissions in MySQL
 
+## Manage and tune NFS
+
+- Ensure it starts at boot: `chkconfig nfs on && service rpcbind start && service nfs start`
+- Add new export as specific user and id: `/data 10.0.0.0/8(rw,sync,no_subtree_check,all_squash,anonuid=503,anongid=504)`
+- Re-export NFS `/etc/exports`: `exportfs -a`
+- Mount all from `/etc/fstab`: `mount -a`
+- Check how many threads: 'cat /proc/fs/nfsd/threads' or `ps aux |grep nfs`
+- Configure number of threads for reboot: `/etc/sysconfig/nfs` then `RPCNFSDCOUNT`
+- Update number of threads without reboot: `rpc.nfsd [threads]` or edit `/proc/fs/nfsd/threads`
+- Check stats: `nfsstat`
+
