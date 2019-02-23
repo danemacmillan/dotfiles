@@ -98,6 +98,11 @@ alias ctags='\ctags --recurse=yes --tag-relative=yes --exclude=.git --exclude=.s
 alias dig='\dig +nocmd any +multiline +noall +answer'
 
 ##
+# exiftool and ffmpeg
+alias strip_metadata_image="exiftool -all= "
+#alias strip_metadata_video="ffmpeg -i IMG_4128.mov -map_metadata -1 -c:v copy -c:a copy out.mov"
+
+##
 # Exit
 #
 # The myriad ways in which I like to exit a shell. My E-key is somewhat busted.
