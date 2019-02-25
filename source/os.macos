@@ -12,8 +12,8 @@ osascript -e 'tell application "System Preferences" to quit'
 
 defaults write com.apple.Dock autohide-delay -float 0
 # Faster keyboard repeat rate.
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write -g KeyRepeat -int 1
+defaults write -g InitialKeyRepeat -int 10
 
 # Ensure character suggestions for accents are enabled.
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
