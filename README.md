@@ -106,8 +106,8 @@ dotfiles
 │   ├── /.config  -> ${XDG_CONFIG_HOME}
 │   ├── /.local   -> ${XDG_DATA_HOME}
 │   └── /bin      -> Miscellaneous executable scripts. Available in $PATH.
-├── /source       -> Core scripts sourced by dotfiles.
-└── bootstap      -> Core bootstrap file that connects everything.
+└── /source       -> Core scripts sourced by dotfiles.
+    └──bootstap   -> Bootstrap file that connects everything.
 ```
 
 #### `dotfiles/home`
