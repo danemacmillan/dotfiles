@@ -94,9 +94,9 @@ if [[ ! -e "${XDG_DATA_HOME}/vim" ]] ; then
 	mkdir -p "${XDG_DATA_HOME}"/vim/{autoload,backup,plugged,swap,undo}
 fi
 
-if [[ ! -e "${HOME}/bin" ]]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/bin' directory.${RESET}"
-	mkdir -p "${HOME}/bin"
+if [[ ! -e "${XDG_BIN_HOME}" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_BIN_HOME}' directory.${RESET}"
+	mkdir -p "${XDG_BIN_HOME}"
 fi
 
 # Note that this will likely already be created by the
