@@ -468,7 +468,7 @@ backup()
 
   date
   echo 'Syncing to iCloud Drive...'
-  rclone sync ~/hack/vagrantshell/sites/phoenix.vagrant.test/.idea/ ~/Documents/hack/phpstorm/phoenix.vagrant.test/.idea/ --transfers 10 --bwlimit off --checksum
+  #rclone sync ~/hack/vagrantshell/sites/phoenix.vagrant.test/.idea/ ~/Documents/hack/phpstorm/phoenix.vagrant.test/.idea/ --transfers 10 --bwlimit off --checksum
   rclone move ~/Library/Group\ Containers/2BUA8C4S2C.com.agilebits/Library/Application\ Support/1Password/Backups/ ~/iCloud/Archives/1password/ --transfers 10 --bwlimit off
   if [[ -e "~/iCloud/.home/Library/Preferences" ]]; then
 	  rclone sync ~/Library/Preferences/ ~/iCloud/.home/Library/Preferences/ --transfers 10 --bwlimit off --copy-links
