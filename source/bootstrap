@@ -93,6 +93,14 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	# Change path for storing bash history.
 	export DOTFILES_BASH_HISTORY_PATH="${XDG_DATA_HOME}/bash/${DOTFILES_HOSTNAME}.${USER}.history"
 
+	# Old version used all domain information in hostname, and new version
+	# does not. If the old, full version does not exist, use the new short
+	# version. This will allow the user to upgrade when they want.
+	if [[ ! -e "${DOTFILES_BASH_HISTORY_PATH}" ]]; then
+		export DOTFILES_HOSTNAME=$(hostname -s)
+		export DOTFILES_BASH_HISTORY_PATH="${XDG_DATA_HOME}/bash/${DOTFILES_HOSTNAME}.${USER}.history"
+	fi
+
 	# This is where all local configs are stored.
 	export DOTFILES_LOCAL_CONFIGS_PATH="${XDG_DATA_HOME}/dotfiles"
 
