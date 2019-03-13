@@ -19,7 +19,6 @@ _vshell()
 		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 		return 0
 	fi
-}
-
+} &&
 complete -F _vshell vshell
 

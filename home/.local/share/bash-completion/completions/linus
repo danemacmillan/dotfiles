@@ -4,7 +4,7 @@
 # Read: https://github.com/scop/bash-completion#faq
 #
 # @author Dane MacMillan <work@danemacmillan.com>
-if command_exists linus; then
+if command -v "linus" >/dev/null 2>&1; then
 	eval $(linus _completion -g -p linus)
 
 	if php -m |grep -q xdebug; then
