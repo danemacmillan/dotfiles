@@ -218,6 +218,11 @@ fi
 #
 # This allows multiple host-specific configurations to exist, but only become
 # active if the dot-prefixed file name matches the hostname of the machine.
+#
+# Note that the full hostname is added for backwards-compatibility. The new
+# version called in DOTFILES_HOSTNAME uses the short hostname.
 if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell.local" ]]; then
 	source "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell.local"
+elif [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/$(hostname -f).shell.local" ]]; then
+	source "${DOTFILES_LOCAL_CONFIGS_PATH}/$(hostname -f).shell.local"
 fi
