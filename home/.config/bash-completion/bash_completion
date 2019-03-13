@@ -21,6 +21,18 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 
+# Pull in bash completion from version 2 location, and have these loaded
+# eagerly. Note that this particular file also needs to be either symlinked
+# into the v1 path at /etc/bash_completion.d, or a ~/.bash_completion file
+# should source this one.
+if [[ "${BASH_COMPLETION_VERSINFO}" != "2" ]]; then
+	if [[ -e "${XDG_DATA_HOME}/bash-completion/completions" ]]; then
+		for completion_file in "${XDG_DATA_HOME}/bash-completion/completions/"*; do
+			source "${completion_file}"
+		done
+	fi
+fi
+
 # Source google-cloud-sdk gcloud utilities
 # https://cloud.google.com/sdk/docs/quickstarts
 if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ]]; then
@@ -68,3 +80,4 @@ elif type compctl &>/dev/null; then
   compctl -K _pm2_completion + -f + pm2
 fi
 ###-end-pm2-completion-###
+
