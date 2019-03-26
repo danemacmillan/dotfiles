@@ -31,6 +31,13 @@ export VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc"
 export PROJECTS_PATH="${HOME}/projects"
 
 ##
+# Define the currently most popular project path, if it makes sense.
+#
+# This will be used in CDPATH, and accessible via the `ppp` alias. This can be
+# left blank. Define it in `$XDG_DATA_HOME/dotfiles/shell.local`.
+export PROJECTS_PATH_POPULAR=""
+
+##
 # Color
 # BSD LSCOLORS for MacOS.
 export CLICOLOR=1
