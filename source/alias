@@ -228,6 +228,7 @@ alias xdg='printenv | grep XDG | sort'
 
 alias h='cd ${HOME}'
 alias p='cd ${PROJECTS_PATH}'
+alias ppp='cd ${PROJECTS_PATH_POPULAR}'
 
 ################################################################################
 
