@@ -246,3 +246,13 @@ if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/${DOTFILES_HOSTNAME}.shell.local" ]]; t
 elif [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/$(hostname -f).shell.local" ]]; then
 	source "${DOTFILES_LOCAL_CONFIGS_PATH}/$(hostname -f).shell.local"
 fi
+
+##
+# Set the CD paths to search when providing tab completion.
+#
+# Note that this is deliberately NOT exported, because the value of this
+# environment variable is really only important on interactive shells, but can
+# critically break scripts that do not expect the $CDPATH to be anything other
+# than the present working directory.
+CDPATH=":${CDPATH}:.:${HOME}:${PROJECTS_PATH}:${PROJECTS_PATH_POPULAR}"
+
