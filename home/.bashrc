@@ -28,13 +28,18 @@ export VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc"
 
 ##
 # Location of projects. The `p` alias changes to this path.
+#
+# This path is also added to CDPATH for subdirectory completion from anywhere.
+#
+# This can be modified in the $XDG_DATA_HOME/dotfiles/shell.local file.
 export PROJECTS_PATH="${HOME}/projects"
 
 ##
-# Define the currently most popular project path, if it makes sense.
+# Location of most popular project path. The `ppp` alias changes to this path.
 #
-# This will be used in CDPATH, and accessible via the `ppp` alias. This can be
-# left blank. Define it in `$XDG_DATA_HOME/dotfiles/shell.local`.
+# This path is also added to CDPATH for subdirectory completion from anywhere.
+#
+# This can be modified in the $XDG_DATA_HOME/dotfiles/shell.local file.
 export PROJECTS_PATH_POPULAR=""
 
 ##
@@ -253,6 +258,7 @@ fi
 # Note that this is deliberately NOT exported, because the value of this
 # environment variable is really only important on interactive shells, but can
 # critically break scripts that do not expect the $CDPATH to be anything other
-# than the present working directory.
-CDPATH=":${CDPATH}:.:${HOME}:${PROJECTS_PATH}:${PROJECTS_PATH_POPULAR}"
+# than the present working directory. Also, this always ensures that the
+# present working directory is first, regardless of anything else being set.
+CDPATH=":.:${HOME}:${PROJECTS_PATH}:${PROJECTS_PATH_POPULAR}:${CDPATH}:"
 
