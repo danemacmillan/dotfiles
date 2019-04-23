@@ -126,10 +126,12 @@ command_exists hub && alias git="hub"
 #alias grewritelast='GIT_COMMITTER_DATE="$(date -d \'24 hours ago\')" git commit --amend --date "$(date -d \'24 hours ago\')" && git push --force'
 # Using custom loop function that will operate in eacch subdirectory,
 # merge canonical branches up to either develop, stage, or master.
-alias ldevelop="loop 'git checkout develop' 'git pull'"
-alias lstage="loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout develop'"
-alias lmaster="loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout master' 'git pull' 'git merge stage' 'git push' 'git checkout develop'"
-alias branches="loop 'git symbolic-ref --short HEAD'"
+alias lmdevelop="ppp && loop 'git checkout develop' 'git pull'"
+alias lmstage="ppp && loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout develop'"
+alias lmmaster="ppp && loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout master' 'git pull' 'git merge stage' 'git push' 'git checkout develop'"
+alias lbranches="ppp && loop 'git symbolic-ref --short HEAD'"
+alias lstatus="ppp && loop 'git s'"
+alias gitmergecurrentbranchtodevelop="git checkout develop && git pull && git checkout - && git pull && git merge develop && git checkout develop && git merge - && git push && git checkout -"
 
 ##
 # Grep
