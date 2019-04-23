@@ -16,7 +16,7 @@ version="v1.4.3"
 if [[ -n "$1" ]]; then
 	version="$1"
 fi
-source_url="git@github.com:brandt/symlinks.git"
+source_url="https://github.com/brandt/symlinks.git"
 source_directory="${DPM_INSTALL_DIRECTORY}/${name}"
 
 echo -e "${RESET}${BBLUE}Downloading, compiling, and installing ${name} ${GREEN}${version}${RESET}"

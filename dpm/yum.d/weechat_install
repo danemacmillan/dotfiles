@@ -22,7 +22,7 @@ version="v1.7"
 if [[ -n "$1" ]]; then
 	version="$1"
 fi
-source_url="git@github.com:weechat/weechat.git"
+source_url="https://github.com/weechat/weechat.git"
 source_directory="${DPM_INSTALL_DIRECTORY}/${name}"
 
 echo -e "${RESET}${BBLUE}Removing any existing version of ${name}${RESET}"
