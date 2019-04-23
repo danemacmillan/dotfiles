@@ -21,7 +21,7 @@
 
 # This should only be defined once. This script being sourced from other places,
 # so this ensures no extraneous calls.
-if [[ -z ${DOTFILES_PATH} ]]; then
+#if [[ -z ${DOTFILES_PATH} ]]; then
 	##
 	# Get the absolute root directory path to the current script.
 	#
@@ -114,7 +114,7 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 		linux*)
 			OS='nix';;
 	esac
-fi
+#fi
 
 # Update PATH.
 if [[ -e "${DOTFILES_PATH}/source/path" ]]; then
