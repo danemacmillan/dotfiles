@@ -12,19 +12,21 @@ source "${HOME}/.dotfiles/source/bootstrap"
 # Modify Bash shell behaviour using shopt built-in.
 # https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html#The-Shopt-Builtin
 #
+# Output is piped to dev/null to prevent old versions of bash complaining.
+
 # Make sure aliases expand in non-interactive mode. For example, when running
 # ssh remote-address "ll"
-shopt -s expand_aliases
+shopt -s expand_aliases 2&>/dev/null
 #
 # Case-insensitive globbing
-shopt -s nocaseglob
+shopt -s nocaseglob 2&>/dev/null
 #
 # Attempt to fix spellng.
-shopt -s cdspell
-shopt -s dirspell
+shopt -s cdspell 2&>/dev/null
+shopt -s dirspell 2&>/dev/null
 #
 # Change directory without typing `cd` built-in.
-shopt -s autocd
+shopt -s autocd 2&>/dev/null
 
 ##
 # Set default editor
