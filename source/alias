@@ -40,8 +40,8 @@ lsdirfirst()
 alias lll="ls --color --group-directories-first ${LS_DEFAULTS} ${LS_IGNORES}"
 alias ll="lsdirfirst ${LS_DEFAULTS}"
 alias kk="ll"
-# Sort by newest first.
-alias llt="ls --color ${LS_DEFAULTS}t ${LS_IGNORES}"
+# Sort by newest last. Scroll up to see oldest.
+alias llt="ls --color ${LS_DEFAULTS}tr ${LS_IGNORES}"
 # Sort by extension.
 alias llx="lsdirfirst ${LS_DEFAULTS}X"
 
