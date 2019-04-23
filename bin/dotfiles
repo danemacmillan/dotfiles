@@ -153,12 +153,12 @@ ln_relative "${DOTFILES_PATH}/home/.editorconfig" "${HOME}/"
 #
 # This will be placed in the user home directory if the iCloud Drive
 # directory path exists. This will only exist on MacOS.
-if [[ ! -e "${HOME}/iCloud" ]] \
-	&& [[ -e "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" ]] \
-; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/iCloud' symlink.${RESET}"
-	ln_relative "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
-fi
+#if [[ ! -e "${HOME}/iCloud" ]] \
+#	&& [[ -e "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" ]] \
+#; then
+#	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/iCloud' symlink.${RESET}"
+#	ln_relative "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
+#fi
 
 ##
 # Install dotfiles package manager packages.
