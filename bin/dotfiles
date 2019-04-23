@@ -15,6 +15,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap" && cd - >/de
 #  - abstract into function.
 #  - do symlinking with cp command so no need to manually track files.
 echo -e "${BLUE}${BOLD}Running dotfiles chores...${RESET}"
+echo "DOTFILES_PATH: ${DOTFILES_PATH}"
 
 ##
 # Update repo from upstream.

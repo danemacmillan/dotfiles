@@ -42,7 +42,7 @@ call plug#begin('$XDG_DATA_HOME/vim/plugged')
 
 	Plug 'stanangeloff/php.vim'
 	Plug 'jetbrains/phpstorm-stubs'
-	Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+	"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 	"Plug 'w0rp/ale'
 
 	Plug 'vim-airline/vim-airline'
