@@ -19,7 +19,7 @@ echo -e "${BLUE}${BOLD}Running dotfiles chores...${RESET}"
 ##
 # Update repo from upstream.
 echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
-#(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
+(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
 
 ##
 # Ensure any file changes are immediately reflected in current environment.
