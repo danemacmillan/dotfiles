@@ -233,11 +233,11 @@ elif [[ -e "/etc/bash_completion" ]]; then
 	# ${HOME}/.bash_completion can also just be created, but the goal of thee
 	# dotfiles is to follow the XDG spec as closely as possible, in an effort to
 	# clean up the home directory.
-	if [[ "${BASH_COMPLETION_VERSINFO}" != "2" ]] \
-		&& [[ ! -e "/etc/bash_completion.d/bash_completion.${USER}" ]] \
-	; then
-		sudo ln -s "${BASH_COMPLETION_USER_FILE}" "/etc/bash_completion.d/bash_completion.${USER}"
-	fi
+	#if [[ "${BASH_COMPLETION_VERSINFO}" != "2" ]] \
+	#	&& [[ ! -e "/etc/bash_completion.d/bash_completion.${USER}" ]] \
+	#; then
+	#	sudo ln -s "${BASH_COMPLETION_USER_FILE}" "/etc/bash_completion.d/bash_completion.${USER}"
+	#fi
 
 	source "/etc/bash_completion"
 fi
