@@ -62,6 +62,12 @@ if [[ -d "/usr/local/opt/php@7.1/sbin" ]]; then
 fi
 
 ##
+# Python version 3.6.
+if [[ -d "/usr/local/opt/python36/bin" ]]; then
+	export PATH="/usr/local/opt/python36/bin:${PATH}"
+fi
+
+##
 # MySQL 5.6
 if [[ -d "/usr/local/opt/mysql@5.6/bin" ]]; then
 	export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
