@@ -68,6 +68,7 @@ php@7.1
 pidof
 pv
 python
+sashkab/python/python36
 #ranger
 rclone
 readline
