@@ -206,3 +206,13 @@ adequate logging in place.
 - Update number of threads without reboot: `rpc.nfsd [threads]` or edit `/proc/fs/nfsd/threads`
 - Check stats: `nfsstat`
 
+## Create a local SSH tunnel to a remote service listening on given port
+
+This example creates a locally listening tunnel on IP address `127.0.0.1` and 
+port `3333`. Any connections made to it are then tunnelled to domain/IP address
+`remote.io` on port `55555`. In this case, a connection made to 
+`127.0.0.1:3333` are forwarded to (likely) a remote instance of MySQL.
+
+- `ssh -L 3333:127.0.0.1:3306 danemacmillan@remote.io -p55555`
+
+
