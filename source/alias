@@ -129,9 +129,12 @@ command_exists hub && alias git="hub"
 alias lmdevelop="ppp && loop 'git checkout develop' 'git pull'"
 alias lmstage="ppp && loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout develop'"
 alias lmmaster="ppp && loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout master' 'git pull' 'git merge stage' 'git push' 'git checkout develop'"
-alias lbranches="ppp && loop 'git symbolic-ref --short HEAD'"
-alias lstatus="ppp && loop 'git s'"
+alias lbranches="ppp && loop 'git symbolic-ref --short HEAD' && cd -"
+alias lstatus="ppp && loop 'git s' && cd -"
 alias gitmergecurrentbranchtodevelop="git checkout develop && git pull && git checkout - && git pull && git merge develop && git checkout develop && git merge - && git push && git checkout -"
+alias git_loop_pull="loop 'git pull'"
+alias git_loop_repos_merge_up_canonicals_to_master="loop 'git checkout develop' 'git pull' 'git checkout stage' 'git pull' 'git merge develop' 'git push' 'git checkout master' 'git pull' 'git merge stage' 'git push' 'git checkout develop'"
+
 
 ##
 # Grep
