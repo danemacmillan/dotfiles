@@ -648,3 +648,9 @@ key_bindings:
   - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                      }
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                      }
   - { key: NumpadEnter,             chars: "\n"                              }
+
+  # @danemacmillan custom.
+  # Restore tmux keybinding for swapping windows: https://github.com/jwilm/alacritty/issues/1385
+  - { key: Left,     mods: Control|Shift,   chars: "\x1b[1;6D"           }
+  - { key: Right,    mods: Control|Shift,   chars: "\x1b[1;6C"           }
+
