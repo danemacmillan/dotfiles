@@ -19,7 +19,7 @@ source "${DOTFILES_BOOTSTRAP_FILE}"
 # @license MIT
 #
 name="tmux"
-version="2.8"
+version="2.9a"
 if [[ -n "$1" ]]; then
 	version="$1"
 fi
@@ -33,9 +33,9 @@ yum -y remove tmux
 if ! command_exists tmux ; then
     echo -e "${RESET}${BBLUE}Downloading, compiling, and installing ${name} ${GREEN}${version}${RESET}"
     cd "${DPM_INSTALL_DIRECTORY}" \
-    && wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz \
-    && tar -xf libevent-2.1.8-stable.tar.gz \
-    && cd libevent-2.1.8-stable \
+    && wget https://github.com/libevent/libevent/releases/download/release-2.1.10-stable/libevent-2.1.10-stable.tar.gz \
+    && tar -xf libevent-2.1.10-stable.tar.gz \
+    && cd libevent-2.1.10-stable \
     && ./configure --prefix=/usr/local \
     && make \
     && sudo make install \
