@@ -134,7 +134,20 @@ FILE 00;38;5;252
 RESET 0
 
 # Directories
-DIR 01;38;5;33
+#DIR 01;38;5;33
+# Color (75) between MacOS folder icon and Finder icon.
+DIR 01;38;5;75
+
+# Directory that is sticky and other-writable (+t,o+w).
+STICKY_OTHER_WRITABLE 48;5;64;38;5;230
+
+# Directory that is other-writable (o+w) and not sticky.
+# This is typically a shared directory.
+#OTHER_WRITABLE 48;5;02;38;5;20
+OTHER_WRITABLE 48;5;75;38;5;16;01
+
+# Directory with the sticky bit set (+t) and not other-writable.
+STICKY 48;5;33;38;5;230
 
 # Symbolic link. (If you set this to 'target' instead of a numerical value, the color is as for the file pointed to.)
 LINK target
@@ -169,15 +182,6 @@ SETGID 48;5;136;38;5;230
 
 # File with capability.
 CAPABILITY 30;41
-
-# Directory that is sticky and other-writable (+t,o+w).
-STICKY_OTHER_WRITABLE 48;5;64;38;5;230
-
-# Directory that is other-writable (o+w) and not sticky.
-OTHER_WRITABLE 48;5;02;38;5;20
-
-# Directory with the sticky bit set (+t) and not other-writable.
-STICKY 48;5;33;38;5;230
 
 # Files with execute permission.
 EXEC 01;38;5;203
@@ -333,17 +337,17 @@ EXEC 01;38;5;203
 .incomplete 05;38;5;238
 
 # Files offloaded to iCloud
-.icloud 01;48;5;17;38;5;12
+.icloud 48;5;17;38;5;116;01
 
 # Miscellaneous files to highlight
 .pdf 00;38;5;196
 .txt 00;38;5;255
-.doc 00;38;5;111
-.docx 00;38;5;111
-.docm 00;38;5;111
-.xlsx 00;38;5;111
-.numbers 00;38;5;111
-.pages 00;38;5;111
+.doc 00;38;5;67
+.docx 00;38;5;67
+.docm 00;38;5;67
+.xlsx 00;38;5;67
+.numbers 00;38;5;67
+.pages 00;38;5;67
 
 # Miscellaneous media files
 .mp3 01;38;5;28
