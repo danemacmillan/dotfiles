@@ -17,6 +17,8 @@ defaults write -g InitialKeyRepeat -int 10
 
 # Ensure character suggestions for accents are enabled.
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
 # Speed up Mission Control animation. Note that MacOS Sierra seems to ignore this.
 defaults write com.apple.dock expose-animation-duration -float 0
 
