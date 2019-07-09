@@ -10,18 +10,18 @@
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
-defaults write com.apple.Dock autohide-delay -float 0
 # Faster keyboard repeat rate.
 defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
-
 # Ensure character suggestions for accents are enabled.
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Speed up Mission Control animation. Note that MacOS Sierra seems to ignore this.
 defaults write com.apple.dock expose-animation-duration -float 0
 
+# Speed up Dock reveal and hide.
+defaults write com.apple.Dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.50
 # Change location of screenshots
 if [[ -e "${HOME}/Documents/screenshots" ]]; then
 	defaults write com.apple.screencapture location "${HOME}/Documents/screenshots"
