@@ -22,6 +22,17 @@ defaults write com.apple.dock expose-animation-duration -float 0
 # Speed up Dock reveal and hide.
 defaults write com.apple.Dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0.50
+
+# Modify Apple's Notes app so it works more like a text editor.
+defaults write com.apple.Notes ShouldContinuouslyCheckSpelling -bool false
+defaults write com.apple.Notes ShouldCorrectSpellingAutomatically -bool false
+defaults write com.apple.Notes ShouldPerformTextReplacement -bool false
+defaults write com.apple.Notes ShouldUseDataDetectors -bool false
+defaults write com.apple.Notes ShouldUseSmartCopyPaste -bool false
+defaults write com.apple.Notes ShouldUseSmartDashes -bool false
+defaults write com.apple.Notes ShouldUseSmartQuotes -bool false
+defaults write com.apple.Notes alwaysShowLightContent -bool false
+
 # Change location of screenshots
 if [[ -e "${HOME}/Documents/screenshots" ]]; then
 	defaults write com.apple.screencapture location "${HOME}/Documents/screenshots"
