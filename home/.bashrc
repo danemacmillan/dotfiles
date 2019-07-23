@@ -131,9 +131,9 @@ export WEECHAT_HOME="${XDG_CONFIG_HOME}/weechat"
 ##
 # Set common rclone options as environment variables.
 # @see https://github.com/ncw/rclone/blob/master/MANUAL.md#environment-variables
-export RCLONE_BWLIMIT="07:00,512 17:00,1M 21:00,1M 23:00,1.5M 01:00,2.5M"
-export RCLONE_CHECKERS=8
-export RCLONE_DRIVE_CHUNK_SIZE=64M
+#export RCLONE_BWLIMIT="07:00,512 17:00,1M 21:00,1M 23:00,1.5M 01:00,2.5M"
+#export RCLONE_CHECKERS=8
+export RCLONE_DRIVE_CHUNK_SIZE=256M
 export RCLONE_DRIVE_USE_TRASH=true
 export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache,*.icloud,com.apple.homed.plist,com.apple.homed.notbackedup.plist}"
 export RCLONE_SKIP_LINKS=true
