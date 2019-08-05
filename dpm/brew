@@ -64,6 +64,7 @@ netperf
 nmap
 node
 openssl
+pass
 pcre
 php@7.1
 pidof
