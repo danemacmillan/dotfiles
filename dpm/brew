@@ -79,6 +79,7 @@ rlwrap
 rsync
 ssh-copy-id
 siege
+stow
 terminal-notifier
 tmux
 tree
