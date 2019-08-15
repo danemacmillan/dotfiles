@@ -285,7 +285,7 @@ newsshkey()
 		KEY_PASSPHRASE="$2"
 	fi
 
-	ssh-keygen -b ${KEY_STRENGTH} -f ${KEY_PATH} -C ${KEY_COMMENT} -N "${KEY_PASSPHRASE}"
+	ssh-keygen -b ${KEY_STRENGTH} -f ${KEY_PATH} -C ${KEY_COMMENT} -N "${KEY_PASSPHRASE}" -m PEM
 
 	echo -e "\nUsername:" \"${KEY_USER}\"
 	echo -e "\nPassphrase:" \"${KEY_PASSPHRASE}\"
