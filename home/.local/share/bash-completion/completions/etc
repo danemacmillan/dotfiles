@@ -1,24 +1,23 @@
 ##
-# Custom completion for vshell command.
+# Custom completion for etc command.
 #
-# The vshell command is part of the VagrantShell repo located at
-# https://github.com/danemacmillan/vagrantshell
+# The etc command is part of the .config/etc location for server configs.
 #
 # Read: https://github.com/scop/bash-completion#faq
 #
 # @author Dane MacMillan <work@danemacmillan.com>
-_vshell()
+_etc()
 {
 	local cur prev opts
 	COMPREPLY=()
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
-	opts="help map restart update xdebug xhprof"
+	opts="help map restart xdebug"
 
 	if [[ ${cur} == * ]] ; then
 		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 		return 0
 	fi
 } &&
-complete -F _vshell vshell
+complete -F _etc etc
 
