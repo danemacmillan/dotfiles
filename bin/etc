@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+
+##
+# etc - 3.0.0
+#
+# `etc` provides a basic Bash utility for managing configs and updates.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @since 3.0.0
+#
+
+tool_name="etc"
+tool_version="3.0.0"
+
+# Explain how to use this tool.
+etc_usage()
+{
+cat << EOF
+$tool_name $tool_version
+'$tool_name' is used for managing daemon configs on current system.
+
+Usage:
+ $tool_name [ Options ]
+
+Options:
+ help                Show this usage message.
+ map                 Map contents of ${XDG_CONFIG_HOME}/etc/macos into core ${HOMEBREW_INSTALL_PATH}/etc.
+ restart             Restart multiple daemons.
+ xdebug              Toggle PHP Xdebug on or off.
+
+Examples:
+ Map new local config files added
+   $tool_name map
+
+EOF
+}
+
+etc_map()
+{
+	local local_etc="${XDG_CONFIG_HOME}/etc/macos"
+	local target_etc="${HOMEBREW_INSTALL_PATH}/etc"
+
+	echo -e "Mapping configs into ${target_etc}"
+	# Remap them. Handle "cp: cannot overwrite non-directory
+	# `/symlink/path' with directory `/hard/path'. Use anonymous pipes to pipe
+	# stderr only to command.
+	'cp' -vRsf "${local_etc}"/* "${target_etc}" 2> >(HANDLESYM=$(cut -d "\`" -f2 | cut -d "'" -f1); [ $HANDLESYM ] && echo -e "Fixing symlink: $HANDLESYM" && unlink $HANDLESYM)
+	# Run again to update unlinked content
+	'cp' -Rsf "${local_etc}"/* "${target_etc}"
+
+	# Clean up any backups that are just symlinks.
+	#find "${target_etc}" -type l -name "*.~[1-9]~" -exec unlink {} \;
+
+	# Remove all dangling symlinks
+	echo -e "Removing dangling symlinks."
+	symlinks -rd "${target_etc}" &> /dev/null
+}
+
+etc_restart()
+{
+	echo -e "Reloading service configs."
+	brew services restart nginx
+	brew services restart php@7.1
+	brew services restart mysql@5.7
+	brew services restart redis@3.2
+  # no varnish yet because version is too high.
+  brew services list
+}
+
+etc_xdebug()
+{
+  echo "This has not been created yet."
+
+#	local xdebug_location="/etc/php.d/15-xdebug.ini"
+#
+#	if grep -q ";zend_extension" "$xdebug_location"; then
+#		echo "Toggling Xdebug on."
+#		sudo sed -i --follow-symlinks -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
+#	else
+#		echo "Toggling Xdebug off."
+#		sudo sed -i --follow-symlinks -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
+#	fi
+#
+#	sudo /etc/init.d/php-fpm reload
+}
+
+##
+# Handle simple options (no need for getopts)
+#
+# No need for passing multiple options at once.
+
+if [[ "$1" == "help" ]]; then
+	etc_usage
+fi
+
+if [[ "$1" == "map" ]]; then
+	etc_map
+fi
+
+if [[ "$1" == "restart" ]]; then
+	etc_restart
+fi
+
+if [[ "$1" == "xdebug" ]]; then
+	etc_xdebug
+fi
+
+# Default show usage help
+if [[ -z "$1" ]]; then
+	etc_usage
+fi
