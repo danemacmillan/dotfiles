@@ -27,9 +27,9 @@ if [[ -e "/etc/paths" ]]; then
 	export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 fi
 
-if [[ -e "/Library/Frameworks/Mono.framework/Versions/Current/Commands" ]]; then
-	export PATH="/Library/Frameworks/Mono.framework/Versions/Current/Commands:$PATH"
-fi
+#if [[ -e "/Library/Frameworks/Mono.framework/Versions/Current/Commands" ]]; then
+#	export PATH="/Library/Frameworks/Mono.framework/Versions/Current/Commands:$PATH"
+#fi
 
 ##
 # On MacOS, add GNU coreutils and other GNU tools to the path, instead of
