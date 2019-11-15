@@ -69,19 +69,17 @@ etc_restart()
 
 etc_xdebug()
 {
-  echo "This has not been created yet."
+	local xdebug_location="/usr/local/etc/php/7.1/conf.d/ext-xdebug.ini"
 
-#	local xdebug_location="/etc/php.d/15-xdebug.ini"
-#
-#	if grep -q ";zend_extension" "$xdebug_location"; then
-#		echo "Toggling Xdebug on."
-#		sudo sed -i --follow-symlinks -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
-#	else
-#		echo "Toggling Xdebug off."
-#		sudo sed -i --follow-symlinks -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
-#	fi
-#
-#	sudo /etc/init.d/php-fpm reload
+	if grep -q ";zend_extension" "$xdebug_location"; then
+		echo "Toggling Xdebug on."
+		sed -i --follow-symlinks -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
+	else
+		echo "Toggling Xdebug off."
+		sed -i --follow-symlinks -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
+	fi
+
+	brew services restart php@7.1
 }
 
 ##

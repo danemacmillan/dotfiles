@@ -142,7 +142,7 @@ ln_relative "${DOTFILES_PATH}/home/.local/bin/diff-so-fancy" "${XDG_BIN_HOME}/"
 ln_relative "${DOTFILES_PATH}/home/.local/bin/imgcat" "${XDG_BIN_HOME}/"
 ln_relative "${DOTFILES_PATH}/home/.local/bin/ydiff" "${XDG_BIN_HOME}/"
 ln_relative "${DOTFILES_PATH}/home/.local/share/bash-completion/completions/linus" "${XDG_DATA_HOME}/bash-completion/completions/"
-ln_relative "${DOTFILES_PATH}/home/.local/share/bash-completion/completions/etc" "${XDG_DATA_HOME}/bash-completion/etc/"
+ln_relative "${DOTFILES_PATH}/home/.local/share/bash-completion/completions/etc" "${XDG_DATA_HOME}/bash-completion/completions/"
 
 # Non-XDG
 ln_relative "${DOTFILES_PATH}/home/.bash_profile" "${HOME}/"
