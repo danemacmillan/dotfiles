@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+source "${DOTFILES_BOOTSTRAP_FILE}"
+
+#brew install composer
+#pecl install xdebug
+
+mkdir -p /usr/local/opt/php@7.1/lib/php/20160303
+cd $HOME/tmp
+wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_dar_x86-64.zip
+unzip ioncube_loaders_dar_x86-64.zip
+mv ioncube/ioncube_loader_dar_7.1.so /usr/local/opt/php@7.1/lib/php/20160303/ioncubeloader.so

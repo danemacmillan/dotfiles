@@ -13,7 +13,6 @@ cask
 casperjs
 cmake
 cmatrix
-composer
 coreutils
 cowsay
 ctags
@@ -58,16 +57,19 @@ media-info
 mhash
 moreutils
 mycli
+mysql@5.7
 mytop
 ncdu
 neofetch
 netperf
+nginx
 nmap
 node
 openssl
 pass
 pcre
 php@7.1
+php_extras
 pidof
 pv
 python
@@ -75,6 +77,7 @@ sashkab/python/python36
 #ranger
 rclone
 readline
+redis@3.2
 rg
 rlwrap
 rsync
