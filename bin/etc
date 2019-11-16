@@ -27,6 +27,7 @@ Options:
  map                 Map contents of ${XDG_CONFIG_HOME}/etc/macos into core ${HOMEBREW_INSTALL_PATH}/etc.
  restart             Restart multiple daemons.
  xdebug              Toggle PHP Xdebug on or off.
+ dnsmasq             Configure dnsmasq for .test TLD and restart it.
 
 Examples:
  Map new local config files added
@@ -82,6 +83,15 @@ etc_xdebug()
 	brew services restart php@7.1
 }
 
+etc_dnsmasq()
+{
+  echo "Configuring dnsmasq for local development on all .test TLDs. This requires sudo."
+
+  sudo mkdir -p /etc/resolver
+  sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
+  sudo brew services restart dnsmasq
+}
+
 ##
 # Handle simple options (no need for getopts)
 #
@@ -101,6 +111,10 @@ fi
 
 if [[ "$1" == "xdebug" ]]; then
 	etc_xdebug
+fi
+
+if [[ "$1" == "dnsmasq" ]]; then
+	etc_dnsmasq
 fi
 
 # Default show usage help
