@@ -89,7 +89,7 @@ tmux
 tree
 tsung
 unrar
-vagrant-completion
+#vagrant-completion
 vim
 #w3m
 weechat
