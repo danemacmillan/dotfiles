@@ -10,6 +10,26 @@
 # @license MIT
 
 ##
+# Pathmunge function copied from CentOS 7, with modification.
+#
+# The modifications are a verification for path existence, and syntax.
+function pathmunge()
+{
+  if [[ -e "${1}" ]]; then
+    case ":${PATH}:" in
+      *:"${1}":*)
+        ;;
+      *)
+        if [[ "${2}" = "after" ]] ; then
+          PATH="${PATH}:${1}"
+        else
+          PATH="${1}:${PATH}"
+        fi
+    esac
+  fi
+}
+
+##
 # Store homebrew install path, if available.
 if [[ -z ${HOMEBREW_INSTALL_PATH} ]]; then
 	export HOMEBREW_INSTALL_PATH="$(command -v brew >/dev/null 2>&1 && brew --prefix)"
@@ -17,19 +37,21 @@ if [[ -z ${HOMEBREW_INSTALL_PATH} ]]; then
 fi
 
 # Common path, if not already included, and it exists.
-[[ ":${PATH}:" != *":/usr/local/bin:"* ]] && [[ -e "/usr/local/bin" ]] && export PATH="/usr/local/bin:${PATH}"
+pathmunge "/usr/local/bin"
 
 ##
 # Reset base path if on MacOS, so nothing unusual finds its way into it.
 # Note that this will also stick /usr/local/sbin into the path, but in a
 # preferred location, instead of at the beginning.
 if [[ -e "/etc/paths" ]]; then
-	export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+  PATH=""
+  pathmunge "/sbin"
+  pathmunge "/usr/sbin"
+  pathmunge "/usr/local/sbin"
+  pathmunge "/bin"
+  pathmunge "/usr/bin"
+  pathmunge "/usr/local/bin"
 fi
-
-#if [[ -e "/Library/Frameworks/Mono.framework/Versions/Current/Commands" ]]; then
-#	export PATH="/Library/Frameworks/Mono.framework/Versions/Current/Commands:$PATH"
-#fi
 
 ##
 # On MacOS, add GNU coreutils and other GNU tools to the path, instead of
@@ -38,39 +60,16 @@ fi
 # it could happen. Also, this just assumes that if the coreutils package is
 # installed, so are the other ones listed inside the conditional block.
 if [[ -e "${HOMEBREW_FORMULA_PATH}/coreutils" ]] ; then
-	export PATH="${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnubin:$PATH"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/curl/bin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-getopt/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/grep/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-indent/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-sed/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-tar/libexec/gnubin"
+
+  export MANPATH="${HOMEBREW_FORMULA_PATH}/grep/libexec/gnuman:$MANPATH"
 	export MANPATH="${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnuman:$MANPATH"
-
-	export PATH="${HOMEBREW_FORMULA_PATH}/curl/bin:$PATH"
-	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-getopt/libexec/gnubin:$PATH"
-	export PATH="${HOMEBREW_FORMULA_PATH}/grep/libexec/gnubin:$PATH"
-	export MANPATH="${HOMEBREW_FORMULA_PATH}/grep/libexec/gnuman:$MANPATH"
-	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-indent/libexec/gnubin:$PATH"
-	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-sed/libexec/gnubin:$PATH"
-	export PATH="${HOMEBREW_FORMULA_PATH}/gnu-tar/libexec/gnubin:$PATH"
-fi
-
-##
-# PHP 7.1, if it is installed. Note that if a user has 7.2 installed, this will
-# supersede it.
-if [[ -d "/usr/local/opt/php@7.1/bin" ]]; then
-	export PATH="/usr/local/opt/php@7.1/bin:${PATH}"
-fi
-
-if [[ -d "/usr/local/opt/php@7.1/sbin" ]]; then
-	export PATH="/usr/local/opt/php@7.1/sbin:${PATH}"
-fi
-
-##
-# Python version 3.6.
-if [[ -d "/usr/local/opt/python36/bin" ]]; then
-	export PATH="/usr/local/opt/python36/bin:${PATH}"
-fi
-
-##
-# MySQL 5.6
-if [[ -d "/usr/local/opt/mysql@5.6/bin" ]]; then
-	export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 fi
 
 # Source google-cloud-sdk gcloud utilities
@@ -82,60 +81,57 @@ elif [[ -e "${HOME}/google-cloud-sdk/path.bash.inc" ]]; then
 fi
 
 ##
-# Go lang binaries
+# PHP 7.1, if it is installed. Note that if a user has 7.2 installed, this will
+# supersede it.
+pathmunge "/usr/local/opt/php@7.1/bin"
+pathmunge "/usr/local/opt/php@7.1/sbin"
+
+##
+# Python version 3.6.
+pathmunge "/usr/local/opt/python36/bin"
+
+##
+# MySQL 5.7 daemon and client binaries.
+pathmunge "/usr/local/opt/mysql@5.7/bin"
+
+##
+# Go lang binaries.
+pathmunge "${HOME}/go/bin"
 if [[ -d "${HOME}/go" ]]; then
-	export PATH="${HOME}/go/bin:${PATH}"
 	export GOPATH="${HOME}/go"
 fi
 
 ##
-# Ruby/RubyGems
-if [[ -e "/usr/local/opt/ruby/bin" ]]; then
-	export PATH="/usr/local/opt/ruby/bin:${PATH}"
-fi
-if [[ -e "/usr/local/lib/ruby/gems/2.6.0/bin" ]]; then
-	export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
-fi
-if [[ -e "${XDG_DATA_HOME}/gem/bin" ]]; then
-	export PATH="${XDG_DATA_HOME}/gem/bin:${PATH}"
-fi
+# Ruby/RubyGems.
+pathmunge "/usr/local/opt/ruby/bin"
+pathmunge "/usr/local/lib/ruby/gems/2.6.0/bin"
+pathmunge "${XDG_DATA_HOME}/gem/bin"
 
 ##
-# Rust
-if [[ -d "${HOME}/.cargo/bin" ]]; then
-	export PATH="${HOME}/.cargo/bin:${PATH}"
-fi
+# Rust.
+pathmunge "${HOME}/.cargo/bin"
 
 ##
-# Composer global installs
-if [[ -d "${HOME}/.composer/vendor/bin" ]]; then
-	export PATH="${HOME}/.composer/vendor/bin:${PATH}"
-fi
-if [[ -d "${XDG_CONFIG_HOME}/composer/vendor/bin" ]]; then
-	export PATH="${XDG_CONFIG_HOME}/composer/vendor/bin:${PATH}"
-fi
+# Node 8.
+pathmunge "/usr/local/opt/node@8/bin"
 
 ##
-# Add any bin files to path if such a directory exists for Vagrant.
-# If using `vagrantshell` repository, then this will exist.
-if [[ -e "/vagrant/bin" ]]; then
-	export PATH="/vagrant/bin:${PATH}"
-fi
+# Composer global installs.
+pathmunge "${HOME}/.composer/vendor/bin"
+pathmunge "${XDG_CONFIG_HOME}/composer/vendor/bin"
 
 ##
 # Add primary dotfiles' repo's bin to path.
-if [[ -e "${DOTFILES_PATH}" ]]; then
-	export PATH="${DOTFILES_PATH}/bin:${PATH}"
-fi
+pathmunge "${DOTFILES_PATH}/bin"
 
 ##
 # Add user bins.
 #
 # These should always be last, as they should be able to overwrite everything.
-if [[ -e "${XDG_BIN_HOME}" ]]; then
-	export PATH="${XDG_BIN_HOME}:${PATH}"
-fi
-if [[ -e "${HOME}/bin" ]]; then
-	export PATH="${HOME}/bin:${PATH}"
-fi
+pathmunge "${XDG_BIN_HOME}"
+pathmunge "${HOME}/bin"
 
+##
+# EXPORT PATH TO ENVIRONMENT.
+export PATH
+unset -f pathmunge

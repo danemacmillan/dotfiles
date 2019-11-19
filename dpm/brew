@@ -58,13 +58,13 @@ mhash
 moreutils
 mycli
 mysql@5.7
-mytop
+#mytop
 ncdu
 neofetch
 netperf
 nginx
 nmap
-node
+node@8
 openssl
 pass
 pcre
