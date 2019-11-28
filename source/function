@@ -481,7 +481,7 @@ backup()
   rclone sync ~/Desktop/ macmillanator:/Desktop/ --transfers 5 --max-size 1000M --bwlimit 0 --progress
   rclone copy ~/Documents/ macmillanator:/Documents/ --transfers 5 --max-size 50000M --bwlimit 0 --progress
   rclone sync ~/Downloads/ macmillanator:/Downloads/ --transfers 5 --max-size 1000M --bwlimit 0 --progress
-  rclone sync ~/Pictures/ macmillanator:/Pictures/ --transfers 5 --checkers 20 --checksum --bwlimit 0 --progress
+  #rclone sync ~/Pictures/ macmillanator:/Pictures/ --transfers 5 --checkers 20 --checksum --bwlimit 0 --progress
   date
 }
 
