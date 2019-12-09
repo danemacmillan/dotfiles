@@ -53,6 +53,10 @@ export PROJECTS_PATH="${HOME}/projects"
 export PROJECTS_PATH_POPULAR=""
 
 ##
+# Homebrew for MacOS
+export HOMEBREW_NO_ANALYTICS=1
+
+##
 # Color
 # BSD LSCOLORS for MacOS.
 export CLICOLOR=1
