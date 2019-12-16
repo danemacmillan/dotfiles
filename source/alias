@@ -21,7 +21,7 @@ alias .........='cd ../../../../../../../..'
 
 ##
 # Directory listing.
-LS_IGNORES="--ignore=.DS_Store --ignore='Icon'$'\r' --ignore=.CFUserTextEncoding --ignore=.localized"
+LS_IGNORES="--ignore=.DS_Store --ignore='Icon'$'\r' --ignore=.CFUserTextEncoding --ignore=.localized --ignore=.Trash --ignore=.Trashes --ignore=.Spotlight-V100 --ignore=.fseventsd"
 LS_DEFAULTS="-lAhviNp"
 # List symlinked directories alongside regular directories.
 # Modified from https://unix.stackexchange.com/a/412041/103243
@@ -37,7 +37,7 @@ lsdirfirst()
 		sort -sk1,1 | cut -d' ' -f2-
 }
 # Original ll without function.
-alias lll="ls --color --group-directories-first ${LS_DEFAULTS} ${LS_IGNORES}"
+alias lll="ls --color --group-directories-first ${LS_DEFAULTS}"
 alias ll="lsdirfirst ${LS_DEFAULTS}"
 alias kk="ll"
 # Sort by newest last. Scroll up to see oldest.
