@@ -81,10 +81,11 @@ elif [[ -e "${HOME}/google-cloud-sdk/path.bash.inc" ]]; then
 fi
 
 ##
-# PHP 7.1, if it is installed. Note that if a user has 7.2 installed, this will
-# supersede it.
+# PHP 7.1, if it is installed, or 7.2.
 pathmunge "/usr/local/opt/php@7.1/bin"
 pathmunge "/usr/local/opt/php@7.1/sbin"
+pathmunge "/usr/local/opt/php@7.2/bin"
+pathmunge "/usr/local/opt/php@7.2/sbin"
 
 ##
 # Python version 3.6.

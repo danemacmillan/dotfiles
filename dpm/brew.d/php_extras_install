@@ -9,10 +9,10 @@ if ! pecl list |grep -q xdebug ; then
   pecl install xdebug
 fi
 
-if [[ ! -f /usr/local/opt/php@7.1/lib/php/20160303/ioncubeloader.so ]]; then
-	mkdir -p /usr/local/opt/php@7.1/lib/php/20160303
+if [[ ! -f /usr/local/opt/php@7.2/lib/php/20170718/ioncubeloader.so ]]; then
+	mkdir -p /usr/local/opt/php@7.2/lib/php/20170718
 	cd $HOME/tmp
 	wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_dar_x86-64.zip
 	unzip ioncube_loaders_dar_x86-64.zip
-	mv ioncube/ioncube_loader_dar_7.1.so /usr/local/opt/php@7.1/lib/php/20160303/ioncubeloader.so
+	mv ioncube/ioncube_loader_dar_7.2.so /usr/local/opt/php@7.2/lib/php/20170718/ioncubeloader.so
 fi
