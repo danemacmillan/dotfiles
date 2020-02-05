@@ -50,3 +50,14 @@ export XDG_LIB_HOME="${XDG_LIB_HOME:-${HOME}/.local/lib}"
 
 [[ ! -e "${XDG_BIN_HOME}" ]] && mkdir -p "${XDG_BIN_HOME}"
 [[ ! -e "${XDG_LIB_HOME}" ]] && mkdir -p "${XDG_LIB_HOME}"
+
+##
+# Unofficial XDG.
+#
+# This a proposal from Debian to include a STATE directory, which would be
+# useful for storing files such as logs.
+#
+# References:
+# - https://wiki.debian.org/XDGBaseDirectorySpecification
+export XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
+[[ ! -e "${XDG_STATE_HOME}" ]] && mkdir -p "${XDG_STATE_HOME}"
