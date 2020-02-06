@@ -77,7 +77,7 @@
 
 	ydiff = !"ydiff -s -w80 --wrap -U10"
 
-	d = !"git ydiff"
+	d = !"git difftool"
 
 [apply]
 
@@ -162,7 +162,6 @@
 
 	# Detect copies as well as renames
 	renames = copies
-	#tool = Kaleidoscope
 	tool = vimdiff
 	context = 5
 
@@ -170,10 +169,6 @@
 
 	prompt = true
 	trustExitCode = true
-
-#[difftool "Kaleidoscope"]
-
-#	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 
 [help]
 
@@ -185,7 +180,6 @@
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
-	#tool = Kaleidoscope
 	tool = vimdiff
 	conflictstyle = diff3
 
@@ -194,11 +188,6 @@
 	keepBackup = false
 	prompt = true
 	trustExitCode = true
-
-#[mergetool "Kaleidoscope"]
-
-#	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-#	trustexitcode = true
 
 [push]
 
