@@ -170,6 +170,10 @@
 	prompt = true
 	trustExitCode = true
 
+[difftool "vimdiff"]
+
+	cmd = vimdiff -R -- \"$LOCAL\" \"$REMOTE\"
+
 [help]
 
 	# Automatically correct and execute mistyped commands. Keep this off unless
