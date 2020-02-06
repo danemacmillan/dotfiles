@@ -118,8 +118,7 @@
 
 	# https://github.com/so-fancy/diff-so-fancy
 	#pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified):'
-	pager = diff-so-fancy | less --tabs=4 -RFX
-	#pager = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less -r
+	#pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color]
 
@@ -163,16 +162,18 @@
 
 	# Detect copies as well as renames
 	renames = copies
-	tool = Kaleidoscope
+	#tool = Kaleidoscope
+	tool = vimdiff
 	context = 5
 
 [difftool]
 
-	prompt = false
+	prompt = true
+	trustExitCode = true
 
-[difftool "Kaleidoscope"]
+#[difftool "Kaleidoscope"]
 
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+#	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 
 [help]
 
@@ -184,17 +185,20 @@
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
-	tool = Kaleidoscope
+	#tool = Kaleidoscope
+	tool = vimdiff
+	conflictstyle = diff3
 
 [mergetool]
 
 	keepBackup = false
-	prompt = false
+	prompt = true
+	trustExitCode = true
 
-[mergetool "Kaleidoscope"]
+#[mergetool "Kaleidoscope"]
 
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
+#	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+#	trustexitcode = true
 
 [push]
 
