@@ -213,6 +213,7 @@ set number
 
 " Enable syntax highlighting
 syntax on
+set synmaxcol=120
 
 " Highlight current line
 " The cursorline can be a huge performance hog and slows scrolling to a crawl.
@@ -221,6 +222,7 @@ set cursorline
 set lazyredraw
 set ttyfast
 set foldlevel=0
+set sidescroll=1
 
 " Make tabs as wide as two spaces
 set tabstop=2
@@ -253,7 +255,7 @@ set nostartofline
 set ruler
 
 " Don’t show the intro message when starting Vim
-set shortmess=atI
+set shortmess+=atI
 
 " Show the current mode
 set showmode
@@ -279,6 +281,12 @@ endif
 
 " Start scrolling three lines before the horizontal window border
 set scrolloff=10
+
+" vimdiff
+if &diff
+	" filler is default and inserts empty lines for sync
+  set diffopt+=filler,context:20
+endif
 
 " Save a file as root
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
