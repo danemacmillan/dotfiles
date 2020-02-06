@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+##
+# Upload content at path to remote location via rclone.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+
+BWLIMIT=20M
+
+export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache,*.icloud,com.apple.homed.plist,com.apple.homed.notbackedup.plist}"
+
+# Local SSD
+/usr/bin/pgrep rclone > /dev/null || /usr/local/bin/rclone copy ~/Public/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT
+
+# External HDD
+/usr/bin/pgrep rclone > /dev/null || /usr/local/bin/rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT
+/usr/bin/pgrep rclone > /dev/null || /usr/local/bin/rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT
+/usr/bin/pgrep rclone > /dev/null || /usr/local/bin/rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT
+
