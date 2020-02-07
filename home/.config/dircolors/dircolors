@@ -277,6 +277,7 @@ EXEC 01;38;5;203
 *VagrantFile     00;38;5;240
 *Dockerfile      00;38;5;240
 *modman          00;38;5;240
+*CODEOWNERS      00;38;5;240
 
 # Files with potentially sensitive data
 *history 00;38;5;46
@@ -303,8 +304,7 @@ EXEC 01;38;5;203
 .extra 00;38;5;229
 *known_hosts 00;38;5;229
 
-# "unimportant" files, such as logs and backups
-.log        00;38;5;238
+# "unimportant" files, such as backups
 .bak        00;38;5;238
 .aux        00;38;5;238
 .lof        00;38;5;238
@@ -331,10 +331,16 @@ EXEC 01;38;5;203
 *Thumbs.db 00;38;5;238
 *Desktop.ini 00;38;5;238
 
-# Call out some unimportant files by either underlining or blinking
+# Call out some unimportant files by underlining, emboldening or blinking.
 .torrent    04;38;5;238
 .part       05;38;5;238
 .incomplete 05;38;5;238
+
+# Log files
+.log        01;38;5;238
+
+# Lock files
+.lock        00;48;5;232;38;5;53
 
 # Files offloaded to iCloud
 .icloud 48;5;17;38;5;116;01
