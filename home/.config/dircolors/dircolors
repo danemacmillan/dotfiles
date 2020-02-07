@@ -340,7 +340,7 @@ EXEC 01;38;5;203
 .log        01;38;5;238
 
 # Lock files
-.lock        00;48;5;232;38;5;53
+.lock        00;48;5;232;38;5;237
 
 # Files offloaded to iCloud
 .icloud 48;5;17;38;5;116;01
