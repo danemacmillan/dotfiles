@@ -33,5 +33,16 @@ set stage-view-line-number-interval = 1
 set diff-context = 5
 
 
+
+
 color id red default
+
+# Custom bindings
+
+# https://github.com/jonas/tig/wiki/Bindings
+bind generic B @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
+
+# https://medium.com/@tommasi.v/git-enhanced-with-tig-9eb07fc30168
+#bind main ! !?git revert %(commit)
+
 
