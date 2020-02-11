@@ -60,6 +60,16 @@ if [[ ! -e "${DOTFILES_BASH_HISTORY_PATH}" ]]; then
 	fi
 fi
 
+# Tig: https://github.com/jonas/tig/blob/master/doc/manual.adoc#history-files
+if [[ ! -e "${XDG_DATA_HOME}/tig" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_DATA_HOME}/tig' directory.${RESET}"
+	mkdir -p "${XDG_DATA_HOME}/tig"
+
+	if [[ ! -f "${XDG_DATA_HOME}/tig/history" ]]; then
+		touch "${XDG_DATA_HOME}/tig/history"
+	fi
+fi
+
 # Non-eager bash_completion (v2) directory.
 #
 # As long as bash_completion version 2 is installed, putting completions in
