@@ -68,7 +68,7 @@ node@8
 openssl
 pass
 pcre
-php@7.1
+php@7.2
 php_extras
 pidof
 pv
