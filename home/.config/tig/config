@@ -1,0 +1,28 @@
+#tigrc
+
+set tab-size = 4
+set refresh-mode = auto
+set refresh-interval = 2
+set history-size = 0
+set mouse = no
+
+set line-graphics = utf-8
+
+set blame-view-line-number-display = no
+set grep-view-line-number-display = no
+set main-view-line-number-display = no
+set reflog-view-line-number-display = no
+set refs-view-line-number-display = no
+set stash-view-line-number-display = no
+set status-view-line-number-display = no
+set tree-view-line-number-display = no
+
+set blob-view-line-number-display = no
+set diff-view-line-number-display = no
+set log-view-line-number-display = no
+set pager-view-line-number-display = no
+set stage-view-line-number-display = no
+set stage-view-line-number-interval = 1
+
+set diff-context = 5
+
