@@ -1,21 +1,29 @@
-#tigrc
+##
+# tigrc
+#
+# @author Dane MacMillan <work@danemacmillan>
 
+
+##
+# General
 set tab-size = 4
-set refresh-mode = auto
-set refresh-interval = 2
+set refresh-mode = periodic
+set refresh-interval = 1
 set history-size = 0
 set mouse = no
-
 set line-graphics = utf-8
 set wrap-lines = no
+set diff-context = 4
 
+##
+# Views
 set blame-view-line-number-display = no
 set grep-view-line-number-display = no
 set main-view-line-number-display = no
 set main-view-id = yes
 set main-view-commit-title-overflow = yes
 set main-view-commit-title-graph = v2
-set main-view-date-display = default
+set main-view-date-display = relative
 set main-view-date-local = yes
 set reflog-view-line-number-display = no
 set refs-view-line-number-display = no
@@ -23,6 +31,8 @@ set stash-view-line-number-display = no
 set status-view-line-number-display = no
 set tree-view-line-number-display = no
 
+##
+# Pagers
 set blob-view-line-number-display = no
 set diff-view-line-number-display = no
 set log-view-line-number-display = no
@@ -30,19 +40,17 @@ set pager-view-line-number-display = no
 set stage-view-line-number-display = no
 set stage-view-line-number-interval = 1
 
-set diff-context = 5
-
-
-
-
+##
+# Colors
 color id red default
+color date yellow default
+color author blue default bold
+color cursor 232 yellow bold
 
+##
 # Custom bindings
-
 # https://github.com/jonas/tig/wiki/Bindings
 bind generic B @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
-
 # https://medium.com/@tommasi.v/git-enhanced-with-tig-9eb07fc30168
 #bind main ! !?git revert %(commit)
-
 
