@@ -51,6 +51,13 @@ color cursor 232 yellow bold
 # Custom bindings
 # https://github.com/jonas/tig/wiki/Bindings
 bind generic B @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
+
 # https://medium.com/@tommasi.v/git-enhanced-with-tig-9eb07fc30168
 #bind main ! !?git revert %(commit)
+
+# https://github.com/jonas/tig/issues/26
+bind generic D !git difftool --tool=vimdiff --no-prompt --trust-exit-code %(commit)^!
+bind diff D !git difftool --tool=vimdiff --no-prompt %(commit)^! -- %(file)
+bind stage D !sh -c "git difftool --tool=vimdiff --no-prompt `expr '%(status)' : 'Staged changes' >/dev/null && echo --cached` -- '%(file)'"
+
 
