@@ -57,7 +57,7 @@ bind generic B @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/]
 #bind main ! !?git revert %(commit)
 
 # https://github.com/jonas/tig/issues/26
-bind generic D !git difftool --tool=vimdiff --no-prompt --trust-exit-code %(commit)^!
+#bind generic D !git difftool --tool=vimdiff --no-prompt --trust-exit-code %(commit)^!
 bind diff D !git difftool --tool=vimdiff --no-prompt %(commit)^! -- %(file)
 bind stage D !sh -c "git difftool --tool=vimdiff --no-prompt `expr '%(status)' : 'Staged changes' >/dev/null && echo --cached` -- '%(file)'"
 
