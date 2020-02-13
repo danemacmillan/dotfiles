@@ -46,6 +46,7 @@ color id red default
 color date yellow default
 color author blue default bold
 color cursor 232 yellow bold
+color overflow 238 default
 
 ##
 # Custom bindings
