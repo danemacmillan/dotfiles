@@ -172,6 +172,13 @@ export CLOUDSDK_PYTHON=""
 export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
+# fzf
+# See path and completions for other sections.
+export FZF_DEFAULT_COMMAND='\rg --files --hidden --follow --smart-case --no-ignore-vcs --maxdepth=20 --ignore-file=$XDG_CONFIG_HOME/ripgrep/ignore 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+bind -x '"\C-p": vim $(fzf);'
+
+##
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
 # Only source this, because executing it will not add hashes to current shell.
 #source "${DOTFILES_PATH}/bin/dpm" --verify
@@ -275,4 +282,5 @@ fi
 # than the present working directory. Also, this always ensures that the
 # present working directory is first, regardless of anything else being set.
 CDPATH=":.:${HOME}:${PROJECTS_PATH}:${PROJECTS_PATH_POPULAR}:${CDPATH}:"
+
 
