@@ -183,8 +183,10 @@ alias fpmstat="ps aux | grep php-fpm | wc -l ; ps --no-headers -o \"rss,cmd\" -C
 ##
 # Ripgrep
 #
-# rg with good defaults.
-alias rg='\rg --hidden --search-zip --smart-case --no-ignore-vcs --maxdepth=20 --ignore-file="${XDG_CONFIG_HOME}/ripgrep/ignore"'
+# Note that the options configured are defined in: $RIPGREP_CONFIG_PATH.
+# The only reason the --ignore-file option is passed is for the environment
+# variable expansion.
+alias rg='\rg --ignore-file="${RIPGREP_IGNORE_PATH}"'
 
 ##
 # Rsync

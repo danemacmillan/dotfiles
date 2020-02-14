@@ -1,0 +1,23 @@
+##
+# ripgrep config
+#
+# @see https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+
+--follow
+--hidden
+--search-zip
+--smart-case
+--no-ignore-vcs
+#--ignore-vcs
+--max-depth=20
+
+#--ignore-file=/Users/danemacmillan/.config/ripgrep/ignore
+## These paths do not work. Only the absolute path above works.
+## Read: https://github.com/BurntSushi/ripgrep/issues/1484
+## As a result, there is an rg alias with only this option passed.
+#--ignore-file=~/.config/ripgrep/ignore
+#--ignore-file=$XDG_CONFIG_HOME/ripgrep/ignore
+#--ignore-file="$HOME/.config/ripgrep/ignore"
+

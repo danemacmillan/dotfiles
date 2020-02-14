@@ -172,9 +172,15 @@ export CLOUDSDK_PYTHON=""
 export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
+# ripgrep
+export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/config"
+export RIPGREP_IGNORE_PATH="${XDG_CONFIG_HOME}/ripgrep/ignore"
+
+##
 # fzf
 # See path and completions for other sections.
-export FZF_DEFAULT_COMMAND='\rg --files --hidden --follow --smart-case --no-ignore-vcs --maxdepth=20 --ignore-file=$XDG_CONFIG_HOME/ripgrep/ignore 2> /dev/null'
+export FZF_DEFAULT_COMMAND="rg --files --ignore-file=${RIPGREP_IGNORE_PATH} 2> /dev/null"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 bind -x '"\C-p": vim $(fzf);'
 

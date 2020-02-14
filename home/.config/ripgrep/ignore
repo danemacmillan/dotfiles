@@ -70,10 +70,6 @@ nbproject/
 *.tbz
 *.tbz2
 
-# Linus CLI releases directory
-releases/.core/
-releases/*/
-
 ## General directories to ignore
 .Trash/
 .composer/
@@ -97,4 +93,14 @@ Public/
 bower_components/
 node_modules/
 tmp/
+
+## Directories specifically related to my own development environment.
+## These should be modified if they're excluding too much.
+#**/releases/.core
+#**/releases/20**
+**/releases
+**/shared
+**/pub/static
+**/pub/media
+**/projects/www
 
