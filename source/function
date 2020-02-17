@@ -403,7 +403,7 @@ firefox_profile()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-cat()
+cat2()
 {
 	local filepath="${1}"
 
