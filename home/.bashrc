@@ -182,7 +182,6 @@ export RIPGREP_IGNORE_PATH="${XDG_CONFIG_HOME}/ripgrep/ignore"
 export FZF_DEFAULT_COMMAND="rg --files --ignore-file=${RIPGREP_IGNORE_PATH} 2> /dev/null"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-bind -x '"\C-p": vim $(fzf);'
 
 ##
 # Verify and export package manager variables for dotfiles, and Generate MD5s.

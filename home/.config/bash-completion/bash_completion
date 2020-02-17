@@ -41,6 +41,9 @@ elif [[ -e "${HOME}/google-cloud-sdk/completion.bash.inc" ]]; then
 	source "${HOME}/google-cloud-sdk/completion.bash.inc"
 fi
 
-# fzf completions
+# fzf completions and keybindings.
 # https://github.com/junegunn/fzf#installation
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.bash" 2> /dev/null
+bind -x '"\C-p": vim $(fzf);'
+source "/usr/local/opt/fzf/shell/key-bindings.bash"
+
