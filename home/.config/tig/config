@@ -66,4 +66,8 @@ bind stage D !sh -c "git difftool --tool=vimdiff --no-prompt $(expr '%(status)' 
 # Based on https://github.com/jonas/tig/issues/463
 bind status C !>git commit
 
+# Modified for MacOS from:
+# https://github.com/jonas/tig/blob/master/doc/manual.adoc#browsing-state-and-user-defined-commands
+bind generic 9 !@bash -c 'echo -n $(echo %(commit)) | pbcopy'
+
 
