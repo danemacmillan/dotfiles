@@ -184,6 +184,10 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 ##
+# httpie
+export HTTPIE_CONFIG_DIR="${XDG_CONFIG_HOME}/httpie"
+
+##
 # Verify and export package manager variables for dotfiles, and Generate MD5s.
 # Only source this, because executing it will not add hashes to current shell.
 #source "${DOTFILES_PATH}/bin/dpm" --verify
