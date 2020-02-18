@@ -84,6 +84,7 @@ rsync
 ssh-copy-id
 siege
 stow
+tealdeer
 terminal-notifier
 tmux
 tree
