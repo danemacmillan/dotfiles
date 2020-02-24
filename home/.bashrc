@@ -172,6 +172,12 @@ export CLOUDSDK_PYTHON=""
 export GOOGLE_APPLICATION_CREDENTIALS=""
 
 ##
+# Boto config used by gsutil.
+#
+# https://cloud.google.com/storage/docs/boto-gsutil
+export BOTO_CONFIG="${XDG_CONFIG_HOME}/gsutil/.boto"
+
+##
 # ripgrep
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/config"
 export RIPGREP_IGNORE_PATH="${XDG_CONFIG_HOME}/ripgrep/ignore"
