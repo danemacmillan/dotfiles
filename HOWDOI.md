@@ -172,6 +172,11 @@ be copied into its config file in order for it to persist after restart.
 - Set instance as slave of master: `SLAVEOF host port`
 - Set instance as master again: `SLAVEOF NO ONE`
 - Flush DB 0 from host: `redis-cli -h instance-name-or-ip -n 0 flushdb`
+- Get key type: `type zc:k:388_LINUSSHOPS_CACHE_GCP_SERVERS`
+- Get data using key type method, there are more than two, but these are 
+very common: 
+	- `GET <key>`: string
+	-  `HGETALL <key>`: hash
 
 ## Remotely access a fresh PMS install
 
