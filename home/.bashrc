@@ -29,6 +29,10 @@ shopt -s dirspell 2&>/dev/null
 shopt -s autocd 2&>/dev/null
 
 ##
+# Add GPG key to bash profile.
+export GPG_TTY=$(tty)
+
+##
 # Set default editor
 export EDITOR=vim
 
