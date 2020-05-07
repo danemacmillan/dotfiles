@@ -117,8 +117,9 @@ pathmunge "${XDG_DATA_HOME}/gem/bin"
 pathmunge "${HOME}/.cargo/bin"
 
 ##
-# Node 8.
+# Node.
 pathmunge "/usr/local/opt/node@8/bin"
+pathmunge "/usr/local/opt/node@10/bin"
 
 ##
 # Redis 3.2
