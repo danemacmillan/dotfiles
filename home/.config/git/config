@@ -193,6 +193,11 @@
 	prompt = true
 	trustExitCode = true
 
+[pull]
+
+# How to reconcile divergent branches on a pull.
+	ff = only
+
 [push]
 
 	# Use the Git 1.x.x default to avoid errors on machines with old Git
