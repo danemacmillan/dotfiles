@@ -756,6 +756,16 @@ rclone_toggle_bwlimit()
 	kill -SIGUSR2 $(pidof rclone)
 }
 
+
+##
+# Generate customer-supplied encryption key for use with GCE instance.
+# https://cloud.google.com/compute/docs/disks/customer-supplied-encryption#gcloud
+gcp_generate_csek()
+{
+	read -sp "String:" ; [[ ${#REPLY} == 32 ]] && echo "$(echo -n "$REPLY" | base64)" || (>&2 echo -e "\nERROR:Wrong Size"; false)
+}
+
+
 ###############################################################################
 # From other authors
 ###############################################################################
