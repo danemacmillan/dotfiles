@@ -144,6 +144,10 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 ##
+# GCP - Google Cloud SDK
+alias gsutil="CLOUDSDK_PYTHON=$(which python3.6) gsutil"
+
+##
 # History
 #
 # Purge all history
@@ -205,7 +209,6 @@ alias copyidrsapub="pbcopy < ${HOME}/.ssh/id_rsa.pub"
 # Tmux
 #
 # Create "default" and "other" tmux sessions.
-#alias tmux='tmux -f "${XDG_CONFIG_HOME}/tmux/tmux.conf"'
 alias t='tmux has-session -t default > /dev/null 2>&1 && tmux a -t default || tmux new -s default'
 alias t0='t'
 alias t1='tmux has-session -t other > /dev/null 2>&1 && tmux a -t other || tmux new -s other'
