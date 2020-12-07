@@ -89,15 +89,15 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 "au VimEnter *  NERDTree
 " Close if only buffer left.
 " https://stackoverflow.com/a/4319165/2973534
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Open when no file specified.
-autocmd StdinReadPre * let g:isReadingFromStdin = 1
-autocmd VimEnter * if !argc() && !exists('g:isReadingFromStdin') | NERDTree | endif
+"autocmd StdinReadPre * let g:isReadingFromStdin = 1
+"autocmd VimEnter * if !argc() && !exists('g:isReadingFromStdin') | NERDTree | endif
 " Auto-focus on document.
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * wincmd p
 
 " FZF search.
-map ; :Files<CR>
+map <space> :Files<CR>
 
 " Indent guides
 let g:indent_guides_start_level = 2
