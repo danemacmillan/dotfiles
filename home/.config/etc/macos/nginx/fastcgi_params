@@ -47,8 +47,32 @@ fastcgi_read_timeout 650;
 fastcgi_keep_conn off;
 
 # Buffering
+#
+# Handle proxy buffering responses to reduce temporary writes to filesystem.
+# Common warning: "an upstream response is buffered to a temporary file
+# /var/cache/nginx/proxy_temp/4/81/0000023814 while reading upstream"
+# If you know clients can handle
 fastcgi_buffering on;
+# Set buffer for initial header response (usually small). Bear in mind
+# that other processes, like Varnish, could be adding and removing
+# headers, or setting large cookies. 4k is probably safe enough.
 fastcgi_buffer_size 32k;
+# Most image thumbnails are between 5kb and 15kb. Most documents (though
+# handled by the fastcgi_* buffer parameters that mirror the proxy_* ones),
+# are between 120kb and 260kb. Eensure it can all be buffered into memory
+# instead of temporarily written to disk. The best way to determine memory
+# allocation is to think of proxy_buffers as a property of a single request.
+# If most respones can be anywhere between 5kb and 260kb, with many images
+# on the low end, memory should be allocated as efficiently as possible. In
+# other words, for each request we have up, for example, 32 buffers, each
+# at 16k each, or 32*16k=512kb. If an image is 12kb, it will only allocate
+# a single buffer of 16k to handle it. If the buffer size was 512kb with
+# only 1 buffer defined (1 512k), that would mean nginx would allocated
+# 512kb of memory for a measly little image. That's not very efficient. By
+# breaking down the buffer size, it helps nginx optimize each response in
+# memory. That means an image of 12kb will only take up 1 16k buffer, while
+# a document that is 260kb will occupy 17 16k buffers. A very large image
+# that is 400kb will occupy 25 16k buffers.
 fastcgi_buffers 2048 4k;
 fastcgi_temp_file_write_size 256k;
 fastcgi_busy_buffers_size 256k;
