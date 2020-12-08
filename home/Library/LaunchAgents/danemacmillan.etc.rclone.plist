@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>KeepAlive</key>
+  <true/>
+  <key>Label</key>
+  <string>danemacmillan.etc.rclone</string>
+  <key>ProgramArguments</key>
+  <array>
+		<string>/usr/local/bin/rclone</string>
+		<string>cmount</string>
+		<string>gd:</string>
+		<string>/Users/danemacmillan/mnt/gd</string>
+		<string>--allow-other</string>
+		<string>--dir-cache-time=1000h</string>
+		<string>--poll-interval=15s</string>
+		<string>--umask=002</string>
+		<string>--fast-list</string>
+		<string>--bwlimit=0</string>
+		<string>--stats=1s</string>
+		<string>--log-file=/Users/danemacmillan/tmp/rclone-mount-gd.log</string>
+		<string>--log-level=INFO</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+</dict>
+</plist>

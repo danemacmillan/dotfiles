@@ -10,6 +10,14 @@
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+
 # Faster keyboard repeat rate.
 defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
@@ -32,6 +40,35 @@ defaults write com.apple.Notes ShouldUseSmartCopyPaste -bool false
 defaults write com.apple.Notes ShouldUseSmartDashes -bool false
 defaults write com.apple.Notes ShouldUseSmartQuotes -bool false
 defaults write com.apple.Notes alwaysShowLightContent -bool false
+
+# Always show scrollbars
+# Possible values: `WhenScrolling`, `Automatic` and `Always`
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+# Disable “natural” (Lion-style) scrolling
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# Finder: show hidden files by default
+#defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Avoid creating .DS_Store files on network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Show icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Change location of screenshots
 if [[ -e "${HOME}/Documents/screenshots" ]]; then
