@@ -1,12 +1,11 @@
 1password
 alacritty
+copyclip
 cyberduck
 #deluge
+#filebot
 firefox
 #firefox-nightly
-#font-inconsolata-nerd-font
-#font-inconsolata-for-powerline
-#font-inconsolata-for-powerline-bold
 font-sourcecodepro-nerd-font
 #gas-mask
 google-chrome
@@ -31,8 +30,6 @@ pycharm
 #radarr
 rowanj-gitx
 sequel-ace
-#sequel-pro
-#sequel-pro-nightly
 sizeup
 #skype
 slack
@@ -40,6 +37,7 @@ slack
 sublime-text
 #tableplus
 #teamviewer
+#transmission
 #tripmode
 typora
 #vagrant
