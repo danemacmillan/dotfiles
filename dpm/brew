@@ -25,6 +25,7 @@ findutils
 fontconfig
 freetype
 fswatch
+fzf
 gawk
 git
 git-extras
