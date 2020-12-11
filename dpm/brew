@@ -10,7 +10,7 @@ bash-completion@2
 #bitlbee
 brew-cask-completion
 cask
-casperjs
+#casperjs
 cmake
 cmatrix
 coreutils

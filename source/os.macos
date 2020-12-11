@@ -70,6 +70,13 @@ defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
+# Disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+# Disable Disk Image Verification: Verifying ...
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+
 # Change location of screenshots
 if [[ -e "${HOME}/Documents/screenshots" ]]; then
 	defaults write com.apple.screencapture location "${HOME}/Documents/screenshots"
