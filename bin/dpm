@@ -202,7 +202,7 @@ __dpm_install_aptget()
 # MacOS' /Applications/ paths.
 __dpm_brew_cask_get_appname()
 {
-	brew cask info --json=v1 "${1}" 2>/dev/null | jq -r ".[0].name[0]"
+	brew info --cask --json=v1 "${1}" 2>/dev/null | jq -r ".[0].name[0]"
 }
 ##
 # Get the installed pathname of a cask.
@@ -212,7 +212,7 @@ __dpm_brew_cask_get_appname()
 # This is not perfect, as not all packages define artifacts or names properly.
 __dpm_brew_cask_get_pathname()
 {
-	brew cask info --json=v1 "${1}" 2>/dev/null | jq -rS ".[0].artifacts[][0]?" 2>/dev/null |cut -d$'\n' -f1 2>/dev/null
+	brew info --cask --json=v1 "${1}" 2>/dev/null | jq -rS ".[0].artifacts[][0]?" 2>/dev/null |cut -d$'\n' -f1 2>/dev/null
 }
 
 ##
@@ -279,12 +279,12 @@ __dpm_install_brew()
 					brew)
 						local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_brew_$directory_index)
 						local package_manager_command="brew install"
-						local package_manager_command_list="$(brew list -1)"
+						local package_manager_command_list="$(brew list --formula -1)"
 						;;
 					cask)
 						local packages_md5_old=$(eval echo \$DOTFILES_PACKAGES_MD5_cask_$directory_index)
-						local package_manager_command="brew cask install"
-						local package_manager_command_list="$(brew cask list -1)"
+						local package_manager_command="brew install --cask"
+						local package_manager_command_list="$(brew list --cask -1)"
 						local package_name+=" $subpackage"
 						;;
 				esac
@@ -316,10 +316,10 @@ __dpm_install_brew()
 
 		echo -e "${BBLUE}Running cleanup and doctor on homebrew.${RESET}"
 		brew cleanup
-		brew doctor
+		brew doctor --verbose
 		echo -e "${BBLUE}Searching for outdated software.${RESET}"
 		brew outdated
-		brew cask outdated
+		brew outdated --cask
 	fi
 }
 

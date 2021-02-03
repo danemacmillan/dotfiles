@@ -265,7 +265,7 @@ if command_exists brew ; then
 
 	##
 	# Check for outdated software.
-	alias outdated='brew outdated; brew cask outdated; composer global outdated'
+	alias outdated='brew outdated; brew outdated --cask; composer global outdated'
 
 	# Depends on Firefox Tools Adapter: https://developer.mozilla.org/en-US/docs/Tools/Firefox_Tools_Adapter
 	# TODO: Add checking.
@@ -284,8 +284,7 @@ if command_exists brew ; then
 		command_exists gcloud && gcloud components update --quiet; \
 		brew update; \
 		brew upgrade; \
-		brew doctor; \
-		brew cask doctor; \
+		brew doctor --verbose; \
 		brew cleanup \
 	"
 fi
