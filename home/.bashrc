@@ -234,15 +234,10 @@ fi
 # faster than original `bash-completion` package.
 # Read: https://superuser.com/a/1393343/496301
 #
-# Note that brew recommends sourcing /usr/local/etc/profile.d/bash_completion.sh
-# for either version of bash-completion. These dotfiles have chosen to
-# explicitly look for version 2, and if found, assign a backwards-compatible
-# directory to look for old-style, eagerly-loaded bash completion files, then
-# source the new, faster ones that are non-eager. Doing so allows the old
-# bash-completion files to be picked up, of which there are several, including
-# those for git completion and vagrant completion. This works because
-# version 2 of bash completion checks for a `$BASH_COMPLETION_COMPAT_DIR`
-# variable, and if found, will immediately source all the files found under it.
+# It exclusively support version 2, and provide fallback support for any
+# utilities that have not updated, using the `$BASH_COMPLETION_COMPAT_DIR`
+# path. Multiple locations are searched: the usual MacOS path is first checked,
+# then a common path on Linux systems, like CentOS.
 #
 # Additionally, the $BASH_COMPLETION_USER_FILE environment variable is set,
 # which by default points to `~/.bash_completion`, but instead has been moved to
@@ -250,29 +245,18 @@ fi
 # should not be used, except in cases where a popular tool does not offer a
 # better alternative. For the purpose of distinguishing old-style eager
 # completions from modern non-eager completions, this user completion file
-# has been added to a path under $XDG_CONFIG_HOME. Non-eager user completions
-# are available under the new path, under $XDG_DATA_HOME.
+# has been added to a path under $XDG_CONFIG_HOME.
+#
+# Non-eager user completions are available under the new path, under
+# $XDG_DATA_HOME. This is where all new completions should be added.
+export BASH_COMPLETION_USER_DIR="${XDG_DATA_HOME}/bash-completion/completions"
 export BASH_COMPLETION_USER_FILE="${XDG_CONFIG_HOME}/bash-completion/bash_completion"
-if [[ -e "/usr/local/share/bash-completion/bash_completion" ]]; then
+if [[ -e "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
 	export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-	source "/usr/local/share/bash-completion/bash_completion"
-elif [[ -e "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
 	source "/usr/local/etc/profile.d/bash_completion.sh"
-elif [[ -e "/etc/bash_completion" ]]; then
-	# This is in all certainty NOT version 2 bash completion, so pull them in
-	# eagerly. Note that this requires sudo privileges to add a user's completion
-	# file to /etc/bash_completion. This is really a last-ditch effort to get
-	# v1 completion compatibility on old systems. A simple
-	# ${HOME}/.bash_completion can also just be created, but the goal of thee
-	# dotfiles is to follow the XDG spec as closely as possible, in an effort to
-	# clean up the home directory.
-	#if [[ "${BASH_COMPLETION_VERSINFO}" != "2" ]] \
-	#	&& [[ ! -e "/etc/bash_completion.d/bash_completion.${USER}" ]] \
-	#; then
-	#	sudo ln -s "${BASH_COMPLETION_USER_FILE}" "/etc/bash_completion.d/bash_completion.${USER}"
-	#fi
-
-	source "/etc/bash_completion"
+elif [[ -e "/etc/profile.d/bash_completion.sh" ]]; then
+	export BASH_COMPLETION_COMPAT_DIR="/etc/bash_completion.d"
+	source "/etc/profile.d/bash_completion.sh"
 fi
 
 ##
