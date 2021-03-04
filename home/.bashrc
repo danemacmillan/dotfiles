@@ -151,6 +151,7 @@ export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,
 #export RCLONE_STATS=1s
 #export RCLONE_TRANSFERS=1
 #export RCLONE_VERBOSE=1
+export RCLONE_CACHE_DIR="${XDG_CACHE_HOME}/rclone"
 
 ##
 # NPM
@@ -249,7 +250,10 @@ fi
 #
 # Non-eager user completions are available under the new path, under
 # $XDG_DATA_HOME. This is where all new completions should be added.
-export BASH_COMPLETION_USER_DIR="${XDG_DATA_HOME}/bash-completion/completions"
+# Note that it is hardcoded to look in a "completions" subdirectory of
+# BASH_COMPLETION_USER_DIR, so in this configuration, the path would expand
+# to BASH_COMPLETION_USER_DIR/completions.
+export BASH_COMPLETION_USER_DIR="${XDG_DATA_HOME}/bash-completion"
 export BASH_COMPLETION_USER_FILE="${XDG_CONFIG_HOME}/bash-completion/bash_completion"
 if [[ -e "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
 	export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
