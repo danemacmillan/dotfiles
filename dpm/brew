@@ -43,7 +43,7 @@ highlight
 htop
 httperf
 httpie
-hub
+#hub
 iftop
 ioping
 ios-webkit-debug-proxy
@@ -77,7 +77,7 @@ pv
 python
 sashkab/python/python36
 #ranger
-rclone
+#rclone
 readline
 redis@3.2
 rg
@@ -85,6 +85,7 @@ rlwrap
 rsync
 ssh-copy-id
 siege
+sipcalc
 stow
 tealdeer
 terminal-notifier
