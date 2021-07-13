@@ -93,7 +93,7 @@ pathmunge "/usr/local/opt/php@7.2/sbin"
 
 ##
 # Python version 3.6.
-pathmunge "/usr/local/opt/python36/bin"
+pathmunge "/usr/local/opt/python@3.6/bin"
 
 ##
 # MySQL 5.7 daemon and client binaries.
