@@ -38,6 +38,7 @@ gnupg
 gnutls
 gpg
 grc
+grunt-cli
 guile
 highlight
 htop
@@ -66,7 +67,7 @@ neofetch
 netperf
 nginx
 nmap
-node@8
+node@10
 openssl
 pass
 pcre
