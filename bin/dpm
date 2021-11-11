@@ -137,6 +137,18 @@ __dpm_hashes_clear()
 # package manager's DB/RPM, so if some random package name like `foobarbaz` is
 # passed to the simple text file list, it will check to see if a
 # `foobarbaz_install` script exists for the given package manager.
+#
+# Note that on November 9, 2021, the loop that this function was called by
+# suddenly started to fail. The first line from the file being looped
+# line-by-line would be read, then it would dump the rest of the file to the
+# terminal in the middle of the install of a package, and then simply break
+# out of the loop and continue to the next block of code. This was happening
+# because for whatever reason, the command being run here suddenly started
+# reading from stdin. Research indicated that passing the command a null
+# file descriptor would be sufficient. It worked. This problem was only
+# noticed on MacOS Monterey, and with HomeBrew 3.3.3, though it could very
+# well be present in the other OSes. This solution was found through from
+# similar problems described at: https://stackoverflow.com/a/55334788/2973534
 __dpm_delegate_install_command()
 {
 	local install_string_suffix="_install"
@@ -157,7 +169,7 @@ __dpm_delegate_install_command()
 		"${package_manager_package_override}"
 	else
 		# Install the package using standard package manager utility.
-		${package_manager_command} ${package_manager_package}
+		${package_manager_command} ${package_manager_package} </dev/null
 	fi
 }
 
