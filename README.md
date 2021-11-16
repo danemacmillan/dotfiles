@@ -140,6 +140,18 @@ repository.
 
 TODO: explain how this works.
 
+### Symlinks via `stow`
+
+As of November 16, 2021, these dotfiles replaced manual symlink creation with
+the `stow` command. Everything under `dotfiles/home` will be symlinked using
+`stow`.
+
+Additionally, there is a technique in use for users of iCloud Drive, that will
+also symlink any files that are found at: 
+`/Users/${USER}/Library/Mobile Documents/com~apple~CloudDocs/${USER}`. This is
+useful for any sensitive config files that can co-exist with the config files
+that are symlinked from these dotfiles.
+
 ## Author
 
 [Dane MacMillan](https://danemacmillan.com)
