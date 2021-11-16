@@ -8,40 +8,131 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap" && cd - >/de
 # provide a quick utility for updating them.
 #
 # @author Dane MacMillan <work@danemacmillan.com>
-# @link https://github.com/danemacmillan/dotfiles
+# @link https://github.com/danemacmillan/dotfiless
 # @license MIT
+
+##
+# Set up basic iCloud variables for supported systems.
+export ICLOUD_DIRECTORY_LONG="${HOME}/Library/Mobile Documents/com~apple~CloudDocs"
+export ICLOUD_DIRECTORY_SHORT="${HOME}/iCloud"
+export ICLOUD_USER_HOME="${ICLOUD_DIRECTORY_LONG}/${USER}"
+
+##
+# Remove dotfiles.
+if [[ "${1}" == "--remove" ]]; then
+	echo "Remove dotfiles symlinks."
+	stow -d "${DOTFILES_PATH}" -t "${HOME}" -D "home" --ignore=\.DS_Store$ -v
+
+	if [[ -d "${ICLOUD_USER_HOME}" ]]; then
+		stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -D ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+	fi
+	echo "Uninstalled dotfiles."
+	exit 0
+fi
+
+##
+# Install dotfiles.
+echo -e "${BLUE}${BOLD}Run dotfiles (${DOTFILES_PATH})...${RESET}"
+
+##
+# Ensure iCloud has downloaded relevant files, so get process started.
 #
-# @TODO
-#  - abstract into function.
-#  - do symlinking with cp command so no need to manually track files.
-echo -e "${BLUE}${BOLD}Running dotfiles chores...${RESET}"
-echo "DOTFILES_PATH: ${DOTFILES_PATH}"
+# This will only try to download content if the specific directory exists. For
+# most users of these dotfiles, this will not run, unless they want to leverage
+# the integrated iCloud technique being used.
+if [[ -d "${ICLOUD_USER_HOME}" ]]; then
+	echo -e "Download possibly evicted iCloud data at path ${ICLOUD_USER_HOME}."
+	brctl download "${ICLOUD_USER_HOME}"
+fi
 
 ##
 # Update repo from upstream.
-echo -e "${BLUE}${BOLD}Updating dotfiles repository.${RESET}"
-(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
+echo -e "${BLUE}${BOLD}Update dotfiles repository.${RESET}"
+#(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
 
 ##
 # Ensure any file changes are immediately reflected in current environment.
 #
 # Assigning DOTFILES_PATH to empty string ensures that all the relevant
-# environment variable values are rediscovered are reassigned.
+# environment variable values are rediscovered and reassigned.
 export DOTFILES_PATH=""
 cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap" && cd - >/dev/null 2>&1
 
 ##
+# Basic directory structures that need to exist before symlinks are built.
+
+#Vim
+if [[ ! -e "${XDG_DATA_HOME}/vim" ]] ; then
+	echo -e "${RESET}${BLUE}${BOLD}Create ${XDG_DATA_HOME}/vim directories.${RESET}"
+	#mkdir -p "${XDG_DATA_HOME}"/vim/{autoload,backup,plugged,swap}
+fi
+[[ ! -e "${XDG_DATA_HOME}/vim/autoload" ]] && mkdir -p "${XDG_DATA_HOME}/vim/autoload"
+[[ ! -e "${XDG_DATA_HOME}/vim/backup" ]] && mkdir -p "${XDG_DATA_HOME}/vim/backup"
+[[ ! -e "${XDG_DATA_HOME}/vim/plugged" ]] && mkdir -p "${XDG_DATA_HOME}/vim/plugged"
+[[ ! -e "${XDG_DATA_HOME}/vim/swap" ]] && mkdir -p "${XDG_DATA_HOME}/vim/swap"
+[[ ! -e "${XDG_DATA_HOME}/vim" ]] && mkdir -p "${XDG_DATA_HOME}/vim"
+
+# Create symlink to iCloud Drive.
+#
+# This will be placed in the user home directory if the iCloud Drive
+# directory path exists. This will only exist on MacOS.
+if [[ ! -e "${ICLOUD_DIRECTORY_SHORT}" ]] \
+	&& [[ -d "${ICLOUD_DIRECTORY_LONG}" ]] \
+; then
+	echo -e "${RESET}${BLUE}${BOLD}Create '${HOME}/iCloud' symlink.${RESET}"
+	ln_relative "${ICLOUD_DIRECTORY_LONG}" "${HOME}/iCloud"
+fi
+
+##
 # Cleanup any legacy associations from older versions of this dotfiles repo.
-echo -e "${BLUE}${BOLD}Cleaning up any legacy dotfiles data.${RESET}"
-unalias dotfiles 2&>/dev/null
-symlinks -d "${HOME}" 2&>/dev/null
-symlinks -d "${HOME}/bin" 2&>/dev/null
-[[ -d "${HOME}/.dotfiles-packages" ]] && rm -rf "${HOME}/.dotfiles-packages"
-[[ -L "${HOME}/.gitconfig" ]] && unlink "${HOME}/.gitconfig"
-[[ -L "${HOME}/.gitignore" ]] && unlink "${HOME}/.gitignore"
-[[ -f "${HOME}/.hgrc.local" ]] && rm "${HOME}/.hgrc.local"
-[[ -e "${XDG_CONFIG_HOME}/alacritty" ]] && rm -rf "${XDG_CONFIG_HOME}/alacritty"
-[[ -e "${XDG_CONFIG_HOME}/htop" ]] && rm -rf "${XDG_CONFIG_HOME}/htop"
+# Note that it will no longer run by default, so if there is a need to clean
+# up anything, source that file manually.
+#source "${DOTFILES_PATH}/source/legacy"
+
+##
+# dotfiles symlinks.
+#
+# Note that not all files within the `$DOTFILES_PATH` directory are symlinked
+# into the user home directory, as they are only used internally by these
+# dotfiles. Only the ones in the "home" directory are used.
+echo -e "${RESET}${BLUE}${BOLD}Symlink dotfiles configs.${RESET}${GREEN}${DIM}"
+# Symlink/stow everything within the "home" directory of these dotfiles.
+stow -d "${DOTFILES_PATH}" -t "${HOME}" -R "home" --ignore=\.DS_Store$ -v
+
+##
+# iCloud symlinks.
+#
+# Special technique for these dotfiles: this will symlink/stow everything
+# found under a directory that matches the ${USER} of the current machine within
+# a user's iCloud Drive; that path needs to equal the following to run:
+# /Users/${USER}/Library/Mobile Documents/com~apple~CloudDocs
+#
+# The purpose of this is to provide a secure, persistent location for any
+# configuration files that contain sensitive information that are difficult
+# to abstract out. In other words, the repository contents of these `dotfiles`
+# contain public non-sensitive configuration data, while anything found at this
+# path will usually contain private configuration data.
+#
+# One thing to note about running this is that `stow` is used for symlinking
+# the files, and if they detect existing files or directories in the user's
+# home directory, they will be considered conflicts and the operation aborted.
+# Ensure that the data stored in iCloud Drive does not overlap/conflict with
+# the data stored in these dotfiles.
+if [[ -d "${ICLOUD_USER_HOME}" ]]; then
+  echo -e "${RESET}${BLUE}${BOLD}Symlink iCloud configs.${RESET}${GREEN}${DIM}"
+	stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -R ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+fi
+
+# Create symlink to special tmp directory.
+#
+# Note that this will likely already be created by the
+# `xdg_base_directory_specification` file, by creating the `$XDG_RUNTIME_DIR`
+# environment variable and directory. Nevertheless, if another OS sets that
+# variable differently, this user tmp directory should still be created.
+if [[ ! -e "${HOME}/tmp" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Symlinking '${HOME}/tmp' directory.${RESET}"
+	ln -ns ${XDG_RUNTIME_DIR} "${HOME}/tmp"
+fi
 
 ##
 # Create directories that will not be tracked by the repo.
@@ -49,6 +140,15 @@ symlinks -d "${HOME}/bin" 2&>/dev/null
 # Their contents could be via symlinks from `$DOTFILES_PATH/*`, though.
 echo -e "${BLUE}${BOLD}Creating any missing directories.${RESET}"
 
+# SSH
+if [[ ! -e "${HOME}/.ssh" ]]; then
+	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.ssh' directory.${RESET}"
+	mkdir -p "${HOME}/.ssh"
+	chown -R $USER:$USER "${HOME}/.ssh"
+	chmod 700 "${HOME}/.ssh"
+fi
+
+# Bash
 if [[ ! -e "${XDG_DATA_HOME}/bash" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_DATA_HOME}/bash' directory.${RESET}"
 	mkdir -p "${XDG_DATA_HOME}/bash"
@@ -69,6 +169,9 @@ if [[ ! -e "${XDG_DATA_HOME}/tig" ]]; then
 		touch "${XDG_DATA_HOME}/tig/history"
 	fi
 fi
+
+#Vim
+[[ ! -e "${XDG_DATA_HOME}/vim/undo" ]] && mkdir -p "${XDG_DATA_HOME}/vim/undo"
 
 # Non-eager bash_completion (v2) directory.
 #
@@ -93,89 +196,13 @@ if [[ ! -e "${XDG_DATA_HOME}/bash-completion/completions" ]]; then
 	fi
 fi
 
-if [[ ! -e "${HOME}/.ssh" ]]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/.ssh' directory.${RESET}"
-	mkdir -p "${HOME}/.ssh"
-	chown -R $USER:$USER "${HOME}/.ssh"
-	chmod 700 "${HOME}/.ssh"
-fi
-
-if [[ ! -e "${XDG_DATA_HOME}/vim" ]] ; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating ${XDG_DATA_HOME}/vim directories.${RESET}"
-	mkdir -p "${XDG_DATA_HOME}"/vim/{autoload,backup,plugged,swap,undo}
-fi
-
-if [[ ! -e "${XDG_BIN_HOME}" ]]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_BIN_HOME}' directory.${RESET}"
-	mkdir -p "${XDG_BIN_HOME}"
-fi
-
-# Note that this will likely already be created by the
-# `xdg_base_directory_specification` file, by creating the `$XDG_RUNTIME_DIR`
-# environment variable and directory. Nevertheless, if another OS sets that
-# variable differently, this user tmp directory should still be created.
-if [[ ! -d "${HOME}/tmp" ]]; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/tmp' directory.${RESET}"
-	mkdir -p "${HOME}/tmp"
-fi
-
 ##
 # Generate local configs that can be customized. These do not go in repo.
 echo -e "${BLUE}${BOLD}Generating local configs in: ${XDG_DATA_HOME}/dotfiles.${RESET}"
 source "${DOTFILES_PATH}/source/local_config_templates"
 
 ##
-# Symlink all trackable files.
-#
-# Note that not all files within the `$DOTFILES_PATH` directory are symlinked
-# into the user home directory, as they are only used internally by these
-# dotfiles.
-echo -e "${RESET}${BLUE}${BOLD}Symlinking dotfiles.${RESET}${GREEN}${DIM}"
-
-# XDG
-ln_relative "${DOTFILES_PATH}/home/.config/alacritty" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/bash-completion" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/dircolors" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/etc" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/git" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/htop" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/npm" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/mycli" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/readline" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/ripgrep" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/rsync" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/siege" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/tig" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/tmux" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/vim" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.config/weechat" "${XDG_CONFIG_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.local/bin/contentuplocal" "${XDG_BIN_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.local/bin/diff-so-fancy" "${XDG_BIN_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.local/bin/imgcat" "${XDG_BIN_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.local/bin/ydiff" "${XDG_BIN_HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.local/share/bash-completion/completions/linus" "${XDG_DATA_HOME}/bash-completion/completions/"
-ln_relative "${DOTFILES_PATH}/home/.local/share/bash-completion/completions/etc" "${XDG_DATA_HOME}/bash-completion/completions/"
-
-# Non-XDG
-ln_relative "${DOTFILES_PATH}/home/.bash_profile" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.bash_sessions_disable" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.bashrc" "${HOME}/"
-ln_relative "${DOTFILES_PATH}/home/.editorconfig" "${HOME}/"
-
-##
-# Create symlink to iCloud Drive.
-#
-# This will be placed in the user home directory if the iCloud Drive
-# directory path exists. This will only exist on MacOS.
-if [[ ! -e "${HOME}/iCloud" ]] \
-	&& [[ -e "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" ]] \
-; then
-	echo -e "${RESET}${BLUE}${BOLD}Creating '${HOME}/iCloud' symlink.${RESET}"
-	ln_relative "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" "${HOME}/iCloud"
-fi
-
-##
-# Install dotfiles package manager packages.
+# Install dotfiles package manager (DPM) packages.
 #
 # Note that this needs to be sourced so the hashes are available in the session,
 # and also needs to be run at the beginning of a session in case new additions

@@ -98,7 +98,7 @@ if [[ -e "${DOTFILES_BASH_HISTORY_PATH}" ]]; then
 fi
 
 ##
-# Disable various history logging.
+# History logging.
 export MYSQL_HISTFILE="${XDG_DATA_HOME}/mysql_history"
 export MYCLI_HISTFILE="${XDG_DATA_HOME}/mycli_history"
 export LESSHISTFILE="${XDG_DATA_HOME}/less_history"
@@ -292,5 +292,3 @@ fi
 # than the present working directory. Also, this always ensures that the
 # present working directory is first, regardless of anything else being set.
 CDPATH=":.:${HOME}:${PROJECTS_PATH}:${PROJECTS_PATH_POPULAR}:${CDPATH}:"
-
-
