@@ -208,7 +208,13 @@ source "${DOTFILES_PATH}/source/local_config_templates"
 # and also needs to be run at the beginning of a session in case new additions
 # are made to the dpm files, which can then immediately be updated by comparing
 # against the value of these hashes made at the beginning of a session.
-source "${DOTFILES_PATH}/bin/dpm" --install
+
+# Install package depencencies only if install flag passed
+if [[ "${1}" == "--nopackages" ]]; then
+	echo -e "${BLUE}${BOLD}Skip dotfiles package install.${RESET}"
+else
+	source "${DOTFILES_PATH}/bin/dpm" --install
+fi
 
 ##
 # Use local, most recent version of Bash, if available.
