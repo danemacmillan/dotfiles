@@ -30,6 +30,17 @@ with "No."
 
 Just run `dotfiles` from anywhere. It is in the `${PATH}`.
 
+### Command Arguments
+
+Several arguments can be used with the `dotfiles` utility:
+
+- `dotfiles unstow`: Unlinks all symlinks.
+- `dotfiles restow`: Unlinks and re-links all symlinks. Effective for pruning.
+- `dotfiles skippackages`: Run command but skip packages installation. This is
+only recommended once all the packages have been installed at least once.
+
+Check tab completion for all possible arguments.
+
 ## Customize
 
 Local customizations can be made to `dotfiles` without actually touching the
