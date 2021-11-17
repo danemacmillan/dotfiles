@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap" && cd - >/dev/null 2>&1
+cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap.sh" && cd - >/dev/null 2>&1
 
 ##
 # Dotfiles - dotfiles
@@ -56,7 +56,7 @@ echo -e "${BLUE}${BOLD}Update dotfiles repository.${RESET}"
 # Assigning DOTFILES_PATH to empty string ensures that all the relevant
 # environment variable values are rediscovered and reassigned.
 export DOTFILES_PATH=""
-cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap" && cd - >/dev/null 2>&1
+cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap.sh" && cd - >/dev/null 2>&1
 
 ##
 # Basic directory structures that need to exist before symlinks are built.
@@ -87,7 +87,7 @@ fi
 # Cleanup any legacy associations from older versions of this dotfiles repo.
 # Note that it will no longer run by default, so if there is a need to clean
 # up anything, source that file manually.
-#source "${DOTFILES_PATH}/source/legacy"
+#source "${DOTFILES_PATH}/source/legacy.sh"
 
 ##
 # dotfiles symlinks.
@@ -199,7 +199,7 @@ fi
 ##
 # Generate local configs that can be customized. These do not go in repo.
 echo -e "${BLUE}${BOLD}Generating local configs in: ${XDG_DATA_HOME}/dotfiles.${RESET}"
-source "${DOTFILES_PATH}/source/local_config_templates"
+source "${DOTFILES_PATH}/source/local_config_templates.sh"
 
 ##
 # Install dotfiles package manager (DPM) packages.
@@ -255,7 +255,7 @@ fi
 # Source any MacOS-specific defaults
 if command_exists defaults ; then
 	echo -e "${BLUE}${BOLD}Setting MacOS defaults.${RESET}"
-	source "${DOTFILES_PATH}/source/os.macos"
+	source "${DOTFILES_PATH}/source/os.macos.sh"
 fi
 
 ##

@@ -1,4 +1,3 @@
-#!/usr/bin/env false
 # vim: ft=sh
 
 ##
@@ -80,8 +79,8 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	export DOTFILES_BOOTSTRAP_FILE="${DOTFILES_PATH}/source/$(basename "${BASH_SOURCE[0]}")"
 
 	# Initialize XDG standard in environment.
-	if [[ -e "${DOTFILES_PATH}/source/xdg_base_directory_specification" ]]; then
-		source "${DOTFILES_PATH}/source/xdg_base_directory_specification"
+	if [[ -e "${DOTFILES_PATH}/source/xdg_base_directory_specification.sh" ]]; then
+		source "${DOTFILES_PATH}/source/xdg_base_directory_specification.sh"
 	fi
 
 	# Assign dotfiles' DPM install directory.
@@ -117,20 +116,20 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 fi
 
 # Update PATH.
-if [[ -e "${DOTFILES_PATH}/source/path" ]]; then
-	source "${DOTFILES_PATH}/source/path"
+if [[ -e "${DOTFILES_PATH}/source/path.sh" ]]; then
+	source "${DOTFILES_PATH}/source/path.sh"
 fi
 
 # Pull in base formatting templates.
-if [[ -f "${DOTFILES_PATH}/source/ui_ux" ]]; then
+if [[ -f "${DOTFILES_PATH}/source/ui_ux.sh" ]]; then
 	if tty -s ; then
-		source "${DOTFILES_PATH}/source/ui_ux"
+		source "${DOTFILES_PATH}/source/ui_ux.sh"
 	fi
 fi
 
 # Pull in base functions.
-if [[ -f "${DOTFILES_PATH}/source/function" ]]; then
-	source "${DOTFILES_PATH}/source/function"
+if [[ -f "${DOTFILES_PATH}/source/function.sh" ]]; then
+	source "${DOTFILES_PATH}/source/function.sh"
 fi
 
 # Create symlink from dotfiles install path into home directory.

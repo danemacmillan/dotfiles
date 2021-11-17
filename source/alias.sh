@@ -230,10 +230,10 @@ alias v='vim'
 alias d='cd "${DOTFILES_PATH}"'
 alias d-local='cd "${DOTFILES_LOCAL_CONFIGS_PATH}"'
 
-alias d-alias='${EDITOR} "${DOTFILES_PATH}/source/alias"'
+alias d-alias='${EDITOR} "${DOTFILES_PATH}/source/alias.sh"'
 alias d-bashrc='${EDITOR} "${DOTFILES_PATH}/home/.bashrc"'
-alias d-function='${EDITOR} "${DOTFILES_PATH}/source/function"'
-alias d-path='${EDITOR} "${DOTFILES_PATH}/source/path"'
+alias d-function='${EDITOR} "${DOTFILES_PATH}/source/function.sh"'
+alias d-path='${EDITOR} "${DOTFILES_PATH}/source/path.sh"'
 alias d-localshell='${EDITOR} "${DOTFILES_LOCAL_CONFIGS_PATH}/shell.local"'
 
 alias how='${EDITOR} "${DOTFILES_PATH}/HOWDOI.md"'

@@ -75,7 +75,7 @@ Tools that natively support the specification will leverage these environment
 variables and directories without additional work. If the variables and
 directories were already available, `dotfiles` will respect them.
 
-Read [the source](https://github.com/danemacmillan/dotfiles/blob/master/source/xdg_base_directory_specification) 
+Read [the source](https://github.com/danemacmillan/dotfiles/blob/master/source/xdg_base_directory_specification.sh) 
 to see how the XDG spec environment variables and directories are created.
 
 ##### Partial Support
@@ -155,4 +155,3 @@ that are symlinked from these dotfiles.
 ## Author
 
 [Dane MacMillan](https://danemacmillan.com)
-

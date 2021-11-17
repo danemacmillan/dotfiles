@@ -1,5 +1,5 @@
 # vim: ft=sh
-source "${HOME}/.dotfiles/source/bootstrap"
+source "${HOME}/.dotfiles/source/bootstrap.sh"
 
 ##
 # .bashrc
@@ -208,14 +208,14 @@ export HTTPIE_CONFIG_DIR="${XDG_CONFIG_HOME}/httpie"
 
 ##
 # Aliases
-if [[ -e "${DOTFILES_PATH}/source/alias" ]]; then
-	source "${DOTFILES_PATH}/source/alias"
+if [[ -e "${DOTFILES_PATH}/source/alias.sh" ]]; then
+	source "${DOTFILES_PATH}/source/alias.sh"
 fi
 
 ##
 # Bash prompt, like PS1
-if [[ -e "${DOTFILES_PATH}/source/prompt_string" ]]; then
-	source "${DOTFILES_PATH}/source/prompt_string"
+if [[ -e "${DOTFILES_PATH}/source/prompt_string.sh" ]]; then
+	source "${DOTFILES_PATH}/source/prompt_string.sh"
 fi
 
 ##
