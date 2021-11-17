@@ -146,11 +146,16 @@ As of November 16, 2021, these dotfiles replaced manual symlink creation with
 the `stow` command. Everything under `dotfiles/home` will be symlinked using
 `stow`.
 
-Additionally, there is a technique in use for users of iCloud Drive, that will
-also symlink any files that are found at: 
+### :cloud: iCloud Drive 
+
+There is a technique in use for users of iCloud Drive, that will also symlink 
+any files that are found at: 
 `/Users/${USER}/Library/Mobile Documents/com~apple~CloudDocs/${USER}`. This is
-useful for any sensitive config files that can co-exist with the config files
-that are symlinked from these dotfiles.
+useful for any sensitive config files that usually co-exist with config files 
+that are symlinked from these dotfiles. For example, if a 
+`/Users/${USER}/Library/Mobile Documents/com~apple~CloudDocs/${USER}/.ssh` 
+directory exists, it will be symlinked to `${HOME}/.ssh` alongside the 
+non-sensitive config files that are stored in this repository. 
 
 ## Author
 
