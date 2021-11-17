@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 ##
 # Completion for proprietary Linus Shops CLI tool.
 #
@@ -11,4 +13,3 @@ if command -v "linus" >/dev/null 2>&1; then
 		eval $(linus _completion -g -p linusdebug)
 	fi
 fi
-

@@ -7,6 +7,11 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap.sh" && cd - >
 # The purpose of this script is to bootstrap the dotfiles dependencies and
 # provide a quick utility for updating them.
 #
+# Basic command arguments can be passed:
+#  dotfiles unstow - Unlink all symlinks.
+#  dotfiles restow - Unlink and relink all symlinks.
+#  dotfiles skippackages - Run without installing/updating packages.
+#
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiless
 # @license MIT
@@ -18,8 +23,8 @@ export ICLOUD_DIRECTORY_SHORT="${HOME}/iCloud"
 export ICLOUD_USER_HOME="${ICLOUD_DIRECTORY_LONG}/${USER}"
 
 ##
-# Remove dotfiles.
-if [[ "${1}" == "--remove" ]]; then
+# Unstow dotfiles' symlinks.
+if [[ "${1}" == "unstow" ]]; then
 	echo "Remove dotfiles symlinks."
 	stow -d "${DOTFILES_PATH}" -t "${HOME}" -D "home" --ignore=\.DS_Store$ -v
 
@@ -27,6 +32,18 @@ if [[ "${1}" == "--remove" ]]; then
 		stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -D ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
 	fi
 	echo "Uninstalled dotfiles."
+	exit 0
+fi
+
+##
+# Restow dotfiles' symlinks.
+if [[ "${1}" == "restow" ]]; then
+	echo "Restowing dotfiles."
+	stow -d "${DOTFILES_PATH}" -t "${HOME}" -R "home" --ignore=\.DS_Store$ -v
+
+	if [[ -d "${ICLOUD_USER_HOME}" ]]; then
+		stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -R ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+	fi
 	exit 0
 fi
 
@@ -209,9 +226,9 @@ source "${DOTFILES_PATH}/source/local_config_templates.sh"
 # are made to the dpm files, which can then immediately be updated by comparing
 # against the value of these hashes made at the beginning of a session.
 
-# Install package depencencies only if install flag passed
-if [[ "${1}" == "--nopackages" ]]; then
-	echo -e "${BLUE}${BOLD}Skip dotfiles package install.${RESET}"
+# Install package dependencies only if option passed.
+if [[ "${1}" == "skippackages" ]]; then
+	echo -e "${BLUE}${BOLD}Skip dotfiles' packages install.${RESET}"
 else
 	source "${DOTFILES_PATH}/bin/dpm" --install
 fi
