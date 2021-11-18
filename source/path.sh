@@ -43,15 +43,25 @@ pathmunge "/usr/local/bin"
 # Reset base path if on MacOS, so nothing unusual finds its way into it.
 # Note that this will also stick /usr/local/sbin into the path, but in a
 # preferred location, instead of at the beginning.
-if [[ -e "/etc/paths" ]]; then
-  PATH=""
-  pathmunge "/sbin"
-  pathmunge "/usr/sbin"
-  pathmunge "/usr/local/sbin"
-  pathmunge "/bin"
-  pathmunge "/usr/bin"
-  pathmunge "/usr/local/bin"
-fi
+## This was undone November 18, 2021, and the missing sbin path is just added
+## above. Resetting the path at this level was causing nix to fail, as it
+## installs at a very high-level.
+#if [[ -e "/etc/paths" ]]; then
+#  PATH=""
+#  pathmunge "/sbin"
+#  pathmunge "/usr/sbin"
+#  pathmunge "/usr/local/sbin"
+#  pathmunge "/bin"
+#  pathmunge "/usr/bin"
+#  pathmunge "/usr/local/bin"
+#fi
+# For whatever reason MacOS does not include this in its path, and some
+# utilities that are installed via HomeBrew need it. Unfortunately, it does
+# not insert itself where it should, as noted in the commented out section
+# above, so as a compromise, this will just add the path to the end, which
+# will make it less important, which is fine, but should still come after the
+# other sbin paths.
+pathmunge "/usr/local/sbin" "after"
 
 ##
 # On MacOS, add GNU coreutils and other GNU tools to the path, instead of
