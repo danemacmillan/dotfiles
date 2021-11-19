@@ -13,7 +13,7 @@
 # Pathmunge function copied from CentOS 7, with modification.
 #
 # The modifications are a verification for path existence, and syntax.
-function pathmunge()
+pathmunge()
 {
   if [[ -e "${1}" ]]; then
     case ":${PATH}:" in
@@ -36,16 +36,23 @@ if [[ -z ${HOMEBREW_INSTALL_PATH} ]]; then
 	export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
 fi
 
-# Common path, if not already included, and it exists.
-pathmunge "/usr/local/bin"
-
 ##
 # Reset base path if on MacOS, so nothing unusual finds its way into it.
 # Note that this will also stick /usr/local/sbin into the path, but in a
 # preferred location, instead of at the beginning.
-## This was undone November 18, 2021, and the missing sbin path is just added
-## above. Resetting the path at this level was causing nix to fail, as it
+#
+# Note that another reason for wanting to do this is that for users of tmux,
+# the PATH gets rebuilt every time, because tmux opens in login mode, which
+# causes MacOS' `path_helper` function to add paths to the end of the list
+# redundantly. Read https://superuser.com/a/583502/496301 for more information.
+# Note that in lieu of blowing up PATH, the decision was made to instead modify
+# how tmux starts its shell; read the first line of the tmux.conf file to see
+# it being changed to ${SHELL}.
+#
+## This was undone November 18, 2021, and the missing sbin path is just after.
+## Resetting the path at this level was causing nix to fail, as it
 ## installs at a very high-level.
+#
 #if [[ -e "/etc/paths" ]]; then
 #  PATH=""
 #  pathmunge "/sbin"
@@ -55,6 +62,7 @@ pathmunge "/usr/local/bin"
 #  pathmunge "/usr/bin"
 #  pathmunge "/usr/local/bin"
 #fi
+#
 # For whatever reason MacOS does not include this in its path, and some
 # utilities that are installed via HomeBrew need it. Unfortunately, it does
 # not insert itself where it should, as noted in the commented out section
@@ -62,6 +70,9 @@ pathmunge "/usr/local/bin"
 # will make it less important, which is fine, but should still come after the
 # other sbin paths.
 pathmunge "/usr/local/sbin" "after"
+
+# Common path, if not already included, and it exists.
+pathmunge "/usr/local/bin"
 
 ##
 # On MacOS, add GNU coreutils and other GNU tools to the path, instead of
@@ -157,4 +168,5 @@ pathmunge "${HOME}/bin"
 ##
 # EXPORT PATH TO ENVIRONMENT.
 export PATH
-unset -f pathmunge
+# Do not unset, so the function is still available.
+#unset -f pathmunge
