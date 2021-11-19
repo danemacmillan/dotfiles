@@ -263,6 +263,26 @@ elif [[ -e "/etc/profile.d/bash_completion.sh" ]]; then
 	source "/etc/profile.d/bash_completion.sh"
 fi
 
+# Nix
+#
+# Set NIX_PATH.
+#
+# See https://nix-community.github.io/home-manager/index.html#ch-usage
+# for original NIX_PATH value. These dotfiles change it so the value is not
+# duplicated.
+#export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+if [[ -e "${HOME}/.nix-defexpr/channels" ]]; then
+	export NIX_PATH="${NIX_PATH:-${HOME}/.nix-defexpr/channels}"
+fi
+#
+# Set home-manager session variables.
+#
+# Do not let nix home-manager manage Bash, see 1.1.4:
+# https://nix-community.github.io/home-manager/index.html#sec-install-standalone
+if [[ -e "${HOME}/.nix-profile/etc/profile.d/hm-session-vars.sh" ]]; then
+	source "${HOME}/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
+
 ##
 # Source extra file if it exists. This file will never get added to repo.
 if [[ -e "${DOTFILES_LOCAL_CONFIGS_PATH}/shell.local" ]]; then
