@@ -265,6 +265,15 @@ fi
 
 # Nix
 #
+# Nix bash completion extra path.
+#
+# Add additional path to XDG_DATA_DIRS for autocompletion provided by Nix.
+# Bash completion will check the paths it finds here as well, and this is how
+# Nix can manage its own completions alongside the ones provided by dotfiles.
+if [[ -e "${HOME}/.nix-profile/share" ]]; then
+	export XDG_DATA_DIRS="${XDG_DATA_DIRS}:${HOME}/.nix-profile/share"
+fi
+#
 # Set NIX_PATH.
 #
 # See https://nix-community.github.io/home-manager/index.html#ch-usage
