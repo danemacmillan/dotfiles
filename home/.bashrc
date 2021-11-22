@@ -219,6 +219,12 @@ if [[ -e "${DOTFILES_PATH}/source/prompt_string.sh" ]]; then
 fi
 
 ##
+# Nix
+if [[ -e "${DOTFILES_PATH}/source/nix.sh" ]]; then
+	source "${DOTFILES_PATH}/source/nix.sh"
+fi
+
+##
 # Add tab completion for many Bash commands.
 #
 # Note that these dotfiles install `bash_completion@2`, and fully leverages
@@ -261,35 +267,6 @@ if [[ -e "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
 elif [[ -e "/etc/profile.d/bash_completion.sh" ]]; then
 	export BASH_COMPLETION_COMPAT_DIR="/etc/bash_completion.d"
 	source "/etc/profile.d/bash_completion.sh"
-fi
-
-# Nix
-#
-# Nix bash completion extra path.
-#
-# Add additional path to XDG_DATA_DIRS for autocompletion provided by Nix.
-# Bash completion will check the paths it finds here as well, and this is how
-# Nix can manage its own completions alongside the ones provided by dotfiles.
-if [[ -e "${HOME}/.nix-profile/share" ]]; then
-	export XDG_DATA_DIRS="${XDG_DATA_DIRS}:${HOME}/.nix-profile/share"
-fi
-#
-# Set NIX_PATH.
-#
-# See https://nix-community.github.io/home-manager/index.html#ch-usage
-# for original NIX_PATH value. These dotfiles change it so the value is not
-# duplicated.
-#export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-if [[ -e "${HOME}/.nix-defexpr/channels" ]]; then
-	export NIX_PATH="${NIX_PATH:-${HOME}/.nix-defexpr/channels}"
-fi
-#
-# Set home-manager session variables.
-#
-# Do not let nix home-manager manage Bash, see 1.1.4:
-# https://nix-community.github.io/home-manager/index.html#sec-install-standalone
-if [[ -e "${HOME}/.nix-profile/etc/profile.d/hm-session-vars.sh" ]]; then
-	source "${HOME}/.nix-profile/etc/profile.d/hm-session-vars.sh"
 fi
 
 ##
