@@ -27,13 +27,14 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # Explicitly do not let Home Manager manage bash.
+  programs.bash.enable = false;
+  #	programs.bash = {
+  #   enable = true;
+  #   bashrcExtra = ''
+  #     . ~/oldbashrc
+  #   '';
+  # };
+
   programs.bat.enable = true;
-
-#	programs.bash = {
- #   enable = true;
-  #  bashrcExtra = ''
-   #   . ~/oldbashrc
-    #'';
-  #};
-
 }
