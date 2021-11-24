@@ -10,9 +10,14 @@
   home.packages = [
     pkgs.bat
     pkgs.bash-completion
+    pkgs.cloud-sql-proxy
     pkgs.curl
+    pkgs.direnv
     pkgs.nix-bash-completions
+    pkgs.radarr
     pkgs.rclone
+    pkgs.sonarr
+    pkgs.symlinks
   ];
 
   # This value determines the Home Manager release that your
