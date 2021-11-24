@@ -11,9 +11,15 @@
     pkgs.bat
     pkgs.bash-completion
     pkgs.cloud-sql-proxy
+    pkgs.coreutils
     pkgs.curl
     pkgs.direnv
+    pkgs.getopt
+    pkgs.gnugrep
+    pkgs.gnused
+    pkgs.gnutar
     pkgs.google-cloud-sdk
+    pkgs.indent
     pkgs.nix-bash-completions
     pkgs.radarr
     pkgs.rclone

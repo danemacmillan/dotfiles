@@ -75,24 +75,6 @@ pathmunge "/usr/local/sbin" "after"
 pathmunge "/usr/local/bin"
 
 ##
-# On MacOS, add GNU coreutils and other GNU tools to the path, instead of
-# using the BSD ones that come with the distribution. Note that this may
-# cause issues with some native applications. I've not experienced it, but
-# it could happen. Also, this just assumes that if the coreutils package is
-# installed, so are the other ones listed inside the conditional block.
-if [[ -e "${HOMEBREW_FORMULA_PATH}/coreutils" ]] ; then
-	pathmunge "${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnubin"
-	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-getopt/libexec/gnubin"
-	pathmunge "${HOMEBREW_FORMULA_PATH}/grep/libexec/gnubin"
-	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-indent/libexec/gnubin"
-	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-sed/libexec/gnubin"
-	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-tar/libexec/gnubin"
-
-  export MANPATH="${HOMEBREW_FORMULA_PATH}/grep/libexec/gnuman:$MANPATH"
-	export MANPATH="${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnuman:$MANPATH"
-fi
-
-##
 # fzf
 pathmunge "/usr/local/opt/fzf/bin"
 

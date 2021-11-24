@@ -13,7 +13,6 @@ cask
 #casperjs
 cmake
 cmatrix
-coreutils
 cowsay
 ctags
 diff-so-fancy
@@ -29,10 +28,6 @@ gawk
 git
 git-extras
 glib
-gnu-getopt
-gnu-indent
-gnu-sed
-gnu-tar
 gnupg
 gnutls
 gpg
@@ -101,4 +96,3 @@ vim
 weechat
 weighttp
 wget
-
