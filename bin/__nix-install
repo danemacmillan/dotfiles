@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+##
+# First install of dotfiles.
+#
+# This is a script to install Dane MacMillan's dotfiles repo on a brand new
+# machine with nothing available.
+#
+# Note about passing arguments to install script:
+# - http://stackoverflow.com/a/25563308
+#
+# Install (with and without SSH keys):
+#   curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -
+#   curl -sL https://raw.githubusercontent.com/danemacmillan/dotfiles/master/install | bash -s -- nossh
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+#
+# @TODO Make OS detection more thorough. At the moment, "nix" essentially
+# means "not MacOS and definitely CentOS." Obviously there is more to "nix."
+# @TODO Make this more robust.
+## Update install script and readme.
+## http://stackoverflow.com/questions/4642915/passing-parameters-to-bash-when-executing-a-script-fetched-by-curl
+
+# Common path, if not already included, and it exists.
+# Fresh environments like on CentOS do not include this path. If this path is
+# not available during installation, each user will redundantly install things
+# that have been added to this PATH.
+[[ ":${PATH}:" != *":/usr/local/bin:"* ]] && [[ -e "/usr/local/bin" ]] && export PATH="/usr/local/bin:${PATH}"
+
+# Determine OS to determine the package manager used to install packages.
+OS=$(uname | awk '{print tolower($0)}')
+case "${OS}" in
+  darwin*)
+    OS="osx";;
+  linux*)
+    OS="nix";;
+esac
+
+echo -e "Preparing dotfiles install for the OS.\n"
+
+# https://nixos.org/download.html
+curl -L https://nixos.org/nix/install | sh
+# Echo close shell and continue with below.
+nix-shell -p nix-info --run "nix-info -m"
+# https://nixos.org/manual/nix/unstable/package-management/basic-package-mgmt.html
+# https://nixos.org/manual/nix/stable/command-ref/nix-channel.html
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+nix-channel --update
+# https://nix-community.github.io/home-manager/index.html#sec-install-standalone
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+
+# Then source home.nix config. How to get git?
+# Do I install with nix, clone, then remove it, and run home manager?
+
+
+
+
+
+
+
+
+
+
+if command -v yum >/dev/null 2>&1; then
+    echo "Installing git."
+    yum -y install git
+elif [[ "${OS}" == "osx" ]]; then
+    echo "Installing Xcode tools."
+    sudo xcodebuild -license accept
+		sudo xcode-select --install
+
+    echo "Installing Homebrew, then git."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/local/bin/brew install git
+fi
+
+dotfiles_repo="git@github.com:danemacmillan/dotfiles.git"
+if [[ "${1}" == "nossh" ]]; then
+	dotfiles_repo="https://github.com/danemacmillan/dotfiles.git"
+fi
+
+dotfiles_install_directory=".dotfiles"
+
+git clone "${dotfiles_repo}" "${dotfiles_install_directory}" \
+&& cd "${dotfiles_install_directory}" \
+&& source bin/dotfiles
