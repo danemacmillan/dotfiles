@@ -38,3 +38,6 @@ fi
 if [[ -e "${HOME}/.nix-profile/etc/profile.d/hm-session-vars.sh" ]]; then
 	source "${HOME}/.nix-profile/etc/profile.d/hm-session-vars.sh"
 fi
+
+# Read: https://nixos.wiki/wiki/FAQ/How_can_I_install_a_proprietary_or_unfree_package%3F
+#NIXPKGS_ALLOW_UNFREE=1
