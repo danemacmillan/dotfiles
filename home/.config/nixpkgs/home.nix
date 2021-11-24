@@ -10,6 +10,7 @@
   home.packages = [
     pkgs.bat
     pkgs.bash-completion
+    pkgs.curl
     pkgs.nix-bash-completions
     pkgs.rclone
   ];

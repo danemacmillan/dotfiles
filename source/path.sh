@@ -82,7 +82,6 @@ pathmunge "/usr/local/bin"
 # installed, so are the other ones listed inside the conditional block.
 if [[ -e "${HOMEBREW_FORMULA_PATH}/coreutils" ]] ; then
 	pathmunge "${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnubin"
-	pathmunge "${HOMEBREW_FORMULA_PATH}/curl/bin"
 	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-getopt/libexec/gnubin"
 	pathmunge "${HOMEBREW_FORMULA_PATH}/grep/libexec/gnubin"
 	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-indent/libexec/gnubin"
