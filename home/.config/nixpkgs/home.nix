@@ -9,9 +9,9 @@
   # Packages that should be installed to the user profile.
   home.packages = [
     pkgs.bat
-		pkgs.bash-completion
-		pkgs.nix-bash-completions
-		pkgs.rclone
+    pkgs.bash-completion
+    pkgs.nix-bash-completions
+    pkgs.rclone
   ];
 
   # This value determines the Home Manager release that your
