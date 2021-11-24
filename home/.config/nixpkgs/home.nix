@@ -13,6 +13,7 @@
     pkgs.cloud-sql-proxy
     pkgs.curl
     pkgs.direnv
+    pkgs.google-cloud-sdk
     pkgs.nix-bash-completions
     pkgs.radarr
     pkgs.rclone

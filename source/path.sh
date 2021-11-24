@@ -96,14 +96,6 @@ fi
 # fzf
 pathmunge "/usr/local/opt/fzf/bin"
 
-# Source google-cloud-sdk gcloud utilities
-# https://cloud.google.com/sdk/docs/quickstarts
-if [[ -e "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]]; then
-	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-elif [[ -e "${HOME}/google-cloud-sdk/path.bash.inc" ]]; then
- source "${HOME}/google-cloud-sdk/path.bash.inc"
-fi
-
 ##
 # PHP 7.1, if it is installed, or 7.2.
 pathmunge "/usr/local/opt/php@7.1/bin"
