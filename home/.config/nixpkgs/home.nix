@@ -8,12 +8,35 @@
 
   # Packages that should be installed to the user profile.
   home.packages = [
+    pkgs.ack
+    pkgs.aspell
+    pkgs.atool
+    pkgs.autoconf
+    pkgs.automake
+    pkgs.autoconf
     pkgs.bat
+    pkgs.bat
+    #pkgs.bash
     pkgs.bash-completion
+    #pkgs.bfg-repo-cleaner
+    #pkgs.bitlbee
     pkgs.cloud-sql-proxy
+    pkgs.cmake
+    pkgs.cmatrix
     pkgs.coreutils
+    pkgs.cowsay
+    pkgs.ctags
     pkgs.curl
+    pkgs.diff-so-fancy
     pkgs.direnv
+    pkgs.dos2unix
+    pkgs.exiftool
+    pkgs.findutils
+    pkgs.fontconfig
+    pkgs.freetype
+    pkgs.fswatch
+    pkgs.fzf
+    pkgs.gawk
     pkgs.getopt
     pkgs.gnugrep
     pkgs.gnused
@@ -24,8 +47,10 @@
     pkgs.radarr
     pkgs.rclone
     pkgs.rsync
+    #pkgs.slack
     pkgs.sonarr
     pkgs.symlinks
+    pkgs.weechat
   ];
 
   # This value determines the Home Manager release that your
