@@ -23,6 +23,7 @@
     pkgs.nix-bash-completions
     pkgs.radarr
     pkgs.rclone
+    pkgs.rsync
     pkgs.sonarr
     pkgs.symlinks
   ];
