@@ -37,7 +37,8 @@ call plug#begin('$XDG_DATA_HOME/vim/plugged')
 	Plug 'scrooloose/nerdtree'
 	Plug 'scrooloose/nerdcommenter'
 
-	Plug '/usr/local/opt/fzf'
+	Plug '/Users/danemacmillan/.nix-profile/bin/fzf'
+	Plug 'junegunn/fzf'
 	Plug 'junegunn/fzf.vim'
 
 	Plug 'stanangeloff/php.vim'
@@ -58,7 +59,7 @@ call plug#end()
 "
 " Available color schemes: solarized, gruvbox, darcula
 silent! set background=dark
-silent! colorscheme solarized
+silent! colorscheme darcula
 let g:solarized_termcolors=256
 let g:gruvbox_contrast_dark = "hard"
 " Make invisible characters less prominent.
@@ -210,8 +211,8 @@ set modelines=4
 set noexrc
 set secure
 
-" Enable line numbers
-set number
+" Enable line numbers that are relative.
+set number relativenumber
 
 " Enable syntax highlighting
 syntax on
