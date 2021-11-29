@@ -26,6 +26,70 @@ command_exists()
 }
 
 ##
+# Loop through base paths and attempt to source with appended path.
+#
+# This is useful for looping through environment variables that are arrays of
+# paths, and trying each of them with the appended path, which is
+# tested for existence and then sourced if the concatenated full path exists.
+# Note that even a single path can be provided.
+#
+# The first argument should be a space- or colon-separated list of paths. This
+# function will support both by appending ":" to the default $IFS, which is
+# usually space,tab,newline. It will only be modified within the function, as
+# it leverages the local keyword.
+#
+# The second argument is the relative path that will be appended to the end of
+# each base path. The result that is tested and possibly sourced is the
+# concatenation of both strings, being a path.
+#
+# Example usages:
+#		source_loop "${PATH}" "relative/path/to/script.sh"
+#		source_loop "${NIX_PROFILES}" "relative/path/to/script.sh" -v
+#
+# The second example will also echo all the successfully sourced paths
+# to STDOUT, which can be captured with $(). The format is space-separated.
+#
+# This will return exit code of 0 if at least one path was sourced.
+#
+# To debug IFS:
+# 	printf %s "$IFS" | od -c
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @link https://github.com/danemacmillan/dotfiles
+# @license MIT
+source_loop()
+{
+	local base_paths="${1}"
+	local append_path="${2}"
+	local verbose="${3}"
+	local base_path
+	local sourced_paths=()
+	local exit_code=1
+	local IFS="$IFS:"
+
+	if [[ -n "${base_paths}" ]] \
+		&& [[ -n "${append_path}" ]] \
+	; then
+		for base_path in ${base_paths}; do
+			if [[ -e "${base_path}/${append_path}" ]]; then
+				sourced_paths+=("${base_path}/${append_path}")
+				exit_code=0
+				source "${base_path}/${append_path}"
+			fi
+		done
+	fi
+
+	if [[ -n "$verbose" ]] \
+		&& [[ "$verbose" == "-v" ]] \
+		&& [[ ${exit_code} == 0 ]] \
+	; then
+		echo "${sourced_paths[@]}"
+	fi
+
+	return $exit_code
+}
+
+##
 # Return a usable timestamp for filenames.
 #
 # Example usage:
@@ -885,4 +949,3 @@ listening()
         echo "Usage: listening [pattern]"
     fi
 }
-
