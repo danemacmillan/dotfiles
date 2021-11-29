@@ -245,30 +245,6 @@ if [[ "${SHELL}" != "${PREFERRED_SHELL}" ]] \
 fi
 
 ##
-# Fix up rclone completion.
-#
-# Rclone uses the old version of bash_completion, which ALWAYS eagerly loads
-# completion files into memory. That causes extremely slow shell startups.
-# Rclone has a massive completion file, which adds several hundred ms to the
-# start up times.
-#
-# This will check if modern bash_completion (v2) is available,
-# check if an rclone completion file exists at the old location, and if both
-# these conditions are true, it will be recreated at the non-eager location,
-# that loads completions only when requested.
-#
-# For now this has only been tested on MacOS.
-# brew --prefix rclone
-if [[ -e "/usr/local/share/bash-completion/completions" ]] \
-	&& [[ ! -e "/usr/local/share/bash-completion/completions/rclone" ]] \
-	&& [[ -e "/usr/local/opt/rclone/etc/bash_completion.d/rclone" ]] \
-; then
-	rm /usr/local/etc/bash_completion.d/rclone 2&>/dev/null
-	rm /etc/bash_completion.d/rclone 2&>/dev/null
-	ln -s /usr/local/opt/rclone/etc/bash_completion.d/rclone /usr/local/share/bash-completion/completions
-fi
-
-##
 # Source any MacOS-specific defaults
 if command_exists defaults ; then
 	echo -e "${BLUE}${BOLD}Setting MacOS defaults.${RESET}"
