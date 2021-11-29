@@ -51,12 +51,8 @@ if [[ "${USER}" == "root" ]]; then
 fi
 
 ##
-# __git_ps1 for MacOS or other systems
-if [[ -e "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh" ]]; then
-	source "${HOMEBREW_FORMULA_PATH}/git/etc/bash_completion.d/git-prompt.sh"
-elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
-	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
-fi
+# __git_ps1 for Nix.
+source_loop "${NIX_PROFILES:-${NIX_PROFILE_USER_PATH}}" "share/git/contrib/completion/git-prompt.sh"
 
 if command_exists __git_ps1 ; then
 	export PS1="${PS1_BACKGROUND}${USER_STYLE}\u\\[${CYAN}\]@${HOST_STYLE}\H\[${RESET}\]\\[${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
@@ -78,4 +74,3 @@ fi
 #    PS1=$(printf "%*s\r%s\n\$ " "$(($(tput cols)+${compensate}))" "$(prompt_right)" "$(prompt_left)")
 #}
 #PROMPT_COMMAND=prompt
-

@@ -235,7 +235,7 @@ fi
 
 ##
 # Use local, most recent version of Bash, if available.
-export PREFERRED_SHELL="/usr/local/bin/bash"
+export PREFERRED_SHELL="${NIX_PROFILE_USER_PATH}/bin/bash"
 if [[ "${SHELL}" != "${PREFERRED_SHELL}" ]] \
 	&& [[ -e "${PREFERRED_SHELL}" ]] \
 ; then

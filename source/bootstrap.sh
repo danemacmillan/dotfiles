@@ -132,6 +132,12 @@ if [[ -f "${DOTFILES_PATH}/source/function.sh" ]]; then
 	source "${DOTFILES_PATH}/source/function.sh"
 fi
 
+##
+# Nix.
+if [[ -e "${DOTFILES_PATH}/source/nix.sh" ]]; then
+	source "${DOTFILES_PATH}/source/nix.sh"
+fi
+
 # Create symlink from dotfiles install path into home directory.
 #
 # This will not occur if the .dotfiles directory itself has been cloned to

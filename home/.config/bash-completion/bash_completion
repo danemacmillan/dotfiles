@@ -21,17 +21,26 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 
-# Source google-cloud-sdk gcloud utilities
-# https://cloud.google.com/sdk/docs/quickstarts
-if [[ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ]]; then
-	source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-elif [[ -e "${HOME}/google-cloud-sdk/completion.bash.inc" ]]; then
-	source "${HOME}/google-cloud-sdk/completion.bash.inc"
-fi
-
-# fzf completions and keybindings.
+# fzf completions and keybindings.ss
 # https://github.com/junegunn/fzf#installation
-[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.bash" 2> /dev/null
+[[ $- == *i* ]] && source "${NIX_PROFILE_USER_PATH}/share/fzf/completion.bash" 2> /dev/null
 bind -x '"\C-p": vim $(fzf);'
-source "/usr/local/opt/fzf/shell/key-bindings.bash"
+source "${NIX_PROFILE_USER_PATH}/share/fzf/key-bindings.bash"
 
+# Source old Homebrew COMPAT completions manually.
+#
+# The BASH_COMPLETION_COMPAT_DIR variable is being used for Nix for the odd
+# completion file that does not support non-eager completion, so these are the
+# last remnants from Homebrew that can be sourced manually, as there can only
+# be one COMPAT directory.
+#
+# This logic is completely lifted from bash_completion.sh itself, with only
+# a path change made. See the end of that file.
+compat_dir="${HOMEBREW_INSTALL_PATH}/etc/bash_completion.d"
+if [[ -d $compat_dir && -r $compat_dir && -x $compat_dir ]]; then
+    for i in "$compat_dir"/*; do
+        [[ ${i##*/} != @($_backup_glob|Makefile*|$_blacklist_glob) && -f \
+        $i && -r $i ]] && . "$i"
+    done
+fi
+unset compat_dir i _blacklist_glob

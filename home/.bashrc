@@ -219,12 +219,6 @@ if [[ -e "${DOTFILES_PATH}/source/prompt_string.sh" ]]; then
 fi
 
 ##
-# Nix
-if [[ -e "${DOTFILES_PATH}/source/nix.sh" ]]; then
-	source "${DOTFILES_PATH}/source/nix.sh"
-fi
-
-##
 # Add tab completion for many Bash commands.
 #
 # Note that these dotfiles install `bash_completion@2`, and fully leverages
@@ -243,8 +237,7 @@ fi
 #
 # It exclusively support version 2, and provide fallback support for any
 # utilities that have not updated, using the `$BASH_COMPLETION_COMPAT_DIR`
-# path. Multiple locations are searched: the usual MacOS path is first checked,
-# then a common path on Linux systems, like CentOS.
+# path.
 #
 # Additionally, the $BASH_COMPLETION_USER_FILE environment variable is set,
 # which by default points to `~/.bash_completion`, but instead has been moved to
@@ -261,12 +254,15 @@ fi
 # to BASH_COMPLETION_USER_DIR/completions.
 export BASH_COMPLETION_USER_DIR="${XDG_DATA_HOME}/bash-completion"
 export BASH_COMPLETION_USER_FILE="${XDG_CONFIG_HOME}/bash-completion/bash_completion"
-if [[ -e "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
-	export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-	source "/usr/local/etc/profile.d/bash_completion.sh"
-elif [[ -e "/etc/profile.d/bash_completion.sh" ]]; then
-	export BASH_COMPLETION_COMPAT_DIR="/etc/bash_completion.d"
-	source "/etc/profile.d/bash_completion.sh"
+if [[ -e "${NIX_PROFILE_USER_PATH}/etc/profile.d/bash_completion.sh" ]]; then
+	export BASH_COMPLETION_COMPAT_DIR="${NIX_PROFILE_USER_PATH}/share/bash_completion.d"
+
+	# Add additional non-eager bash-completion2 paths, which check $XDG_DATA_DIRS
+	# and appends `bash-completion/completions` to them.
+	# Nix:
+	export XDG_DATA_DIRS="${XDG_DATA_DIRS}:${NIX_PROFILE_USER_PATH}/share"
+
+	source "${NIX_PROFILE_USER_PATH}/etc/profile.d/bash_completion.sh"
 fi
 
 ##
