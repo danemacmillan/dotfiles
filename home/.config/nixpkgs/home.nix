@@ -162,4 +162,28 @@
   programs.htop.enable = false;
   programs.tmux.enable = false;
   programs.vim.enable = false;
+
+  # MacOS Defaults.
+  #
+  # This is still experimental, and it is possible that they only execute
+  # if the nix-darwon module is installed and Home Manager managed through it.
+  # In the meantime, these are just example additions. Home Manager does appear
+  # to apply them in its output when running `switch`, but does not seem to
+  # take effect in the OS itself. Perhaps a restart is required.
+  targets.darwin.defaults = {
+    #defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+    com.apple.desktopservices = {
+      DSDontWriteNetworkStores = true;
+      DSDontWriteUSBStores = true;
+    };
+    #defaults write com.apple.finder ShowPathbar -bool true
+    com.apple.finder = {
+      ShowPathbar = false;
+    };
+    #defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+    NSGlobalDomain = {
+      com.apple.swipescrolldirection = true;
+    };
+  };
+
 }
