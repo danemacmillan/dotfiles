@@ -138,7 +138,16 @@
   programs.home-manager.enable = true;
 
   # Let Home Manager manage these configurations.
-  programs.bat.enable = true;
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "GitHub";
+      italic-text = "always";
+    };
+  };
+
+  # This does not work, so comment out for now.
+  #programs.command-not-found.enable = true;
 
   # Do not let Home Manager manage these configurations.
   programs.bash.enable = false;
