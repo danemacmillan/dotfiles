@@ -33,8 +33,12 @@ shopt -s autocd 2&>/dev/null
 export GPG_TTY=$(tty)
 
 ##
-# Set default editor
+# Set default editor.
 export EDITOR=vim
+
+##
+# Set default pager to `most` for colorization.
+export PAGER=most
 
 ##
 # Use custom XDG directory for vim.

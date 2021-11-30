@@ -81,6 +81,7 @@
     pkgs.mediainfo
     pkgs.libmhash
     pkgs.moreutils
+    pkgs.most
     pkgs.mycli
     pkgs.ncdu
     pkgs.neofetch
@@ -149,6 +150,7 @@
     # };
   programs.alacritty.enable = false;
   programs.git.enable = false;
+  programs.htop.enable = false;
   programs.tmux.enable = false;
   programs.vim.enable = false;
 }
