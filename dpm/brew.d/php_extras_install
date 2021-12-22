@@ -16,3 +16,19 @@ if [[ ! -f /usr/local/opt/php@7.2/lib/php/20170718/ioncubeloader.so ]]; then
 	unzip ioncube_loaders_dar_x86-64.zip
 	mv ioncube/ioncube_loader_dar_7.2.so /usr/local/opt/php@7.2/lib/php/20170718/ioncubeloader.so
 fi
+
+if [[ ! -f /usr/local/opt/php@7.3/lib/php/20180731/ioncubeloader.so ]]; then
+	mkdir -p /usr/local/opt/php@7.3/lib/php/20180731
+	cd $HOME/tmp
+	wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_dar_x86-64.zip
+	unzip ioncube_loaders_dar_x86-64.zip
+	mv ioncube/ioncube_loader_dar_7.3.so /usr/local/opt/php@7.3/lib/php/20180731/ioncubeloader.so
+fi
+
+if [[ ! -f /usr/local/opt/php@7.4/lib/php/20190902/ioncubeloader.so ]]; then
+	mkdir -p /usr/local/opt/php@7.4/lib/php/20190902
+	cd $HOME/tmp
+	wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_mac_x86-64.zip
+	unzip ioncube_loaders_mac_x86-64.zip
+	mv ioncube/ioncube_loader_mac_7.4.so /usr/local/opt/php@7.4/lib/php/20190902/ioncubeloader.so
+fi

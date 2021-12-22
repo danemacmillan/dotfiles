@@ -61,7 +61,7 @@ etc_restart()
 {
 	echo -e "Reloading service configs."
 	brew services restart nginx
-	brew services restart php@7.2
+	brew services restart php@7.3
 	brew services restart mysql@5.7
 	brew services restart redis@3.2
   # no varnish yet because version is too high.
@@ -70,10 +70,10 @@ etc_restart()
 
 etc_xdebug()
 {
-	local xdebug_location="/usr/local/etc/php/7.2/conf.d/ext-xdebug.ini"
+	local xdebug_location="/usr/local/etc/php/7.3/conf.d/ext-xdebug.ini"
 
   # Fix any random insertion in php.ini.
-  sed -i --follow-symlinks -e 's/zend_extension="xdebug.so"//g' "/usr/local/etc/php/7.2/php.ini"
+  sed -i --follow-symlinks -e 's/zend_extension="xdebug.so"//g' "/usr/local/etc/php/7.3/php.ini"
 
 	if grep -q ";zend_extension" "$xdebug_location"; then
 		echo "Toggling Xdebug on."
@@ -83,7 +83,7 @@ etc_xdebug()
 		sed -i --follow-symlinks -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
 	fi
 
-	brew services restart php@7.2
+	brew services restart php@7.3
 }
 
 etc_dnsmasq()

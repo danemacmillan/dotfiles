@@ -84,6 +84,8 @@ pathmunge "/usr/local/opt/php@7.1/bin"
 pathmunge "/usr/local/opt/php@7.1/sbin"
 pathmunge "/usr/local/opt/php@7.2/bin"
 pathmunge "/usr/local/opt/php@7.2/sbin"
+pathmunge "/usr/local/opt/php@7.3/bin"
+pathmunge "/usr/local/opt/php@7.3/sbin"
 
 ##
 # Python version 3.6.
