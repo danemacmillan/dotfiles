@@ -171,9 +171,11 @@ alias npm_config_list='npm config ls -l'
 #
 # Note: this is very specific to my standard virtual machine.
 # Change the remote_host. Check it by running `netstat -r`.
+# Old XDebug v2 versions.
 #alias phpdebugcli='PHP_CLI_DEBUG="true" COMPOSER_ALLOW_XDEBUG=1 PHP_IDE_CONFIG="serverName=phpdebugcli" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=192.168.70.1" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp"'
-#alias phpdebugcli='PHP_CLI_DEBUG="true" PHP_IDE_CONFIG="serverName=phpdebugcli" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_host=192.168.70.1" -d "xdebug.remote_port=9000" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp"'
-alias phpdebugcli='PHP_CLI_DEBUG="true" COMPOSER_ALLOW_XDEBUG=1 PHP_IDE_CONFIG="serverName=phpdebugcli" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_port=9001" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp"'
+#alias phpdebugcli='PHP_CLI_DEBUG="true" COMPOSER_ALLOW_XDEBUG=1 PHP_IDE_CONFIG="serverName=phpdebugcli" $(which php) -d "xdebug.idekey=PHPSTORM" -d "xdebug.remote_port=9001" -d "xdebug.remote_enable=1" -d "xdebug.remote_autostart=1" -d "xdebug.remote_handler=dbgp"'
+# XDebug v3:
+alias phpdebugcli='PHP_CLI_DEBUG="true" COMPOSER_ALLOW_XDEBUG=1 XDEBUG_MODE=debug XDEBUG_SESSION=1 '
 if command_exists linus \
 	&& [[ -e "${XDG_BIN_HOME}/linus" ]] \
 	&& php -m |grep -q xdebug \
