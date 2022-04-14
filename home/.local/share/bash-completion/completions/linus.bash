@@ -8,8 +8,5 @@
 # @author Dane MacMillan <work@danemacmillan.com>
 if command -v "linus" >/dev/null 2>&1; then
 	eval $(linus _completion -g -p linus)
-
-	if php -m |grep -q xdebug; then
-		eval $(linus _completion -g -p linusdebug)
-	fi
+	eval $(linus _completion -g -p linusdebug)
 fi
