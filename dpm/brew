@@ -1,6 +1,7 @@
 brew-cask-completion
 cask
 #casperjs
+composer
 grunt-cli
 #ios-webkit-debug-proxy
 #mackup
@@ -8,7 +9,7 @@ mysql@5.7
 #mytop
 nginx
 node@10
-php@7.2
+php@7.3
 php_extras
 pidof
 redis@3.2

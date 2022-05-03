@@ -61,16 +61,18 @@
     pkgs.google-cloud-sdk
     pkgs.grc
     pkgs.guile
+    pkgs.gzip
     pkgs.highlight
     pkgs.htop
     pkgs.httperf
     pkgs.httpie
+    pkgs.icu69
     #pkgs.hub
     pkgs.iftop
     pkgs.indent
     pkgs.ioping
     pkgs.iperf
-    pkgs.pinentry
+    #pkgs.pinentry
     pkgs.jmeter
     pkgs.jpegoptim
     pkgs.jq
@@ -80,6 +82,7 @@
     pkgs.mas
     pkgs.mediainfo
     pkgs.libmhash
+    pkgs.lsof
     pkgs.moreutils
     pkgs.most
     pkgs.mycli
@@ -91,8 +94,9 @@
     pkgs.openssl
     pkgs.pass
     pkgs.pcre
+    pkgs.procps
     pkgs.pv
-    pkgs.python37
+    #pkgs.python37Full
     #pkgs.ranger
     pkgs.rclone
     pkgs.readline
@@ -117,11 +121,57 @@
     pkgs.wget
     pkgs.ydiff
 
+    # Development
+    #pkgs.mysql57
+    #pkgs.nginx
+    ##pkgs.nodejs-10_x
+    ##pkgs.nodePackages.grunt-cli
+    ##pkgs.phantomjs2
+    #pkgs.php74
+    # Build PHP with custom set of extensions compiled in.
+    # https://nixos.org/manual/nixpkgs/unstable/#sec-php
+#    (pkgs.php74.withExtensions ({ all, ... }: with all; [
+#      bcmath
+#      ctype
+#      curl
+#      dom
+#      fileinfo
+#      gd
+#      #hash
+#      iconv
+#      intl
+#      json
+#      #libxml
+#      mysqlnd
+#      mysqli
+#      opcache
+#      openssl
+#      #pcre
+#      pdo_mysql
+#      redis
+#      simplexml
+#      soap
+#      sockets
+#      sodium
+#      xdebug
+#      xmlwriter
+#      xsl
+#      zip
+#    ]))
+    ## Build package with its own set of dependencies and PHP version.
+    ##(pkgs.php74.withExtensions ({ all, ... }: with all; [
+    ##  opcache
+    ##])).packages.composer
+    #pkgs.php74Packages.composer
+    #pkgs.php74Packages.psysh
+    #pkgs.redis
+
     # GUIs
     #pkgs.alacritty
-    pkgs.radarr
+    #pkgs.mono5
+    #pkgs.radarr
     #pkgs.slack
-    pkgs.sonarr
+    #pkgs.sonarr
   ];
 
   # This value determines the Home Manager release that your
