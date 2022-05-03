@@ -117,7 +117,7 @@
     pkgs.vim
     #pkgs.w3m
     pkgs.weechat
-    pkgs.weighttp
+    #pkgs.weighttp
     pkgs.wget
     pkgs.ydiff
 
