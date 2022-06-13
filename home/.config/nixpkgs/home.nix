@@ -124,8 +124,8 @@
     # Development
     #pkgs.mysql57
     #pkgs.nginx
-    ##pkgs.nodejs-10_x
-    ##pkgs.nodePackages.grunt-cli
+    pkgs.nodejs-10_x
+    pkgs.nodePackages.grunt-cli
     ##pkgs.phantomjs2
     #pkgs.php74
     # Build PHP with custom set of extensions compiled in.
