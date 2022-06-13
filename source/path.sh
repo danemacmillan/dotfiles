@@ -38,31 +38,38 @@ fi
 
 ##
 # Reset base path if on MacOS, so nothing unusual finds its way into it.
-# Note that this will also stick /usr/local/sbin into the path, but in a
-# preferred location, instead of at the beginning.
 #
 # Note that another reason for wanting to do this is that for users of tmux,
 # the PATH gets rebuilt every time, because tmux opens in login mode, which
 # causes MacOS' `path_helper` function to add paths to the end of the list
-# redundantly. Read https://superuser.com/a/583502/496301 for more information.
-# Note that in lieu of blowing up PATH, the decision was made to instead modify
+# redundantly. Additionally, JetBrains' IDEs have a "Shell Integration" feature
+# that disables login_shell, which causes paths to be rebuilt in another way,
+# so doing this on MacOS will allow the PATH to be identical under every
+# context.
+#
+# This essentially restores much earlier behaviour that was causing problems
+# with Nix integration. The only difference now is the call to source the
+# system profile right after, which allows system paths to get included.
+#
+# Read https://superuser.com/a/583502/496301 for more information.
+#
+# Note that in addition to blowing up PATH, the decision was made to modify
 # how tmux starts its shell; read the first line of the tmux.conf file to see
 # it being changed to ${SHELL}.
-#
-## This was undone November 18, 2021, and the missing sbin path is just after.
-## Resetting the path at this level was causing nix to fail, as it
-## installs at a very high-level.
-#
-#if [[ -e "/etc/paths" ]]; then
-#  PATH=""
-#  pathmunge "/sbin"
-#  pathmunge "/usr/sbin"
-#  pathmunge "/usr/local/sbin"
-#  pathmunge "/bin"
-#  pathmunge "/usr/bin"
-#  pathmunge "/usr/local/bin"
-#fi
-#
+if [[ -e "/etc/profile" ]]; then
+ PATH=""
+
+ # Unset this variable so `/etc/bashrc`'s `PATH` is rebuilt every time.
+ # This sequence is how Nix gets into `PATH`:
+ # - source `/etc/profile`;
+ # - that sources `/etc/bashrc`;
+ # - that sources a Nix script to add its own `PATH` data.
+ unset __ETC_PROFILE_NIX_SOURCED
+
+ source /etc/profile
+fi
+
+##
 # For whatever reason MacOS does not include this in its path, and some
 # utilities that are installed via HomeBrew need it. Unfortunately, it does
 # not insert itself where it should, as noted in the commented out section
@@ -71,6 +78,7 @@ fi
 # other sbin paths.
 pathmunge "/usr/local/sbin" "after"
 
+##
 # Common path, if not already included, and it exists.
 pathmunge "/usr/local/bin"
 
