@@ -46,3 +46,7 @@ fi
 
 # https://github.com/NixOS/nix/pull/3988
 #NIX_SHELL_PRESERVE_PROMPT=1
+
+# Packages marked as insecure or outdated can be overridden. Also see the config
+# to allow specific package overrides.
+#export NIXPKGS_ALLOW_INSECURE=1
