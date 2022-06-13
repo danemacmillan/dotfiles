@@ -18,6 +18,7 @@
 
 ## There should be one TERM entry for each termtype that is colorizable.
 TERM Eterm
+TERM alacritty
 TERM ansi
 TERM color-xterm
 TERM con132x25
@@ -375,4 +376,3 @@ EXEC 01;38;5;203
 .raw 00;38;5;28
 .tiff 00;38;5;28
 .png 00;38;5;28
-
