@@ -12,6 +12,5 @@ node@10
 php@7.3
 php_extras
 pidof
-redis@3.2
-ssh-copy-id
+redis@6.2
 #vagrant-completion
