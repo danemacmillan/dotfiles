@@ -76,3 +76,21 @@ fastcgi_buffer_size 32k;
 fastcgi_buffers 2048 4k;
 fastcgi_temp_file_write_size 256k;
 fastcgi_busy_buffers_size 256k;
+
+# Magento store code and store type.
+include fastcgi_params_magento;
+# Store (store view) code is defined in Administration > Configuration > Manage
+# Stores
+# Website code is defined under Stores > All Stores > Web Site
+fastcgi_param MAGE_RUN_CODE $MAGERUNCODE;
+# Note that using website more gracefully handles multi-website configurations
+# with unique domain names. When set to `website`, the domain will trigger the
+# different data and theme, while `store` will mean that the domain will
+# continue to operate as the selected store, despite the domain changing; in
+# this case only the store view code that appears in the URL triggers the theme
+# and data changes. This is why to support multi-website, it was decided to
+# move to MAGE_RUN_TYPE=website, which will properly load data and theme, and
+# 404 any random URLs that make sense in the website.
+# Either `store` or `website`. If store, use store view code (en, fr); if
+# website, use website code (base)
+fastcgi_param MAGE_RUN_TYPE website;

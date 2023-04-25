@@ -1,0 +1,78 @@
+# Magento store code and store type.
+# Every deploy with unique values should define this file.
+
+# Only use this for multiple domains with different store codes.
+
+# "set" can only be used in contexts: server, location, if, so be careful
+# not to include fastcgi_params outside of those contexts.
+# http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set
+
+# When MAGE_RUN_TYPE=website, must use website codes instead.
+# Can only appear in http{} context.
+#map $http_host $MAGERUNCODE {
+#    default base;
+#    fortnine.ca base;
+#    linusadmin.fortnine.ca base;
+#    storefront.linus.io base;
+#    storefront-admin.linus.io base;
+#    storefront-stage-admin.linus.io base;
+#    storefront-stage.linus.io base;
+#    storefront-stage-fortnine.linus.io base;
+#   storefront-stage-defender.linus.io defenderbase;
+#    defender.com defenderbase;
+#    defenderpreview.fortnine.ca defenderbase;
+#}
+
+set $MAGERUNCODE "base";
+# Only use this for multiple domains with different store codes.
+if ($host = "fortnine.ca") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "linusadmin.fortnine.ca") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "storefront-admin.linus.io") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "storefront.linus.io") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "storefront-stage.linus.io") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "storefront-stage-fortnine.linus.io") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "storefront-stage-admin.linus.io") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "storefront-admin.test") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "storefront.test") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "storefront-fortnine.ngrok.dev") {
+    set $MAGERUNCODE "base";
+}
+
+if ($host = "storefront-fortnine.test") {
+    set $MAGERUNCODE "base";
+}
+if ($host = "defender.com") {
+    set $MAGERUNCODE "defenderbase";
+}
+if ($host = "defenderpreview.fortnine.ca") {
+    set $MAGERUNCODE "defenderbase";
+}
+if ($host = "storefront-stage-defender.linus.io") {
+    set $MAGERUNCODE "defenderbase";
+}
+if ($host = "storefront-defender.test") {
+    set $MAGERUNCODE "defenderbase";
+}
+if ($host = "storefront-defender.ngrok.dev") {
+    set $MAGERUNCODE "defenderbase";
+}
+
+
