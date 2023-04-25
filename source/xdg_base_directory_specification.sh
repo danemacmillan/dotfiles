@@ -31,7 +31,7 @@ export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
 export XDG_CONFIG_DIRS="${XDG_CONFIG_DIRS:-/etc/xdg}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 __tmpdir="${TMPDIR%/}"
-export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-"${__tmpdir:-/tmp}/uid${UID}"}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-"${__tmpdir:-/tmp}/${UID}"}"
 unset __tmpdir
 
 [[ ! -e "${XDG_DATA_HOME}" ]] && mkdir -p "${XDG_DATA_HOME}"
