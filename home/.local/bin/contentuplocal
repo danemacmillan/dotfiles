@@ -5,14 +5,14 @@
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 
-BWLIMIT=4M
+BWLIMIT=20M
 
 export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache,*.icloud,com.apple.homed.plist,com.apple.homed.notbackedup.plist}"
 
 #if [[ "`pidof -x $(basename $0) -o %PPID`" ]]; then exit; fi
 
-echo $$
-echo $(basename $0)
+#echo $$
+#echo $(basename $0)
 #pgrep -f *contentuplocal*
 
 
@@ -22,9 +22,13 @@ echo $(basename $0)
 # Local SSD
 #/usr/bin/pgrep rclone > /dev/null || /usr/local/bin/rclone copy ~/Public/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT
 
+pgrep -f $(basename $0) > /dev/null || rclone move $HOME/Public/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
+pgrep -f $(basename $0) > /dev/null || rclone move $HOME/Public/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
+pgrep -f $(basename $0) > /dev/null || rclone move $HOME/Public/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
+
 # External HDD
-/usr/bin/pgrep -f $(basename $0) > /dev/null || rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
-/usr/bin/pgrep -f $(basename $0) > /dev/null || rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
-/usr/bin/pgrep -f $(basename $0) > /dev/null || rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
+#pgrep -f $(basename $0) > /dev/null || rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
+#pgrep -f $(basename $0) > /dev/null || rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
+#pgrep -f $(basename $0) > /dev/null || rclone move /Volumes/hdd-2tb/media/ gd:/media --drive-chunk-size 256M --transfers 1 --stats 1s -v --log-file ~/tmp/rclone.log --bwlimit $BWLIMIT --fast-list --drive-stop-on-upload-limit
 
 
