@@ -94,6 +94,7 @@
     pkgs.openssl
     pkgs.pass
     pkgs.pcre
+    pkgs.poppler_utils
     pkgs.procps
     pkgs.pv
     #pkgs.python37Full
@@ -105,6 +106,7 @@
     pkgs.rsync
     pkgs.siege
     pkgs.sipcalc
+    pkgs.ssh-copy-id
     pkgs.stow
     pkgs.symlinks
     pkgs.tealdeer
@@ -124,7 +126,8 @@
     # Development
     #pkgs.mysql57
     #pkgs.nginx
-    pkgs.nodejs-10_x
+    #pkgs.nodejs-10_x
+    pkgs.nodejs-16_x
     pkgs.nodePackages.grunt-cli
     ##pkgs.phantomjs2
     #pkgs.php74
@@ -182,7 +185,7 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "21.11";
+  home.stateVersion = "22.05";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
