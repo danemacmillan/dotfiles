@@ -5,7 +5,8 @@ composer
 grunt-cli
 #ios-webkit-debug-proxy
 #mackup
-mysql@5.7
+#mysql@5.7
+mysql-client
 #mytop
 nginx
 node@10

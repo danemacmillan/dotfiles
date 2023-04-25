@@ -103,7 +103,10 @@ pathmunge "/usr/local/opt/python@3.6/bin"
 
 ##
 # MySQL 5.7 daemon and client binaries.
-pathmunge "/usr/local/opt/mysql@5.7/bin"
+#pathmunge "/usr/local/opt/mysql@5.7/bin"
+
+# Only client for command line.
+pathmunge "/usr/local/opt/mysql-client/bin"
 
 ##
 # Go lang binaries.
