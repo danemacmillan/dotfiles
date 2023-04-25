@@ -84,6 +84,9 @@
 	# Detect whitespace errors when applying a patch
 	whitespace = fix
 
+[checkout]
+	defaultRemote = origin
+
 [core]
 
 	# http://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/
