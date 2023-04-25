@@ -173,7 +173,7 @@ export NPM_CONFIG_TMP="${XDG_RUNTIME_DIR}/npm"
 # This variable points the gcloud tool to a supported version without breaking
 # CentOS' yum utility, which depends on 2.6.x.
 # https://cloud.google.com/sdk/docs/release-notes#13200_2016-10-26
-export CLOUDSDK_PYTHON=""
+# export CLOUDSDK_PYTHON=""
 
 ##
 # Allow specifying the auth credentials file. Having this set will override
@@ -181,9 +181,10 @@ export CLOUDSDK_PYTHON=""
 # Accounts within the iam+ section, which can also be passed to most utilities
 # with a `-credential_file=` flag.
 # https://developers.google.com/identity/protocols/application-default-credentials
-export GOOGLE_APPLICATION_CREDENTIALS=""
+# export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/.config/gcloud/application_default_credentials.json"
+#export GOOGLE_APPLICATION_CREDENTIALS=""
+#export GOOGLE_CLOUD_PROJECT=""
 
-##
 # Boto config used by gsutil.
 #
 # https://cloud.google.com/storage/docs/boto-gsutil
