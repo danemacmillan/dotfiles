@@ -7,6 +7,7 @@
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 if command -v "linus" >/dev/null 2>&1; then
-	eval $(linus _completion -g -p linus)
-	eval $(linus _completion -g -p linusdebug)
+	eval "$($XDG_BIN_HOME/linus completion bash)"
+	#eval $(linus _completion -g -p linus)
+	#eval $(linus _completion -g -p linusdebug)
 fi
