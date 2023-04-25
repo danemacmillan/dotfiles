@@ -86,6 +86,10 @@ pathmunge "/usr/local/bin"
 # fzf
 pathmunge "/usr/local/opt/fzf/bin"
 
+
+pathmunge "/usr/local/opt/icu4c/bin"
+pathmunge "/usr/local/opt/icu4c/sbin"
+
 ##
 # PHP 7.1, if it is installed, or 7.2.
 pathmunge "/usr/local/opt/php@7.1/bin"
