@@ -206,6 +206,13 @@ alias siege='\siege --rc="${XDG_CONFIG_HOME}/siege/siegerc"'
 # SSH
 alias copyidrsa="pbcopy < ${HOME}/.ssh/id_rsa"
 alias copyidrsapub="pbcopy < ${HOME}/.ssh/id_rsa.pub"
+# https://dev.to/yugabyte/ssh-and-warning-setlocale-lcctype-cannot-change-locale-utf-8-no-such-file-or-directory-5cnf
+# https://stackoverflow.com/questions/29609371/how-not-to-pass-the-locale-through-an-ssh-connection-command
+#alias ssh="ssh -F ${HOME}/.ssh/config "
+#alias ssh="LC_ALL= ssh "
+# On MacOS it would be better to add a specific rule in /etc/ssh/ssh_config.d/
+# that will, when matched, not allow any ensuing configs to be used. By default,
+# MacOS sends `SendEnv LANG LC_*` to all hosts.
 
 ##
 # Tmux
