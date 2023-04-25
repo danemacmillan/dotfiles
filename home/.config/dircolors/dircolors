@@ -87,6 +87,8 @@ TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
 TERM xterm-termite
+TERM xterm-kitty
+
 
 ##
 # Standard 16 color support
