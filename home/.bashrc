@@ -38,7 +38,7 @@ export EDITOR=vim
 
 ##
 # Set default pager to `most` for colorization.
-export PAGER=most
+#export PAGER=most
 
 ##
 # Use custom XDG directory for vim.
