@@ -94,6 +94,8 @@ pathmunge "/usr/local/opt/php@7.2/bin"
 pathmunge "/usr/local/opt/php@7.2/sbin"
 pathmunge "/usr/local/opt/php@7.3/bin"
 pathmunge "/usr/local/opt/php@7.3/sbin"
+pathmunge "/usr/local/opt/php@7.4/bin"
+pathmunge "/usr/local/opt/php@7.4/sbin"
 
 ##
 # Python version 3.6.
@@ -127,7 +129,7 @@ pathmunge "/usr/local/opt/node@10/bin"
 
 ##
 # Redis 3.2
-pathmunge "/usr/local/opt/redis@3.2/bin"
+pathmunge "/usr/local/opt/redis@6.2/bin"
 
 #PostgreSQL
 pathmunge "/usr/local/opt/postgresql@9.6/bin"
