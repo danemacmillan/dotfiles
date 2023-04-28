@@ -949,3 +949,11 @@ listening()
         echo "Usage: listening [pattern]"
     fi
 }
+
+
+# Experimental sparsebundle sync.
+icloud_bundle_sync()
+{
+	"rsync" -aP --delete "${HOME}/projects.sparsebundle/" "${HOME}/iCloud/Disks/projects.sparsebundle.dir"
+}
+
