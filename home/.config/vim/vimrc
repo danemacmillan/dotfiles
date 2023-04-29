@@ -37,7 +37,9 @@ call plug#begin('$XDG_DATA_HOME/vim/plugged')
 	Plug 'scrooloose/nerdtree'
 	Plug 'scrooloose/nerdcommenter'
 
-	Plug '/Users/danemacmillan/.nix-profile/bin/fzf'
+	" @TODO Fix this when officially on nix. Revert for brew.
+	"Plug '/Users/danemacmillan/.nix-profile/bin/fzf'
+	Plug '/opt/homebrew/opt/fzf/bin'
 	Plug 'junegunn/fzf'
 	Plug 'junegunn/fzf.vim'
 

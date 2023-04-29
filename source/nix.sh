@@ -21,6 +21,16 @@ if [[ -n "${NIX_PROFILES}" ]] \
 	&& [[ -z "${NIX_PROFILE_USER_PATH}" ]] \
 ; then
 	export NIX_PROFILE_USER_PATH="${HOME}/.nix-profile"
+else
+		# Temporarily set this until the Nix integration is complete. The dotfiles have leveraged this variable in a few
+		# places, so if the above condition is not true, then this variable will be retrofitted for the usual paths
+		# expected by brew.
+		#@TODO
+		if [[ -e "/opt/homebrew/bin" ]]; then
+					export NIX_PROFILE_USER_PATH="/opt/homebrew"
+		elif [[ -e "/usr/local/bin" ]]; then
+					export NIX_PROFILE_USER_PATH="/usr/local"
+		fi
 fi
 
 # Set NIX_PATH.

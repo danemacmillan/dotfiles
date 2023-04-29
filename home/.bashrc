@@ -260,6 +260,9 @@ fi
 export BASH_COMPLETION_USER_DIR="${XDG_DATA_HOME}/bash-completion"
 export BASH_COMPLETION_USER_FILE="${XDG_CONFIG_HOME}/bash-completion/bash_completion"
 if [[ -e "${NIX_PROFILE_USER_PATH}/etc/profile.d/bash_completion.sh" ]]; then
+	# This path will not exist. It seems to be changed in the new Silicon world.
+	# Nevertheless, the XDG_DATA_DIRS are appended, and that is where the
+	# additional non-eager completions exist on Apple M*.
 	export BASH_COMPLETION_COMPAT_DIR="${NIX_PROFILE_USER_PATH}/share/bash_completion.d"
 
 	# Add additional non-eager bash-completion2 paths, which check $XDG_DATA_DIRS

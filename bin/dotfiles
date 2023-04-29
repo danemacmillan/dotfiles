@@ -137,7 +137,7 @@ stow -d "${DOTFILES_PATH}" -t "${HOME}" -R "home" --ignore=\.DS_Store$ -v
 # the data stored in these dotfiles.
 if [[ -d "${ICLOUD_USER_HOME}" ]]; then
   echo -e "${RESET}${BLUE}${BOLD}Symlink iCloud configs.${RESET}${GREEN}${DIM}"
-	stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -R ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+	stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -R ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ --ignore=dotfiles$ -v
 fi
 
 # Create symlink to special tmp directory.

@@ -23,9 +23,30 @@
 
 # fzf completions and keybindings.ss
 # https://github.com/junegunn/fzf#installation
-[[ $- == *i* ]] && source "${NIX_PROFILE_USER_PATH}/share/fzf/completion.bash" 2> /dev/null
-bind -x '"\C-p": vim $(fzf);'
-source "${NIX_PROFILE_USER_PATH}/share/fzf/key-bindings.bash"
+
+###
+###
+#To install useful keybindings and fuzzy completion:
+#  /opt/homebrew/opt/fzf/install
+#
+#To use fzf in Vim, add the following line to your .vimrc:
+#  set rtp+=/opt/homebrew/opt/fzf
+#
+#
+# For: macosm1
+if [[ -e "/opt/homebrew/opt/fzf/install" ]]; then
+	# Auto-completion
+  # ---------------
+	[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.bash" 2> /dev/null
+	# Key bindings
+  # ------------
+	source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
+else
+	# For: nix,macos,
+	[[ $- == *i* ]] && source "${NIX_PROFILE_USER_PATH}/share/fzf/completion.bash" 2> /dev/null
+	bind -x '"\C-p": vim $(fzf);'
+	source "${NIX_PROFILE_USER_PATH}/share/fzf/key-bindings.bash"
+fi
 
 # Source old Homebrew COMPAT completions manually.
 #

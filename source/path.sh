@@ -69,6 +69,12 @@ if [[ -e "/etc/profile" ]]; then
  source /etc/profile
 fi
 
+# New Homebrew paths for Apple Silicon.
+## Path example on a fresh install of MacOS followed by Homebrew.
+#/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+pathmunge "/opt/homebrew/bin"
+pathmunge "/opt/homebrew/sbin"
+
 ##
 # For whatever reason MacOS does not include this in its path, and some
 # utilities that are installed via HomeBrew need it. Unfortunately, it does
@@ -84,6 +90,7 @@ pathmunge "/usr/local/bin"
 
 ##
 # fzf
+pathmunge "/opt/homebrew/opt/fzf/bin"
 pathmunge "/usr/local/opt/fzf/bin"
 
 

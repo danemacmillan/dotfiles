@@ -48,9 +48,13 @@ elif [[ "${OS}" == "osx" ]]; then
     sudo xcodebuild -license accept
 		sudo xcode-select --install
 
-    echo "Installing Homebrew, then git."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    /usr/local/bin/brew install git
+    echo "Installing Homebrew, git, and stow."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    if [[ -e "/opt/homebrew/bin/brew" ]]; then
+    	/opt/homebrew/bin/brew install git stow
+    elif [[ -e "/usr/local/bin/brew" ]]; then
+    	/usr/local/bin/brew install git stow
+    fi
 fi
 
 dotfiles_repo="git@github.com:danemacmillan/dotfiles.git"
