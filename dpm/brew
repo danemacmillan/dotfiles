@@ -60,9 +60,11 @@ git
 ##gnu-indent
 ##gnu-sed
 ##gnu-tar
-gnupg
+## Lots of dependencies
+#gnupg
 gnutls
-grc
+## dependencies on python3.11
+#grc
 
 ##guile
 highlight
@@ -91,7 +93,8 @@ ncdu
 
 nmap
 
-##openssl ## New enough version on MacOS.
+## New enough version on MacOS.
+##openssl
 ##pass
 ##pcre
 
