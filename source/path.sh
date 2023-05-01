@@ -30,13 +30,6 @@ pathmunge()
 }
 
 ##
-# Store homebrew install path, if available.
-if [[ -z ${HOMEBREW_INSTALL_PATH} ]]; then
-	export HOMEBREW_INSTALL_PATH="$(command -v brew >/dev/null 2>&1 && brew --prefix)"
-	export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
-fi
-
-##
 # Reset base path if on MacOS, so nothing unusual finds its way into it.
 #
 # Note that another reason for wanting to do this is that for users of tmux,
@@ -72,8 +65,8 @@ fi
 # New Homebrew paths for Apple Silicon.
 ## Path example on a fresh install of MacOS followed by Homebrew.
 #/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
-pathmunge "/opt/homebrew/bin"
 pathmunge "/opt/homebrew/sbin"
+pathmunge "/opt/homebrew/bin"
 
 ##
 # For whatever reason MacOS does not include this in its path, and some
@@ -87,6 +80,38 @@ pathmunge "/usr/local/sbin" "after"
 ##
 # Common path, if not already included, and it exists.
 pathmunge "/usr/local/bin"
+
+##
+# Store homebrew install path, if available.
+#
+# These environment variables need to be set after Homebrew can be found in the
+# PATH. Non-M1 MBPs leveraged the common `/usr/local/bin` path in PATH, but
+# M1 MBPs require that Homebrew customer paths be added. This is why these
+# environment variables have now been set lower: it is ensure that the minimal
+# number of PATHs have been added.
+if [[ -z ${HOMEBREW_INSTALL_PATH} ]]; then
+	export HOMEBREW_INSTALL_PATH="$(command -v brew >/dev/null 2>&1 && brew --prefix)"
+	export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
+fi
+
+##
+# On MacOS, add GNU coreutils and other GNU tools to the path, instead of
+# using the BSD ones that come with the distribution. Note that this may
+# cause issues with some native applications. I've not experienced it, but
+# it could happen. Also, this just assumes that if the coreutils package is
+# installed, so are the other ones listed inside the conditional block.
+if [[ -e "${HOMEBREW_FORMULA_PATH}/coreutils" ]] ; then
+	pathmunge "${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/curl/bin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-getopt/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/grep/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-indent/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-sed/libexec/gnubin"
+	pathmunge "${HOMEBREW_FORMULA_PATH}/gnu-tar/libexec/gnubin"
+
+  export MANPATH="${HOMEBREW_FORMULA_PATH}/grep/libexec/gnuman:$MANPATH"
+  export MANPATH="${HOMEBREW_FORMULA_PATH}/coreutils/libexec/gnuman:$MANPATH"
+fi
 
 ##
 # fzf
