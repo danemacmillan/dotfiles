@@ -44,16 +44,23 @@ if command -v yum >/dev/null 2>&1; then
     echo "Installing git."
     yum -y install git
 elif [[ "${OS}" == "osx" ]]; then
-    echo "Installing Xcode tools."
+    echo "Installing Xcode tools, and Rosetta if on Apple Silicon."
     sudo xcodebuild -license accept
-		sudo xcode-select --install
+    sudo xcode-select --install
+    # This will only be run on supported chipsets. Intel chipsets
+    # will just state this cannot be installed and move on.
+    sudo softwareupdate --install-rosetta --agree-to-license
 
-    echo "Installing Homebrew, git, and stow."
+    echo "Installing Homebrew, git, coreutils, and stow"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    if [[ -e "/opt/homebrew/bin/brew" ]]; then
-    	/opt/homebrew/bin/brew install git stow
-    elif [[ -e "/usr/local/bin/brew" ]]; then
-    	/usr/local/bin/brew install git stow
+
+    dotfiles_homebrew_bin_path="/usr/local/bin"
+    if [[ -e "/opt/homebrew/bin" ]]; then
+        dotfiles_homebrew_bin_path="/opt/homebrew/bin"
+    fi
+
+    if [[ -e "$dotfiles_homebrew_bin_path/brew" ]]; then
+        "$dotfiles_homebrew_bin_path/brew" install git coreutils stow
     fi
 fi
 
