@@ -8,6 +8,14 @@ Additionally, it strictly adheres to the [XDG Base Directory Specification](http
 This is good for anyone who wants a *clean* `${HOME}`, especially MacOS users
 who do not natively benefit from the XDG spec.
 
+> ### Beyond Version `v2.0.0`
+> :information_source: From November 19, 2021 onward , these dotfiles use 
+> [Home Manager with Nix](https://github.com/nix-community/home-manager) instead
+> of [Homebrew](https://brew.sh) for the majority of its tooling and 
+> configuration. To use the last supported Homebrew version, it is tagged as
+> `v2.0.0`. The `master` branch beyond that point will reflect an evolving
+> adoption of Nix.
+
 ## Setup
 
 ### Install
