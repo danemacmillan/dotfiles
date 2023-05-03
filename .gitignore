@@ -45,6 +45,7 @@ tags
 ## Weechat
 home/.config/weechat/irc.conf
 home/.config/weechat/*.log
+home/.config/weechat/logs/*
 home/.config/weechat/*.upgrade
 home/.config/weechat/weechat_fifo*
 
