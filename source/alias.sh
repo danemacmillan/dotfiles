@@ -33,7 +33,7 @@ lsdirfirst()
   fi
 
 	ls --color ${LS_IGNORES} ${lsoptions} -q "$@" |
-		awk '{if(/^total [0-9\.]+\w+?$/ || /\/$/) n=1; else n=2; print n, $0}' |
+		awk '{if(/^total [0-9\.]+[a-zA-Z]*?$/ || /\/$/) n=1; else n=2; print n, $0}' |
 		sort -sk1,1 | cut -d' ' -f2-
 }
 # Original ll without function.
