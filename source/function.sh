@@ -968,3 +968,9 @@ icloud_disk_mount_projects()
 	hdiutil attach "${ICLOUD_DISK_PROJECTS}"
 }
 
+icloud_reset_sync()
+{
+	echo "Resetting iCloud's bird daemon."
+	pkill bird
+}
+
