@@ -8,13 +8,20 @@ Additionally, it strictly adheres to the [XDG Base Directory Specification](http
 This is good for anyone who wants a *clean* `${HOME}`, especially MacOS users
 who do not natively benefit from the XDG spec.
 
-> ### Beyond Version `v2.0.0`
-> :information_source: From November 19, 2021 onward , these dotfiles use 
-> [Home Manager with Nix](https://github.com/nix-community/home-manager) instead
-> of [Homebrew](https://brew.sh) for the majority of its tooling and 
-> configuration. To use the last supported Homebrew version, it is tagged as
-> `v2.0.0`. The `master` branch beyond that point will reflect an evolving
-> adoption of Nix.
+## Package Manager Support
+
+These dotfiles were originally developed with [Homebrew](https://brew.sh/)
+support. Starting late 2021, a feature branch to support [Home Manager with Nix](https://github.com/nix-community/home-manager)
+was developed. As of May 2023, both package managers should be able to operate
+in parallel, and these dotfiles will essentially continue to work. Note that if
+the relevant Nix environment variables are detected, they will take precedence
+when buildling the `${PATH}`, which means that packages from Nix will be
+prioritized over matching packages from Homebrew.
+
+The original intention was to move exclusively to Nix, but given some of the
+shortcomings related to how desktop applications are discoverable in MacOS'
+Spotlight search, the conclusion was to modify the dotfiles to ensure as much
+compatibility between the two package managers (read [#25](https://github.com/danemacmillan/dotfiles/pull/25)).
 
 ## Setup
 
@@ -42,6 +49,7 @@ Just run `dotfiles` from anywhere. It is in the `${PATH}`.
 
 Several arguments can be used with the `dotfiles` utility:
 
+- `dotfiles stow`: Create all symlinks.
 - `dotfiles unstow`: Unlinks all symlinks.
 - `dotfiles restow`: Unlinks and re-links all symlinks. Effective for pruning.
 - `dotfiles skippackages`: Run command but skip packages installation. This is
