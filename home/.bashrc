@@ -103,11 +103,16 @@ fi
 
 ##
 # History logging.
-export MYSQL_HISTFILE="${XDG_DATA_HOME}/mysql_history"
-export MYCLI_HISTFILE="${XDG_DATA_HOME}/mycli_history"
-export LESSHISTFILE="${XDG_DATA_HOME}/less_history"
-export REDISCLI_HISTFILE="${XDG_DATA_HOME}/rediscli_history"
-export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
+#export MYSQL_HISTFILE="${XDG_DATA_HOME}/mysql_history"
+export MYSQL_HISTFILE=/dev/null
+#export MYCLI_HISTFILE="${XDG_DATA_HOME}/mycli_history"
+export MYCLI_HISTFILE=/dev/null
+#export LESSHISTFILE="${XDG_DATA_HOME}/less_history"
+export LESSHISTFILE=/dev/null
+#export REDISCLI_HISTFILE="${XDG_DATA_HOME}/rediscli_history"
+export REDISCLI_HISTFILE=/dev/null
+#export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
+export NODE_REPL_HISTORY=/dev/null
 
 
 ##
