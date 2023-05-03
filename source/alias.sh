@@ -145,7 +145,7 @@ alias fgrep='fgrep --color=auto'
 
 ##
 # GCP - Google Cloud SDK
-alias gsutil="CLOUDSDK_PYTHON=$(which python3.6) gsutil"
+# alias gsutil="CLOUDSDK_PYTHON=$(which python3.6) gsutil"
 
 ##
 # History
