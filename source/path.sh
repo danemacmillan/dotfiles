@@ -178,6 +178,11 @@ pathmunge "/usr/local/opt/postgresql@9.6/bin"
 pathmunge "${HOME}/.composer/vendor/bin"
 pathmunge "${XDG_CONFIG_HOME}/composer/vendor/bin"
 
+## Google Cloud SDK: add its installed components to path.
+if [[ -e "${HOMEBREW_INSTALL_PATH}/share/google-cloud-sdk/path.bash.inc" ]]; then
+	source "${HOMEBREW_INSTALL_PATH}/share/google-cloud-sdk/path.bash.inc"
+fi
+
 ##
 # Add primary dotfiles' repo's bin to path.
 pathmunge "${DOTFILES_PATH}/bin"

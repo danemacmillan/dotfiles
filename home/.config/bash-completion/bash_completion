@@ -65,3 +65,9 @@ if [[ -d $compat_dir && -r $compat_dir && -x $compat_dir ]]; then
     done
 fi
 unset compat_dir i _blacklist_glob
+
+##
+# Google Cloud SDK: enable shell command completion for gcloud.
+if [[ -e "${HOMEBREW_INSTALL_PATH}/share/google-cloud-sdk/completion.bash.inc" ]]; then
+	source "${HOMEBREW_INSTALL_PATH}/share/google-cloud-sdk/completion.bash.inc"
+fi

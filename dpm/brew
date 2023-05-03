@@ -60,8 +60,8 @@ git
 ##gnu-indent
 ##gnu-sed
 ##gnu-tar
-## Lots of dependencies
-#gnupg
+## Lots of dependencies.
+gnupg
 gnutls
 ## dependencies on python3.11
 #grc

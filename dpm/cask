@@ -10,6 +10,8 @@ font-sauce-code-pro-nerd-font
 #font-sourcecodepro-nerd-font
 #gas-mask
 ##google-chrome
+## Should also run `gcloud components install cloud_sql_proxy` after.
+google-cloud-sdk
 ##gpg-suite
 #icloud-control
 #insomnia
