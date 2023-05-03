@@ -69,8 +69,12 @@ if [[ "${1}" == "nossh" ]]; then
 	dotfiles_repo="https://github.com/danemacmillan/dotfiles.git"
 fi
 
-dotfiles_install_directory=".dotfiles"
+dotfiles_install_directory="${PWD}/.dotfiles"
 
-git clone "${dotfiles_repo}" "${dotfiles_install_directory}" \
-&& cd "${dotfiles_install_directory}" \
-&& source bin/dotfiles
+if [[ ! -e ${dotfiles_install_directory}" ]]; then
+	git clone "${dotfiles_repo}" "${dotfiles_install_directory}" \
+	&& cd "${dotfiles_install_directory}" \
+	&& source bin/dotfiles
+else
+	echo -e "Dotfiles already installed at: ${dotfiles_install_directory}"
+fi

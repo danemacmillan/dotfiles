@@ -8,6 +8,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap.sh" && cd - >
 # provide a quick utility for updating them.
 #
 # Basic command arguments can be passed:
+#  dotfiles stow - Create all symlinks.
 #  dotfiles unstow - Unlink all symlinks.
 #  dotfiles restow - Unlink and relink all symlinks.
 #  dotfiles skippackages - Run without installing/updating packages.
@@ -16,34 +17,97 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap.sh" && cd - >
 # @link https://github.com/danemacmillan/dotfiless
 # @license MIT
 
-##
-# Set up basic iCloud variables for supported systems.
-export ICLOUD_DIRECTORY_LONG="${HOME}/Library/Mobile Documents/com~apple~CloudDocs"
-export ICLOUD_DIRECTORY_SHORT="${HOME}/iCloud"
-export ICLOUD_USER_HOME="${ICLOUD_DIRECTORY_LONG}/${USER}"
 
 ##
-# Unstow dotfiles' symlinks.
-if [[ "${1}" == "unstow" ]]; then
-	echo "Remove dotfiles symlinks."
-	stow -d "${DOTFILES_PATH}" -t "${HOME}" -D "home" --ignore=\.DS_Store$ -v
+# Symlink the dotfiles from multiple locations.
+#
+#
+# 1) dotfiles symlinks.
+#
+# Note that not all files within the `$DOTFILES_PATH` directory are symlinked
+# into the user home directory, as they are only used internally by these
+# dotfiles. Only the ones in the "home" directory are used.
+#
+#
+# 2) iCloud symlinks.
+#
+# Special technique for these dotfiles: this will symlink/stow everything
+# found under a directory that matches the ${USER} of the current machine within
+# a user's iCloud Drive; that path needs to equal the following to run:
+# /Users/${USER}/Library/Mobile Documents/com~apple~CloudDocs/${USER}
+#
+# The purpose of this is to provide a secure, persistent location for any
+# configuration files that contain sensitive information that are difficult
+# to abstract out. In other words, the repository contents of these `dotfiles`
+# contain public non-sensitive configuration data, while anything found at this
+# path will usually contain private configuration data.
+#
+# One thing to note about running this is that `stow` is used for symlinking
+# the files, and if they detect existing files or directories in the user's
+# home directory, they will be considered conflicts and the operation aborted.
+# Ensure that the data stored in iCloud Drive does not overlap/conflict with
+# the data stored in these dotfiles.
+__dotfiles_stow()
+{
+	if [[ ! -L "${HOME}/.bashrc" ]]; then
+		echo -e "Add dotfiles symlinks:"
+		echo -e "======================"
+		if [[ -e "${ICLOUD_USER_HOME}" ]]; then
+			echo -e "\n - symlink paths in: ${ICLOUD_USER_HOME}\n"
+			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -S ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+		fi
 
-	if [[ -d "${ICLOUD_USER_HOME}" ]]; then
-		stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -D ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+		echo -e "\n - symlink paths in: ${DOTFILES_PATH}/home\n"
+		stow -d "${DOTFILES_PATH}" -t "${HOME}" -S "home" --ignore=\.DS_Store$ -v
+	else
+		echo -e "Dotfiles may have detected a symlink conflict."
+		echo -e "The following sample file is already a symlink: ${HOME}/.bashrc"
 	fi
-	echo "Uninstalled dotfiles."
+}
+
+__dotfiles_unstow()
+{
+	if [[ -L "${HOME}/.bashrc" ]]; then
+		echo -e "Remove dotfiles symlinks:"
+		echo -e "========================="
+		if [[ -e "${ICLOUD_USER_HOME}" ]]; then
+			echo -e "\n - symlink paths in: ${ICLOUD_USER_HOME}\n"
+			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -D ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+		fi
+
+		echo -e "\n - symlink paths in: ${DOTFILES_PATH}/home\n"
+		stow -d "${DOTFILES_PATH}" -t "${HOME}" -D "home" --ignore=\.DS_Store$ -v
+	else
+		echo -e "Dotfiles may have detected a symlink error."
+		echo -e "The following sample file is not already symlink: ${HOME}/.bashrc"
+		echo -e "If this is the first time running, this can be ignored."
+	fi
+}
+
+__dotfiles_restow()
+{
+	__dotfiles_unstow
+	__dotfiles_stow
+}
+
+##
+# Stow dotfiles symlinks.
+if [[ "${1}" == "stow" ]]; then
+	__dotfiles_stow
 	exit 0
 fi
 
 ##
-# Restow dotfiles' symlinks.
-if [[ "${1}" == "restow" ]]; then
-	echo "Restowing dotfiles."
-	stow -d "${DOTFILES_PATH}" -t "${HOME}" -R "home" --ignore=\.DS_Store$ -v
+# Unstow dotfiles symlinks.
+if [[ "${1}" == "unstow" ]]; then
+	__dotfiles_unstow
+	exit 0
+fi
 
-	if [[ -d "${ICLOUD_USER_HOME}" ]]; then
-		stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -R ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
-	fi
+##
+# Restow dotfiles symlinks.
+if [[ "${1}" == "restow" ]]; then
+	__dotfiles_restow
 	exit 0
 fi
 
@@ -64,7 +128,7 @@ fi
 
 ##
 # Update repo from upstream.
-echo -e "${BLUE}${BOLD}Update dotfiles repository.${RESET}"
+#echo -e "${BLUE}${BOLD}Update dotfiles repository.${RESET}"
 #(cd "${DOTFILES_PATH}" && git stash && git pull && git stash pop)
 
 ##
@@ -77,6 +141,14 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap.sh" && cd - >
 
 ##
 # Basic directory structures that need to exist before symlinks are built.
+
+# Ensure multiple stow packages do not conflict with each other.
+# This is mostly needed so that each stow package does not attempt to take
+# ownership of these paths. These are the few paths that are currently shared
+# across multiple stow packages.
+[[ ! -e "${XDG_CONFIG_HOME}/.keep" ]] && touch "${XDG_CONFIG_HOME}/.keep"
+[[ ! -e "${XDG_DATA_HOME}/.keep" ]] && touch "${XDG_DATA_HOME}/.keep"
+[[ ! -e "${XDG_BIN_HOME}/.keep" ]] && touch "${XDG_BIN_HOME}/.keep"
 
 #Vim
 if [[ ! -e "${XDG_DATA_HOME}/vim" ]] ; then
@@ -107,38 +179,8 @@ fi
 #source "${DOTFILES_PATH}/source/legacy.sh"
 
 ##
-# dotfiles symlinks.
-#
-# Note that not all files within the `$DOTFILES_PATH` directory are symlinked
-# into the user home directory, as they are only used internally by these
-# dotfiles. Only the ones in the "home" directory are used.
-echo -e "${RESET}${BLUE}${BOLD}Symlink dotfiles configs.${RESET}${GREEN}${DIM}"
-# Symlink/stow everything within the "home" directory of these dotfiles.
-stow -d "${DOTFILES_PATH}" -t "${HOME}" -R "home" --ignore=\.DS_Store$ -v
-
-##
-# iCloud symlinks.
-#
-# Special technique for these dotfiles: this will symlink/stow everything
-# found under a directory that matches the ${USER} of the current machine within
-# a user's iCloud Drive; that path needs to equal the following to run:
-# /Users/${USER}/Library/Mobile Documents/com~apple~CloudDocs/${USER}
-#
-# The purpose of this is to provide a secure, persistent location for any
-# configuration files that contain sensitive information that are difficult
-# to abstract out. In other words, the repository contents of these `dotfiles`
-# contain public non-sensitive configuration data, while anything found at this
-# path will usually contain private configuration data.
-#
-# One thing to note about running this is that `stow` is used for symlinking
-# the files, and if they detect existing files or directories in the user's
-# home directory, they will be considered conflicts and the operation aborted.
-# Ensure that the data stored in iCloud Drive does not overlap/conflict with
-# the data stored in these dotfiles.
-if [[ -d "${ICLOUD_USER_HOME}" ]]; then
-  echo -e "${RESET}${BLUE}${BOLD}Symlink iCloud configs.${RESET}${GREEN}${DIM}"
-	stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -R ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ --ignore=dotfiles$ -v
-fi
+# Symlink dotfiles: regular and iCloud.
+__dotfiles_restow
 
 # Create symlink to special tmp directory.
 #
@@ -182,9 +224,9 @@ if [[ ! -e "${XDG_DATA_HOME}/tig" ]]; then
 	echo -e "${RESET}${BLUE}${BOLD}Creating '${XDG_DATA_HOME}/tig' directory.${RESET}"
 	mkdir -p "${XDG_DATA_HOME}/tig"
 
-	if [[ ! -f "${XDG_DATA_HOME}/tig/history" ]]; then
-		touch "${XDG_DATA_HOME}/tig/history"
-	fi
+#	if [[ ! -f "${XDG_DATA_HOME}/tig/history" ]]; then
+#		touch "${XDG_DATA_HOME}/tig/history"
+#	fi
 fi
 
 #Vim

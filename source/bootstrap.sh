@@ -103,6 +103,13 @@ if [[ -z ${DOTFILES_PATH} ]]; then
 	# This is where all local configs are stored.
 	export DOTFILES_LOCAL_CONFIGS_PATH="${XDG_DATA_HOME}/dotfiles"
 
+  # Set up basic iCloud variables for supported systems.
+  if [[ -e "${HOME}/Library/Mobile Documents/com~apple~CloudDocs" ]]; then
+		export ICLOUD_DIRECTORY_LONG="${HOME}/Library/Mobile Documents/com~apple~CloudDocs"
+		export ICLOUD_DIRECTORY_SHORT="${HOME}/iCloud"
+		export ICLOUD_USER_HOME="${ICLOUD_DIRECTORY_LONG}/${USER}"
+  fi
+
 	# Detect OS so dotfiles seamlessly work across OSX and Linux.
 	# I only use OSX and CentOS, so additional cases will need
 	# to be defined for another OS.
