@@ -959,8 +959,6 @@ icloud_bundle_sync()
 
 icloud_disk_mount_projects()
 {
-	local ICLOUD_DIRECTORY_LONG="${HOME}/Library/Mobile Documents/com~apple~CloudDocs"
-	local ICLOUD_DIRECTORY_SHORT="${HOME}/iCloud"
 	local ICLOUD_DISK_PROJECTS="${ICLOUD_DIRECTORY_LONG}/Disks/projects.sparsebundle.dir"
 
 	brctl download "${ICLOUD_DISK_PROJECTS}"
