@@ -154,6 +154,8 @@ fi
 # Note that this is also necessary so that the .bashrc file can include this
 # file itself. This is related to the problem of determining the DOTFILES_PATH
 # variable in as clean a way as possible, without symlinking unnecessarily.
-if [[ ! -e "${HOME}/.dotfiles" ]]; then
+if [[ ! -e "${HOME}/.dotfiles" ]] \
+	&& [[ ! -e "${ICLOUD_DIRECTORY_SHORT}/dotfiles" ]] \
+; then
 	ln_relative "${DOTFILES_PATH}" "${HOME}/.dotfiles"
 fi

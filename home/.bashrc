@@ -1,5 +1,7 @@
 # vim: ft=sh
-source "${HOME}/.dotfiles/source/bootstrap.sh"
+DOTFILES_BOOTSTRAP="dotfiles/source/bootstrap.sh"
+source "./iCloud/${DOTFILES_BOOTSTRAP}" 2>/dev/null || source "./.${DOTFILES_BOOTSTRAP}"
+unset DOTFILES_BOOTSTRAP
 
 ##
 # .bashrc
@@ -306,4 +308,5 @@ fi
 # critically break scripts that do not expect the $CDPATH to be anything other
 # than the present working directory. Also, this always ensures that the
 # present working directory is first, regardless of anything else being set.
-CDPATH=":.:${HOME}:${PROJECTS_PATH}:${PROJECTS_PATH_POPULAR}:${CDPATH}:"
+CDPATH=":.:${HOME}:${PROJECTS_PATH}:${CDPATH}:"
+[[ -e "${ICLOUD_USER_HOME}" ]] && CDPATH=":${CDPATH}:${ICLOUD_DIRECTORY_SHORT}:"
