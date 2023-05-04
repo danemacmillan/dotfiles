@@ -117,10 +117,6 @@ fi
 # fzf
 pathmunge "${HOMEBREW_FORMULA_PATH}/fzf/bin"
 
-
-pathmunge "${HOMEBREW_FORMULA_PATH}/icu4c/bin"
-pathmunge "${HOMEBREW_FORMULA_PATH}/icu4c/sbin"
-
 ##
 # PHP
 pathmunge "${HOMEBREW_FORMULA_PATH}/php@7.4/bin"
@@ -158,6 +154,7 @@ pathmunge "${HOME}/.cargo/bin"
 # Node.
 pathmunge "${HOMEBREW_FORMULA_PATH}/node@8/bin"
 pathmunge "${HOMEBREW_FORMULA_PATH}/node@10/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/node@16/bin"
 
 ##
 # Redis
