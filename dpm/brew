@@ -44,6 +44,7 @@ coreutils
 ##ctagsb
 curl
 ##diff-so-fancy
+direnv
 ##dnsmasq
 dos2unix
 exiftool
