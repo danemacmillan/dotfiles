@@ -285,15 +285,16 @@ if command_exists brew ; then
 	alias rebuildopenwithmenu='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user; killall Finder; echo "Rebuilt Open With, relaunching Finder"'
 	alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
+	# Used to also include in update: `npm install npm@latest -g; \`
 	alias update="softwareupdate --install --all --verbose; \
 		dotfiles; \
 		composer selfupdate; \
 		composer selfupdate --clean-backups; \
-		npm install npm@latest -g; \
 		command_exists gcloud && gcloud components update --quiet; \
 		brew update; \
 		brew upgrade; \
 		brew doctor --verbose; \
 		brew cleanup \
+		brew autoremove \
 	"
 fi
