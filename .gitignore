@@ -29,6 +29,8 @@ nbproject/
 
 ## Composer
 vendor/
+home/.config/composer/.htaccess
+home/.config/composer/keys*
 
 ## Node
 node_modules/
