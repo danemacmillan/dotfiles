@@ -308,8 +308,8 @@ fi
 # critically break scripts that do not expect the $CDPATH to be anything other
 # than the present working directory. Also, this always ensures that the
 # present working directory is first, regardless of anything else being set.
-CDPATH=":.:${HOME}:${PROJECTS_PATH}:${CDPATH}:"
-[[ -e "${ICLOUD_USER_HOME}" ]] && CDPATH=":${CDPATH}:${ICLOUD_DIRECTORY_SHORT}:"
+#CDPATH=":.:${HOME}:${PROJECTS_PATH}:${CDPATH}:"
+#[[ -e "${ICLOUD_USER_HOME}" ]] && CDPATH=":${CDPATH}:${ICLOUD_DIRECTORY_SHORT}:"
 
 ##
 # direnv
