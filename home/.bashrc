@@ -1,6 +1,6 @@
 # vim: ft=sh
 DOTFILES_BOOTSTRAP="dotfiles/source/bootstrap.sh"
-source "./iCloud/${DOTFILES_BOOTSTRAP}" 2>/dev/null || source "./.${DOTFILES_BOOTSTRAP}"
+source "${HOME}/iCloud/${DOTFILES_BOOTSTRAP}" 2>/dev/null || source "${HOME}/.${DOTFILES_BOOTSTRAP}"
 unset DOTFILES_BOOTSTRAP
 
 ##
