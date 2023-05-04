@@ -115,34 +115,27 @@ fi
 
 ##
 # fzf
-pathmunge "/opt/homebrew/opt/fzf/bin"
-pathmunge "/usr/local/opt/fzf/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/fzf/bin"
 
 
-pathmunge "/usr/local/opt/icu4c/bin"
-pathmunge "/usr/local/opt/icu4c/sbin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/icu4c/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/icu4c/sbin"
 
 ##
-# PHP 7.1, if it is installed, or 7.2.
-pathmunge "/usr/local/opt/php@7.1/bin"
-pathmunge "/usr/local/opt/php@7.1/sbin"
-pathmunge "/usr/local/opt/php@7.2/bin"
-pathmunge "/usr/local/opt/php@7.2/sbin"
-pathmunge "/usr/local/opt/php@7.3/bin"
-pathmunge "/usr/local/opt/php@7.3/sbin"
-pathmunge "/usr/local/opt/php@7.4/bin"
-pathmunge "/usr/local/opt/php@7.4/sbin"
+# PHP
+pathmunge "${HOMEBREW_FORMULA_PATH}/php@7.4/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/php@7.4/sbin"
 
 ##
 # Python version 3.6.
-pathmunge "/usr/local/opt/python@3.6/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/python@3.6/bin"
 
 ##
 # MySQL 5.7 daemon and client binaries.
-#pathmunge "/usr/local/opt/mysql@5.7/bin"
+#pathmunge "${HOMEBREW_FORMULA_PATH}/mysql@5.7/bin"
 
 # Only client for command line.
-pathmunge "/usr/local/opt/mysql-client/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/mysql-client/bin"
 
 ##
 # Go lang binaries.
@@ -153,7 +146,7 @@ fi
 
 ##
 # Ruby/RubyGems.
-pathmunge "/usr/local/opt/ruby/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/ruby/bin"
 pathmunge "/usr/local/lib/ruby/gems/2.6.0/bin"
 pathmunge "${XDG_DATA_HOME}/gem/bin"
 
@@ -163,15 +156,15 @@ pathmunge "${HOME}/.cargo/bin"
 
 ##
 # Node.
-pathmunge "/usr/local/opt/node@8/bin"
-pathmunge "/usr/local/opt/node@10/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/node@8/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/node@10/bin"
 
 ##
-# Redis 3.2
-pathmunge "/usr/local/opt/redis@6.2/bin"
+# Redis
+pathmunge "${HOMEBREW_FORMULA_PATH}/redis@6.2/bin"
 
 #PostgreSQL
-pathmunge "/usr/local/opt/postgresql@9.6/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/postgresql@9.6/bin"
 
 ##
 # Composer global installs.
