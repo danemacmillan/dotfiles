@@ -60,13 +60,13 @@ __dotfiles_stow()
 		local stow_exitcode=0
 		if [[ -e "${ICLOUD_USER_HOME}" ]]; then
 			echo -e "\n - symlink paths in: ${ICLOUD_USER_HOME}\n"
-			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -S ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -S ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v 2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2)
 			stow_exitcode=$?
 		fi
 
 		if [[ "${stow_exitcode}" -eq 0 ]]; then
 			echo -e "\n - symlink paths in: ${DOTFILES_PATH}/home\n"
-			stow -d "${DOTFILES_PATH}" -t "${HOME}" -S "home" --ignore=\.DS_Store$ -v
+			stow -d "${DOTFILES_PATH}" -t "${HOME}" -S "home" --ignore=\.DS_Store$ -v 2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2)
 		fi
 	else
 		echo -e "Dotfiles may have detected a symlink conflict."
@@ -83,13 +83,13 @@ __dotfiles_unstow()
 		local stow_exitcode=0
 		if [[ -e "${ICLOUD_USER_HOME}" ]]; then
 			echo -e "\n - symlink paths in: ${ICLOUD_USER_HOME}\n"
-			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -D ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -D ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v 2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2)
 			stow_exitcode=$?
 		fi
 
 		if [[ "${stow_exitcode}" -eq 0 ]]; then
 			echo -e "\n - symlink paths in: ${DOTFILES_PATH}/home\n"
-			stow -d "${DOTFILES_PATH}" -t "${HOME}" -D "home" --ignore=\.DS_Store$ -v
+			stow -d "${DOTFILES_PATH}" -t "${HOME}" -D "home" --ignore=\.DS_Store$ -v 2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2)
 		fi
 	else
 		echo -e "Dotfiles may have detected a symlink error."
