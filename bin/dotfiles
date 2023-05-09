@@ -54,7 +54,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap.sh" && cd - >
 __dotfiles_stow()
 {
 	if [[ ! -L "${HOME}/.bashrc" ]]; then
-		echo -e "Add dotfiles symlinks:"
+		echo -e "\nAdd dotfiles symlinks:"
 		echo -e "======================"
 
 		local stow_exitcode=0
@@ -77,7 +77,7 @@ __dotfiles_stow()
 __dotfiles_unstow()
 {
 	if [[ -L "${HOME}/.bashrc" ]]; then
-		echo -e "Remove dotfiles symlinks:"
+		echo -e "\nRemove dotfiles symlinks:"
 		echo -e "========================="
 
 		local stow_exitcode=0
