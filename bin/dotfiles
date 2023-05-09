@@ -21,6 +21,10 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && source "../source/bootstrap.sh" && cd - >
 ##
 # Symlink the dotfiles from multiple locations.
 #
+# To ensure integrity, both locations need to succeed and fail together,
+# otherwise there can be a case where the first `stow` operation fails, and then
+# the second one succeeds. The result is a unexpected state for the symlinks to
+# be in. This is why ${stow_exitcode} is checked.
 #
 # 1) dotfiles symlinks.
 #
@@ -52,13 +56,18 @@ __dotfiles_stow()
 	if [[ ! -L "${HOME}/.bashrc" ]]; then
 		echo -e "Add dotfiles symlinks:"
 		echo -e "======================"
+
+		local stow_exitcode=0
 		if [[ -e "${ICLOUD_USER_HOME}" ]]; then
 			echo -e "\n - symlink paths in: ${ICLOUD_USER_HOME}\n"
 			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -S ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+			stow_exitcode=$?
 		fi
 
-		echo -e "\n - symlink paths in: ${DOTFILES_PATH}/home\n"
-		stow -d "${DOTFILES_PATH}" -t "${HOME}" -S "home" --ignore=\.DS_Store$ -v
+		if [[ "${stow_exitcode}" -eq 0 ]]; then
+			echo -e "\n - symlink paths in: ${DOTFILES_PATH}/home\n"
+			stow -d "${DOTFILES_PATH}" -t "${HOME}" -S "home" --ignore=\.DS_Store$ -v
+		fi
 	else
 		echo -e "Dotfiles may have detected a symlink conflict."
 		echo -e "The following sample file is already a symlink: ${HOME}/.bashrc"
@@ -70,13 +79,18 @@ __dotfiles_unstow()
 	if [[ -L "${HOME}/.bashrc" ]]; then
 		echo -e "Remove dotfiles symlinks:"
 		echo -e "========================="
+
+		local stow_exitcode=0
 		if [[ -e "${ICLOUD_USER_HOME}" ]]; then
 			echo -e "\n - symlink paths in: ${ICLOUD_USER_HOME}\n"
 			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -D ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v
+			stow_exitcode=$?
 		fi
 
-		echo -e "\n - symlink paths in: ${DOTFILES_PATH}/home\n"
-		stow -d "${DOTFILES_PATH}" -t "${HOME}" -D "home" --ignore=\.DS_Store$ -v
+		if [[ "${stow_exitcode}" -eq 0 ]]; then
+			echo -e "\n - symlink paths in: ${DOTFILES_PATH}/home\n"
+			stow -d "${DOTFILES_PATH}" -t "${HOME}" -D "home" --ignore=\.DS_Store$ -v
+		fi
 	else
 		echo -e "Dotfiles may have detected a symlink error."
 		echo -e "The following sample file is not already symlink: ${HOME}/.bashrc"
