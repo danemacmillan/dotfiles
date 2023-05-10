@@ -313,4 +313,4 @@ fi
 
 ##
 # direnv
-eval "$(direnv hook bash)"
+[[ -e "${HOMEBREW_INSTALL_PATH}/bin/direnv" ]] && eval "$(direnv hook bash)"
