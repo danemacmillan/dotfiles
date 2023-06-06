@@ -139,6 +139,11 @@ if [[ -f "${DOTFILES_PATH}/source/function.sh" ]]; then
 	source "${DOTFILES_PATH}/source/function.sh"
 fi
 
+# Pull in iCloud shell functionality.
+if [[ -f "${DOTFILES_PATH}/source/icloud.sh" ]]; then
+	source "${DOTFILES_PATH}/source/icloud.sh"
+fi
+
 ##
 # Nix.
 if [[ -e "${DOTFILES_PATH}/source/nix.sh" ]]; then
