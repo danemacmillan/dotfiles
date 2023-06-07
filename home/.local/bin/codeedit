@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+##
+# Wrapper to invoke CodeEdit from command line and wait for app to close.
+#
+# This is useful in combination with the ${EDITOR} environment variable, when
+# a GUI experience is just needed over something like Vim.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+open -n -W -a CodeEdit.app "$(realpath $@)"
+
