@@ -519,7 +519,8 @@ cat2()
 # the chaining.
 #
 # Also note that there are implicit EXCLUDES for rclone defined in .bashrc.
-# For example, files with the ".icloud" extension are excluded.
+# For example, files with the ".icloud" extension are excluded. This was
+# actually copied over in case it is ever accidentally run outside this context.
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
@@ -529,18 +530,19 @@ backup()
 	local command_name="${FUNCNAME[0]}"
 
   export RCLONE_VERBOSE=1
+  export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache,*.icloud,com.apple.homed.plist,com.apple.homed.notbackedup.plist}"
 
   date
   echo 'Syncing to iCloud Drive...'
-  rclone move ~/Library/Group\ Containers/2BUA8C4S2C.com.agilebits/Library/Application\ Support/1Password/Backups/ ~/iCloud/Archives/1password/ --transfers 10 --bwlimit 0
+  #rclone move ~/Library/Group\ Containers/2BUA8C4S2C.com.agilebits/Library/Application\ Support/1Password/Backups/ ~/iCloud/Archives/1password/ --transfers 10 --bwlimit 0
   #if [[ -e "~/iCloud/.home/Library/Preferences" ]]; then
 	#  rclone sync ~/Library/Preferences/ ~/iCloud/.home/Library/Preferences/ --transfers 10 --bwlimit 0 --copy-links
   #fi
-  rclone sync ~/Pictures/Photo\ Booth\ Library/ ~/Documents/images/photobooth/ --transfers 10 --bwlimit 0 --checksum
+  #rclone sync ~/Pictures/Photo\ Booth\ Library/ ~/Documents/images/photobooth/ --transfers 10 --bwlimit 0 --checksum
 
   date
   echo 'Backing up to Google Drive...'
-  rclone sync ~/iCloud/danemacmillan/ macmillanator:/danemacmillan/ --transfers 5 --max-size 50000M --bwlimit 0 --progress
+  rclone sync ~/iCloud/danemacmillan/ macmillanator:/iCloud/danemacmillan/ --transfers 5 --max-size 50000M --bwlimit 0 --progress
   rclone copy ~/iCloud/Archives/ macmillanator:/Archives/ --transfers 1 --max-size 50000M --bwlimit 0 --progress
   rclone sync ~/Desktop/ macmillanator:/Desktop/ --transfers 5 --max-size 1000M --bwlimit 0 --progress
   rclone copy ~/Documents/ macmillanator:/Documents/ --transfers 5 --max-size 50000M --bwlimit 0 --progress
