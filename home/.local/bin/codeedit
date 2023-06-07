@@ -7,4 +7,3 @@
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 open -n -W -a CodeEdit.app "$(realpath $@)"
-
