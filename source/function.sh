@@ -831,6 +831,26 @@ gcp_generate_csek()
 	read -sp "String:" ; [[ ${#REPLY} == 32 ]] && echo "$(echo -n "$REPLY" | base64)" || (>&2 echo -e "\nERROR:Wrong Size"; false)
 }
 
+##
+# Convert a UNIX timestamp to a human-readable format.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @license MIT
+timestamp_to_date()
+{
+	date -d @"$1"
+}
+
+##
+# Generate a timestamp from the current time.
+#
+# @author Dane MacMillan <work@danemacmillan.com>
+# @license MIT
+timestamp_now()
+{
+	date +%s
+}
+
 ###############################################################################
 # From other authors
 ###############################################################################
