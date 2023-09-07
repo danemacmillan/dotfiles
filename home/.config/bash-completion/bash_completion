@@ -42,10 +42,15 @@ if [[ -e "/opt/homebrew/opt/fzf/install" ]]; then
   # ------------
 	source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
 else
-	# For: nix,macos,
-	[[ $- == *i* ]] && source "${NIX_PROFILE_USER_PATH}/share/fzf/completion.bash" 2> /dev/null
+	# Macos
+	[[ $- == *i* ]] && source "${NIX_PROFILE_USER_PATH}/opt/fzf/shell/completion.bash" 2> /dev/null
 	bind -x '"\C-p": vim $(fzf);'
-	source "${NIX_PROFILE_USER_PATH}/share/fzf/key-bindings.bash"
+	source "${NIX_PROFILE_USER_PATH}/opt/fzf/shell/key-bindings.bash"
+
+	#nix, not tested.
+	#[[ $- == *i* ]] && source "${NIX_PROFILE_USER_PATH}/share/fzf/completion.bash" 2> /dev/null
+	#bind -x '"\C-p": vim $(fzf);'
+	#source "${NIX_PROFILE_USER_PATH}/share/fzf/key-bindings.bash"
 fi
 
 # Source old Homebrew COMPAT completions manually.
