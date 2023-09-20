@@ -157,6 +157,7 @@ export WEECHAT_HOME="${XDG_CONFIG_HOME}/weechat"
 #export RCLONE_CHECKERS=8
 export RCLONE_DRIVE_CHUNK_SIZE=256M
 export RCLONE_DRIVE_USE_TRASH=true
+export RCLONE_STATS_FILE_NAME_LENGTH=0
 export RCLONE_EXCLUDE="{.unionfs-fuse/,.DS_Store,.localized,.CFUserTextEncoding,Icon\\r,Thumbs.db,Desktop.ini,desktop.ini,ehthumbs.db,.Spotlight-V100,.Trashes,.cache,*.icloud,com.apple.homed.plist,com.apple.homed.notbackedup.plist}"
 #export RCLONE_SKIP_LINKS=true
 #export RCLONE_STATS=1s
