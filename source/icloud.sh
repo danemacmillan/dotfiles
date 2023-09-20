@@ -22,13 +22,17 @@ icloud_bundle_sync()
 
 icloud_disk_mount_projects()
 {
-	#local ICLOUD_DISK_PROJECTS="${ICLOUD_DIRECTORY_LONG}/Disks/projects.sparsebundle.dir"
-	local ICLOUD_DISK_PROJECTS="${HOME}/Disks/projects.sparsebundle.dir"
+	local ICLOUD_DISK_PROJECTS="${ICLOUD_DIRECTORY_LONG}/Disks/projects.sparsebundle.dir"
+	#local ICLOUD_DISK_PROJECTS="${HOME}/Disks/projects.sparsebundle.dir"
 
 	brctl download "${ICLOUD_DISK_PROJECTS}"
 
 	read -p "Ready to mount ${ICLOUD_DISK_PROJECTS}? Ensure it has been completely downloaded before mounting."
 
+	echo "Compacting any unused space within sparse bundle."
+	hdiutil compact "${ICLOUD_DISK_PROJECTS}" -batteryallowed
+
+	echo "Mounting."
 	hdiutil attach "${ICLOUD_DISK_PROJECTS}"
 }
 
