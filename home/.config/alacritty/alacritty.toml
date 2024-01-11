@@ -1,0 +1,45 @@
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.cursor]
+cursor = "0xffffff"
+text = "0x000000"
+
+[colors.normal]
+black = "0x000000"
+blue = "0x7aa6da"
+cyan = "0x70c0ba"
+green = "0xb9ca4a"
+magenta = "0xc397d8"
+red = "0xd54e53"
+white = "0xeaeaea"
+yellow = "0xe6c547"
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xeaeaea"
+
+[colors.selection]
+background = "0x404040"
+text = "0xeaeaea"
+
+[font]
+size = 13.0
+
+[font.bold]
+family = "SauceCodePro Nerd Font"
+style = "SemiBold"
+
+[font.italic]
+family = "SauceCodePro Nerd Font"
+style = "Medium Italic"
+
+[font.normal]
+family = "SauceCodePro Nerd Font"
+style = "Regular"
+
+[scrolling]
+history = 100000
+
+[window]
+startup_mode = "Maximized"
