@@ -103,6 +103,7 @@ nmap
 
 #python
 #sashkab/python/python36
+pyenv
 #ranger
 rclone
 readline
