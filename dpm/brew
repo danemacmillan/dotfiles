@@ -2,7 +2,7 @@
 ##cask
 #casperjs
 ##composer
-##grunt-cli
+grunt-cli
 #ios-webkit-debug-proxy
 #mackup
 #mysql@5.7
@@ -14,6 +14,7 @@
 ##php@7.4
 ##php_extras
 pidof
+poppler
 ##redis@6.2
 #vagrant-completion
 
