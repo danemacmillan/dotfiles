@@ -43,6 +43,25 @@ icloud_reset_sync()
 }
 
 
+##
+# Figure out what is constantly syncing in iCloud Drive.
+#
+# For a while I noticed that iCloud Drive in Finder was always syncing. After
+# watching the filesystem it was noted that it was my `dotfiles` repo whenever
+# it was opened in a PhpStorm project. The IDE had a copilot plugin that was
+# constantly syncing.
+#
+# Source: https://discussions.apple.com/thread/255157739?answerId=255157739021&sortBy=rank#255157739021
+#
+icloud_debug_sync()
+{
+	echo "This will help debug endless iCloud Drive syncing."
+	echo "It is best to run this after a restart."
+	echo "This will list all filesystem changes in iCloud Drive."
+	echo "Use these paths to help debug what is constantly syncing."
+
+	fswatch --event-flags ~/Library/Mobile\ Documents/
+}
 
 
 
