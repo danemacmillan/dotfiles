@@ -42,6 +42,21 @@ icloud_reset_sync()
 	pkill bird
 }
 
+##
+# Very rough function to ensure some content always local.
+icloud_pin()
+{
+	echo "Manually ensuring given pinned directories are locally available."
+
+	/usr/bin/brctl download "${HOME}/iCloud/danemacmillan"
+	/usr/bin/brctl download "${HOME}/iCloud/dotfiles"
+
+	/usr/bin/brctl download "${HOME}/Desktop/"
+	/usr/bin/brctl download "${HOME}"/Documents/avatars/*
+
+	/usr/bin/brctl download "${HOME}/iCloud/Disks"
+	/usr/bin/brctl download "${HOME}/iCloud/Downloads"
+}
 
 ##
 # Figure out what is constantly syncing in iCloud Drive.
