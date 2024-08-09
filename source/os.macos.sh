@@ -80,8 +80,8 @@ defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
 # Change location of screenshots
-if [[ -e "${HOME}/Documents/screenshots" ]]; then
-	defaults write com.apple.screencapture location "${HOME}/Documents/screenshots"
+if [[ -e "${ICLOUD_DIRECTORY_LONG}/Screenshots" ]]; then
+	defaults write com.apple.screencapture location "${ICLOUD_DIRECTORY_LONG}/Screenshots"
 	killall SystemUIServer
 fi
 
