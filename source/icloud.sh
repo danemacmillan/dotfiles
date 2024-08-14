@@ -102,7 +102,7 @@ icloud_disk()
 		mv "${disk_name}.sparsebundle" "${disk_name}.sparsebundle.iCloudDisk"
 		echo -e "Created iCloud Disk: ${disk_name}.sparsebundle.iCloudDisk"
 	else
-		echo -e "Calculate the MD5 hash of a file (or string if path not found)"
+		echo -e "Create iCloud Disk compatible for iCloud Drive"
 		echo -e "Usage:\n  ${BCYAN}${command_name}${RESET} ${GREEN}DISK_NAME DISK_SIZE_GB BAND_SIZE_MB"
 		echo ""
 		echo -e "${RESET}Example usages:\n"
