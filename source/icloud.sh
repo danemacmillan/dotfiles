@@ -93,22 +93,31 @@ icloud_disk()
 		local band_size_mb=$((2048 * "${3}"))
 	fi
 
-	if [[ -n ${disk_name} && -n ${disk_size_gb} && -n ${band_size_mb} ]]; then
+	if [[ -n ${disk_name} ]]; then
 		#hdiutil create -encryption AES-128 -type SPARSEBUNDLE -size 300g -fs "APFS" projects -imagekey sparse-band-size=2097152 -volname projects
 		echo -e "Creating encrypted sparsebundle for iCloud Disk with following command:"
 		local command="hdiutil create -encryption AES-128 -type SPARSEBUNDLE -size "${disk_size_gb}"g -fs "APFS" "${disk_name}" -imagekey sparse-band-size="${band_size_mb}" -volname "${disk_name}""
 		echo -e "  ${GREEN}${command}${RESET}"
 		${command}
-		mv "${disk_name}.sparsebundle" "${disk_name}.sparsebundle.iCloudDisk"
+		echo -e "Converting sparsebundle package to iCloud Disk directory..."
+		mkdir "${disk_name}.sparsebundle.iCloudDisk"
+		mv "${disk_name}.sparsebundle"/* "${disk_name}.sparsebundle.iCloudDisk"/ && rm -rf "${disk_name}.sparsebundle"
 		echo -e "Created iCloud Disk: ${disk_name}.sparsebundle.iCloudDisk"
+		echo -e "Mount command: hdiutil attach ${disk_name}.sparsebundle.iCloudDisk"
+		echo -e "Unmount command: hdiutil detach /Volumes/${disk_name}"
 	else
 		echo -e "Create iCloud Disk compatible for iCloud Drive"
-		echo -e "Usage:\n  ${BCYAN}${command_name}${RESET} ${GREEN}DISK_NAME DISK_SIZE_GB BAND_SIZE_MB"
 		echo ""
-		echo -e "${RESET}Example usages:\n"
+		echo -e "Usage:"
+		echo -e "  ${BCYAN}${command_name}${RESET} ${GREEN}DISK_NAME DISK_SIZE_GB BAND_SIZE_MB"
+		echo ""
+		echo -e "${RESET}Example usages:"
 		echo "  ${BCYAN}icloud_disk ${GREEN}foobar${RESET}  (create a disk named 'foobar' with a 1GB sparse bundle disk size and 8MB band size)"
 		echo "  ${BCYAN}icloud_disk ${GREEN}projects 500 200${RESET}  (create a disk named 'projects' with a 500GB sparse bundle disk size and 200MB band size)"
 		echo ""
+		echo -e "Mounting instructions:"
+		echo -e "  Mount command: hdiutil attach [DISK_NAME].sparsebundle.iCloudDisk"
+		echo -e "  Unmount command: hdiutil detach /Volumes/[DISK_NAME]"
 		return 1
 	fi
 }
