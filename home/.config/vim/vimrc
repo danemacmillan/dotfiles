@@ -203,9 +203,7 @@ endif
 set backupskip=/tmp/*,/private/tmp/*,$XDG_RUNTIME_DIR
 
 " Set .viminfo location
-if empty(glob('$XDG_DATA_HOME/vim/viminfo'))
-	set viminfo+=n$XDG_DATA_HOME/vim/viminfo
-endif
+set viminfo+=n$XDG_DATA_HOME/vim/info/viminfo
 
 " Respect modeline in files
 set modeline
