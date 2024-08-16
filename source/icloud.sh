@@ -75,6 +75,9 @@
 #  - add validation
 #  - create within the ~/iCloud/Disks/ path ($ICLOUD_DIRECTORY_LONG)
 #  - tie into mounting
+#  - Auto-generate an .envrc (direnv) file at the requested mountpoint
+#  (explicitly set instead of default on /Volumes), so that anytime the
+#  directory is navigated to it will be auto-mounted.
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 icloud_disk()
