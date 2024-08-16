@@ -140,8 +140,10 @@ icloud_disk_mount_projects()
 	echo "Compacting any unused space within sparse bundle."
 	hdiutil compact "${ICLOUD_DISK_PROJECTS}" -batteryallowed
 
+
+	mkdir -p "${HOME}/projects"
 	echo "Mounting."
-	hdiutil attach "${ICLOUD_DISK_PROJECTS}"
+	hdiutil attach "${ICLOUD_DISK_PROJECTS}" -mountpoint "${HOME}/projects"
 }
 
 icloud_reset_sync()
