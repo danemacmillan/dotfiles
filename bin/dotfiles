@@ -62,6 +62,19 @@ __dotfiles_stow()
 			echo -e "\n - symlink paths in: ${ICLOUD_USER_HOME}\n"
 			stow -d "${ICLOUD_DIRECTORY_LONG}" -t "${HOME}" -S ${USER} --ignore=\.DS_Store$ --ignore=map-icloud-home$ -v 2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2)
 			stow_exitcode=$?
+
+			# Consider adding file locks to ~/Library/Preferences/* files.
+			# This will prevent the application from replacing these symlinks whenever
+			# there are edits made. This essentially forces the application to follow
+			# the symlink and make the change there.
+			# @link https://apple.stackexchange.com/a/385124/275327
+			# Example:
+			# - chflags -vh uchg ~/Library/Preferences/com.irradiatedsoftware.SizeUp.plist
+			# - chflags -vh uchg ~/Library/Preferences/org.m0k.transmission.plist
+			#
+			# Note that the locks prevent stow from removing the symlink, which
+			# results in unstow failing. If locking is to become part of this process,
+			# then this case will need to be addressed: unlock file before unstow.
 		fi
 
 		if [[ "${stow_exitcode}" -eq 0 ]]; then
