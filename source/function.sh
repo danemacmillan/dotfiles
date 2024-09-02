@@ -918,3 +918,38 @@ listening()
         echo "Usage: listening [pattern]"
     fi
 }
+
+
+##
+# Remux MKV to MP4 container for Apple/broader compatibility.
+#
+# This also addresses a shortcoming when remuxing frm h265/HEVC, which for
+# whatever reason is not seamless on Apple devices, so the codec needs to be
+# tagged differently.
+#
+# Read: https://discussions.apple.com/thread/253596557?answerId=256733064022&sortBy=rank#256733064022
+#
+# Subtitles are also automatically converted to a compatible MP4 version.
+#
+# For the most part this function assumes the video and audio codec are
+# compatible and do not need to be re-encoded. Nevertheless, if there are
+# issues, you can specify stuff like this:
+#
+# -c:v h264 -c:a aac
+# -c:v copy -c:a copy
+mkvtomp4()
+{
+	local video_codec=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=codec_name -of default=nw=1:nk=1 "${1}")
+
+	if [ "$video_codec" = "hevc" ]; then
+			echo "Retagging hev1/hevc to hvc1 for Quicktime and AppleTV compatibility."
+			ffmpeg -i "${1}" -map 0 -c copy -c:s mov_text -tag:v hvc1 "${1%.*}.mp4"
+		else
+			ffmpeg -i "${1}" -map 0 -c copy -c:s mov_text "${1%.*}.mp4"
+	fi
+}
+
+mkvtomp4_loop()
+{
+	for file in *.mkv; do mkvtomp4 "$file"; done
+}
