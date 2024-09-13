@@ -2,7 +2,7 @@
 ##cask
 #casperjs
 ##composer
-grunt-cli
+##grunt-cli
 #ios-webkit-debug-proxy
 #mackup
 #mysql@5.7
