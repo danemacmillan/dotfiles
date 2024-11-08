@@ -99,9 +99,16 @@ alias ctags='\ctags --recurse=yes --tag-relative=yes --exclude=.git --exclude=.s
 alias dig='\dig +nocmd any +multiline +noall +answer'
 
 ##
-# exiftool and ffmpeg
+# exiftool and ffmpegq
 alias strip_metadata_image="exiftool -all= "
 #alias strip_metadata_video="ffmpeg -i IMG_4128.mov -map_metadata -1 -c:v copy -c:a copy out.mov"
+## Other useful commands for exiftool
+# exiftool -alldates="2023:10:18 12:00:00" .
+# exiftool -UserComment="Screenshot" IMG_8555.jpeg
+# exiftool -Comment="" IMG_8555.jpeg
+# exiftool '-alldates<$filename' .
+# exiftool '-alldates<modifydate' DSCN0012.JPG
+# exiftool '-alldates<filemodifydate' DSCN0012.JPG
 
 ##
 # Exit
