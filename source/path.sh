@@ -133,6 +133,7 @@ pathmunge "${HOMEBREW_FORMULA_PATH}/python@3.6/bin"
 
 # Only client for command line.
 pathmunge "${HOMEBREW_FORMULA_PATH}/mysql-client/bin"
+pathmunge "${HOMEBREW_FORMULA_PATH}/mysql-client@8.0/bin"
 
 ##
 # Go lang binaries.
