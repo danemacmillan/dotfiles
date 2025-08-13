@@ -48,6 +48,17 @@ if [[ ! -e "${dotfiles_install_directory}" ]]; then
 			echo "Installing git."
 			yum -y install git
 	elif [[ "${OS}" == "osx" ]]; then
+			# Validate sudo user for any future operations. It will timeout after
+			# five minutes by default, which means additional sudo commands would
+			# prompt for validation again. This ensures less friction during install.
+			# There are ways to extend that timeout, but for now this will suffice.
+			sudo -v
+
+			echo "Updating MacOS. This is necessary to ensure Xcode can be installed."
+			echo "Note also that the dotfiles install may need to be restarted."
+			# Ensure latest version of MacOS otherwise Xcode fails to install.
+			sudo softwareupdate --install --os-only
+
 			echo "Installing Xcode tools, and Rosetta if on Apple Silicon."
 			sudo xcodebuild -license accept
 			sudo xcode-select --install
@@ -55,15 +66,20 @@ if [[ ! -e "${dotfiles_install_directory}" ]]; then
 			# will just state this cannot be installed and move on.
 			sudo softwareupdate --install-rosetta --agree-to-license
 
-			echo "Installing Homebrew, git, coreutils, and stow"
-			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+			echo "Installing Homebrew."
+			if ! command -v brew >/dev/null 2>&1; then
+				# https://github.com/Homebrew/install/?tab=readme-ov-file#install-homebrew-on-macos-or-linux
+				NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+			fi
 
 			dotfiles_homebrew_bin_path="/usr/local/bin"
 			if [[ -e "/opt/homebrew/bin" ]]; then
-					dotfiles_homebrew_bin_path="/opt/homebrew/bin"
+					dotfiles_homebrewhiw_bin_path="/opt/homebrew/bin"
 			fi
+			eval "$($dotfiles_homebrew_bin_path/brew shellenv)"
 
 			if [[ -e "$dotfiles_homebrew_bin_path/brew" ]]; then
+					echo "Installing git, coreutils, and stow from Homebrew."
 					"$dotfiles_homebrew_bin_path/brew" install git coreutils stow
 			fi
 	fi
