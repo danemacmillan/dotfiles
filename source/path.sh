@@ -62,12 +62,6 @@ if [[ -e "/etc/profile" ]]; then
  source /etc/profile
 fi
 
-# New Homebrew paths for Apple Silicon.
-## Path example on a fresh install of MacOS followed by Homebrew.
-#/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
-pathmunge "/opt/homebrew/sbin"
-pathmunge "/opt/homebrew/bin"
-
 ##
 # For whatever reason MacOS does not include this in its path, and some
 # utilities that are installed via HomeBrew need it. Unfortunately, it does
@@ -79,19 +73,33 @@ pathmunge "/usr/local/sbin" "after"
 
 ##
 # Common path, if not already included, and it exists.
+# Note that Homebrew for Intel machines also use this.
 pathmunge "/usr/local/bin"
 
 ##
-# Store homebrew install path, if available.
+# New Homebrew paths for Apple Silicon.
+pathmunge "/opt/homebrew/bin"
+
+##
+# Set no-unset-safe variable boundaries.
+# There could be subtle export issues evaluating Homebrew shellenv before this.
+: "${MANPATH:=}"
+: "${INFOPATH:=}"
+# Export Homebrew environment variables, including some paths like sbin.
+if [[ -z ${HOMEBREW_PREFIX} ]]; then
+	command -v brew >/dev/null 2>&1 && eval "$(brew shellenv)"
+fi
+
+##
+# Store package manager install path, if available.
 #
-# These environment variables need to be set after Homebrew can be found in the
-# PATH. Non-M1 MBPs leveraged the common `/usr/local/bin` path in PATH, but
-# M1 MBPs require that Homebrew customer paths be added. This is why these
-# environment variables have now been set lower: it is ensure that the minimal
-# number of PATHs have been added.
+# TODO:
+# Rename these two custom environment variables so they are not mentioning
+# "homebrew" in them. Perhaps something like "package" would be more general
+# fit.
 if [[ -z ${HOMEBREW_INSTALL_PATH} ]]; then
-	export HOMEBREW_INSTALL_PATH="$(command -v brew >/dev/null 2>&1 && brew --prefix)"
-	export HOMEBREW_FORMULA_PATH="$([[ ! -z ${HOMEBREW_INSTALL_PATH} ]] && echo ${HOMEBREW_INSTALL_PATH}/opt)"
+	export HOMEBREW_INSTALL_PATH="${HOMEBREW_PREFIX}"
+	export HOMEBREW_FORMULA_PATH="${HOMEBREW_INSTALL_PATH}/opt"
 fi
 
 ##
