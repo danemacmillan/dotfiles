@@ -174,6 +174,10 @@ alias npm_global_install_path='echo $(npm root -g)'
 alias npm_config_list='npm config ls -l'
 
 ##
+# op / 1Password
+alias gg="op item get Google --otp | pbcopy"
+
+##
 # PHP
 #
 # Note: this is very specific to my standard virtual machine.
@@ -228,6 +232,11 @@ alias copyidrsapub="pbcopy < ${HOME}/.ssh/id_rsa.pub"
 alias t='tmux has-session -t default > /dev/null 2>&1 && tmux a -t default || tmux new -s default'
 alias t0='t'
 alias t1='tmux has-session -t other > /dev/null 2>&1 && tmux a -t other || tmux new -s other'
+
+##
+# Typora markdown editor
+# https://support.typora.io/Use-Typora-From-Shell-or-cmd/
+alias typora="open -a typora"
 
 ##
 # Vagrant
