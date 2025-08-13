@@ -128,6 +128,15 @@ pathmunge "${HOMEBREW_FORMULA_PATH}/php@7.4/sbin"
 pathmunge "${HOMEBREW_FORMULA_PATH}/python@3.6/bin"
 
 ##
+# Pyenv
+# https://github.com/pyenv/pyenv?tab=readme-ov-file#bash
+export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
+if command -v pyenv >/dev/null 2>&1; then
+	pathmunge "$PYENV_ROOT/bin"
+	eval "$(pyenv init - bash)"
+fi
+
+##
 # MySQL 5.7 daemon and client binaries.
 #pathmunge "${HOMEBREW_FORMULA_PATH}/mysql@5.7/bin"
 
