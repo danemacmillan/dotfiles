@@ -313,4 +313,5 @@ fi
 
 ##
 # direnv
+export DIRENV_WARN_TIMEOUT=300s
 command_exists direnv && eval "$(direnv hook bash)"
