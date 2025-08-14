@@ -78,6 +78,7 @@ pathmunge "/usr/local/bin"
 
 ##
 # New Homebrew paths for Apple Silicon.
+pathmunge "/opt/homebrew/sbin"
 pathmunge "/opt/homebrew/bin"
 
 ##
