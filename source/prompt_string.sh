@@ -7,6 +7,10 @@
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
 
+# Set no-unset-safe variable boundaries.
+: "${SSH_TTY:=}"
+: "${HAS_SSH:=}"
+
 ##
 # PS1
 
