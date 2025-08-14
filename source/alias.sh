@@ -313,4 +313,5 @@ if command_exists brew ; then
 		brew cleanup \
 		brew autoremove \
 	"
+	alias hygiene="brew cleanup --scrub --prune=all; brew autoremove -v; sudo tmutil deletelocalsnapshots /"
 fi
