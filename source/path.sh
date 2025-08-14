@@ -193,6 +193,27 @@ if [[ -e "${HOMEBREW_INSTALL_PATH}/share/google-cloud-sdk/path.bash.inc" ]]; the
 fi
 
 ##
+# Argc completions
+#
+# To install:
+#  cd ${XDG_LIB_HOME}
+#  git clone https://github.com/sigoden/argc-completions.git
+#  cd argc-completions
+#  ./scripts/download-tools.sh
+#  ./scripts/setup-shell.sh bash
+#
+export ARGC_COMPLETIONS_ROOT="${XDG_LIB_HOME}/argc-completions"
+if command -v argc >/dev/null 2>&1 \
+	&& [ -d "${ARGC_COMPLETIONS_ROOT}" ] \
+; then
+	export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions/macos:$ARGC_COMPLETIONS_ROOT/completions"
+	export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"
+	# To add completions for only the specified command, modify next line e.g. argc_scripts=( cargo git )
+	argc_scripts=( $(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions/macos" "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p') )
+	source <(argc --argc-completions bash "${argc_scripts[@]}")
+fi
+
+##
 # Add primary dotfiles' repo's bin to path.
 pathmunge "${DOTFILES_PATH}/bin"
 
