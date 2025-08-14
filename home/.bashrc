@@ -31,6 +31,11 @@ shopt -s dirspell 2&>/dev/null
 shopt -s autocd 2&>/dev/null
 
 ##
+# Silence ZSH warning on MacOS.
+# https://support.apple.com/en-us/102360
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+##
 # Add GPG key to bash profile.
 export GPG_TTY=$(tty)
 

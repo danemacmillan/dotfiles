@@ -310,6 +310,19 @@ if [[ "${SHELL}" != "${PREFERRED_SHELL}" ]] \
 ; then
 	echo -e "${BLUE}${BOLD}Updating default SHELL to ${PREFERRED_SHELL}. This will require sudo.${RESET}"
 	echo -e "Close and re-open the terminal for this change to take effect."
+
+	sudo -v
+
+	# The path to the new bash binary first needs to be whitelisted before it
+	# can be changed on the terminal.
+	# https://support.apple.com/en-us/102360
+	SHELLS_FILE="/etc/shells"
+	if ! grep -qxF "${PREFERRED_SHELL}" "${SHELLS_FILE}"; then
+		echo "Adding ${PREFERRED_SHELL} to ${SHELLS_FILE}..."
+		echo "${PREFERRED_SHELL}" | sudo tee -a "${SHELLS_FILE}" > /dev/null
+	fi
+
+	export BASH_SILENCE_DEPRECATION_WARNING=1
 	sudo chsh -s "${PREFERRED_SHELL}" $(whoami)
 fi
 
