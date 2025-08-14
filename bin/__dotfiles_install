@@ -77,6 +77,7 @@ if [[ ! -e "${dotfiles_install_directory}" ]]; then
 					dotfiles_homebrewhiw_bin_path="/opt/homebrew/bin"
 			fi
 			eval "$($dotfiles_homebrew_bin_path/brew shellenv)"
+			"$dotfiles_homebrew_bin_path/brew" completions link
 
 			if [[ -e "$dotfiles_homebrew_bin_path/brew" ]]; then
 					echo "Installing git, coreutils, and stow from Homebrew."
