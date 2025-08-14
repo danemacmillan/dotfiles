@@ -1,0 +1,24 @@
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+
+# ghostty +list-fonts
+font-family = SauceCodePro NF
+
+font-size = 13
+font-thicken = true
+font-thicken-strength = 0
+cursor-style = block
+bold-is-bright = false
+background = 000000
+#foreground = eaeaea
+
+#background-opacity = 0.6
+#background-blur = 20
+background-opacity = 1
+#background-blur = 20
+
+# ghostty +list-themes
+#theme = light:rose-pine-dawn,dark:rose-pine
