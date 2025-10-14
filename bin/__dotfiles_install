@@ -57,7 +57,7 @@ if [[ ! -e "${dotfiles_install_directory}" ]]; then
 			echo "Updating MacOS. This is necessary to ensure Xcode can be installed."
 			echo "Note also that the dotfiles install may need to be restarted."
 			# Ensure latest version of MacOS otherwise Xcode fails to install.
-			sudo softwareupdate --install --os-only
+			sudo softwareupdate --install --os-only --agree-to-license
 
 			echo "Installing Xcode tools, and Rosetta if on Apple Silicon."
 			sudo xcodebuild -license accept
