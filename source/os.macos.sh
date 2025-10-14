@@ -22,7 +22,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
 # Ensure character suggestions for accents are enabled.
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+#defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
+defaults write -g ApplePressAndHoldEnabled -bool true
 
 # Speed up Mission Control animation. Note that MacOS Sierra seems to ignore this.
 defaults write com.apple.dock expose-animation-duration -float 0
