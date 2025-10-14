@@ -4,6 +4,9 @@
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
+# https://ghostty.org/docs/config/reference#shell-integration-features
+shell-integration-features = true
+
 # ghostty +list-fonts
 font-family = SauceCodePro NF
 
@@ -11,6 +14,7 @@ font-size = 13
 font-thicken = true
 font-thicken-strength = 0
 cursor-style = block
+adjust-cursor-thickness = 6
 bold-is-bright = false
 background = 000000
 #foreground = eaeaea
