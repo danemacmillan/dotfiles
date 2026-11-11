@@ -183,6 +183,10 @@
 	# you enjoy pain.
 	autocorrect = 0
 
+[init]
+
+	defaultBranch = main
+
 [merge]
 
 	# Include summaries of merged commits in newly created merge commit messages
