@@ -292,6 +292,7 @@ EXEC 01;38;5;203
 .sql.gz 01;48;5;236;38;5;46
 .yaml 00;38;5;46
 .yml 00;38;5;46
+*id_ed25519 00;38;5;46
 *id_rsa 00;38;5;46
 *irc.conf 00;38;5;46 # weechat
 *rclone.conf 00;38;5;46 # rclone

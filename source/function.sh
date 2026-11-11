@@ -320,6 +320,8 @@ tt()
 }
 
 ##
+# Do not generate RSA keys for SSH anymore. Use ED keys.
+#
 # Auto-generate new SSH keys with option to provide passphrase
 # Note: if you want characters like "!" in your passphrase, run like this:
 # newsshkey 'Long passphrase!!!! with spaces and niceties!'
@@ -332,7 +334,7 @@ tt()
 # @author Dane MacMillan <work@danemacmillan.com>
 # @link https://github.com/danemacmillan/dotfiles
 # @license MIT
-newsshkey()
+newrsakey()
 {
 	KEY_USER=${USER}
 	if [[ -n $1 ]]; then
@@ -350,6 +352,46 @@ newsshkey()
 	fi
 
 	ssh-keygen -b ${KEY_STRENGTH} -f ${KEY_PATH} -C ${KEY_COMMENT} -N "${KEY_PASSPHRASE}" -m PEM
+
+	echo -e "\nUsername:" \"${KEY_USER}\"
+	echo -e "\nPassphrase:" \"${KEY_PASSPHRASE}\"
+	echo -e "\nProvide this public key to your devop if required:\n"
+	cat ${KEY_PATH}.pub
+
+	# Remove passphrase from appearing in bash history, if provided.
+	# Source: http://thoughtsbyclayg.blogspot.ca/2008/02/how-to-delete-last-command-from-bash.html
+	if [[ -n "$1" ]]; then
+		history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))
+	fi
+}
+
+##
+# Generate new ED key.
+#
+# Eventually roll in some options like newrsakey.
+#
+newsshkey()
+{
+	KEY_USER=${USER}
+	if [[ -n $1 ]]; then
+		KEY_USER="$1"
+	fi
+
+	KEY_TYPE="ed25519"
+	KEY_STRENGTH="200"
+	KEY_NAME_BASE=${KEY_TYPE}_${KEY_STRENGTH}_$(date +%Y_%m_%d_%H%M%S)
+	KEY_PATH=${HOME}/.ssh/${KEY_USER}_${KEY_NAME_BASE}.id_${KEY_TYPE}
+	KEY_COMMENT="${KEY_USER}@${KEY_NAME_BASE}"
+
+	KEY_PASSPHRASE=""
+	if [[ -n "$2" ]]; then
+		KEY_PASSPHRASE="$2"
+	fi
+
+	#ssh-keygen -b ${KEY_STRENGTH} -f ${KEY_PATH} -C ${KEY_COMMENT} -N "${KEY_PASSPHRASE}" -m PEM
+
+	#ssh-keygen -t ed25519 -a 200 -o -f ~/.ssh/id_ed25519_2026 -C "dane@mac-2026"
+	ssh-keygen -t ed25519 -a ${KEY_STRENGTH} -o -f ${KEY_PATH} -C ${KEY_COMMENT} -N "${KEY_PASSPHRASE}"
 
 	echo -e "\nUsername:" \"${KEY_USER}\"
 	echo -e "\nPassphrase:" \"${KEY_PASSPHRASE}\"
