@@ -68,7 +68,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias listen='lsof -Pnl +M -i4'
 alias nsp='netstat -tulpn'
 alias ss='lsof -i'
-alias ip="curl -H 'Accept: application/json' ipinfo.io/json && echo -e '\n' && ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias ipp="curl -H 'Accept: application/json' ipinfo.io/json && echo -e '\n' && ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias flushdns='sudo killall -HUP mDNSResponder'
 alias networkscan="arp -a"
 # Full port scan, service version, and OS scan (sudo required).
