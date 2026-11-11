@@ -78,6 +78,8 @@
 #  - Auto-generate an .envrc (direnv) file at the requested mountpoint
 #  (explicitly set instead of default on /Volumes), so that anytime the
 #  directory is navigated to it will be auto-mounted.
+#  - Add option to make filesystem case-sensitive.
+#  - Add option to make unencrypted volume.
 #
 # @author Dane MacMillan <work@danemacmillan.com>
 icloud_disk()
