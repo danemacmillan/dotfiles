@@ -188,6 +188,10 @@ pathmunge "${HOMEBREW_FORMULA_PATH}/postgresql@9.6/bin"
 pathmunge "${HOME}/.composer/vendor/bin"
 pathmunge "${XDG_CONFIG_HOME}/composer/vendor/bin"
 
+##
+# Docker desktop user.
+pathmunge "${HOME}/.docker/bin"
+
 ## Google Cloud SDK: add its installed components to path.
 if [[ -e "${HOMEBREW_INSTALL_PATH}/share/google-cloud-sdk/path.bash.inc" ]]; then
 	source "${HOMEBREW_INSTALL_PATH}/share/google-cloud-sdk/path.bash.inc"
