@@ -65,6 +65,8 @@ elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
 	source "/usr/share/git-core/contrib/completion/git-prompt.sh"
 fi
 
+# If "brew install git" does not run, this will not work, so no prompt, either.
+# This should have a default and then if PS1 is available, add it.
 if command_exists __git_ps1 ; then
 	export PS1="${PS1_BACKGROUND}${USER_STYLE}\u\\[${CYAN}\]@${HOST_STYLE}\H\[${RESET}\]\\[${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
 fi

@@ -72,6 +72,8 @@ if [[ ! -e "${dotfiles_install_directory}" ]]; then
 				NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 			fi
 
+			# This section seems to have failed, as git was not installed, which
+			# meant that __git_ps1 did not install, and thus PROMPT STRING.
 			dotfiles_homebrew_bin_path="/usr/local/bin"
 			if [[ -e "/opt/homebrew/bin" ]]; then
 					dotfiles_homebrewhiw_bin_path="/opt/homebrew/bin"
