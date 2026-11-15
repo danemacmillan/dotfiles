@@ -154,7 +154,7 @@ nnoremap <S-Tab> :bprevious<CR>
 nnoremap <F3> :%s/^\s\{0,2\}\d\+\s\?//e <Bar> %s/➝*·*¬*_*»*▸*$//e<CR>
 
 " Toggle line number visibility for copying from other systems with mouse.
-nnoremap <F4> :set invnumber <Bar> :set list!<CR>
+nnoremap <F4> :set number! list!<CR>
 
 " Reload vimrc
 nnoremap <leader>sv :source $MYVIMRC<CR>
@@ -214,7 +214,7 @@ set noexrc
 set secure
 
 " Enable line numbers that are relative.
-set number relativenumber
+set number norelativenumber
 
 " Enable syntax highlighting
 syntax on
