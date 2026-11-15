@@ -66,7 +66,7 @@ elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
 fi
 
 if command_exists __git_ps1 ; then
-	export PS1="${PS1_BACKGROUND}${USER_STYLE}\u\\[${CYAN}\]@${HOST_STYLE}\H\[${RESET}\]\\[${CYAN}\] \w\\[${RED}\]\$(__git_ps1) ${USER_BANG}\\[${RESET}\] "
+	export PS1="${PS1_BACKGROUND}${USER_STYLE}\u\\[${CYAN}\]@${HOST_STYLE}\H\[${RESET}\]\\[${CYAN}\] \w\\[${RED}\]\$(status=\$?; __git_ps1; printf ' '; (( status == 0 )) || printf '\001%s\002%d' \"\${DARKISHGREY:-}\" \"\$status\")${USER_BANG}\\[${RESET}\] "
 fi
 
 # https://superuser.com/a/517110
