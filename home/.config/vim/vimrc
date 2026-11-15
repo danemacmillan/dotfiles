@@ -64,6 +64,7 @@ call plug#end()
 " Available color schemes: solarized, gruvbox, darcula
 silent! set background=dark
 silent! colorscheme darcula
+highlight CursorLineNr ctermfg=230 ctermbg=94 guifg=#ffffd7 guibg=#875f00
 let g:solarized_termcolors=256
 let g:gruvbox_contrast_dark = "hard"
 " Make invisible characters less prominent.
@@ -250,6 +251,9 @@ set incsearch
 
 " Enable mouse in all modes
 set mouse=a
+if has('mouse_sgr')
+  set ttymouse=sgr
+endif
 " Disable error bells
 set noerrorbells
 
